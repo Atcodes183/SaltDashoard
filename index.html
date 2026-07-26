@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chemistry Dashboard — Salt Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070d0a;
+  --panel:#0c1712;
+  --panel-border:#1c332a;
+  --mint:#34d399;
+  --mint-dim:#1c332a;
+  --wrong:#fb7185;
+  --wrong-dim:#3a1e24;
+  --flame:#f0a34e;
+  --muted:#7a8f85;
+  --text:#eef3ef;
+  --optbg:#0f1c17;
+  --optborder:#1e352b;
+  --gray:#2a4437;
+}
+*{box-sizing:border-box;}
+html,body{
+  margin:0; padding:0; min-height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'JetBrains Mono', monospace;
+  scrollbar-width:thin;
+  scrollbar-color:var(--panel-border) var(--bg);
+}
+*{ scrollbar-width:thin; scrollbar-color:var(--panel-border) var(--bg); }
+::-webkit-scrollbar{ width:9px; height:9px; }
+::-webkit-scrollbar-track{ background:transparent; }
+::-webkit-scrollbar-thumb{ background:var(--panel-border); border-radius:8px; border:2px solid transparent; background-clip:padding-box; }
+::-webkit-scrollbar-thumb:hover{ background:var(--mint-dim); background-clip:padding-box; }
+body{ padding:28px 16px 60px; }
+.wrap{ max-width:980px; margin:0 auto; transition:max-width .35s ease; }
+.wrap.wide{ max-width:1320px; }
+
+/* ---------- BREADCRUMB ---------- */
+.crumb{
+  display:flex; align-items:center; gap:8px;
+  font-size:13px; color:var(--muted);
+  margin-bottom:18px;
+  flex-wrap:wrap;
+}
+.crumb .seg{ cursor:default; }
+.crumb .seg.clickable{ cursor:pointer; text-decoration:underline; text-underline-offset:3px; }
+.crumb .seg.clickable:hover{ color:var(--mint); }
+.crumb .sep{ color:#3d4d46; }
+.crumb .seg.current{ color:var(--text); }
+
+/* ---------- DASHBOARD ---------- */
+.dash-hero{ text-align:center; margin:20px 0 34px; }
+.dash-hero .eyebrow{
+  font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--mint);
+  display:flex; align-items:center; justify-content:center; gap:9px; margin-bottom:12px;
+}
+.dash-hero .eyebrow::before{
+  content:""; width:7px; height:7px; border-radius:50%; background:var(--mint);
+  box-shadow:0 0 10px 2px rgba(52,211,153,.5);
+}
+.dash-hero h1{
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:clamp(28px,5vw,42px);
+  margin:0 0 10px;
+}
+.dash-hero p{ color:var(--muted); font-size:14px; max-width:520px; margin:0 auto; }
+
+.section-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+@media (max-width:680px){ .section-grid{ grid-template-columns:1fr; } }
+
+.section-card{
+  background:var(--panel);
+  border:1px solid var(--panel-border);
+  border-radius:18px;
+  padding:26px 24px;
+  cursor:pointer;
+  transition:border-color .15s ease, transform .15s ease;
+  text-align:left;
+}
+.section-card:hover{ border-color:var(--mint); transform:translateY(-2px); }
+.section-card .icon{
+  width:42px; height:42px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; margin-bottom:16px;
+}
+.section-card h3{
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:20px; margin:0 0 8px;
+}
+.section-card p{ color:var(--muted); font-size:13.5px; line-height:1.55; margin:0 0 14px; }
+.section-card .meta{
+  display:flex; align-items:center; gap:8px;
+  font-size:12px; color:var(--mint);
+}
+.section-card.disabled{ opacity:.45; cursor:default; }
+.section-card.disabled:hover{ border-color:var(--panel-border); transform:none; }
+
+.more-note{
+  margin-top:20px;
+  font-size:12.5px;
+  color:var(--muted);
+  text-align:center;
+}
+
+/* ---------- SHARED APP SHELL ---------- */
+.app-shell{ display:none; }
+.app-shell.show{ display:block; }
+.back-row{ margin-bottom:16px; }
+.back-btn{
+  font-family:'JetBrains Mono', monospace;
+  font-size:12.5px;
+  background:transparent;
+  border:1px solid var(--panel-border);
+  color:#a9bdb3;
+  padding:8px 14px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.back-btn:hover{ border-color:var(--mint); color:var(--mint); }
+
+.app-title{
+  font-family:'Source Serif 4', Georgia, serif;
+  font-size:22px;
+  margin:0 0 18px;
+}
+
+/* ---------- TOPBAR ---------- */
+.topbar{ display:flex; align-items:center; gap:16px; margin-bottom:10px; }
+.posnum{ font-size:14px; color:#c9d6cf; white-space:nowrap; }
+.track{ flex:1; height:6px; background:#122019; border-radius:3px; overflow:hidden; }
+.fill{ height:100%; background:var(--mint); transition:width .35s ease; }
+.statline{ font-size:13px; white-space:nowrap; display:flex; align-items:center; gap:10px;}
+.statline .ok{ color:var(--mint); }
+.statline .bad{ color:var(--wrong); }
+.statline .dot{ color:#3d4d46; }
+.submitBtn{
+  font-family:'JetBrains Mono', monospace;
+  font-size:12px; letter-spacing:.03em;
+  background:transparent;
+  border:1px solid #2a4437;
+  color:#a9bdb3;
+  padding:7px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.submitBtn:hover{ border-color:var(--mint); color:var(--mint); }
+
+/* ---------- CARD ---------- */
+.card{
+  background:var(--panel);
+  border:1px solid var(--panel-border);
+  border-radius:16px;
+  padding:34px 40px 30px;
+  margin-top:18px;
+}
+.rowtop{ display:flex; align-items:center; justify-content:space-between; margin-bottom:26px; }
+.pill{
+  display:inline-block; font-size:11.5px; letter-spacing:.06em;
+  border:1px solid currentColor; color:var(--pillcolor, var(--mint));
+  padding:7px 14px; border-radius:8px;
+}
+.hint{ font-size:13px; color:var(--muted); }
+
+.question{
+  font-family:'Source Serif 4', Georgia, serif;
+  font-weight:700; font-size:27px; line-height:1.4; color:#fbfdfc; margin-bottom:30px;
+}
+.question sub, .question sup{ font-family:'JetBrains Mono',monospace; font-weight:600; font-size:.62em; }
+
+.options{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+@media (max-width:680px){ .options{ grid-template-columns:1fr; } }
+
+.opt{
+  display:flex; align-items:center; gap:14px;
+  background:var(--optbg); border:1.5px solid var(--optborder); border-radius:10px;
+  padding:16px 18px; cursor:pointer; font-size:16px; color:#dfe9e3;
+  transition:border-color .12s ease, background .12s ease;
+}
+.opt:hover:not(.locked){ border-color:#33564390; }
+.opt .badge{
+  flex:0 0 auto; width:26px; height:26px; border:1px solid #33473e; border-radius:6px;
+  display:flex; align-items:center; justify-content:center; font-size:11.5px; color:#93a89e;
+}
+.opt.correctChoice{ border-color:var(--mint); background:rgba(52,211,153,0.08); }
+.opt.correctChoice .badge{ border-color:var(--mint); color:var(--mint); }
+.opt.wrongChoice{ border-color:var(--wrong); background:rgba(251,113,133,0.08); }
+.opt.wrongChoice .badge{ border-color:var(--wrong); color:var(--wrong); }
+.opt.locked{ cursor:default; }
+.opt.dim{ opacity:.55; }
+
+.feedback{ min-height:20px; font-size:14px; margin-bottom:8px; }
+.feedback.ok{ color:var(--mint); }
+.feedback.bad{ color:var(--flame); }
+
+.revealRow{ display:flex; justify-content:flex-end; }
+.revealLink{
+  font-size:13px; color:var(--flame); text-decoration:underline; text-underline-offset:3px;
+  cursor:pointer; background:none; border:none; font-family:inherit;
+}
+.revealLink:disabled{ opacity:.3; cursor:default; text-decoration:none; }
+
+/* ---------- BOTTOM NAV ---------- */
+.navrow{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-top:22px; }
+.navbtn{
+  font-family:'JetBrains Mono', monospace; font-size:14px;
+  background:var(--panel); border:1px solid var(--panel-border); color:#d7e3dc;
+  padding:16px 10px; border-radius:12px; cursor:pointer;
+  transition:border-color .12s ease, color .12s ease;
+}
+.navbtn:hover:not(:disabled){ border-color:var(--mint); color:var(--mint); }
+.navbtn:disabled{ opacity:.35; cursor:default; }
+
+/* ---------- REPORT ---------- */
+.report{ display:none; }
+.report.show{ display:block; }
+.quizview.hide{ display:none; }
+
+.reportHead{ text-align:center; margin:8px 0 30px; }
+.reportHead h1{ font-family:'Source Serif 4', Georgia, serif; font-size:32px; margin:0 0 8px; }
+.reportHead p{ color:var(--muted); margin:0; font-size:14px; }
+
+/* ---- Pie / donut chart ---- */
+.donut-panel{
+  background:var(--panel);
+  border:1px solid var(--panel-border);
+  border-radius:16px;
+  padding:26px 28px;
+  display:flex;
+  align-items:center;
+  gap:32px;
+  margin-bottom:28px;
+  flex-wrap:wrap;
+}
+.donut{
+  width:170px; height:170px; border-radius:50%;
+  flex:0 0 auto;
+  position:relative;
+  background:conic-gradient(#243b32 0 100%);
+}
+.donut-hole{
+  position:absolute; inset:20px; border-radius:50%;
+  background:var(--panel);
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column;
+}
+.donut-hole .acc{ font-family:'Source Serif 4', Georgia, serif; font-size:26px; color:var(--mint); font-weight:700; }
+.donut-hole .acclbl{ font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-top:2px; }
+
+.legend{ display:flex; flex-direction:column; gap:10px; flex:1; min-width:180px; }
+.legend-row{ display:flex; align-items:center; gap:10px; font-size:13.5px; }
+.legend-dot{ width:11px; height:11px; border-radius:3px; flex:0 0 auto; }
+.legend-lbl{ color:#dbe6df; flex:1; }
+.legend-num{ font-weight:700; color:var(--text); }
+.legend-sub{ color:var(--muted); font-size:11.5px; }
+
+.sectionLbl{ font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:30px 0 12px; }
+
+.focusBox{
+  background:rgba(251,113,133,0.06); border:1px solid var(--wrong-dim); border-radius:14px;
+  padding:18px 20px; margin-bottom:10px;
+}
+.focusBox .ttl{ color:var(--wrong); font-size:14px; margin-bottom:10px; font-weight:600; }
+.focusList{ display:flex; flex-wrap:wrap; gap:8px; }
+.focusChip{ font-size:12.5px; border:1px solid var(--wrong); color:var(--wrong); padding:6px 12px; border-radius:20px; }
+.focusEmpty{ color:var(--mint); font-size:14px; }
+
+.catrow{ display:flex; align-items:center; gap:14px; padding:12px 4px; border-bottom:1px solid var(--panel-border); }
+.catname{ width:200px; flex:0 0 auto; font-size:13px; color:#dbe6df; }
+.catbar-track{ flex:1; height:8px; background:#122019; border-radius:4px; overflow:hidden; }
+.catbar-fill{ height:100%; }
+.catfrac{ width:80px; flex:0 0 auto; text-align:right; font-size:12.5px; color:var(--muted); }
+.catpct{ width:54px; flex:0 0 auto; text-align:right; font-size:13px; font-weight:600; }
+
+.restartRow{ text-align:center; margin-top:34px; }
+.restartBtn{
+  font-family:'JetBrains Mono', monospace; font-size:14px; background:var(--mint); color:#04140c;
+  border:none; padding:14px 26px; border-radius:10px; cursor:pointer; font-weight:600;
+}
+.restartBtn:hover{ background:#4de3ab; }
+
+/* ---------- SMOOTH VIEW TRANSITIONS ---------- */
+.wrap{ overflow:hidden; }
+@keyframes viewEnter{
+  from{ opacity:0; transform:translateY(10px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+.view-enter{ animation:viewEnter .38s cubic-bezier(.4,0,.2,1); }
+
+/* ---------- ACCURACY SECONDARY STAT ---------- */
+.acc-note{ font-size:11px; color:var(--muted); margin-top:6px; text-align:center; max-width:150px; }
+
+/* ---------- HISTORY BUTTON / BACK ROW ---------- */
+.back-row{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+
+/* ---------- HISTORY VIEW ---------- */
+.section-card.wide{ grid-column:1 / -1; }
+.hist-section{
+  background:var(--panel); border:1px solid var(--panel-border); border-radius:16px;
+  padding:24px 26px; margin-bottom:22px;
+}
+.hist-section h3{ font-family:'Source Serif 4', Georgia, serif; font-size:19px; margin:0 0 4px; }
+.hist-empty{ color:var(--muted); font-size:13.5px; margin-top:10px; }
+.hist-summary{ display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin:12px 0 16px; }
+.hist-summary .big{ font-family:'Source Serif 4', Georgia, serif; font-size:28px; color:var(--mint); }
+.hist-summary .delta{ font-size:13px; }
+.hist-summary .delta.up{ color:var(--mint); }
+.hist-summary .delta.down{ color:var(--wrong); }
+.hist-summary .delta.flat{ color:var(--muted); }
+.hist-spark{ margin:6px 0 18px; }
+.hist-list{ display:flex; flex-direction:column; gap:0; max-height:260px; overflow-y:auto; }
+.hist-row{
+  display:flex; align-items:center; gap:12px; padding:10px 4px;
+  border-bottom:1px solid var(--panel-border); font-size:12.5px;
+}
+.hist-row:last-child{ border-bottom:none; }
+.hist-row .hdate{ color:var(--muted); width:130px; flex:0 0 auto; }
+.hist-row .hscore{ color:#dbe6df; width:110px; flex:0 0 auto; }
+.hist-row .hacc{ font-weight:700; width:50px; flex:0 0 auto; text-align:right; }
+.hist-row .htrend{ width:40px; flex:0 0 auto; text-align:right; font-size:11px; }
+.hist-clear-row{ text-align:center; margin-top:8px; }
+.hist-clear-btn{
+  font-family:'JetBrains Mono', monospace; font-size:11.5px; background:transparent;
+  border:1px solid var(--panel-border); color:var(--muted); padding:6px 12px; border-radius:6px; cursor:pointer;
+}
+/* ---------- QUESTION NAVIGATOR ---------- */
+.quizLayout{ display:flex; gap:28px; align-items:flex-start; }
+.quizMain{ flex:1; min-width:0; }
+.qNavPanel{
+  width:300px; flex:0 0 auto;
+  background:var(--panel); border:1px solid var(--panel-border); border-radius:16px;
+  padding:22px 20px; position:sticky; top:20px; max-height:80vh; overflow-y:auto;
+}
+.qNavTitle{ font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-bottom:10px; }
+.qNavLegend{ display:flex; gap:12px; flex-wrap:wrap; font-size:10.5px; color:var(--muted); margin-bottom:14px; }
+.qNavLegend span{ display:flex; align-items:center; gap:5px; }
+.qNavLegend i{ width:9px; height:9px; border-radius:3px; display:inline-block; }
+.qNavGrid{ display:grid; grid-template-columns:repeat(6,1fr); gap:8px; }
+.qNavBox{
+  aspect-ratio:1; display:flex; align-items:center; justify-content:center;
+  font-size:12px; border:1px solid var(--optborder); border-radius:7px; cursor:pointer;
+  background:var(--optbg); color:#a9bdb3; transition:border-color .12s ease, background .12s ease, box-shadow .12s ease;
+}
+.qNavBox:hover{ border-color:var(--mint); }
+.qNavBox.current{ border-color:var(--mint); box-shadow:0 0 0 2px rgba(52,211,153,.25); color:var(--text); font-weight:700; }
+.qNavBox.correct{ background:rgba(52,211,153,0.18); border-color:var(--mint); color:var(--mint); }
+.qNavBox.wrong{ background:rgba(251,113,133,0.18); border-color:var(--wrong); color:var(--wrong); }
+.qNavBox.skipped{ background:rgba(240,163,78,0.16); border-color:var(--flame); color:var(--flame); }
+
+@media (max-width:1050px){
+  .quizLayout{ flex-direction:column; }
+  .qNavPanel{ width:100%; position:static; max-height:none; }
+  .qNavGrid{ grid-template-columns:repeat(10,1fr); }
+}
+@media (max-width:520px){
+  .qNavGrid{ grid-template-columns:repeat(6,1fr); }
+}
+
+/* ---------- FLOATING BACK BUTTON ---------- */
+.floating-back-btn{
+  position:fixed; left:20px; bottom:26px; z-index:100;
+  font-family:'JetBrains Mono', monospace; font-size:12.5px;
+  background:var(--panel); border:1px solid var(--panel-border); color:#a9bdb3;
+  padding:11px 18px; border-radius:10px; cursor:pointer;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);
+  opacity:0; transform:translateY(14px);
+  pointer-events:none;
+  transition:opacity .25s ease, transform .25s ease, border-color .15s ease, color .15s ease;
+}
+.floating-back-btn.visible{ opacity:1; transform:translateY(0); pointer-events:auto; }
+.floating-back-btn:hover{ border-color:var(--mint); color:var(--mint); }
+@media (max-width:520px){
+  .floating-back-btn{ left:14px; right:14px; bottom:16px; text-align:center; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ======= CHEMISTRY HUB ======= -->
+  <div class="app-shell show" id="chem-hub">
+    <div class="crumb">
+      <span class="seg current">Chemistry</span>
+    </div>
+    <div class="dash-hero">
+      <div class="eyebrow">Vikrant Kumar's Notes</div>
+      <h1>Chemistry</h1>
+      <p>Pick a chapter to open its quizzes, question navigator, and test history.</p>
+    </div>
+    <div class="section-grid">
+      <div class="section-card wide" id="cardSaltAnalysis">
+        <div class="icon" style="background:rgba(52,211,153,0.12); color:var(--mint);">🧪</div>
+        <h3>Salt Analysis</h3>
+        <p>Anion analysis, preliminary tests, and the cation group division scheme — self-contained multiple-choice runs with instant feedback, a report, and full test history.</p>
+        <div class="meta">→ open chapter</div>
+      </div>
+    </div>
+    <div class="more-note">More chapters (e.g. mole concept, chemical bonding) can be added here as separate cards.</div>
+  </div>
+
+  <!-- ======= DASHBOARD ======= -->
+  <div class="app-shell" id="dashboard">
+    <div class="crumb">
+      <span class="seg clickable" id="crumbChemistry">Chemistry</span>
+      <span class="sep">/</span>
+      <span class="seg current">Salt Analysis</span>
+    </div>
+    <div class="dash-hero">
+      <div class="eyebrow">Vikrant Kumar's Notes</div>
+      <h1>Salt Analysis</h1>
+      <p>Pick a section to test yourself. Each one is a self-contained multiple-choice run with instant feedback and a report at the end.</p>
+    </div>
+    <div class="section-grid">
+      <div class="section-card" id="cardAnion">
+        <div class="icon" style="background:rgba(52,211,153,0.12); color:var(--mint);">⚗</div>
+        <h3>Anion Analysis</h3>
+        <p>Group reagents, confirmatory tests, and color reactions for carbonate, sulphite, thiosulphate, sulphide, nitrite, nitrate, and the halides through sulphate.</p>
+        <div class="meta">→ <span id="anionCount">0</span> questions</div>
+      </div>
+      <div class="section-card" id="cardPrelim">
+        <div class="icon" style="background:rgba(96,165,250,0.12); color:#60a5fa;">🔥</div>
+        <h3>Preliminary Tests &amp; Cation Groups</h3>
+        <p>Physical tests, flame test colors, borax bead &amp; microcosmic salt colors, charcoal cavity, cobalt nitrate, dry heat, and the cation group division table.</p>
+        <div class="meta">→ <span id="prelimCount">0</span> questions</div>
+      </div>
+      <div class="section-card wide" id="cardHistory">
+        <div class="icon" style="background:rgba(240,163,78,0.12); color:var(--flame);">📈</div>
+        <h3>Test History</h3>
+        <p>See every past attempt for each section and how your accuracy has moved over time — no need to submit a new test to check.</p>
+        <div class="meta">→ view past results</div>
+      </div>
+    </div>
+    <div class="more-note">More sections (e.g. cation analysis, systematic scheme) can be added here as separate cards.</div>
+  </div>
+
+  <!-- ======= ANION APP ======= -->
+  <div class="app-shell" id="app-anion" data-title="Anion Analysis"></div>
+
+  <!-- ======= PRELIM APP ======= -->
+  <div class="app-shell" id="app-prelim" data-title="Preliminary Tests &amp; Cation Groups"></div>
+
+  <!-- ======= HISTORY VIEW ======= -->
+  <div class="app-shell" id="app-history">
+    <div class="back-row"><button class="back-btn" id="historyBackBtn">&larr; Back to Salt Analysis</button></div>
+    <h2 class="app-title">Test History</h2>
+    <div id="historyBody"></div>
+  </div>
+
+</div>
+
+<button id="floatingBackBtn" class="floating-back-btn">&larr; Back to Salt Analysis</button>
+
+<script>
+// ============================================================
+//  SMOOTH VIEW-SWITCH ANIMATION
+//  Animates the shared .wrap element's height between two states
+//  and fades/slides the newly-shown element in, so switching
+//  between the dashboard, a quiz, its report, and history never
+//  snaps abruptly.
+// ============================================================
+function animatedSwitch(changeFn, enterEl){
+  const wrap = document.querySelector('.wrap');
+  const startH = wrap.getBoundingClientRect().height;
+  wrap.style.height = startH + 'px';
+  wrap.style.transition = 'none';
+
+  changeFn();
+
+  const endH = wrap.scrollHeight;
+  // force reflow so the browser registers the start height before animating
+  void wrap.offsetHeight;
+  wrap.style.transition = 'height .38s cubic-bezier(.4,0,.2,1)';
+  wrap.style.height = endH + 'px';
+
+  if(enterEl){
+    enterEl.classList.remove('view-enter');
+    void enterEl.offsetHeight;
+    enterEl.classList.add('view-enter');
+  }
+
+  const cleanup = ()=>{
+    wrap.style.transition = '';
+    wrap.style.height = '';
+    wrap.removeEventListener('transitionend', cleanup);
+  };
+  wrap.addEventListener('transitionend', cleanup);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ============================================================
+//  FLOATING BACK BUTTON
+//  On the dashboard there's nothing to go back to. On every other
+//  view (a quiz, its report, or history) the real "Back" button
+//  lives at the top of the page — once you've scrolled down, this
+//  floating copy stays put so you don't have to scroll all the way
+//  back up just to leave the page.
+// ============================================================
+const floatingBackBtn = document.getElementById('floatingBackBtn');
+let activeBackTarget = null;
+
+function setActiveBackTarget(el, label){
+  activeBackTarget = el;
+  if(el) floatingBackBtn.textContent = label || el.textContent;
+  updateFloatingBackVisibility();
+}
+function updateFloatingBackVisibility(){
+  const shouldShow = !!activeBackTarget && window.scrollY > 160;
+  floatingBackBtn.classList.toggle('visible', shouldShow);
+}
+window.addEventListener('scroll', updateFloatingBackVisibility, {passive:true});
+floatingBackBtn.addEventListener('click', ()=>{
+  if(activeBackTarget) activeBackTarget.click();
+});
+
+// ============================================================
+//  HISTORY STORAGE
+//  Every submitted test appends one record per section to
+//  localStorage, so past results/improvement can be reviewed
+//  without having to submit another test.
+// ============================================================
+const HISTORY_KEY = 'saltdash-history-v1';
+const APP_REGISTRY = {}; // sectionKey -> { title, total }
+
+function storageAvailable(){
+  try{
+    const t = '__t__';
+    localStorage.setItem(t, t);
+    localStorage.removeItem(t);
+    return true;
+  }catch(e){ return false; }
+}
+
+function loadHistory(){
+  if(!storageAvailable()) return {};
+  try{
+    return JSON.parse(localStorage.getItem(HISTORY_KEY)) || {};
+  }catch(e){ return {}; }
+}
+
+function saveHistoryRecord(sectionKey, record){
+  if(!storageAvailable()) return;
+  const all = loadHistory();
+  if(!all[sectionKey]) all[sectionKey] = [];
+  all[sectionKey].push(record);
+  // keep the most recent 50 attempts per section
+  if(all[sectionKey].length > 50) all[sectionKey] = all[sectionKey].slice(-50);
+  try{ localStorage.setItem(HISTORY_KEY, JSON.stringify(all)); }catch(e){}
+}
+
+function clearHistorySection(sectionKey){
+  if(!storageAvailable()) return;
+  const all = loadHistory();
+  delete all[sectionKey];
+  try{ localStorage.setItem(HISTORY_KEY, JSON.stringify(all)); }catch(e){}
+}
+
+function fmtDate(ts){
+  const d = new Date(ts);
+  return d.toLocaleDateString(undefined,{month:'short',day:'numeric'}) + ' · ' +
+         d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
+}
+
+function sparklineSVG(values){
+  const w = 300, h = 56, pad = 6;
+  if(values.length < 2){
+    return `<svg class="hist-spark" viewBox="0 0 ${w} ${h}" width="100%" height="${h}"></svg>`;
+  }
+  const step = (w - pad*2) / (values.length-1);
+  const pts = values.map((v,i)=>{
+    const x = pad + i*step;
+    const y = h - pad - (v/100)*(h-pad*2);
+    return x.toFixed(1)+','+y.toFixed(1);
+  }).join(' ');
+  return `<svg class="hist-spark" viewBox="0 0 ${w} ${h}" width="100%" height="${h}" preserveAspectRatio="none">
+    <polyline points="${pts}" fill="none" stroke="#34d399" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
+}
+
+function renderHistoryView(){
+  const body = document.getElementById('historyBody');
+  const all = loadHistory();
+  const available = storageAvailable();
+  body.innerHTML = '';
+
+  if(!available){
+    body.innerHTML = '<div class="hist-empty">History storage isn\'t available in this browser mode (e.g. private browsing).</div>';
+    return;
+  }
+
+  Object.keys(APP_REGISTRY).forEach(key=>{
+    const meta = APP_REGISTRY[key];
+    const records = all[key] || [];
+    const section = document.createElement('div');
+    section.className = 'hist-section';
+
+    if(records.length === 0){
+      section.innerHTML = `<h3>${meta.title}</h3><div class="hist-empty">No tests submitted yet for this section.</div>`;
+      body.appendChild(section);
+      return;
+    }
+
+    const latest = records[records.length-1];
+    const first = records[0];
+    const delta = latest.accTotal - first.accTotal;
+    const deltaClass = delta > 0 ? 'up' : (delta < 0 ? 'down' : 'flat');
+    const deltaSign = delta > 0 ? '+' : '';
+    const deltaText = records.length > 1
+      ? `<span class="delta ${deltaClass}">${deltaSign}${delta}% since your first attempt</span>`
+      : `<span class="delta flat">first attempt on record</span>`;
+
+    const sparkVals = records.map(r=>r.accTotal);
+    const rowsHtml = records.slice().reverse().map((r,i, arr)=>{
+      const prev = arr[i+1];
+      let trend = '';
+      if(prev){
+        if(r.accTotal > prev.accTotal) trend = '<span style="color:var(--mint)">▲</span>';
+        else if(r.accTotal < prev.accTotal) trend = '<span style="color:var(--wrong)">▼</span>';
+        else trend = '<span style="color:var(--muted)">•</span>';
+      }
+      return `<div class="hist-row">
+        <span class="hdate">${fmtDate(r.ts)}</span>
+        <span class="hscore">${r.correct}/${r.total} correct</span>
+        <span class="hacc" style="color:${r.accTotal<50?'var(--wrong)':'var(--mint)'}">${r.accTotal}%</span>
+        <span class="htrend">${trend}</span>
+      </div>`;
+    }).join('');
+
+    section.innerHTML = `
+      <h3>${meta.title}</h3>
+      <div class="hist-summary">
+        <span class="big">${latest.accTotal}%</span>
+        <span style="color:var(--muted); font-size:12.5px;">latest accuracy (of all ${latest.total} questions)</span>
+        ${deltaText}
+      </div>
+      ${sparklineSVG(sparkVals)}
+      <div class="hist-list">${rowsHtml}</div>
+      <div class="hist-clear-row"><button class="hist-clear-btn" data-clear="${key}">Clear this section's history</button></div>
+    `;
+    body.appendChild(section);
+  });
+
+  body.querySelectorAll('[data-clear]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      clearHistorySection(btn.getAttribute('data-clear'));
+      renderHistoryView();
+    });
+  });
+}
+
+function openHistory(){
+  animatedSwitch(()=>{
+    document.querySelector('.wrap').classList.remove('wide');
+    document.getElementById('dashboard').classList.remove('show');
+    document.getElementById('app-anion').classList.remove('show');
+    document.getElementById('app-prelim').classList.remove('show');
+    renderHistoryView();
+    document.getElementById('app-history').classList.add('show');
+  }, document.getElementById('app-history'));
+  setActiveBackTarget(document.getElementById('historyBackBtn'));
+}
+
+// ============================================================
+//  CHEMISTRY HUB <-> SALT ANALYSIS NAVIGATION
+// ============================================================
+function openSaltAnalysis(){
+  animatedSwitch(()=>{
+    document.getElementById('chem-hub').classList.remove('show');
+    document.getElementById('dashboard').classList.add('show');
+  }, document.getElementById('dashboard'));
+  setActiveBackTarget(document.getElementById('crumbChemistry'), '\u2190 Back to Chemistry');
+}
+
+document.getElementById('cardSaltAnalysis').addEventListener('click', openSaltAnalysis);
+document.getElementById('crumbChemistry').addEventListener('click', ()=>{
+  animatedSwitch(()=>{
+    document.querySelector('.wrap').classList.remove('wide');
+    document.getElementById('dashboard').classList.remove('show');
+    document.getElementById('chem-hub').classList.add('show');
+  }, document.getElementById('chem-hub'));
+  setActiveBackTarget(null);
+});
+
+document.getElementById('cardHistory').addEventListener('click', openHistory);
+document.getElementById('historyBackBtn').addEventListener('click', ()=>{
+  animatedSwitch(()=>{
+    document.getElementById('app-history').classList.remove('show');
+    document.getElementById('dashboard').classList.add('show');
+  }, document.getElementById('dashboard'));
+  setActiveBackTarget(null);
+});
+
+// ============================================================
+//  QUIZ APP TEMPLATE (scoped per container, no global id clashes)
+// ============================================================
+function quizTemplate(title){
+  return `
+    <div class="back-row">
+      <button class="back-btn" data-role="backBtn">&larr; Back to Salt Analysis</button>
+      <button class="back-btn" data-role="historyBtn">📈 View history</button>
+    </div>
+    <h2 class="app-title">${title}</h2>
+
+    <div class="quizview" data-role="quizview">
+      <div class="topbar">
+        <div class="posnum" data-role="posnum">1 / 1</div>
+        <div class="track"><div class="fill" data-role="fill" style="width:1%"></div></div>
+        <div class="statline">
+          <span class="ok" data-role="okCount">0 correct</span>
+          <span class="dot">·</span>
+          <span class="bad" data-role="badCount">0 missed</span>
+        </div>
+        <button class="submitBtn" data-role="submitTop">Submit test →</button>
+      </div>
+
+      <div class="quizLayout">
+        <div class="quizMain">
+          <div class="card">
+            <div class="rowtop">
+              <span class="pill" data-role="pill">CATEGORY</span>
+              <span class="hint" data-role="hintText">choose an answer</span>
+            </div>
+            <div class="question" data-role="questionText">Loading…</div>
+            <div class="options" data-role="optionsWrap"></div>
+            <div class="feedback" data-role="feedback"></div>
+            <div class="revealRow">
+              <button class="revealLink" data-role="revealBtn">I don't know — show the answer →</button>
+            </div>
+          </div>
+
+          <div class="navrow">
+            <button class="navbtn" data-role="prevBtn">&larr; Prev</button>
+            <button class="navbtn" data-role="shuffleBtn">&#8658; Shuffle</button>
+            <button class="navbtn" data-role="nextBtn">Next &rarr;</button>
+          </div>
+        </div>
+
+        <div class="qNavPanel">
+          <div class="qNavTitle">Jump to question</div>
+          <div class="qNavLegend">
+            <span><i style="background:rgba(52,211,153,0.35); border:1px solid var(--mint);"></i>Correct</span>
+            <span><i style="background:rgba(251,113,133,0.35); border:1px solid var(--wrong);"></i>Wrong</span>
+            <span><i style="background:rgba(240,163,78,0.3); border:1px solid var(--flame);"></i>Skipped</span>
+          </div>
+          <div class="qNavGrid" data-role="qNavGrid"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="report" data-role="report">
+      <div class="reportHead">
+        <h1 data-role="reportTitle">Your Report</h1>
+        <p data-role="reportSub">Here's how the run went, and where to focus next.</p>
+      </div>
+
+      <div class="donut-panel">
+        <div class="donut" data-role="donut">
+          <div class="donut-hole">
+            <div class="acc" data-role="rAccuracy">0%</div>
+            <div class="acclbl">accuracy</div>
+          </div>
+        </div>
+        <div class="legend" data-role="legend">
+          <div class="legend-row"><span class="legend-dot" style="background:var(--mint);"></span><span class="legend-lbl">Correct</span><span class="legend-num" data-role="rCorrect">0</span></div>
+          <div class="legend-row"><span class="legend-dot" style="background:var(--wrong);"></span><span class="legend-lbl">Wrong</span><span class="legend-num" data-role="rWrong">0</span></div>
+          <div class="legend-row"><span class="legend-dot" style="background:var(--flame);"></span><span class="legend-lbl">Skipped</span><span class="legend-num" data-role="rSkipped">0</span></div>
+          <div class="legend-row"><span class="legend-dot" style="background:var(--gray);"></span><span class="legend-lbl">Not reached</span><span class="legend-num" data-role="rNotReached">0</span></div>
+        </div>
+      </div>
+      <div class="acc-note" data-role="rAccuracyNote" style="text-align:left; max-width:none; margin:-16px 0 22px;"></div>
+
+      <div class="sectionLbl">Focus areas</div>
+      <div class="focusBox">
+        <div class="ttl" data-role="focusTitle">Topics to review next</div>
+        <div class="focusList" data-role="focusList"></div>
+      </div>
+
+      <div class="sectionLbl">Breakdown by category</div>
+      <div data-role="catBreakdown"></div>
+
+      <div class="restartRow">
+        <button class="restartBtn" data-role="restartBtn">Restart test</button>
+      </div>
+    </div>
+  `;
+}
+
+function stripTags(html){
+  const d = document.createElement('div');
+  d.innerHTML = html;
+  return d.textContent;
+}
+
+function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
+  const container = document.getElementById(containerId);
+  container.innerHTML = quizTemplate(title);
+  const $ = (role) => container.querySelector(`[data-role="${role}"]`);
+
+  const TOTAL = QUESTIONS.length;
+  let order = QUESTIONS.map((_,i)=>i);
+  let pos = 0;
+  let answers = {}; // answers[originalIndex] = { selected: idx|null, skipped: bool, correct: bool }
+
+  APP_REGISTRY[sectionKey] = { title, total: TOTAL };
+
+  const posnum = $('posnum'), fill = $('fill'), okCount = $('okCount'), badCount = $('badCount');
+  const pill = $('pill'), hintText = $('hintText'), questionText = $('questionText');
+  const optionsWrap = $('optionsWrap'), feedback = $('feedback'), revealBtn = $('revealBtn');
+  const prevBtn = $('prevBtn'), nextBtn = $('nextBtn'), shuffleBtn = $('shuffleBtn'), submitTop = $('submitTop');
+  const quizview = $('quizview'), report = $('report');
+  const backBtn = $('backBtn'), restartBtn = $('restartBtn'), historyBtn = $('historyBtn');
+  const qNavGrid = $('qNavGrid');
+
+  function reshuffleOrder(){
+    for(let i=order.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [order[i],order[j]]=[order[j],order[i]];
+    }
+    pos = 0;
+  }
+
+  function currentQ(){ return QUESTIONS[order[pos]]; }
+  function currentIdx(){ return order[pos]; }
+
+  function updateStats(){
+    let ok=0, bad=0;
+    Object.values(answers).forEach(a=>{
+      if(a.correct) ok++;
+      else if(a.selected!==null || a.skipped) bad++;
+    });
+    okCount.textContent = ok + " correct";
+    badCount.textContent = bad + " missed";
+  }
+
+  function renderQNav(){
+    qNavGrid.innerHTML = order.map((origIdx, i)=>{
+      const a = answers[origIdx];
+      let cls = 'qNavBox';
+      if(i === pos) cls += ' current';
+      if(a){
+        if(a.skipped) cls += ' skipped';
+        else if(a.correct) cls += ' correct';
+        else cls += ' wrong';
+      }
+      return `<div class="${cls}" data-i="${i}">${i+1}</div>`;
+    }).join('');
+    qNavGrid.querySelectorAll('.qNavBox').forEach(box=>{
+      box.addEventListener('click', ()=>{
+        pos = parseInt(box.getAttribute('data-i'),10);
+        render();
+      });
+    });
+  }
+
+  function render(){
+    const idx = currentIdx();
+    const item = currentQ();
+    const color = CAT_COLORS[item.cat] || "#34d399";
+    pill.textContent = item.cat;
+    pill.style.setProperty('--pillcolor', color);
+    pill.style.color = color;
+    questionText.innerHTML = item.q;
+    posnum.textContent = (pos+1) + " / " + TOTAL;
+    fill.style.width = (((pos+1)/TOTAL)*100).toFixed(1) + "%";
+
+    optionsWrap.innerHTML = "";
+    const existing = answers[idx];
+    const letters = ["A","B","C","D"];
+
+    item.options.forEach((optText, i)=>{
+      const div = document.createElement('div');
+      div.className = "opt";
+      div.innerHTML = `<span class="badge">${letters[i]}</span><span>${optText}</span>`;
+      if(existing){
+        div.classList.add("locked");
+        if(i === item.correct){ div.classList.add("correctChoice"); }
+        if(existing.selected===i && i!==item.correct){ div.classList.add("wrongChoice"); }
+        if(existing.selected!==null && existing.selected!==i && i!==item.correct){ div.classList.add("dim"); }
+        if(existing.skipped && i!==item.correct){ div.classList.add("dim"); }
+      } else {
+        div.addEventListener('click', ()=> selectOption(idx, i));
+      }
+      optionsWrap.appendChild(div);
+    });
+
+    hintText.textContent = existing ? "answered" : "choose an answer";
+
+    if(existing){
+      if(existing.skipped){
+        feedback.textContent = "Skipped — the answer is " + letters[item.correct] + ". " + stripTags(item.options[item.correct]);
+        feedback.className = "feedback bad";
+      } else if(existing.correct){
+        feedback.textContent = "Correct!";
+        feedback.className = "feedback ok";
+      } else {
+        feedback.textContent = "Wrong — the answer is " + letters[item.correct] + ". " + stripTags(item.options[item.correct]);
+        feedback.className = "feedback bad";
+      }
+      revealBtn.disabled = true;
+    } else {
+      feedback.textContent = "";
+      feedback.className = "feedback";
+      revealBtn.disabled = false;
+    }
+
+    prevBtn.disabled = pos===0;
+    updateStats();
+    renderQNav();
+  }
+
+  function selectOption(idx, choiceIdx){
+    const item = QUESTIONS[idx];
+    answers[idx] = { selected: choiceIdx, skipped:false, correct: choiceIdx===item.correct };
+    render();
+  }
+
+  revealBtn.addEventListener('click', ()=>{
+    const idx = currentIdx();
+    if(answers[idx]) return;
+    answers[idx] = { selected:null, skipped:true, correct:false };
+    render();
+  });
+
+  prevBtn.addEventListener('click', ()=>{ if(pos>0){ pos--; render(); } });
+  nextBtn.addEventListener('click', ()=>{
+    if(pos < TOTAL-1){ pos++; render(); }
+    else { pos = 0; render(); }
+  });
+  shuffleBtn.addEventListener('click', ()=>{
+    for(let i=order.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [order[i],order[j]]=[order[j],order[i]];
+    }
+    pos = 0;
+    render();
+  });
+
+  container.addEventListener('keydown', (e)=>{
+    if(!report.classList.contains('show')){
+      if(e.code==='ArrowRight'){ nextBtn.click(); }
+      else if(e.code==='ArrowLeft'){ prevBtn.click(); }
+      else if(['1','2','3','4'].includes(e.key)){
+        const idx = currentIdx();
+        if(!answers[idx]) selectOption(idx, parseInt(e.key,10)-1);
+      }
+    }
+  });
+  container.setAttribute('tabindex','0');
+
+  // ---------------- SUBMIT / REPORT ----------------
+  function buildReport(){
+    const visitedIdx = Object.keys(answers).map(Number);
+    const attempted = visitedIdx.filter(i=>answers[i].selected!==null);
+    const correct = attempted.filter(i=>answers[i].correct);
+    const wrong = attempted.filter(i=>!answers[i].correct);
+    const skipped = visitedIdx.filter(i=>answers[i].skipped);
+    const notReached = TOTAL - visitedIdx.length;
+
+    $('rCorrect').textContent = correct.length;
+    $('rWrong').textContent = wrong.length;
+    $('rSkipped').textContent = skipped.length;
+    $('rNotReached').textContent = notReached;
+
+    // Accuracy is measured against the FULL question bank (TOTAL), not just
+    // the questions attempted — 2 correct out of 4 attempted, out of 104
+    // total, is a 2% accuracy, not a 50% one.
+    const accTotal = TOTAL>0 ? Math.round((correct.length/TOTAL)*100) : 0;
+    const attemptedDenom = attempted.length + skipped.length;
+    const accAttempted = attemptedDenom>0 ? Math.round((correct.length/attemptedDenom)*100) : null;
+
+    $('rAccuracy').textContent = accTotal + "%";
+    $('rAccuracyNote').textContent = accAttempted!==null
+      ? accAttempted + "% of questions you attempted"
+      : "no questions attempted";
+    $('reportTitle').textContent = "Your " + title + " Report";
+    $('reportSub').textContent =
+      visitedIdx.length + " of " + TOTAL + " questions seen"
+      + (notReached>0 ? " · " + notReached + " not reached" : "");
+
+    // ---- donut chart (conic-gradient) ----
+    const nC = correct.length, nW = wrong.length, nS = skipped.length, nN = notReached;
+    const sum = nC + nW + nS + nN;
+    const donut = $('donut');
+    if(sum === 0){
+      donut.style.background = "conic-gradient(#243b32 0 100%)";
+    } else {
+      const pC = nC/sum*100;
+      const pW = nW/sum*100;
+      const pS = nS/sum*100;
+      const c1 = pC;
+      const c2 = c1 + pW;
+      const c3 = c2 + pS;
+      donut.style.background = `conic-gradient(
+        var(--mint) 0% ${c1}%,
+        var(--wrong) ${c1}% ${c2}%,
+        var(--flame) ${c2}% ${c3}%,
+        var(--gray) ${c3}% 100%
+      )`;
+    }
+
+    // per category
+    const catStats = {};
+    QUESTIONS.forEach((q, i)=>{
+      if(!catStats[q.cat]) catStats[q.cat] = {total:0, attempted:0, correct:0, wrong:0, skipped:0};
+      catStats[q.cat].total++;
+      const a = answers[i];
+      if(a){
+        if(a.selected!==null){
+          catStats[q.cat].attempted++;
+          if(a.correct) catStats[q.cat].correct++; else catStats[q.cat].wrong++;
+        } else if(a.skipped){
+          catStats[q.cat].skipped++;
+        }
+      }
+    });
+
+    const rows = Object.entries(catStats).map(([cat, s])=>{
+      const seen = s.attempted + s.skipped;
+      const mastery = seen>0 ? s.correct/seen : null;
+      return {cat, ...s, seen, mastery};
+    });
+
+    const seenRows = rows.filter(r=>r.seen>0).sort((a,b)=> a.mastery - b.mastery);
+    const unseenRows = rows.filter(r=>r.seen===0);
+
+    const breakdownEl = $('catBreakdown');
+    breakdownEl.innerHTML = "";
+    [...seenRows, ...unseenRows].forEach(r=>{
+      const color = CAT_COLORS[r.cat] || "#34d399";
+      const pct = r.seen>0 ? Math.round(r.mastery*100) : null;
+      const row = document.createElement('div');
+      row.className = "catrow";
+      row.innerHTML = `
+        <div class="catname">${r.cat}</div>
+        <div class="catbar-track"><div class="catbar-fill" style="width:${pct===null?0:pct}%; background:${color}"></div></div>
+        <div class="catfrac">${r.seen>0 ? (r.correct+"/"+r.seen+" seen") : (r.total+" not seen")}</div>
+        <div class="catpct" style="color:${pct===null? '#7a8f85' : (pct<70? 'var(--wrong)' : color)}">${pct===null?"—":pct+"%"}</div>
+      `;
+      breakdownEl.appendChild(row);
+    });
+
+    const focus = seenRows.filter(r=>r.mastery < 0.75).slice(0,5);
+    const focusListEl = $('focusList');
+    const focusTitle = $('focusTitle');
+    focusListEl.innerHTML = "";
+    if(focus.length===0 && seenRows.length>0){
+      focusTitle.textContent = "Nice work — no weak spots above the threshold";
+      const span = document.createElement('div');
+      span.className = "focusEmpty";
+      span.textContent = "Everything you were tested on is holding above 75% accuracy.";
+      focusListEl.appendChild(span);
+    } else if(seenRows.length===0){
+      focusTitle.textContent = "No questions answered yet";
+      const span = document.createElement('div');
+      span.className = "focusEmpty";
+      span.textContent = "Answer a few questions, then submit to see your focus areas.";
+      focusListEl.appendChild(span);
+    } else {
+      focusTitle.textContent = "Revisit these topics next";
+      focus.forEach(r=>{
+        const chip = document.createElement('div');
+        chip.className = "focusChip";
+        chip.textContent = r.cat + " · " + Math.round(r.mastery*100) + "%";
+        focusListEl.appendChild(chip);
+      });
+    }
+
+    return { correct: correct.length, wrong: wrong.length, skipped: skipped.length, notReached, total: TOTAL, accTotal };
+  }
+
+  function showReport(){
+    const stats = buildReport();
+    animatedSwitch(()=>{
+      quizview.classList.add('hide');
+      report.classList.add('show');
+    }, report);
+
+    // Only log a history entry if at least one question was actually seen.
+    if(stats.correct + stats.wrong + stats.skipped > 0){
+      saveHistoryRecord(sectionKey, { ts: Date.now(), ...stats });
+    }
+
+    // Reshuffle so the next attempt at this test isn't in the same order.
+    reshuffleOrder();
+  }
+
+  submitTop.addEventListener('click', showReport);
+
+  restartBtn.addEventListener('click', ()=>{
+    answers = {};
+    reshuffleOrder();
+    animatedSwitch(()=>{
+      report.classList.remove('show');
+      quizview.classList.remove('hide');
+      render();
+    }, quizview);
+  });
+
+  backBtn.addEventListener('click', ()=>{
+    // Leaving mid-test — whether unanswered, partially answered, or
+    // already submitted — resets the run so coming back to this section
+    // always starts a fresh, reshuffled test automatically.
+    answers = {};
+    reshuffleOrder();
+    report.classList.remove('show');
+    quizview.classList.remove('hide');
+    render();
+    animatedSwitch(()=>{
+      document.querySelector('.wrap').classList.remove('wide');
+      container.classList.remove('show');
+      document.getElementById('dashboard').classList.add('show');
+    }, document.getElementById('dashboard'));
+    setActiveBackTarget(null);
+  });
+
+  historyBtn.addEventListener('click', ()=>{
+    // Same as Back — jumping off to History also counts as leaving the test.
+    answers = {};
+    reshuffleOrder();
+    report.classList.remove('show');
+    quizview.classList.remove('hide');
+    render();
+    animatedSwitch(()=>{
+      document.querySelector('.wrap').classList.remove('wide');
+      container.classList.remove('show');
+      renderHistoryView();
+      document.getElementById('app-history').classList.add('show');
+    }, document.getElementById('app-history'));
+    setActiveBackTarget(document.getElementById('historyBackBtn'));
+  });
+
+  render();
+
+  return {
+    open(){
+      animatedSwitch(()=>{
+        document.querySelector('.wrap').classList.add('wide');
+        document.getElementById('dashboard').classList.remove('show');
+        document.getElementById('app-anion').classList.remove('show');
+        document.getElementById('app-prelim').classList.remove('show');
+        document.getElementById('app-history').classList.remove('show');
+        container.classList.add('show');
+      }, container);
+      setActiveBackTarget(backBtn);
+      container.focus({preventScroll:true});
+    }
+  };
+}
+
+// ============================================================
+//  DATA (inserted below) + BOOTSTRAP
+// ============================================================
+const DEFAULT_ANION_QUESTIONS = [
+// ---------------- CLASSIFICATION ----------------
+{cat:"CLASSIFICATION", q:"Which group reagent is used for CO<sub>3</sub><sup>2-</sup>, SO<sub>3</sub><sup>2-</sup>, S<sub>2</sub>O<sub>3</sub><sup>2-</sup>, S<sup>2-</sup> and NO<sub>2</sub><sup>-</sup>?", options:["Dilute H<sub>2</sub>SO<sub>4</sub> or dilute HCl","Concentrated H<sub>2</sub>SO<sub>4</sub> only","AgNO<sub>3</sub>","BaCl<sub>2</sub>"], correct:0},
+{cat:"CLASSIFICATION", q:"Which of these anions needs the concentrated H<sub>2</sub>SO<sub>4</sub> group reagent (not dilute)?", options:["CO<sub>3</sub><sup>2-</sup>","Cl<sup>-</sup>","SO<sub>3</sub><sup>2-</sup>","NO<sub>2</sub><sup>-</sup>"], correct:1},
+{cat:"CLASSIFICATION", q:"Which of these anions is tested independently, with no common group reagent?", options:["Cl<sup>-</sup>","SO<sub>4</sub><sup>2-</sup>","S<sup>2-</sup>","CO<sub>3</sub><sup>2-</sup>"], correct:1},
+{cat:"CLASSIFICATION", q:"Why does LiHCO<sub>3</sub> never appear as a solid?", options:["It's radioactive","Alkali metal bicarbonates exist only in solution","It reacts instantly with air","It's too acidic to isolate"], correct:1},
+{cat:"CLASSIFICATION", q:"PO<sub>4</sub><sup>3-</sup>, CrO<sub>4</sub><sup>2-</sup> and MnO<sub>4</sub><sup>-</sup> belong to which group?", options:["Dilute acid group","Concentrated acid group","Independent group","Carbonate group"], correct:2},
+{cat:"CLASSIFICATION", q:"Bicarbonates of alkali metals (except Li) are generally found:", options:["Only as solids","Only in solution, not as isolable solids","As gases at room temperature","They don't exist at all"], correct:1},
+
+// ---------------- CARBONATE / BICARBONATE ----------------
+{cat:"CARBONATE/BICARBONATE", q:"CO<sub>2</sub> is passed into lime water until in large excess. What happens to the initial milkiness?", options:["It intensifies further","It disappears (forms soluble Ca(HCO<sub>3</sub>)<sub>2</sub>)","It turns black","It turns yellow"], correct:1},
+{cat:"CARBONATE/BICARBONATE", q:"Which of these gases is non-reducing and will NOT decolorize acidified KMnO<sub>4</sub>?", options:["SO<sub>2</sub>","H<sub>2</sub>S","CO<sub>2</sub>","NO<sub>2</sub>"], correct:2},
+{cat:"CARBONATE/BICARBONATE", q:"Na<sub>2</sub>CO<sub>3</sub> + AgNO<sub>3</sub> gives a white precipitate that reversibly converts into:", options:["Black Ag<sub>2</sub>S","Brown Ag<sub>2</sub>O + CO<sub>2</sub>","Yellow AgI","Orange Ag<sub>2</sub>CrO<sub>4</sub>"], correct:1},
+{cat:"CARBONATE/BICARBONATE", q:"Na<sub>2</sub>CO<sub>3</sub> + HgCl<sub>2</sub> gives which colored precipitate?", options:["Green","Reddish brown","Black","Yellow"], correct:1},
+{cat:"CARBONATE/BICARBONATE", q:"Na<sub>2</sub>CO<sub>3</sub> + CuSO<sub>4</sub> gives which colored precipitate?", options:["Green","Blue","Reddish brown","White"], correct:0},
+{cat:"CARBONATE/BICARBONATE", q:"Which cations give NO precipitate with NaHCO<sub>3</sub>, even though they DO precipitate with Na<sub>2</sub>CO<sub>3</sub>?", options:["Ag<sup>+</sup>, Pb<sup>2+</sup>","Ca<sup>2+</sup>, Sr<sup>2+</sup>, Ba<sup>2+</sup>","Cu<sup>2+</sup>, Zn<sup>2+</sup>","Hg<sub>2</sub><sup>2+</sup>, Hg<sup>2+</sup>"], correct:1},
+{cat:"CARBONATE/BICARBONATE", q:"Which indicator fails to indicate the neutralization endpoint of NaHCO<sub>3</sub>?", options:["Methyl orange","Phenolphthalein","Both fail","Neither fails"], correct:1},
+{cat:"CARBONATE/BICARBONATE", q:"The final (2nd) equivalence point of a Na<sub>2</sub>CO<sub>3</sub> titration is indicated by:", options:["Phenolphthalein","Methyl orange","Starch","Litmus"], correct:1},
+{cat:"CARBONATE/BICARBONATE", q:"CO<sub>2</sub>/CO<sub>3</sub><sup>2-</sup> is passed through acidified orange K<sub>2</sub>Cr<sub>2</sub>O<sub>7</sub>. What is observed?", options:["Turns green (Cr<sup>3+</sup>)","No color change at all","Turns colorless","Turns purple"], correct:1},
+{cat:"CARBONATE/BICARBONATE", q:"Any acid stronger than which acid will react with NaHCO<sub>3</sub> to release CO<sub>2</sub>?", options:["H<sub>2</sub>CO<sub>3</sub>","HCl","H<sub>2</sub>SO<sub>4</sub>","HNO<sub>3</sub>"], correct:0},
+{cat:"CARBONATE/BICARBONATE", q:"NaHCO<sub>3</sub> heated strongly gives:", options:["Na<sub>2</sub>CO<sub>3</sub> + H<sub>2</sub>O + CO<sub>2</sub>","NaOH + CO<sub>2</sub>","Na<sub>2</sub>O + H<sub>2</sub>O","No reaction"], correct:0},
+{cat:"CARBONATE/BICARBONATE", q:"Na<sub>2</sub>CO<sub>3</sub> + Hg<sub>2</sub>(NO<sub>3</sub>)<sub>2</sub> gives a yellow precipitate that, on standing, converts to:", options:["White HgCO<sub>3</sub>","Black Hg<sub>2</sub>O + CO<sub>2</sub>","Red HgO","Green Hg(OH)<sub>2</sub>"], correct:1},
+
+// ---------------- SULPHITE / BISULPHITE ----------------
+{cat:"SULPHITE/BISULPHITE", q:"BaSO<sub>3</sub> is normally insoluble, but it dissolves readily in:", options:["Plain water","An oxidizing medium, or in conc. HCl","Dilute NaOH","It never dissolves"], correct:1},
+{cat:"SULPHITE/BISULPHITE", q:"The group reagent test for a sulphite salt liberates which gas?", options:["CO<sub>2</sub>","SO<sub>2</sub> (pungent)","H<sub>2</sub>S","NO"], correct:1},
+{cat:"SULPHITE/BISULPHITE", q:"Sulphite + AgNO<sub>3</sub> forms a clear solution which, on boiling, gives:", options:["Black Ag<sub>2</sub>S","A white reducing precipitate, Ag<sub>2</sub>SO<sub>3</sub>","Yellow AgI","Orange Ag<sub>2</sub>CrO<sub>4</sub>"], correct:1},
+{cat:"SULPHITE/BISULPHITE", q:"On further boiling, Ag<sub>2</sub>SO<sub>3</sub> decomposes into:", options:["Ag + SO<sub>2</sub> + SO<sub>4</sub><sup>2-</sup>","AgCl + H<sub>2</sub>O","Ag<sub>2</sub>O + S","AgOH + SO<sub>3</sub>"], correct:0},
+{cat:"SULPHITE/BISULPHITE", q:"Aldehydes and methyl ketones react with NaHSO<sub>3</sub> to form:", options:["A precipitate of free sulphur","A white crystalline bisulphite addition compound","SO<sub>2</sub> gas only","No visible reaction"], correct:1},
+{cat:"SULPHITE/BISULPHITE", q:"A sulphite salt treated with Zn/HCl (or Fe/HCl) produces:", options:["SO<sub>2</sub> gas","H<sub>2</sub>S gas (rotten egg smell)","Only H<sub>2</sub> gas","SO<sub>3</sub> gas"], correct:1},
+{cat:"SULPHITE/BISULPHITE", q:"In an oxidizing medium, the white Ag<sub>2</sub>SO<sub>3</sub> precipitate converts to:", options:["White Ag<sub>2</sub>SO<sub>4</sub>","Black Ag<sub>2</sub>S","Metallic Ag","AgOH"], correct:0},
+{cat:"SULPHITE/BISULPHITE", q:"Insoluble BaSO<sub>4</sub> also dissolves in conc. H<sub>2</sub>SO<sub>4</sub> because it forms:", options:["Soluble Ba(HSO<sub>4</sub>)<sub>2</sub>","BaO","BaS","It never dissolves in any acid"], correct:0},
+
+// ---------------- THIOSULPHATE ----------------
+{cat:"THIOSULPHATE", q:"Which of the following thiosulphates is INSOLUBLE?", options:["Na<sub>2</sub>S<sub>2</sub>O<sub>3</sub>","K<sub>2</sub>S<sub>2</sub>O<sub>3</sub>","Ag<sub>2</sub>S<sub>2</sub>O<sub>3</sub>","(NH<sub>4</sub>)<sub>2</sub>S<sub>2</sub>O<sub>3</sub>"], correct:2},
+{cat:"THIOSULPHATE", q:"The group test for thiosulphate with dilute acid gives:", options:["Sulphur precipitate AND SO<sub>2</sub> gas together","Only CO<sub>2</sub> gas","Only H<sub>2</sub>S gas","Reddish-brown NO<sub>2</sub> fumes"], correct:0},
+{cat:"THIOSULPHATE", q:"White Ag<sub>2</sub>S<sub>2</sub>O<sub>3</sub> reacting with excess Na<sub>2</sub>S<sub>2</sub>O<sub>3</sub> gives:", options:["Insoluble black Ag<sub>2</sub>S","Soluble Na<sub>3</sub>[Ag(S<sub>2</sub>O<sub>3</sub>)<sub>2</sub>]","AgCl","No reaction at all"], correct:1},
+{cat:"THIOSULPHATE", q:"Ag<sub>2</sub>S<sub>2</sub>O<sub>3</sub> reacting with water on boiling turns into:", options:["White AgCl","Black Ag<sub>2</sub>S","Yellow AgI","A colorless solution"], correct:1},
+{cat:"THIOSULPHATE", q:"Unlike AgCl, the black Ag<sub>2</sub>S formed from thiosulphate is, when treated with NH<sub>3</sub>:", options:["Soluble","Insoluble","Explosive","Volatile"], correct:1},
+{cat:"THIOSULPHATE", q:"Thiosulphate + FeCl<sub>3</sub> gives which colored precipitate?", options:["Blood red","Violet, Fe<sub>2</sub>(S<sub>2</sub>O<sub>3</sub>)<sub>3</sub>","Yellow","Black"], correct:1},
+{cat:"THIOSULPHATE", q:"Adding excess Na<sub>2</sub>S<sub>2</sub>O<sub>3</sub> to the violet Fe<sub>2</sub>(S<sub>2</sub>O<sub>3</sub>)<sub>3</sub> precipitate gives:", options:["A green FeS<sub>2</sub>O<sub>3</sub> solution","A brown ring","Black FeS","No visible change"], correct:0},
+{cat:"THIOSULPHATE", q:"Thiosulphate decolorizes the blue-black starch-iodine complex by converting I<sub>2</sub> into:", options:["I<sup>-</sup> only","NaI + Na<sub>2</sub>S<sub>4</sub>O<sub>6</sub>","HI","IO<sub>3</sub><sup>-</sup>"], correct:1},
+{cat:"THIOSULPHATE", q:"Unstable H<sub>2</sub>S<sub>2</sub>O<sub>3</sub> decomposes to:", options:["H<sub>2</sub>O + SO<sub>2</sub> + S","H<sub>2</sub>SO<sub>4</sub> + H<sub>2</sub>","HCl + S","SO<sub>3</sub> + H<sub>2</sub>O"], correct:0},
+{cat:"THIOSULPHATE", q:"Thiosulphate + Pb(OAc)<sub>2</sub> gives a white ppt → excess reagent gives a soluble complex → water then gives:", options:["White PbSO<sub>4</sub>","Black PbS","Yellow PbI<sub>2</sub>","Orange PbCrO<sub>4</sub>"], correct:1},
+{cat:"THIOSULPHATE", q:"CN<sup>-</sup> + Pb<sup>2+</sup> gives white PbSO<sub>3</sub>; that same solution + FeCl<sub>3</sub> gives what colored precipitate?", options:["Blood-red Fe(SCN)<sub>3</sub>","Green FeS<sub>2</sub>O<sub>3</sub>","Yellow FeS","Black Fe<sub>2</sub>S<sub>3</sub>"], correct:0},
+
+// ---------------- SULPHIDE / BISULPHIDE ----------------
+{cat:"SULPHIDE/BISULPHIDE", q:"The group reagent test for a sulphide salt liberates which gas?", options:["SO<sub>2</sub>","H<sub>2</sub>S (rotten egg smell)","CO<sub>2</sub>","NO<sub>2</sub>"], correct:1},
+{cat:"SULPHIDE/BISULPHIDE", q:"Which THREE sulphides need aqua regia (not just conc. HNO<sub>3</sub>) to dissolve?", options:["HgS, CoS, NiS","PbS, CuS, ZnS","FeS, MnS, Ag<sub>2</sub>S","CdS, SnS, Sb<sub>2</sub>S<sub>3</sub>"], correct:0},
+{cat:"SULPHIDE/BISULPHIDE", q:"The nitroprusside test for a soluble sulphide salt gives which color?", options:["Blue","Violet","Yellow","Brown"], correct:1},
+{cat:"SULPHIDE/BISULPHIDE", q:"The nitroprusside test fails for:", options:["Concentrated sulphide solutions","Free H<sub>2</sub>S gas (low S<sup>2-</sup> concentration)","Alkali metal sulphides","It never fails"], correct:1},
+{cat:"SULPHIDE/BISULPHIDE", q:"The methylene blue test is specific for detecting:", options:["SO<sub>2</sub>","H<sub>2</sub>S","CO<sub>2</sub>","NO<sub>2</sub>"], correct:1},
+{cat:"SULPHIDE/BISULPHIDE", q:"Sulphide + Pb(OAc)<sub>2</sub> gives black PbS, which on treatment with H<sub>2</sub>O<sub>2</sub> becomes:", options:["White PbSO<sub>4</sub>","Yellow PbI<sub>2</sub>","Black PbS (no change)","Brown PbO<sub>2</sub>"], correct:0},
+{cat:"SULPHIDE/BISULPHIDE", q:"Group 1 (alkali metal) sulphides are generally:", options:["Insoluble","Soluble","Explosive on contact with air","Colorless solids only"], correct:1},
+{cat:"SULPHIDE/BISULPHIDE", q:"Aqueous solutions of group 1/2 sulphides are basic due to:", options:["Cationic hydrolysis","Anionic hydrolysis","No hydrolysis occurs","Oxidation by air"], correct:1},
+{cat:"SULPHIDE/BISULPHIDE", q:"Cr<sub>2</sub>S<sub>3</sub> + H<sub>2</sub>O gives a green precipitate of:", options:["Cr(OH)<sub>3</sub> (+ H<sub>2</sub>S)","CrO<sub>3</sub>","Cr<sub>2</sub>O<sub>3</sub>","CrS"], correct:0},
+{cat:"SULPHIDE/BISULPHIDE", q:"Sulphide salt + Cd(NO<sub>3</sub>)<sub>2</sub> gives which colored precipitate?", options:["Black","Yellow, CdS","White","Green"], correct:1},
+
+// ---------------- NITRITE ----------------
+{cat:"NITRITE", q:"The group test gas for a nitrite salt is colorless NO, which then:", options:["Stays colorless indefinitely","Turns reddish-brown (NO<sub>2</sub>) in air","Turns yellow","Turns violet"], correct:1},
+{cat:"NITRITE", q:"The nitrite ring test uses which acid strength/conditions?", options:["Conc. H<sub>2</sub>SO<sub>4</sub> with heating","Dilute H<sub>2</sub>SO<sub>4</sub>, no heating needed","Conc. HCl","Dilute HCl with heating"], correct:1},
+{cat:"NITRITE", q:"Using conc. H<sub>2</sub>SO<sub>4</sub> instead of dilute in the nitrite ring test would:", options:["Have no real effect","Further oxidize NO to NO<sub>2</sub>, spoiling the test","Make the ring permanent","Prevent the ring from forming entirely"], correct:1},
+{cat:"NITRITE", q:"For the nitrite + KI + starch test, acidification must use:", options:["HCl","H<sub>2</sub>SO<sub>4</sub>","A non-oxidizing acid like CH<sub>3</sub>COOH","HNO<sub>3</sub>"], correct:2},
+{cat:"NITRITE", q:"A nitrite salt heated with NH<sub>4</sub>Cl gives which gas?", options:["NH<sub>3</sub>","N<sub>2</sub> (colorless, odourless, tasteless)","NO<sub>2</sub>","H<sub>2</sub>"], correct:1},
+{cat:"NITRITE", q:"The Griess–Ilosvay test for nitrite produces:", options:["A blue precipitate","An orange-red/pink azo dye","A yellow solution","A colorless gas"], correct:1},
+{cat:"NITRITE", q:"All nitrites are soluble except:", options:["AgNO<sub>2</sub>","KNO<sub>2</sub>","NaNO<sub>2</sub>","NH<sub>4</sub>NO<sub>2</sub>"], correct:0},
+{cat:"NITRITE", q:"A nitrite salt treated with Zn-NaOH or Al-NaOH liberates which gas?", options:["H<sub>2</sub>","NH<sub>3</sub>","N<sub>2</sub>","NO<sub>2</sub>"], correct:1},
+{cat:"NITRITE", q:"White reducing AgNO<sub>2</sub> reacting with acidified KMnO<sub>4</sub> turns the KMnO<sub>4</sub>:", options:["Colorless (Mn<sup>2+</sup>)","Green","Stays purple, unchanged","Brown"], correct:0},
+{cat:"NITRITE", q:"A nitrite salt gets oxidized by MnO<sub>4</sub><sup>-</sup>, Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup> or halates, converting itself into:", options:["Nitrate, NO<sub>3</sub><sup>-</sup>","Ammonia","Nitrogen gas","Nitrous oxide"], correct:0},
+
+// ---------------- NITRATE ----------------
+{cat:"NITRATE", q:"The group test for nitrate with conc. H<sub>2</sub>SO<sub>4</sub> and heat gives:", options:["Reddish-brown NO<sub>2</sub> fumes","Colorless NO fumes only","Yellow-green Cl<sub>2</sub> gas","Violet I<sub>2</sub> fumes"], correct:0},
+{cat:"NITRATE", q:"Adding Cu chips to the nitrate + conc. H<sub>2</sub>SO<sub>4</sub> test:", options:["Has no visible effect","Intensifies the reddish-brown fumes","Stops the reaction entirely","Turns the fumes blue"], correct:1},
+{cat:"NITRATE", q:"The nitrate brown ring test requires FeSO<sub>4</sub> in what amount?", options:["A small, exact amount","A large excess","It isn't needed at all","Only a trace"], correct:1},
+{cat:"NITRATE", q:"What is the dual role of FeSO<sub>4</sub> in the nitrate ring test?", options:["Oxidizing agent + drying agent","Complexing/precipitating agent AND reducing agent","Only a catalyst","Only a color indicator"], correct:1},
+{cat:"NITRATE", q:"Which insoluble nitrate is brown in color?", options:["Hg(OH)NO<sub>3</sub>","Co(OH)NO<sub>3</sub>","BiONO<sub>3</sub>","AgNO<sub>3</sub>"], correct:2},
+{cat:"NITRATE", q:"Insoluble oxo-/hydroxo-nitrate salts dissolve in:", options:["Plain water","Strongly acidic medium, e.g. conc. HNO<sub>3</sub>","Dilute NaOH","They never dissolve"], correct:1},
+{cat:"NITRATE", q:"The main difference between the nitrate and nitrite ring tests is:", options:["Nitrate needs conc. H<sub>2</sub>SO<sub>4</sub> + heat + large excess FeSO<sub>4</sub>; nitrite needs only dilute H<sub>2</sub>SO<sub>4</sub>, no heat","They are essentially identical","Nitrite needs heating, nitrate doesn't","Nitrate doesn't need FeSO<sub>4</sub> at all"], correct:0},
+{cat:"NITRATE", q:"A nitrate salt treated with Zn-NaOH or Al-NaOH liberates which gas?", options:["NO<sub>2</sub>","NH<sub>3</sub>","N<sub>2</sub>","H<sub>2</sub>"], correct:1},
+
+// ---------------- CHLORIDE ----------------
+{cat:"CHLORIDE", q:"Which of these normally-insoluble chlorides is soluble in conc. HCl?", options:["AgCl","PbCl<sub>2</sub>","BiOCl","CuCl"], correct:2},
+{cat:"CHLORIDE", q:"The group test: chloride + conc. H<sub>2</sub>SO<sub>4</sub> + KCl gives which gas?", options:["Cl<sub>2</sub>","Pungent HCl gas","H<sub>2</sub>S","SO<sub>2</sub>"], correct:1},
+{cat:"CHLORIDE", q:"To liberate Cl<sub>2</sub> gas (not just HCl) from a chloride salt, you add:", options:["NaOH","An oxidizer like MnO<sub>2</sub> or PbO<sub>2</sub> with conc. H<sub>2</sub>SO<sub>4</sub>","Plain water","Dilute HCl"], correct:1},
+{cat:"CHLORIDE", q:"White Hg<sub>2</sub>Cl<sub>2</sub> reacting with NH<sub>3</sub> undergoes disproportionation to give:", options:["HgNH<sub>2</sub>Cl + Hg (black)","HgCl<sub>2</sub> only","Hg<sub>2</sub>O","No reaction"], correct:0},
+{cat:"CHLORIDE", q:"Which chlorides give a NEGATIVE chromyl chloride test due to significant covalent character?", options:["NaCl, KCl","SnCl<sub>4</sub>, HgCl<sub>2</sub>","CaCl<sub>2</sub>, BaCl<sub>2</sub>","AgCl, PbCl<sub>2</sub>"], correct:1},
+{cat:"CHLORIDE", q:"The chromyl chloride test cannot be extended to bromide or iodide because:", options:["HBr/HI are too easily oxidized under the conditions","Br and I don't form any chlorides","The reaction is simply too slow","No such limitation actually exists"], correct:0},
+{cat:"CHLORIDE", q:"A high concentration of Cl<sup>-</sup> is needed for a positive chromyl chloride test because:", options:["Excess HCl is needed, since part of it gets oxidized by the CrO<sub>3</sub> formed","Low Cl<sup>-</sup> gives a false positive","There's no real chemical reason","Cl<sup>-</sup> only acts as a catalyst"], correct:0},
+{cat:"CHLORIDE", q:"Reddish CrO<sub>2</sub>Cl<sub>2</sub> vapor reacting with aqueous KOH gives:", options:["A yellow K<sub>2</sub>CrO<sub>4</sub> solution","Orange K<sub>2</sub>Cr<sub>2</sub>O<sub>7</sub>","Green Cr(OH)<sub>3</sub>","A colorless solution"], correct:0},
+{cat:"CHLORIDE", q:"SnCl<sub>2</sub> reacting with water converts into an insoluble oxychloride:", options:["SnOCl<sub>2</sub>","Sn(OH)Cl","SnCl<sub>4</sub>","No change occurs"], correct:1},
+{cat:"CHLORIDE", q:"All chloride salts are soluble except:", options:["AgCl, PbCl<sub>2</sub>, Hg<sub>2</sub>Cl<sub>2</sub>, CuCl (and a few oxychlorides)","NaCl, KCl","CaCl<sub>2</sub>, MgCl<sub>2</sub>","NH<sub>4</sub>Cl, BaCl<sub>2</sub>"], correct:0},
+{cat:"CHLORIDE", q:"Chloride + Hg<sub>2</sub>(NO<sub>3</sub>)<sub>2</sub> gives a white/yellowish-white precipitate that turns which color with NH<sub>3</sub>?", options:["Black (HgNH<sub>2</sub>Cl + Hg)","Yellow","Red","No change at all"], correct:0},
+{cat:"CHLORIDE", q:"Etard oxidation (toluene + CrO<sub>2</sub>Cl<sub>2</sub>) ultimately produces:", options:["Benzoic acid","Benzaldehyde","Toluic acid","Benzyl chloride"], correct:1},
+
+// ---------------- BROMIDE ----------------
+{cat:"BROMIDE", q:"All bromide salts are soluble except:", options:["AgBr, PbBr<sub>2</sub>, Hg<sub>2</sub>Br<sub>2</sub>, CuBr","NaBr, KBr","CaBr<sub>2</sub>","NH<sub>4</sub>Br"], correct:0},
+{cat:"BROMIDE", q:"Conc. H<sub>2</sub>SO<sub>4</sub> + a bromide salt gives which colored fumes, and why?", options:["Reddish-brown Br<sub>2</sub> (H<sub>2</sub>SO<sub>4</sub> itself oxidizes it)","Colorless HBr only","Yellow-green Cl<sub>2</sub>","Violet I<sub>2</sub>"], correct:0},
+{cat:"BROMIDE", q:"Orthophosphoric acid (H<sub>3</sub>PO<sub>4</sub>) + bromide gives:", options:["Colorless HBr fumes, turning brown only via aerial oxidation","Immediate intense Br<sub>2</sub> fumes","No reaction at all","SO<sub>2</sub> gas"], correct:0},
+{cat:"BROMIDE", q:"The fluorescein test converts yellow-orange fluorescein into a bright pink/red dye called:", options:["Erythrosine","Eosin Y (tetrabromofluorescein)","Methylene blue","Rhodamine"], correct:1},
+{cat:"BROMIDE", q:"The fluorescein test alone cannot distinguish bromide from iodide because:", options:["Both salts are insoluble","Eosin (from Br<sub>2</sub>) and erythrosine (from I<sub>2</sub>) are both shades of red/pink","Iodide doesn't react at all","They form the exact same compound"], correct:1},
+{cat:"BROMIDE", q:"To properly distinguish Br<sup>-</sup> and I<sup>-</sup> in a mixture, chemists use:", options:["The layer test with CHCl<sub>3</sub> as solvent","The fluorescein test alone","Adding NaOH","Simply boiling with water"], correct:0},
+{cat:"BROMIDE", q:"In the layer test, the halogen X<sub>2</sub>' used must be positioned _____ X in the periodic table to displace it.", options:["Below","Above","In the same period","Position doesn't matter"], correct:1},
+{cat:"BROMIDE", q:"A bromide salt + F<sub>2</sub> in the layer test gives what colored layer over CHCl<sub>3</sub>?", options:["Yellowish-green","Reddish-brown","Bluish-black","Colorless"], correct:1},
+{cat:"BROMIDE", q:"White PbBr<sub>2</sub> is:", options:["Soluble in cold water","Insoluble in cold water, but dissolves in hot water","Soluble under all conditions","A compound that never forms"], correct:1},
+{cat:"BROMIDE", q:"Bromide salt + MnO<sub>2</sub> + conc. H<sub>2</sub>SO<sub>4</sub> gives:", options:["Intense reddish-brown Br<sub>2</sub> fumes","Colorless fumes only","Green fumes","No reaction"], correct:0},
+
+// ---------------- IODIDE ----------------
+{cat:"IODIDE", q:"All iodide salts are soluble except:", options:["AgI, PbI<sub>2</sub>, Hg<sub>2</sub>I<sub>2</sub>, CuI, BiI<sub>3</sub>, HgI<sub>2</sub>, BiOI","NaI, KI","CaI<sub>2</sub>","NH<sub>4</sub>I"], correct:0},
+{cat:"IODIDE", q:"Conc. H<sub>2</sub>SO<sub>4</sub> + an iodide salt gives violet fumes plus how many total gaseous products?", options:["2","3","4 (I<sub>2</sub>, HI, SO<sub>2</sub>, H<sub>2</sub>O)","5"], correct:2},
+{cat:"IODIDE", q:"Nessler's reagent, used to test for ammonia, has the formula:", options:["K<sub>2</sub>[HgI<sub>4</sub>]","AgNO<sub>3</sub>","Na<sub>2</sub>[Fe(CN)<sub>5</sub>NO]","K<sub>2</sub>Cr<sub>2</sub>O<sub>7</sub>"], correct:0},
+{cat:"IODIDE", q:"Nessler's reagent + NH<sub>3</sub> gives which colored precipitate?", options:["Brown (iodide of Millon's base)","White","Black","Green"], correct:0},
+{cat:"IODIDE", q:"I<sup>-</sup> + Hg<sub>2</sub><sup>2+</sup> (mercurous) initially gives which colored precipitate?", options:["Scarlet red","Green, Hg<sub>2</sub>I<sub>2</sub>","Yellow","White"], correct:1},
+{cat:"IODIDE", q:"I<sub>2</sub> is well known to catalyze the redox reaction between:", options:["Ce<sup>4+</sup> and AsO<sub>3</sub><sup>3-</sup>","Fe<sup>2+</sup> and MnO<sub>4</sub><sup>-</sup>","H<sub>2</sub>O<sub>2</sub> and KI","Cu<sup>2+</sup> and Zn"], correct:0},
+{cat:"IODIDE", q:"Which of these does NOT liberate I<sub>2</sub> from an iodide salt?", options:["Cl<sub>2</sub>","NaCl","MnO<sub>4</sub><sup>-</sup>/H<sup>+</sup>","Conc. HNO<sub>3</sub>"], correct:1},
+{cat:"IODIDE", q:"Yellow PbI<sub>2</sub> (insoluble in water) becomes soluble in:", options:["Excess KI (forms PbI<sub>4</sub><sup>2-</sup>)","Cold water","Dilute HNO<sub>3</sub> only","It never dissolves"], correct:0},
+{cat:"IODIDE", q:"I<sup>-</sup> + Hg<sup>2+</sup> gives which colored precipitate first?", options:["Scarlet red, HgI<sub>2</sub>","Green","Black","White"], correct:0},
+{cat:"IODIDE", q:"Iodine vapor's electrophilic substitution on fluorescein at room temperature is:", options:["Very fast and vigorous","Too weak to give a distinct pink reaction","Explosive","Identical in speed to bromine's"], correct:1},
+
+// ---------------- SULPHATE ----------------
+{cat:"SULPHATE", q:"Which of these sulphates are completely insoluble?", options:["Ag<sub>2</sub>SO<sub>4</sub>, PbSO<sub>4</sub>, BaSO<sub>4</sub>, SrSO<sub>4</sub>","Na<sub>2</sub>SO<sub>4</sub>, K<sub>2</sub>SO<sub>4</sub>","MgSO<sub>4</sub>, ZnSO<sub>4</sub>","CuSO<sub>4</sub>, FeSO<sub>4</sub>"], correct:0},
+{cat:"SULPHATE", q:"BaSO<sub>4</sub> dissolves ONLY in:", options:["Dilute HCl","Concentrated H<sub>2</sub>SO<sub>4</sub>","Dilute HNO<sub>3</sub>","It never dissolves in any acid"], correct:1},
+{cat:"SULPHATE", q:"HgSO<sub>4</sub>.HgO is what colored precipitate?", options:["Yellow","Green","Black","White"], correct:0},
+{cat:"SULPHATE", q:"Cr(OH)SO<sub>4</sub> is what colored precipitate?", options:["Yellow","Green","Blue","Black"], correct:1},
+{cat:"SULPHATE", q:"White PbSO<sub>4</sub>, insoluble even in hot water, dissolves in:", options:["Conc. H<sub>2</sub>SO<sub>4</sub> (forms Pb(HSO<sub>4</sub>)<sub>2</sub>)","Cold water","Dilute NaOH only","It never dissolves"], correct:0},
+{cat:"SULPHATE", q:"CaSO<sub>4</sub> and HgSO<sub>4</sub> are best described as:", options:["Completely insoluble","Only slightly soluble","Highly soluble","Explosive on contact with water"], correct:1},
+{cat:"SULPHATE", q:"Sulphate salt + HgCl<sub>2</sub> gives which colored precipitate?", options:["Yellow, HgSO<sub>4</sub>.H<sub>2</sub>O","White","Black","Green"], correct:0},
+{cat:"SULPHATE", q:"White BaSO<sub>4</sub> (from BaCl<sub>2</sub> + sulphate) is insoluble even in:", options:["Dilute/conc. HCl or HNO<sub>3</sub>, dilute H<sub>2</sub>SO<sub>4</sub>, or halogen water","Only cold water","Only dilute NaOH","It's actually soluble in all of these"], correct:0},
+];
+
+const DEFAULT_PRELIM_QUESTIONS = [
+// ---------------- PHYSICAL TESTS ----------------
+{cat:"PHYSICAL TESTS", q:"A salt gives a purple color in its dry state. Which ion is most likely responsible?", options:["MnO<sub>4</sub><sup>-</sup> (permanganate)","Cu<sup>2+</sup>","CrO<sub>4</sub><sup>2-</sup>","Fe<sup>3+</sup>"], correct:0},
+{cat:"PHYSICAL TESTS", q:"Hydrated salts of Mn<sup>2+</sup> and Co<sup>2+</sup> are typically what color?", options:["Green","Pink","Blue","Brown"], correct:1},
+{cat:"PHYSICAL TESTS", q:"A blue-colored aqueous solution most likely contains which ion?", options:["Fe<sup>3+</sup>","Cr<sup>3+</sup>","Cu<sup>2+</sup>","Mn<sup>2+</sup>"], correct:2},
+{cat:"PHYSICAL TESTS", q:"A green solution could contain which of these ions?", options:["Ni<sup>2+</sup>, Fe<sup>2+</sup>, or Cr<sup>3+</sup>","Cu<sup>2+</sup> only","CrO<sub>4</sub><sup>2-</sup> only","Mn<sup>2+</sup> only"], correct:0},
+{cat:"PHYSICAL TESTS", q:"An ammoniacal, pungent, urinal-like smell from a salt indicates the presence of:", options:["S<sup>2-</sup>","NH<sub>4</sub><sup>+</sup>","CH<sub>3</sub>COO<sup>-</sup>","C<sub>2</sub>O<sub>4</sub><sup>2-</sup>"], correct:1},
+{cat:"PHYSICAL TESTS", q:"A light, fluffy powder texture in a salt suggests the presence of:", options:["Pb<sup>2+</sup>","Ba<sup>2+</sup>","CO<sub>3</sub><sup>2-</sup>","Hg<sub>2</sub><sup>2+</sup>"], correct:2},
+{cat:"PHYSICAL TESTS", q:"If a deliquescent salt turns colored as it absorbs moisture, it may be:", options:["Zn(NO<sub>3</sub>)<sub>2</sub>","Cu(NO<sub>3</sub>)<sub>2</sub> or FeCl<sub>3</sub>","NaCl","KCl"], correct:1},
+
+// ---------------- FLAME TEST ----------------
+{cat:"FLAME TEST", q:"What color does Na<sup>+</sup> impart to a Bunsen flame?", options:["Golden yellow","Crimson red","Lilac/violet","Apple green"], correct:0},
+{cat:"FLAME TEST", q:"What color does K<sup>+</sup> impart to a flame?", options:["Golden yellow","Lilac or red-violet","Crimson red","Blue"], correct:1},
+{cat:"FLAME TEST", q:"What color does Li<sup>+</sup> impart to a flame?", options:["Crimson red","Golden yellow","Violet","Blue"], correct:0},
+{cat:"FLAME TEST", q:"Sr<sup>2+</sup> gives which flame color?", options:["Apple green","Brick red","Crimson red","Blue"], correct:2},
+{cat:"FLAME TEST", q:"Ba<sup>2+</sup> gives which flame color?", options:["Brick red","Apple green","Blue","Violet"], correct:1},
+{cat:"FLAME TEST", q:"Which two metals give NO flame test color at all?", options:["Na & K","Be & Mg","Ca & Sr","Rb & Cs"], correct:1},
+{cat:"FLAME TEST", q:"When Na<sup>+</sup> and K<sup>+</sup> are both present, what masks the potassium color to the naked eye?", options:["Potassium's own violet color","The intense golden-yellow of sodium","They cancel out to give no color","Both intensify to orange"], correct:1},
+{cat:"FLAME TEST", q:"Viewed through blue (cobalt) glass, how do the Na<sup>+</sup> and K<sup>+</sup> flame colors appear?", options:["Na turns crimson, K disappears","Both disappear completely","Na disappears, K shows a crimson red flame","Both turn violet"], correct:2},
+{cat:"FLAME TEST", q:"What is the role of concentrated HCl in the flame test?", options:["Provides H<sup>+</sup> ions for the flame","Converts the salt into a volatile cationic chloride","Oxidizes the sample before testing","Cools the wire before testing"], correct:1},
+{cat:"FLAME TEST", q:"The characteristic yellow flame color of sodium arises from which electronic transition?", options:["3s<sup>1</sup> → 3p<sup>1</sup>","2s → 2p","4s → 3d","1s → 2s"], correct:0},
+{cat:"FLAME TEST", q:"Pb<sup>2+</sup> gives which flame color?", options:["Bluish","Apple green","Brick red","Violet"], correct:0},
+
+// ---------------- BORAX BEAD TEST ----------------
+{cat:"BORAX BEAD TEST", q:"A heated, transparent borax bead is chemically composed of:", options:["Sodium carbonate and boric acid","Sodium metaborate and boric anhydride","Sodium metaphosphate and water","Calcium borate and silica"], correct:1},
+{cat:"BORAX BEAD TEST", q:"In the oxidizing flame (hot), a chromium (Cr<sup>3+</sup>) borax bead appears:", options:["Violet","Blue","Yellow/green","Colorless"], correct:2},
+{cat:"BORAX BEAD TEST", q:"In the oxidizing flame (cold), the chromium borax bead appears:", options:["Green","Yellow/green","Violet","Colorless"], correct:0},
+{cat:"BORAX BEAD TEST", q:"In the reducing flame, a chromium borax bead stays which color (both hot and cold)?", options:["Grey","Blue","Green","Colorless"], correct:2},
+{cat:"BORAX BEAD TEST", q:"A manganese (Mn<sup>2+</sup>) borax bead in the oxidizing flame (hot) is:", options:["Blue","Violet","Yellow","Green"], correct:1},
+{cat:"BORAX BEAD TEST", q:"In the reducing flame, the manganese borax bead becomes:", options:["Colorless/grey","Deep violet","Blue","Black"], correct:0},
+{cat:"BORAX BEAD TEST", q:"An iron (Fe<sup>3+</sup>) borax bead in the oxidizing flame (hot) is:", options:["Blue","Yellowish brown","Violet","Colorless"], correct:1},
+{cat:"BORAX BEAD TEST", q:"In the reducing flame, the iron borax bead turns green or bottle-green due to the formation of:", options:["Fe<sup>2+</sup>","Metallic Fe","Fe<sub>2</sub>O<sub>3</sub>","FeO<sub>3</sub><sup>-</sup>"], correct:0},
+{cat:"BORAX BEAD TEST", q:"A cobalt (Co<sup>2+</sup>) borax bead is which color in the oxidizing flame?", options:["Blue","Violet","Green","Grey"], correct:0},
+{cat:"BORAX BEAD TEST", q:"A nickel (Ni<sup>2+</sup>) borax bead in the oxidizing flame (hot) is:", options:["Blue","Green","Violet","Yellow"], correct:2},
+{cat:"BORAX BEAD TEST", q:"A copper (Cu<sup>2+</sup>) borax bead in the oxidizing flame (hot) is:", options:["Blue","Green","Violet","Colorless"], correct:1},
+{cat:"BORAX BEAD TEST", q:"In the reducing flame (cold), the copper borax bead turns opaque brown-red due to:", options:["CuO formation","Cu(OH)<sub>2</sub> formation","Metallic copper deposition","Cu<sub>2</sub>O formation only, no metal"], correct:2},
+{cat:"BORAX BEAD TEST", q:"The borax bead test is characteristically given by transition metal ions that:", options:["Are alkali metals","Have unpaired electrons and form colored compounds","Are anions, not cations","Have no d-electrons at all"], correct:1},
+{cat:"BORAX BEAD TEST", q:"Alums also show the swelling characteristic of borax on heating, but on strong heating they:", options:["Also form a transparent glassy bead","Convert into an amorphous powder (unlike borax)","Turn completely black","Explode violently"], correct:1},
+{cat:"BORAX BEAD TEST", q:"Which of the following gives a positive borax bead test?", options:["Al<sup>3+</sup>","Pb<sup>2+</sup>","Sn<sup>2+</sup>","Mn<sup>3+</sup>"], correct:3},
+{cat:"BORAX BEAD TEST", q:"The borax bead swells up before forming a clear bead because of:", options:["Oxidation of the platinum wire","Loss of water of crystallization","Absorption of atmospheric CO<sub>2</sub>","Reaction with the metal salt"], correct:1},
+
+// ---------------- MICROCOSMIC SALT TEST ----------------
+{cat:"MICROCOSMIC SALT TEST", q:"What is the chemical formula of microcosmic salt?", options:["Na<sub>2</sub>B<sub>4</sub>O<sub>7</sub>·10H<sub>2</sub>O","Na(NH<sub>4</sub>)HPO<sub>4</sub>·4H<sub>2</sub>O","NaHCO<sub>3</sub>","Na<sub>2</sub>HPO<sub>4</sub>"], correct:1},
+{cat:"MICROCOSMIC SALT TEST", q:"On strong heating, microcosmic salt decomposes to form a glassy bead of:", options:["Sodium metaborate (NaBO<sub>2</sub>)","Sodium metaphosphate (NaPO<sub>3</sub>)","Sodium carbonate","Sodium orthophosphate"], correct:1},
+{cat:"MICROCOSMIC SALT TEST", q:"In the oxidizing flame, the sodium metaphosphate bead reacts with a transition metal oxide to form:", options:["A mixed borate","A mixed carbonate","A mixed phosphate (NaMPO<sub>4</sub>)","A mixed sulfate"], correct:2},
+{cat:"MICROCOSMIC SALT TEST", q:"Initial heating of microcosmic salt produces a crackling/decrepitation sound because it is:", options:["Losing its water of crystallization","Melting instantly","Reacting with the platinum wire","Oxidizing in the flame"], correct:0},
+
+// ---------------- CHARCOAL CAVITY & COBALT NITRATE ----------------
+{cat:"CHARCOAL CAVITY TEST", q:"A 'red scale' observed in the charcoal cavity test suggests the presence of:", options:["Pb<sup>2+</sup>","Cu<sup>2+</sup>","Zn<sup>2+</sup>","Ni<sup>2+</sup>"], correct:1},
+{cat:"CHARCOAL CAVITY TEST", q:"A metallic bead with a yellow incrustation in the charcoal cavity test suggests:", options:["Cu<sup>2+</sup>","Zn<sup>2+</sup>","Pb<sup>2+</sup>","Al<sup>3+</sup>"], correct:2},
+{cat:"CHARCOAL CAVITY TEST", q:"A residue that is yellow when hot but turns white on cooling (with no bead) suggests:", options:["Pb<sup>2+</sup>","Zn<sup>2+</sup>","Cu<sup>2+</sup>","Sn<sup>2+</sup>"], correct:1},
+{cat:"CHARCOAL CAVITY TEST", q:"A white infusible residue in the charcoal cavity test could indicate which group of cations?", options:["Cu<sup>2+</sup>, Ni<sup>2+</sup>, Fe<sup>3+</sup>, Co<sup>2+</sup>","Zn<sup>2+</sup>, Al<sup>3+</sup>, Mg<sup>2+</sup>, Ba<sup>2+</sup>, Ca<sup>2+</sup>, Sn<sup>2+</sup>","Only NH<sub>4</sub><sup>+</sup>","Only Pb<sup>2+</sup>"], correct:1},
+{cat:"CHARCOAL CAVITY TEST", q:"The cobalt nitrate test is performed only on residues that were, in the charcoal cavity test:", options:["Colored black","White and infusible","Metallic beads","Yellow incrustations"], correct:1},
+{cat:"CHARCOAL CAVITY TEST", q:"Al<sub>2</sub>O<sub>3</sub> + CoO on heating gives which characteristic color?", options:["Rinmann's green","Thenard blue","Bluish green (azure)","Pink"], correct:1},
+{cat:"CHARCOAL CAVITY TEST", q:"ZnO + CoO on heating gives which characteristic color?", options:["Thenard blue","Rinmann's green","Azure","Pink"], correct:1},
+{cat:"CHARCOAL CAVITY TEST", q:"MgO + CoO on heating gives which characteristic color?", options:["Thenard blue","Rinmann's green","Azure","Pink"], correct:3},
+{cat:"CHARCOAL CAVITY TEST", q:"SnO + CoO on heating gives which characteristic color?", options:["Pink","Thenard blue","Bluish green (azure)","Rinmann's green"], correct:2},
+
+// ---------------- DRY HEAT TEST & SUBLIMATION ----------------
+{cat:"DRY HEAT TEST", q:"In the dry heat test, a residue that is yellow when hot but white when cold indicates:", options:["Fe<sub>2</sub>O<sub>3</sub>","ZnO","SnO<sub>2</sub>","No residue"], correct:1},
+{cat:"DRY HEAT TEST", q:"In the dry heat test, a residue that is red when cold but black when hot indicates:", options:["ZnO","Fe<sub>2</sub>O<sub>3</sub>","SnO<sub>2</sub>","HgO"], correct:1},
+{cat:"DRY HEAT TEST", q:"If NO solid residue at all is obtained in the dry heat test, the cation is likely:", options:["A transition metal","An alkaline earth metal","NH<sub>4</sub><sup>+</sup> or PH<sub>4</sub><sup>+</sup> (non-metallic)","An alkali metal"], correct:2},
+{cat:"DRY HEAT TEST", q:"A yellow-brown residue when hot that turns yellow when cold indicates:", options:["SnO<sub>2</sub> or Bi<sub>2</sub>O<sub>3</sub>","ZnO","Fe<sub>2</sub>O<sub>3</sub>","HgO"], correct:0},
+{cat:"DRY HEAT TEST", q:"Which reagents commonly give white sublimates on dry heating?", options:["Only NaCl and KI","HgCl<sub>2</sub>, Hg<sub>2</sub>Cl<sub>2</sub>, As<sub>2</sub>O<sub>3</sub>, Sb<sub>2</sub>O<sub>3</sub>, NH<sub>4</sub>X","Only CaCO<sub>3</sub>","Only sulphates"], correct:1},
+{cat:"DRY HEAT TEST", q:"A black sublimate on dry heating is characteristic of:", options:["ZnO","HgS (vermilion) or Hg<sub>2</sub>S","Fe<sub>2</sub>O<sub>3</sub>","CaO"], correct:1},
+{cat:"DRY HEAT TEST", q:"A yellow sublimate on dry heating could indicate:", options:["HgI<sub>2</sub> or As<sub>2</sub>S<sub>3</sub>","NaCl","Fe<sub>2</sub>O<sub>3</sub>","CaCO<sub>3</sub>"], correct:0},
+
+// ---------------- GAS EVOLVED & HEATING EFFECTS ----------------
+{cat:"GAS EVOLVED & HEATING", q:"If N<sub>2</sub> gas (not N<sub>2</sub>O) is evolved on heating a salt, this suggests:", options:["NH<sub>4</sub><sup>+</sup> combined with a non-oxidizing anion","NH<sub>4</sub><sup>+</sup> combined with an oxidizing anion (e.g. NO<sub>2</sub><sup>-</sup>, Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup>)","A pure carbonate","A pure sulphate"], correct:1},
+{cat:"GAS EVOLVED & HEATING", q:"If NH<sub>3</sub> gas is evolved on heating a salt, this suggests:", options:["NH<sub>4</sub><sup>+</sup> combined with an oxidizing anion","NH<sub>4</sub><sup>+</sup> combined with a non-oxidizing anion (e.g. Cl<sup>-</sup>, CO<sub>3</sub><sup>2-</sup>, SO<sub>4</sub><sup>2-</sup>)","A pure nitrate","A pure carbonate"], correct:1},
+{cat:"GAS EVOLVED & HEATING", q:"Which alkali metal carbonate is the one exception that DOES decompose on heating?", options:["Na<sub>2</sub>CO<sub>3</sub>","K<sub>2</sub>CO<sub>3</sub>","Li<sub>2</sub>CO<sub>3</sub>","Rb<sub>2</sub>CO<sub>3</sub>"], correct:2},
+{cat:"GAS EVOLVED & HEATING", q:"Heating white lead carbonate (2PbCO<sub>3</sub>·Pb(OH)<sub>2</sub>) at 350°C gives which red-orange product?", options:["PbO","PbO<sub>2</sub>","Pb<sub>3</sub>O<sub>4</sub>","Pb<sub>2</sub>O<sub>3</sub>"], correct:2},
+{cat:"GAS EVOLVED & HEATING", q:"On strong heating, pink hydrated CoCl<sub>2</sub>·6H<sub>2</sub>O eventually loses all its water to give anhydrous CoCl<sub>2</sub>, which is:", options:["Pink","Green","Blue","Yellow"], correct:2},
+{cat:"GAS EVOLVED & HEATING", q:"'Swells' as an action-of-heat observation is characteristic of:", options:["Borates and alums","Sulphates","Nitrates","Chlorides"], correct:0},
+
+// ---------------- CATION GROUP DIVISION ----------------
+{cat:"CATION GROUPS", q:"What is the group reagent for Group I cations (Pb<sup>2+</sup>, Ag<sup>+</sup>, Hg<sub>2</sub><sup>2+</sup>)?", options:["Dilute HCl","Dilute HCl + H<sub>2</sub>S","NH<sub>4</sub>OH + NH<sub>4</sub>Cl","(NH<sub>4</sub>)<sub>2</sub>CO<sub>3</sub> + NH<sub>4</sub>Cl"], correct:0},
+{cat:"CATION GROUPS", q:"What is the group reagent for Group II cations?", options:["Dilute HCl","Dilute HCl + H<sub>2</sub>S","NH<sub>4</sub>OH + H<sub>2</sub>S","NaOH"], correct:1},
+{cat:"CATION GROUPS", q:"Fe<sup>3+</sup>, Cr<sup>3+</sup>, and Al<sup>3+</sup> are precipitated as hydroxides by NH<sub>4</sub>OH + NH<sub>4</sub>Cl — which group is this?", options:["Group I","Group III","Group IV","Group V"], correct:1},
+{cat:"CATION GROUPS", q:"Which cations belong to Group IV, precipitated by NH<sub>4</sub>OH + H<sub>2</sub>S?", options:["Pb<sup>2+</sup>, Ag<sup>+</sup>, Hg<sub>2</sub><sup>2+</sup>","Fe<sup>3+</sup>, Cr<sup>3+</sup>, Al<sup>3+</sup>","Zn<sup>2+</sup>, Mn<sup>2+</sup>, Co<sup>2+</sup>, Ni<sup>2+</sup>","Ca<sup>2+</sup>, Ba<sup>2+</sup>, Sr<sup>2+</sup>"], correct:2},
+{cat:"CATION GROUPS", q:"Ca<sup>2+</sup>, Ba<sup>2+</sup>, and Sr<sup>2+</sup> are precipitated as white carbonates using which group reagent?", options:["NaOH","Dilute HCl + H<sub>2</sub>S","(NH<sub>4</sub>)<sub>2</sub>CO<sub>3</sub> + NH<sub>4</sub>Cl","NH<sub>4</sub>OH + NH<sub>4</sub>Cl"], correct:2},
+{cat:"CATION GROUPS", q:"What is the group reagent for Mg<sup>2+</sup> (Group VI), which gives white Mg(NH<sub>4</sub>)PO<sub>4</sub>?", options:["Dilute HCl","(NH<sub>4</sub>)<sub>2</sub>CO<sub>3</sub> + NH<sub>4</sub>Cl","NH<sub>4</sub>Cl + NH<sub>4</sub>OH + (NH<sub>4</sub>)<sub>2</sub>HPO<sub>4</sub>","NaOH"], correct:2},
+{cat:"CATION GROUPS", q:"NH<sub>4</sub><sup>+</sup> (Group Zero) is detected using which reagent, releasing NH<sub>3</sub> gas?", options:["NaOH","Dilute HCl","NH<sub>4</sub>OH + NH<sub>4</sub>Cl","(NH<sub>4</sub>)<sub>2</sub>CO<sub>3</sub>"], correct:0},
+{cat:"CATION GROUPS", q:"Why is NH<sub>4</sub>Cl added along with NH<sub>4</sub>OH before Group III precipitation?", options:["To increase OH<sup>-</sup> concentration for complete precipitation","To lower OH<sup>-</sup> concentration (common-ion effect) so only very-low-K<sub>sp</sub> hydroxides precipitate","To dissolve the Group III hydroxides again","To oxidize Fe<sup>2+</sup> to Fe<sup>3+</sup>"], correct:1},
+{cat:"CATION GROUPS", q:"Before testing with the Group III reagent, the solution is boiled with dilute HNO<sub>3</sub> in order to:", options:["Remove excess acid","Oxidize Fe<sup>2+</sup> to Fe<sup>3+</sup> so it precipitates completely as Fe(OH)<sub>3</sub>","Precipitate Group I cations first","Reduce Cr<sup>3+</sup> to Cr<sup>2+</sup>"], correct:1},
+{cat:"CATION GROUPS", q:"Why can NH<sub>4</sub>NO<sub>3</sub> NOT be used in place of NH<sub>4</sub>Cl for Group III precipitation?", options:["It doesn't dissolve in water","NO<sub>3</sub><sup>-</sup> can oxidize Mn<sup>2+</sup> to Mn<sup>3+</sup>, causing unwanted Mn(OH)<sub>3</sub> precipitation","It precipitates Group I cations by mistake","It's simply too expensive"], correct:1},
+{cat:"CATION GROUPS", q:"What condition determines whether a salt precipitates from solution?", options:["Q<sub>sp</sub> > K<sub>sp</sub>","Q<sub>sp</sub> < K<sub>sp</sub>","Q<sub>sp</sub> = 0","K<sub>sp</sub> > 1"], correct:0},
+
+// ---------------- BUNSEN FLAME STRUCTURE ----------------
+{cat:"BUNSEN FLAME", q:"Which zone of the Bunsen flame is the hottest, at roughly 1550°C?", options:["The dark inner cone (unburnt gas)","Just above the tip of the inner cone","The middle/reducing zone","The outer mantle edge"], correct:1},
+{cat:"BUNSEN FLAME", q:"Which zone of the Bunsen flame is used for reducing oxides to the free metal?", options:["The outer oxidizing mantle","The upper reducing zone (rich in carbon)","The dark inner cone","The gas supply tube"], correct:1},
+{cat:"BUNSEN FLAME", q:"The lower oxidizing zone of the flame is generally used for:", options:["The borax-bead test and microcosmic salt test","Only the flame test","Only the charcoal cavity test","Cooling the sample"], correct:0}
+];
+
+const ANION_CAT_COLORS = {
+  "CLASSIFICATION": "#8ca0b3",
+  "CARBONATE/BICARBONATE": "#34d399",
+  "SULPHITE/BISULPHITE": "#eab308",
+  "THIOSULPHATE": "#f97316",
+  "SULPHIDE/BISULPHIDE": "#a78bfa",
+  "NITRITE": "#60a5fa",
+  "NITRATE": "#22d3ee",
+  "CHLORIDE": "#4ade80",
+  "BROMIDE": "#fb7185",
+  "IODIDE": "#c084fc",
+  "SULPHATE": "#fbbf24"
+};
+
+const PRELIM_CAT_COLORS = {
+  "PHYSICAL TESTS": "#8ca0b3",
+  "FLAME TEST": "#fbbf24",
+  "BORAX BEAD TEST": "#60a5fa",
+  "MICROCOSMIC SALT TEST": "#34d399",
+  "CHARCOAL CAVITY TEST": "#f97316",
+  "DRY HEAT TEST": "#c084fc",
+  "GAS EVOLVED & HEATING": "#4ade80",
+  "CATION GROUPS": "#fb7185",
+  "BUNSEN FLAME": "#22d3ee"
+};
+
+
+// ============================================================
+//  SHARED QUESTION SYNC
+//  This file expects a sibling "questions.json" hosted next to
+//  it (same folder, same site — e.g. this repo deployed on
+//  Netlify). Every visitor's page fetches that file fresh on
+//  load, so editing questions.json in GitHub and letting
+//  Netlify redeploy updates the quiz for everyone — no need to
+//  re-send this HTML file itself.
+//  If questions.json can't be reached (e.g. opened directly as
+//  a local file from disk, with no server), it silently falls
+//  back to the question bank built into this file below.
+// ============================================================
+const SYNC_URL = "./questions.json";
+
+async function loadQuestionData(){
+  let anionQ = DEFAULT_ANION_QUESTIONS;
+  let prelimQ = DEFAULT_PRELIM_QUESTIONS;
+  let usedShared = false;
+
+  if (SYNC_URL && SYNC_URL.trim().length){
+    try{
+      const bust = (SYNC_URL.includes('?') ? '&' : '?') + '_=' + Date.now();
+      const res = await fetch(SYNC_URL + bust, {cache:'no-store'});
+      if (res.ok){
+        const data = await res.json();
+        if (data && Array.isArray(data.anion) && data.anion.length){ anionQ = data.anion; usedShared = true; }
+        if (data && Array.isArray(data.prelim) && data.prelim.length){ prelimQ = data.prelim; usedShared = true; }
+      }
+    }catch(e){
+      console.warn('Could not reach questions.json, falling back to the built-in copy in this file.', e);
+    }
+  }
+
+  boot(anionQ, prelimQ, usedShared);
+}
+
+function boot(ANION_QUESTIONS, PRELIM_QUESTIONS, usedShared){
+  const anionApp = initQuizApp('app-anion', ANION_QUESTIONS, ANION_CAT_COLORS, 'Anion Analysis', 'anion');
+  const prelimApp = initQuizApp('app-prelim', PRELIM_QUESTIONS, PRELIM_CAT_COLORS, 'Preliminary Tests & Cation Groups', 'prelim');
+
+  document.getElementById('anionCount').textContent = ANION_QUESTIONS.length;
+  document.getElementById('prelimCount').textContent = PRELIM_QUESTIONS.length;
+
+  document.getElementById('cardAnion').addEventListener('click', ()=> anionApp.open());
+  document.getElementById('cardPrelim').addEventListener('click', ()=> prelimApp.open());
+
+  if (!usedShared && SYNC_URL && SYNC_URL.trim().length){
+    console.warn('SYNC_URL is set but could not be loaded — showing the built-in question bank instead.');
+  }
+}
+
+loadQuestionData();
+
+</script>
+</body>
+</html>
