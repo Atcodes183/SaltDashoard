@@ -2178,5 +2178,438 @@
       "CATION GROUPS": "#fb7185",
       "BUNSEN FLAME": "#22d3ee"
     }
+  },
+  "alkane": {
+    "questions": [
+      {
+        "cat": "NOMENCLATURE & CLASSIFICATION",
+        "q": "What is the general formula of an open-chain (acyclic) alkane?",
+        "options": [
+          "C<sub>n</sub>H<sub>2n+2</sub>",
+          "C<sub>n</sub>H<sub>2n</sub>",
+          "C<sub>n</sub>H<sub>2n-2</sub>",
+          "C<sub>n</sub>H<sub>n</sub>"
+        ],
+        "correct": 0,
+        "expl": "Alkanes contain only single C–C and C–H bonds (zero degree of unsaturation), which fixes the general formula at CₙH₂ₙ₊₂."
+      },
+      {
+        "cat": "NOMENCLATURE & CLASSIFICATION",
+        "q": "A carbon atom bonded to exactly three other carbon atoms is classified as:",
+        "options": [
+          "Tertiary (3°)",
+          "Primary (1°)",
+          "Secondary (2°)",
+          "Quaternary (4°)"
+        ],
+        "correct": 0,
+        "expl": "Classification of a carbon (1°/2°/3°/4°) depends only on how many other carbons it is directly bonded to — three neighbouring carbons makes it tertiary."
+      },
+      {
+        "cat": "NOMENCLATURE & CLASSIFICATION",
+        "q": "What is the IUPAC name of neopentane, (CH<sub>3</sub>)<sub>4</sub>C?",
+        "options": [
+          "2,2-Dimethylpropane",
+          "2-Methylbutane",
+          "2,2-Dimethylbutane",
+          "Pentane"
+        ],
+        "correct": 0,
+        "expl": "The longest chain through the central carbon is only 3 carbons (propane), with two methyl substituents both on C2, giving 2,2-dimethylpropane."
+      },
+      {
+        "cat": "NOMENCLATURE & CLASSIFICATION",
+        "q": "When two different numbering directions of the parent chain give the same lowest locant set, the tie is broken by giving the lower number to:",
+        "options": [
+          "The substituent that comes first alphabetically",
+          "The heavier substituent",
+          "The substituent closer to C1 by default",
+          "The substituent mentioned last in the name"
+        ],
+        "correct": 0,
+        "expl": "IUPAC rules break locant ties using alphabetical priority — whichever substituent is cited first alphabetically in the name gets the lower locant."
+      },
+      {
+        "cat": "NOMENCLATURE & CLASSIFICATION",
+        "q": "A carbon atom attached to only one other carbon atom (e.g., a terminal CH<sub>3</sub>) is called:",
+        "options": [
+          "Primary (1°)",
+          "Secondary (2°)",
+          "Tertiary (3°)",
+          "Quaternary (4°)"
+        ],
+        "correct": 0,
+        "expl": "Chain-end carbons and methyl branches, bonded to just one other carbon, are always primary."
+      },
+      {
+        "cat": "ISOMERISM",
+        "q": "Since alkanes have no functional group, ring, or multiple bond to reposition, the only constitutional isomerism they can show is:",
+        "options": [
+          "Chain (skeletal) isomerism",
+          "Positional isomerism",
+          "Functional group isomerism",
+          "Metamerism"
+        ],
+        "correct": 0,
+        "expl": "With nothing to reposition except the carbon skeleton itself, alkanes can only differ in how the chain is branched — chain/skeletal isomerism."
+      },
+      {
+        "cat": "ISOMERISM",
+        "q": "How many structural isomers does butane (C<sub>4</sub>H<sub>10</sub>) have?",
+        "options": [
+          "2 (n-butane, isobutane)",
+          "3",
+          "4",
+          "5"
+        ],
+        "correct": 0,
+        "expl": "Butane can only be arranged as a straight 4-carbon chain (n-butane) or with one branch (isobutane/2-methylpropane) — exactly 2 isomers."
+      },
+      {
+        "cat": "ISOMERISM",
+        "q": "How many structural (chain) isomers does pentane (C<sub>5</sub>H<sub>12</sub>) have?",
+        "options": [
+          "2",
+          "3 (n-pentane, isopentane, neopentane)",
+          "4",
+          "5"
+        ],
+        "correct": 1,
+        "expl": "Pentane has 3 possible skeletons: the straight chain (n-pentane), one branch (isopentane/2-methylbutane), and the fully branched neopentane (2,2-dimethylpropane)."
+      },
+      {
+        "cat": "ISOMERISM",
+        "q": "The degree of unsaturation of any open-chain alkane C<sub>n</sub>H<sub>2n+2</sub> is:",
+        "options": [
+          "0",
+          "1",
+          "2",
+          "Depends on n"
+        ],
+        "correct": 0,
+        "expl": "Degree of unsaturation = (2n+2 − 2n)/2 = 0 for every value of n, confirming alkanes have no rings or multiple bonds regardless of chain length."
+      },
+      {
+        "cat": "ISOMERISM",
+        "q": "How many structurally distinct isomers do methane, ethane, and propane each have?",
+        "options": [
+          "Just 1 each — branching isn't possible with 3 or fewer carbons",
+          "2 each",
+          "1, 2, and 3 respectively",
+          "It varies with temperature"
+        ],
+        "correct": 0,
+        "expl": "You need at least 4 carbons to have a branch point with a chain on either side, so methane, ethane, and propane can each only be drawn one way — chain isomerism starts at butane."
+      },
+      {
+        "cat": "PREPARATION METHODS",
+        "q": "In the Wurtz reaction, two molecules of an alkyl halide react with sodium metal in dry ether to give:",
+        "options": [
+          "A higher alkane (R–R) + 2NaX",
+          "An alkene + NaX + H₂",
+          "An alcohol + NaX",
+          "An alkyne + 2NaX"
+        ],
+        "correct": 0,
+        "expl": "Sodium generates alkyl radicals from R–X which couple to form the symmetrical alkane R–R, releasing NaX; using two different halides gives a statistical mixture of three products, so Wurtz is best for making symmetrical alkanes."
+      },
+      {
+        "cat": "PREPARATION METHODS",
+        "q": "Electrolysis of a concentrated aqueous solution of the sodium/potassium salt of a carboxylic acid, giving an alkane at the anode with loss of CO<sub>2</sub>, is called:",
+        "options": [
+          "Kolbe's electrolytic method",
+          "The Wurtz reaction",
+          "Corey–House synthesis",
+          "Clemmensen reduction"
+        ],
+        "correct": 0,
+        "expl": "At the anode, 2RCOO⁻ loses electrons and decarboxylates to two R• radicals which combine to R–R (plus CO₂), while H₂ is liberated at the cathode."
+      },
+      {
+        "cat": "PREPARATION METHODS",
+        "q": "Heating sodium acetate with soda-lime (NaOH + CaO) gives methane by a reaction known as:",
+        "options": [
+          "Decarboxylation",
+          "Wurtz reaction",
+          "Hydrogenation",
+          "Kolbe electrolysis"
+        ],
+        "correct": 0,
+        "expl": "CH₃COONa + NaOH —(CaO, Δ)→ CH₄ + Na₂CO₃; this soda-lime decarboxylation removes one carbon from any carboxylic acid salt to give the alkane with one fewer carbon."
+      },
+      {
+        "cat": "PREPARATION METHODS",
+        "q": "Which method is the most reliable way to make an unsymmetrical alkane R–R' cleanly, avoiding a mixture of products?",
+        "options": [
+          "Corey–House synthesis (lithium dialkylcuprate + alkyl halide)",
+          "Wurtz reaction on two different halides",
+          "Kolbe electrolysis of two different acid salts",
+          "Simple hydrogenation of an alkene"
+        ],
+        "correct": 0,
+        "expl": "Because Wurtz or Kolbe with two different starting materials statistically gives a mixture of R–R, R'–R', and R–R', the Gilman reagent R₂CuLi reacting selectively with a different alkyl halide R'X is the standard clean route to an unsymmetrical alkane."
+      },
+      {
+        "cat": "PREPARATION METHODS",
+        "q": "Treating a Grignard reagent (RMgX) with water gives:",
+        "options": [
+          "The corresponding alkane, R–H",
+          "An alcohol, R–OH",
+          "An alkyl halide, R–X",
+          "An alkene"
+        ],
+        "correct": 0,
+        "expl": "The polarized, basic C–Mg bond is protonated by even a weak acid like water, quenching it to R–H + Mg(OH)X — which is why Grignard reactions must be kept rigorously moisture-free until this step is wanted."
+      },
+      {
+        "cat": "PHYSICAL PROPERTIES",
+        "q": "Among isomeric alkanes, increasing the amount of branching generally makes the boiling point:",
+        "options": [
+          "Decrease",
+          "Increase",
+          "Stay the same",
+          "Increase then decrease"
+        ],
+        "correct": 0,
+        "expl": "Branching makes a molecule more compact and spherical, shrinking its surface area of contact with neighbouring molecules and weakening van der Waals forces — so isobutane boils lower than n-butane."
+      },
+      {
+        "cat": "PHYSICAL PROPERTIES",
+        "q": "Alkanes are essentially _____ in water and _____ in nonpolar organic solvents like benzene.",
+        "options": [
+          "insoluble; soluble",
+          "soluble; insoluble",
+          "soluble; soluble",
+          "insoluble; insoluble"
+        ],
+        "correct": 0,
+        "expl": "Nonpolar C–H/C–C bonds can't hydrogen-bond with water, so alkanes are hydrophobic, but they dissolve readily in nonpolar solvents (\"like dissolves like\")."
+      },
+      {
+        "cat": "PHYSICAL PROPERTIES",
+        "q": "At room temperature, the first four alkanes (methane through butane) exist as:",
+        "options": [
+          "Gases",
+          "Liquids",
+          "Solids",
+          "Waxy solids"
+        ],
+        "correct": 0,
+        "expl": "C₁–C₄ alkanes are gases at room temperature; roughly C₅–C₁₇ are liquids, and heavier alkanes are waxy solids."
+      },
+      {
+        "cat": "PHYSICAL PROPERTIES",
+        "q": "Compared to water, the density of liquid alkanes is:",
+        "options": [
+          "Lower — they float on water",
+          "Higher — they sink",
+          "About the same",
+          "Unpredictable"
+        ],
+        "correct": 0,
+        "expl": "Liquid alkanes are typically around 0.6–0.8 g/mL, well below water's 1.0 g/mL, which is why spilled oil/hydrocarbons float on water."
+      },
+      {
+        "cat": "PHYSICAL PROPERTIES",
+        "q": "In the alternating melting-point trend of the n-alkane series, alkanes with an even number of carbons tend to have _____ melting points than neighbouring odd-carbon alkanes.",
+        "options": [
+          "Relatively higher (better crystal packing)",
+          "Relatively lower",
+          "Identical",
+          "Randomly varying"
+        ],
+        "correct": 0,
+        "expl": "Even-carbon chains pack more symmetrically into the crystal lattice than odd-chain ones of similar length, giving them a modestly higher melting point and producing the characteristic zig-zag (odd-even) trend."
+      },
+      {
+        "cat": "FREE RADICAL HALOGENATION",
+        "q": "The three mechanistic steps of free-radical halogenation of an alkane, in the correct order, are:",
+        "options": [
+          "Initiation → Propagation → Termination",
+          "Propagation → Initiation → Termination",
+          "Initiation → Termination → Propagation",
+          "Termination → Propagation → Initiation"
+        ],
+        "correct": 0,
+        "expl": "The chain reaction must first generate radicals (initiation), then repeatedly consume/regenerate them to build product (propagation), and finally radicals combine to end the chain (termination)."
+      },
+      {
+        "cat": "FREE RADICAL HALOGENATION",
+        "q": "The initiation step of the radical chlorination of methane involves:",
+        "options": [
+          "Homolytic fission of Cl₂ by heat or UV light into 2 Cl•",
+          "Heterolytic fission of Cl₂ into Cl⁺ and Cl⁻",
+          "Direct addition of Cl₂ across a C–H bond",
+          "Formation of CH₃Cl in a single step"
+        ],
+        "correct": 0,
+        "expl": "Light or heat supplies just enough energy to homolytically cleave the relatively weak Cl–Cl bond into two chlorine radicals, which then go on to propagate the chain."
+      },
+      {
+        "cat": "FREE RADICAL HALOGENATION",
+        "q": "The rate of H-atom abstraction from a C–H bond during radical halogenation follows the order:",
+        "options": [
+          "3° > 2° > 1° > CH₄",
+          "1° > 2° > 3°",
+          "CH₄ > 1° > 2° > 3°",
+          "All C–H bonds react at the same rate"
+        ],
+        "correct": 0,
+        "expl": "More substituted radicals are more stable (hyperconjugation and inductive donation from alkyl groups), lowering the transition-state energy for their formation, so abstraction is fastest at tertiary C–H bonds."
+      },
+      {
+        "cat": "FREE RADICAL HALOGENATION",
+        "q": "Reactivity of the halogens toward alkanes in radical halogenation follows the order:",
+        "options": [
+          "F₂ ≫ Cl₂ > Br₂ ≫ I₂",
+          "I₂ > Br₂ > Cl₂ > F₂",
+          "All halogens are equally reactive",
+          "Cl₂ > F₂ > Br₂ > I₂"
+        ],
+        "correct": 0,
+        "expl": "F₂ reacts almost explosively (highly exothermic, poorly selective), Cl₂ reacts readily, Br₂ is slower but far more selective, and I₂ barely reacts at all (the H-abstraction step is endothermic) unless an oxidizer removes the HI formed."
+      },
+      {
+        "cat": "FREE RADICAL HALOGENATION",
+        "q": "Compared to chlorination, bromination of an alkane is:",
+        "options": [
+          "More selective for the more substituted (e.g., tertiary) C–H bond",
+          "Less selective",
+          "Exactly as selective",
+          "Unpredictable in its selectivity"
+        ],
+        "correct": 0,
+        "expl": "Because H-abstraction by Br• is endothermic, its transition state resembles the product radical more closely (Hammond postulate), making bromination far more sensitive to radical stability and hence much more selective for tertiary over primary C–H bonds than chlorination."
+      },
+      {
+        "cat": "COMBUSTION, OXIDATION & CRACKING",
+        "q": "Complete combustion of an alkane in excess oxygen produces:",
+        "options": [
+          "CO₂ and H₂O",
+          "CO and H₂O",
+          "Only elemental carbon and H₂O",
+          "Only H₂O"
+        ],
+        "correct": 0,
+        "expl": "With ample O₂, every carbon is fully oxidized to CO₂ and every hydrogen ends up as H₂O, releasing a large amount of heat."
+      },
+      {
+        "cat": "COMBUSTION, OXIDATION & CRACKING",
+        "q": "When the oxygen supply is limited, combustion of an alkane can instead produce:",
+        "options": [
+          "CO and/or soot (elemental carbon)",
+          "Only CO₂",
+          "Only H₂O",
+          "No reaction takes place"
+        ],
+        "correct": 0,
+        "expl": "Under O₂-starved conditions the carbon isn't fully oxidized, so incomplete combustion yields carbon monoxide or even unburned soot alongside water."
+      },
+      {
+        "cat": "COMBUSTION, OXIDATION & CRACKING",
+        "q": "Thermal decomposition of higher alkanes into smaller alkanes and alkenes at high temperature (≈773 K) in the absence of air is called:",
+        "options": [
+          "Cracking (pyrolysis)",
+          "Isomerization",
+          "Aromatization",
+          "Halogenation"
+        ],
+        "correct": 0,
+        "expl": "Cracking proceeds via a free-radical mechanism and is used industrially to break heavier petroleum fractions down into more valuable lighter fractions such as gasoline."
+      },
+      {
+        "cat": "COMBUSTION, OXIDATION & CRACKING",
+        "q": "Heating n-hexane over a catalyst such as Cr₂O₃/Al₂O₃ (or Pt) at high temperature and pressure to form benzene is an example of:",
+        "options": [
+          "Aromatization (catalytic reforming)",
+          "Cracking",
+          "Isomerization",
+          "The Wurtz reaction"
+        ],
+        "correct": 0,
+        "expl": "This cyclization-plus-dehydrogenation converts a straight-chain C₆ (or higher) alkane into an aromatic ring, and is used industrially to raise the octane number of petrol."
+      },
+      {
+        "cat": "COMBUSTION, OXIDATION & CRACKING",
+        "q": "Treating n-butane with anhydrous AlCl₃/HCl converts it into isobutane. This rearrangement is called:",
+        "options": [
+          "Isomerization",
+          "Cracking",
+          "Aromatization",
+          "Controlled oxidation"
+        ],
+        "correct": 0,
+        "expl": "Isomerization rearranges a straight-chain alkane into a more branched isomer without changing the molecular formula, which raises the octane rating of the fuel."
+      },
+      {
+        "cat": "CONFORMATIONS (ETHANE)",
+        "q": "Rotation about the C–C single bond in ethane gives infinite arrangements; the two extreme (limiting) forms are called:",
+        "options": [
+          "Staggered and eclipsed",
+          "Cis and trans",
+          "Syn and anti",
+          "Chair and boat"
+        ],
+        "correct": 0,
+        "expl": "Staggered (front and back C–H bonds 60° apart) and eclipsed (bonds directly aligned, 0° apart) are the two limiting conformations of ethane; chair/boat describe cyclic systems, not open-chain ethane."
+      },
+      {
+        "cat": "CONFORMATIONS (ETHANE)",
+        "q": "Which conformation of ethane is more stable, and why?",
+        "options": [
+          "Staggered — it minimizes torsional strain between the C–H bonding electrons",
+          "Eclipsed — the aligned bonds stabilize each other",
+          "Staggered — due to steric bulk of the hydrogens",
+          "Both are exactly equally stable"
+        ],
+        "correct": 0,
+        "expl": "In the staggered form the C–H bonding pairs on the front and back carbons are as far apart as possible, minimizing torsional (Pitzer) strain from their electron-electron repulsion, making staggered the lowest-energy, most populated conformation."
+      },
+      {
+        "cat": "CONFORMATIONS (ETHANE)",
+        "q": "The rotational energy barrier in ethane (staggered → eclipsed) is approximately:",
+        "options": [
+          "12.5 kJ/mol (≈ 3 kcal/mol)",
+          "125 kJ/mol",
+          "1.25 kJ/mol",
+          "Essentially zero"
+        ],
+        "correct": 0,
+        "expl": "This small barrier, arising purely from torsional strain (ethane has no bulky substituents), is easily overcome by thermal energy at room temperature, so conformers interconvert rapidly and cannot be isolated as separate compounds."
+      },
+      {
+        "cat": "CONFORMATIONS (ETHANE)",
+        "q": "Conformational isomers differ from constitutional/configurational isomers in that conformers:",
+        "options": [
+          "Interconvert by rotation about a single bond without breaking any bonds",
+          "Can only interconvert by breaking and reforming bonds",
+          "Are non-superimposable mirror images of each other",
+          "Differ in the position of a functional group on the chain"
+        ],
+        "correct": 0,
+        "expl": "Because conformers are related purely by free rotation around a σ-bond, they aren't isolable as distinct compounds the way constitutional or configurational isomers are."
+      },
+      {
+        "cat": "CONFORMATIONS (ETHANE)",
+        "q": "A Newman projection is drawn by viewing the molecule:",
+        "options": [
+          "Along the axis of the C–C bond, so the front carbon is a dot and the rear carbon is a circle",
+          "Perpendicular to the C–C bond, as a wedge-dash structure",
+          "From above, as in a Fischer projection",
+          "Along a C–H bond only"
+        ],
+        "correct": 0,
+        "expl": "Looking straight down the C–C bond, front-atom bonds are drawn radiating from a central point and back-atom bonds radiate from the edge of a circle behind it, making the dihedral (torsional) angle between them easy to read off."
+      }
+    ],
+    "catColors": {
+      "NOMENCLATURE & CLASSIFICATION": "#38bdf8",
+      "ISOMERISM": "#a78bfa",
+      "PREPARATION METHODS": "#fbbf24",
+      "PHYSICAL PROPERTIES": "#f472b6",
+      "FREE RADICAL HALOGENATION": "#fb923c",
+      "COMBUSTION, OXIDATION & CRACKING": "#4ade80",
+      "CONFORMATIONS (ETHANE)": "#22d3ee"
+    }
   }
 }

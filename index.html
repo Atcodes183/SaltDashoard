@@ -539,6 +539,12 @@ body{ padding:28px 16px 60px; }
         <p>Anion analysis, preliminary tests, and the cation group division scheme — self-contained multiple-choice runs with instant feedback, a report, and full test history.</p>
         <div class="meta">→ open chapter</div>
       </div>
+      <div class="section-card wide" id="cardHydrocarbons">
+        <div class="icon" style="background:rgba(251,146,60,0.12); color:#fb923c;">⛓</div>
+        <h3>Hydrocarbons</h3>
+        <p>Alkanes — nomenclature, isomerism, preparation methods, physical properties, free-radical halogenation, combustion/cracking, and ethane conformations.</p>
+        <div class="meta">→ open chapter</div>
+      </div>
     </div>
     <div class="more-note">More chapters (e.g. mole concept, chemical bonding) can be added here as separate cards.</div>
   </div>
@@ -578,7 +584,36 @@ body{ padding:28px 16px 60px; }
     <div class="more-note">More sections (e.g. cation analysis, systematic scheme) can be added here as separate cards.</div>
   </div>
 
-  <!-- ======= SUBCHAPTER MENU (shared by Anion + Prelim) ======= -->
+  <!-- ======= HYDROCARBONS DASHBOARD ======= -->
+  <div class="app-shell" id="dashboard-hydro">
+    <div class="crumb">
+      <span class="seg clickable" id="crumbChemistryHydro">Chemistry</span>
+      <span class="sep">/</span>
+      <span class="seg current">Hydrocarbons</span>
+    </div>
+    <div class="dash-hero">
+      <div class="eyebrow">Vikrant Kumar's Notes</div>
+      <h1>Hydrocarbons</h1>
+      <p>Pick a section to test yourself. Each one is a self-contained multiple-choice run with instant feedback and a report at the end.</p>
+    </div>
+    <div class="section-grid">
+      <div class="section-card" id="cardAlkane">
+        <div class="icon" style="background:rgba(251,146,60,0.12); color:#fb923c;">⛓</div>
+        <h3>Alkane</h3>
+        <p>Nomenclature &amp; classification, isomerism, preparation methods, physical properties, free-radical halogenation, combustion/oxidation/cracking, and ethane conformations.</p>
+        <div class="meta">→ <span id="alkaneCount">0</span> questions</div>
+      </div>
+      <div class="section-card wide" id="cardHistoryHydro">
+        <div class="icon" style="background:rgba(240,163,78,0.12); color:var(--flame);">📈</div>
+        <h3>Test Report</h3>
+        <p>See every past attempt for this chapter's sections, and how your accuracy has moved over time, without submitting a new test.</p>
+        <div class="meta">→ view past results</div>
+      </div>
+    </div>
+    <div class="more-note">More sections (e.g. alkenes, alkynes, aromatic hydrocarbons) can be added here as separate cards.</div>
+  </div>
+
+  <!-- ======= SUBCHAPTER MENU (shared by Anion + Prelim + Alkane) ======= -->
   <div class="app-shell" id="subchapter-menu">
     <div class="crumb" data-role="crumb"></div>
     <div class="back-row"><button class="back-btn" data-role="submenuBack">&larr; Back to Salt Analysis</button></div>
@@ -632,6 +667,9 @@ body{ padding:28px 16px 60px; }
 
   <!-- ======= PRELIM APP ======= -->
   <div class="app-shell" id="app-prelim" data-title="Preliminary Tests &amp; Cation Groups"></div>
+
+  <!-- ======= ALKANE APP ======= -->
+  <div class="app-shell" id="app-alkane" data-title="Alkane"></div>
 
   <!-- ======= HISTORY VIEW ======= -->
   <div class="app-shell" id="app-history">
@@ -811,6 +849,8 @@ function sparklineSVG(values){
   </svg>`;
 }
 
+let currentHistoryChapter = 'salt';
+
 function renderHistoryView(){
   const body = document.getElementById('historyBody');
   const all = loadHistory();
@@ -822,7 +862,7 @@ function renderHistoryView(){
     return;
   }
 
-  Object.keys(APP_REGISTRY).forEach(key=>{
+  Object.keys(APP_REGISTRY).filter(key => SECTION_CHAPTER[key] === currentHistoryChapter).forEach(key=>{
     const meta = APP_REGISTRY[key];
     const records = all[key] || [];
     const section = document.createElement('div');
@@ -886,7 +926,9 @@ function hideAllShells(){
   document.querySelectorAll('.app-shell').forEach(el=>el.classList.remove('show'));
 }
 
-function openHistory(){
+function openHistory(chapterKey){
+  currentHistoryChapter = chapterKey || SECTION_CHAPTER[currentSection] || 'salt';
+  const chap = CHAPTER_META[currentHistoryChapter];
   animatedSwitch(()=>{
     document.querySelector('.wrap').classList.remove('wide');
     hideAllShells();
@@ -895,10 +937,10 @@ function openHistory(){
   }, document.getElementById('app-history'));
   renderCrumb('app-history', [
     {label:'Chemistry', onClick: showChemHub},
-    {label:'Salt Analysis', onClick: openSaltAnalysis},
+    {label: chap.title, onClick: chap.open},
     {label:'Test Report'}
   ]);
-  setActiveBack('\u2190 Back to Salt Analysis', openSaltAnalysis);
+  setActiveBack('\u2190 Back to ' + chap.title, chap.open);
 }
 
 // ============================================================
@@ -922,9 +964,30 @@ function openSaltAnalysis(){
   setActiveBack('\u2190 Back to Chemistry', showChemHub);
 }
 
+function openHydrocarbons(){
+  animatedSwitch(()=>{
+    document.querySelector('.wrap').classList.remove('wide');
+    hideAllShells();
+    document.getElementById('dashboard-hydro').classList.add('show');
+  }, document.getElementById('dashboard-hydro'));
+  setActiveBack('\u2190 Back to Chemistry', showChemHub);
+}
+
 document.getElementById('cardSaltAnalysis').addEventListener('click', openSaltAnalysis);
 document.getElementById('crumbChemistry').addEventListener('click', showChemHub);
-document.getElementById('cardHistory').addEventListener('click', openHistory);
+document.getElementById('cardHistory').addEventListener('click', ()=> openHistory('salt'));
+
+document.getElementById('cardHydrocarbons').addEventListener('click', openHydrocarbons);
+document.getElementById('crumbChemistryHydro').addEventListener('click', showChemHub);
+document.getElementById('cardHistoryHydro').addEventListener('click', ()=> openHistory('hydro'));
+
+// ---- Chapter registry: maps each sectionKey to its parent chapter,
+// used to generalize crumbs/back-buttons across chapters ----
+const CHAPTER_META = {
+  salt:  { title:'Salt Analysis', open: openSaltAnalysis },
+  hydro: { title:'Hydrocarbons',  open: openHydrocarbons }
+};
+const SECTION_CHAPTER = { anion:'salt', prelim:'salt', alkane:'hydro' };
 
 // ---- Sub-chapter menu (Study / 30-Min Revision / Flashcards), shared
 // by Anion Analysis and Preliminary Tests via SECTION_META lookup ----
@@ -1339,20 +1402,106 @@ prelim: {
 <p><b>Group VI</b> (reagent: NH₄Cl + NH₄OH + (NH₄)₂HPO₄; member Mg²⁺; product: white Mg(NH₄)PO₄).</p>
 <p><b>Group Zero</b> (reagent: NaOH; member NH₄⁺; product: NH₃ is released).</p>
 `
+},
+
+alkane: {
+
+'NOMENCLATURE & CLASSIFICATION': `
+<p>Alkanes are saturated, acyclic hydrocarbons containing only C–C and C–H single bonds, so their degree of unsaturation is always zero, giving the general formula <b>CₙH₂ₙ₊₂</b>.</p>
+<p><b>Classifying carbon atoms</b> — by how many other carbon atoms a carbon is directly bonded to:</p>
+<table>
+<tr><th>Type</th><th>Bonded to</th><th>Example position</th></tr>
+<tr><td>Primary (1°)</td><td>1 other carbon</td><td>Terminal CH₃ groups, methyl branches</td></tr>
+<tr><td>Secondary (2°)</td><td>2 other carbons</td><td>Middle of an unbranched chain</td></tr>
+<tr><td>Tertiary (3°)</td><td>3 other carbons</td><td>A branch point</td></tr>
+<tr><td>Quaternary (4°)</td><td>4 other carbons, no H</td><td>e.g. the central carbon of neopentane</td></tr>
+</table>
+<p>Hydrogens are classified to match the carbon they sit on: 1° H, 2° H, 3° H (a quaternary carbon has no H to classify).</p>
+<p><b>IUPAC nomenclature rules</b> (in order of application): (1) find the longest continuous carbon chain — this becomes the parent name (meth-, eth-, prop-, but-, pent-, hex-, hept-, oct-, non-, dec- + "-ane"); (2) number the chain from whichever end gives the lowest locants to substituents as a set; (3) if there's a tie in the locant set, give the lower number to whichever substituent comes first alphabetically; (4) cite substituents alphabetically in the name, using di-/tri-/tetra- for repeats (these multiplying prefixes are ignored when alphabetizing).</p>
+<p><b>Common/trivial names</b> for small branched alkanes are still widely used: isobutane (2-methylpropane), isopentane (2-methylbutane), neopentane (2,2-dimethylpropane, fully substituted central carbon).</p>
+`,
+
+'ISOMERISM': `
+<p>Because alkanes have no functional group, ring, or π-bond to reposition, the <b>only</b> constitutional isomerism they can show is <b>chain (skeletal) isomerism</b> — different ways of branching the same carbon skeleton.</p>
+<p>Methane, ethane, and propane (≤3 carbons) have just <b>one</b> possible structure each — branching needs at least 4 carbons. From butane onward the isomer count grows quickly:</p>
+<table>
+<tr><th>Alkane</th><th>Molecular formula</th><th>No. of chain isomers</th></tr>
+<tr><td>Butane</td><td>C₄H₁₀</td><td>2 (n-butane, isobutane)</td></tr>
+<tr><td>Pentane</td><td>C₅H₁₂</td><td>3 (n-pentane, isopentane, neopentane)</td></tr>
+<tr><td>Hexane</td><td>C₆H₁₄</td><td>5</td></tr>
+<tr><td>Heptane</td><td>C₇H₁₆</td><td>9</td></tr>
+</table>
+<p>Degree of unsaturation (DoU) for CₙH₂ₙ₊₂ works out to (2n+2 − 2n)/2 = 0 for every n, which is exactly what "saturated, acyclic" means — confirmation that no amount of branching can introduce a ring or multiple bond.</p>
+`,
+
+'PREPARATION METHODS': `
+<p><b>Hydrogenation of unsaturated hydrocarbons:</b> alkenes/alkynes + H₂ over a finely divided Pt/Pd/Ni catalyst (Sabatier–Senderens reaction) add hydrogen across the multiple bond to give the corresponding alkane.</p>
+<p><b>Wurtz reaction:</b> 2 R–X + 2Na (dry ethereal solution) → R–R + 2NaX, going through free alkyl radicals. Works best for making a <i>symmetrical</i> alkane from one halide; using two different halides R–X and R'–X gives a statistical mixture of R–R, R'–R', and R–R', so it's a poor choice for a clean unsymmetrical product. Tertiary halides give poor yields because elimination (to alkene) competes with coupling.</p>
+<p><b>Wurtz–Fittig reaction:</b> an aryl halide + an alkyl halide + Na in dry ether gives an alkylbenzene (Ar–R), extending the same radical-coupling idea to aromatic substrates.</p>
+<p><b>Kolbe's electrolytic method:</b> electrolysis of a concentrated aqueous solution of the sodium/potassium salt of a carboxylic acid. At the anode, 2RCOO⁻ loses electrons and decarboxylates: 2RCOO⁻ → 2RCOO• → 2R• + 2CO₂, and the R• radicals combine to R–R; H₂ is liberated at the cathode.</p>
+<p><b>Decarboxylation (soda-lime reaction):</b> sodium/potassium salt of a carboxylic acid heated with soda-lime (NaOH + CaO, the CaO simply prevents the NaOH from corroding the glass) gives the alkane with one fewer carbon: R–COONa + NaOH →(CaO, Δ)→ R–H + Na₂CO₃.</p>
+<p><b>From Grignard reagents:</b> RMgX (made from RX + Mg in dry ether) reacts with water or any active-hydrogen compound (alcohols, amines) by simple protonolysis of the polarized, basic C–Mg bond: RMgX + H₂O → R–H + Mg(OH)X. This is why Grignard reactions must stay moisture-free until this quenching step is actually wanted.</p>
+<p><b>Corey–House synthesis:</b> the most reliable route to an <i>unsymmetrical</i> alkane. An alkyl halide is first converted to a lithium dialkylcuprate ("Gilman reagent," R₂CuLi, via R–Li then + CuI); reacting this with a different alkyl halide R'–X selectively gives R–R', avoiding the statistical-mixture problem of Wurtz/Kolbe.</p>
+`,
+
+'PHYSICAL PROPERTIES': `
+<p><b>Physical state at room temperature:</b> C₁–C₄ are gases, roughly C₅–C₁₇ are liquids, and C₁₈ and heavier are waxy solids — boiling and melting points rise fairly steadily with molecular mass as van der Waals forces between longer chains get stronger.</p>
+<p><b>Effect of branching on boiling point:</b> among isomers, more branching lowers the boiling point — a branched, more spherical molecule has less surface area in contact with its neighbours, weakening the van der Waals attraction (e.g. isobutane boils lower than n-butane; neopentane boils lower than isopentane, which boils lower than n-pentane).</p>
+<p><b>Melting point (odd–even alternation):</b> alkanes with an even number of carbons pack more symmetrically into a crystal lattice than a neighbouring odd-carbon chain of similar length, giving them a modestly higher melting point — plotting melting point against carbon number gives a characteristic zig-zag rather than a smooth curve.</p>
+<p><b>Solubility:</b> alkanes are nonpolar, so they cannot hydrogen-bond with water and are essentially insoluble in it, but they dissolve readily in nonpolar organic solvents like benzene, CCl₄, or ether ("like dissolves like").</p>
+<p><b>Density:</b> liquid alkanes are less dense than water (typically ≈0.6–0.8 g/mL), so they float on it — the reason an oil/hydrocarbon spill spreads as a surface layer.</p>
+`,
+
+'FREE RADICAL HALOGENATION': `
+<p>Alkanes react with halogens (X₂) under heat or UV light via a <b>free-radical chain mechanism</b> with three stages:</p>
+<table>
+<tr><th>Step</th><th>What happens</th></tr>
+<tr><td>Initiation</td><td>X₂ →(hν or Δ)→ 2X• — homolytic fission of the weak X–X bond by light/heat energy.</td></tr>
+<tr><td>Propagation</td><td>X• + R–H → R• + HX, then R• + X₂ → R–X + X• — the regenerated X• keeps the chain going.</td></tr>
+<tr><td>Termination</td><td>Any two radicals combine (X•+X•, R•+R•, or R•+X•), consuming radicals and ending the chain.</td></tr>
+</table>
+<p><b>Reactivity of the halogens:</b> F₂ ≫ Cl₂ > Br₂ ≫ I₂. F₂ is so exothermic the reaction is almost explosive and poorly selective; Cl₂ reacts readily; Br₂ is slower (the H-abstraction step is endothermic) but far more selective; I₂'s H-abstraction step is endothermic enough that iodination barely proceeds at all unless the HI formed is removed by an oxidizer (e.g. HIO₃ or HNO₃) to pull the equilibrium forward.</p>
+<p><b>Regioselectivity (which C–H bond reacts):</b> the rate of H-abstraction follows 3° > 2° > 1° > CH₄, because more-substituted carbon radicals are more stable (hyperconjugation + inductive donation from alkyl groups), lowering the transition-state energy for their formation.</p>
+<p><b>Chlorination vs bromination selectivity:</b> since Br• abstraction is endothermic, its transition state (Hammond postulate) resembles the product radical closely, so bromination is highly sensitive to radical stability and strongly favors the more substituted position; chlorination's transition state is earlier/more reactant-like, so it is far less selective and gives more of a statistical mixture.</p>
+`,
+
+'COMBUSTION, OXIDATION & CRACKING': `
+<p><b>Complete combustion:</b> CₙH₂ₙ₊₂ + excess O₂ → n CO₂ + (n+1) H₂O, strongly exothermic. Branched isomers release slightly less heat of combustion than their straight-chain counterpart of the same formula (branched isomers are marginally more stable).</p>
+<p><b>Incomplete combustion:</b> with a limited O₂ supply, carbon isn't fully oxidized, giving CO and/or soot (elemental carbon) alongside water instead of CO₂.</p>
+<p><b>Controlled catalytic oxidation:</b> passing a lower alkane/air (or O₂) mixture over a catalyst (e.g. Cu, Mo₂O₃) under controlled temperature and pressure gives partial-oxidation products — alcohols, aldehydes, or carboxylic acids — rather than full combustion; used industrially to make simple oxygenated organics from petroleum gas fractions.</p>
+<p><b>Isomerization:</b> heating a straight-chain (n-) alkane with anhydrous AlCl₃ + a trace of HCl rearranges it into its more branched isomer (e.g. n-butane → isobutane) without changing the molecular formula. Branched alkanes burn more efficiently in an engine (less "knocking"), so isomerization is used to raise the octane number of a fuel fraction.</p>
+<p><b>Aromatization (catalytic reforming):</b> heating an n-alkane of 6 or more carbons over Cr₂O₃/Al₂O₃ or Pt at high temperature and pressure cyclizes and dehydrogenates it into an aromatic ring (e.g. n-hexane → benzene). Also used industrially to raise octane number.</p>
+<p><b>Pyrolysis (cracking):</b> heating higher alkanes to around 773 K in the absence of air breaks C–C bonds homolytically (free-radical mechanism), fragmenting them into a mixture of smaller alkanes and alkenes. This is the industrial process that converts heavy petroleum fractions into the lighter fractions (like gasoline) that are in higher demand.</p>
+`,
+
+'CONFORMATIONS (ETHANE)': `
+<p>Free rotation about the C–C σ-bond in ethane generates infinitely many arrangements of the two sets of H atoms relative to each other, called <b>conformations</b> — unlike constitutional/configurational isomers, conformers interconvert by simple bond rotation, with no bonds broken, so they can't be isolated as separate compounds.</p>
+<p>The two limiting (extreme) conformations, best visualized with a <b>Newman projection</b> (viewed straight down the C–C axis, front carbon as a dot, rear carbon as a circle):</p>
+<table>
+<tr><th>Conformation</th><th>Dihedral angle between front/back H's</th><th>Relative stability</th></tr>
+<tr><td>Staggered</td><td>60°</td><td>More stable (lowest energy) — bonding electron pairs are maximally separated, minimizing torsional (Pitzer) strain</td></tr>
+<tr><td>Eclipsed</td><td>0°</td><td>Less stable (highest energy) — aligned C–H bonds maximize electron-electron repulsion between them</td></tr>
+</table>
+<p>The energy barrier to rotation (staggered → eclipsed) in ethane is small, only about <b>12.5 kJ/mol (≈3 kcal/mol)</b>, arising purely from torsional strain since ethane has no bulky substituents to add steric strain. This barrier is easily crossed by ordinary thermal energy at room temperature, so the molecule rotates freely and rapidly between conformations rather than existing as isolable, fixed forms.</p>
+`
+
 }
 
 };
 
 const SECTION_META = {
   anion:  { title:'Anion Analysis', desc:'Group reagents, confirmatory tests, and color reactions for carbonate, sulphite, thiosulphate, sulphide, nitrite, nitrate, and the halides through sulphate.' },
-  prelim: { title:'Preliminary Tests & Cation Groups', desc:'Physical tests, flame test colors, borax bead & microcosmic salt colors, charcoal cavity, cobalt nitrate, dry heat, and the cation group division table.' }
+  prelim: { title:'Preliminary Tests & Cation Groups', desc:'Physical tests, flame test colors, borax bead & microcosmic salt colors, charcoal cavity, cobalt nitrate, dry heat, and the cation group division table.' },
+  alkane: { title:'Alkane', desc:'Nomenclature & classification, isomerism, preparation methods, physical properties, free-radical halogenation, combustion/oxidation/cracking, and ethane conformations.' }
 };
 let currentSection = null;
+const SECTION_APPS = {}; // sectionKey -> quiz app instance, filled in BOOTSTRAP
 
 function openSubmenu(sectionKey){
   currentSection = sectionKey;
   const meta = SECTION_META[sectionKey];
   const data = SECTION_DATA[sectionKey];
+  const chap = CHAPTER_META[SECTION_CHAPTER[sectionKey]];
   document.getElementById('submenuTitle').textContent = meta.title;
   document.getElementById('submenuDesc').textContent = meta.desc;
   document.getElementById('submenuStudyCount').textContent = data ? data.questions.length : 0;
@@ -1364,21 +1513,20 @@ function openSubmenu(sectionKey){
   }, document.getElementById('subchapter-menu'));
   renderCrumb('subchapter-menu', [
     {label:'Chemistry', onClick: showChemHub},
-    {label:'Salt Analysis', onClick: openSaltAnalysis},
+    {label: chap.title, onClick: chap.open},
     {label: meta.title}
   ]);
-  setActiveBack('\u2190 Back to Salt Analysis', openSaltAnalysis);
+  setActiveBack('\u2190 Back to ' + chap.title, chap.open);
 }
 
 document.getElementById('cardStudy').addEventListener('click', ()=> openStudy(currentSection));
 document.getElementById('cardRevision').addEventListener('click', ()=> openRevision(currentSection));
 document.getElementById('cardFlashcards').addEventListener('click', ()=>{
-  if(currentSection === 'anion') anionApp.open();
-  else if(currentSection === 'prelim') prelimApp.open();
+  if(SECTION_APPS[currentSection]) SECTION_APPS[currentSection].open();
 });
 
-document.getElementById('historyBackBtn').addEventListener('click', openSaltAnalysis);
-document.querySelector('#subchapter-menu [data-role="submenuBack"]').addEventListener('click', openSaltAnalysis);
+document.getElementById('historyBackBtn').addEventListener('click', ()=> CHAPTER_META[currentHistoryChapter].open());
+document.querySelector('#subchapter-menu [data-role="submenuBack"]').addEventListener('click', ()=> CHAPTER_META[SECTION_CHAPTER[currentSection]].open());
 
 // ---- Study view ----
 function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-+|-+$)/g,''); }
@@ -1434,7 +1582,7 @@ function openStudy(sectionKey){
   }, document.getElementById('app-study'));
   renderCrumb('app-study', [
     {label:'Chemistry', onClick: showChemHub},
-    {label:'Salt Analysis', onClick: openSaltAnalysis},
+    {label: CHAPTER_META[SECTION_CHAPTER[sectionKey]].title, onClick: CHAPTER_META[SECTION_CHAPTER[sectionKey]].open},
     {label: meta.title, onClick: ()=> openSubmenu(sectionKey)},
     {label:'Study'}
   ]);
@@ -1474,7 +1622,7 @@ function openRevision(sectionKey){
   }, document.getElementById('app-revision'));
   renderCrumb('app-revision', [
     {label:'Chemistry', onClick: showChemHub},
-    {label:'Salt Analysis', onClick: openSaltAnalysis},
+    {label: CHAPTER_META[SECTION_CHAPTER[sectionKey]].title, onClick: CHAPTER_META[SECTION_CHAPTER[sectionKey]].open},
     {label: meta.title, onClick: ()=> openSubmenu(sectionKey)},
     {label:'30-Min Revision'}
   ]);
@@ -1992,7 +2140,7 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     review.classList.remove('show');
     quizview.classList.remove('hide');
     render();
-    openHistory();
+    openHistory(SECTION_CHAPTER[sectionKey]);
   });
 
   render();
@@ -2007,7 +2155,7 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
       }, container);
       renderCrumb(containerId, [
         {label:'Chemistry', onClick: showChemHub},
-        {label:'Salt Analysis', onClick: openSaltAnalysis},
+        {label: CHAPTER_META[SECTION_CHAPTER[sectionKey]].title, onClick: CHAPTER_META[SECTION_CHAPTER[sectionKey]].open},
         {label: title, onClick: ()=> openSubmenu(sectionKey)},
         {label:'Flashcards / Quick Quiz'}
       ]);
@@ -2030,12 +2178,19 @@ fetch('./questions.json')
     SECTION_DATA = data;
     anionApp = initQuizApp('app-anion', data.anion.questions, data.anion.catColors, 'Anion Analysis', 'anion');
     prelimApp = initQuizApp('app-prelim', data.prelim.questions, data.prelim.catColors, 'Preliminary Tests & Cation Groups', 'prelim');
+    const alkaneApp = initQuizApp('app-alkane', data.alkane.questions, data.alkane.catColors, 'Alkane', 'alkane');
+
+    SECTION_APPS.anion = anionApp;
+    SECTION_APPS.prelim = prelimApp;
+    SECTION_APPS.alkane = alkaneApp;
 
     document.getElementById('anionCount').textContent = data.anion.questions.length;
     document.getElementById('prelimCount').textContent = data.prelim.questions.length;
+    document.getElementById('alkaneCount').textContent = data.alkane.questions.length;
 
     document.getElementById('cardAnion').addEventListener('click', ()=> openSubmenu('anion'));
     document.getElementById('cardPrelim').addEventListener('click', ()=> openSubmenu('prelim'));
+    document.getElementById('cardAlkane').addEventListener('click', ()=> openSubmenu('alkane'));
   })
   .catch(err => {
     console.error('Failed to load questions.json', err);
