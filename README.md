@@ -20,10 +20,12 @@ Chemistry
                                    past attempts & accuracy trend)
 ```
 
-- **Study** renders every single question in that section as a full
-  fact — the question, the correct answer, and its full explanation —
-  grouped by category, with a jump-to-category nav at the top. Nothing
-  is shortened or left out.
+- **Study** renders the full transcribed class notes for that category
+  (group reagents, every confirmatory test, every color reaction and
+  equation) first, followed by a collapsible list of every question in
+  that category from the quiz bank (question + correct answer + full
+  explanation). A jump-to-category nav sits at the top. Nothing is
+  shortened or left out.
 - **30-Min Quick Revision** condenses the same material to one line per
   fact (answer + the first clause of its explanation), grouped by
   category in a two-column scan layout, meant to be read start to
@@ -42,8 +44,8 @@ there's no separate content file to keep in sync.
 
 | File             | Purpose                                                            |
 |-------------------|---------------------------------------------------------------------|
-| `index.html`      | The app: markup, styles, and all navigation/quiz/study/revision logic (fetches `questions.json` at load time) |
-| `questions.json`  | All question banks (anion analysis + preliminary tests/cation groups) and their category color maps — the single source of truth for Study, Revision, and Flashcards |
+| `index.html`      | The app: markup, styles, all navigation/quiz/study/revision logic, and the transcribed `STUDY_NOTES` reference content (fetches `questions.json` at load time) |
+| `questions.json`  | All question banks (anion analysis + preliminary tests/cation groups) and their category color maps — powers Flashcards and the 30-Min Revision cheat sheet |
 | `netlify.toml`    | Deploy configuration for Netlify (publish directory, headers, SPA redirect) |
 | `README.md`       | This file |
 
@@ -96,11 +98,19 @@ that section. Add a new category by adding an entry to the
 corresponding `catColors` map; the first question tagged with that
 `cat` name will create the new section automatically.
 
-## Note on Study content
+## Study reference notes
 
-The Study and 30-Min Revision sections are generated entirely from the
-`q` / `options[correct]` / `expl` fields already in `questions.json` —
-they don't pull from any external source document. If you have a PDF or
-notes you'd like folded in (e.g. extra context, diagrams, or points not
-already captured as a quiz question), add them as additional entries in
-`questions.json` and they'll flow through to all three views.
+The rich per-category notes shown at the top of each Study category
+(reagents, tests, equations, tables) live in the `STUDY_NOTES` constant
+near the top of the JS in `index.html`, keyed by section → category
+name — the category names must match the `cat` values used in
+`questions.json` exactly. They were transcribed from "Class
+Notes/Assignment Part 01" (Preliminary Tests & Cation Groups) and
+"Part 02" (Anion Analysis) by Vikrant Kumar. To add or correct notes
+for a category, edit the matching template-literal string in
+`STUDY_NOTES`.
+
+The quiz-bank facts shown further down each Study category (and all of
+30-Min Revision) are generated purely from `questions.json`'s `q` /
+`options[correct]` / `expl` fields, so any question you add there
+automatically appears in Flashcards, Study, and Revision.
