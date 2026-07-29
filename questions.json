@@ -2242,6 +2242,18 @@
         "expl": "Chain-end carbons and methyl branches, bonded to just one other carbon, are always primary."
       },
       {
+        "cat": "NOMENCLATURE & CLASSIFICATION",
+        "q": "A quaternary (4°) carbon, such as the central carbon of neopentane, has how many hydrogen atoms attached to it?",
+        "options": [
+          "Zero",
+          "One",
+          "Two",
+          "Three"
+        ],
+        "correct": 0,
+        "expl": "A quaternary carbon is bonded to four other carbons, using up all four of its bonds, so it carries no hydrogen atoms at all."
+      },
+      {
         "cat": "ISOMERISM",
         "q": "Since alkanes have no functional group, ring, or multiple bond to reposition, the only constitutional isomerism they can show is:",
         "options": [
@@ -2302,56 +2314,584 @@
         "expl": "You need at least 4 carbons to have a branch point with a chain on either side, so methane, ethane, and propane can each only be drawn one way — chain isomerism starts at butane."
       },
       {
-        "cat": "PREPARATION METHODS",
+        "cat": "ISOMERISM",
+        "q": "Hexane (C<sub>6</sub>H<sub>14</sub>) has how many chain isomers in total?",
+        "options": [
+          "4",
+          "5 (n-hexane, 2-methylpentane, 3-methylpentane, 2,2-dimethylbutane, 2,3-dimethylbutane)",
+          "6",
+          "3"
+        ],
+        "correct": 1,
+        "expl": "Hexane has exactly 5 possible carbon skeletons — the isomer count grows quickly as chain length increases (2 for butane, 3 for pentane, 5 for hexane, 9 for heptane)."
+      },
+      {
+        "cat": "WURTZ REACTION & COUPLING METHODS",
         "q": "In the Wurtz reaction, two molecules of an alkyl halide react with sodium metal in dry ether to give:",
         "options": [
-          "A higher alkane (R–R) + 2NaX",
+          "A higher, symmetrical alkane (R–R) + 2NaX",
           "An alkene + NaX + H₂",
           "An alcohol + NaX",
           "An alkyne + 2NaX"
         ],
         "correct": 0,
-        "expl": "Sodium generates alkyl radicals from R–X which couple to form the symmetrical alkane R–R, releasing NaX; using two different halides gives a statistical mixture of three products, so Wurtz is best for making symmetrical alkanes."
+        "expl": "Sodium generates alkyl radicals from R–X which couple to form the symmetrical alkane R–R, releasing NaX."
       },
       {
-        "cat": "PREPARATION METHODS",
-        "q": "Electrolysis of a concentrated aqueous solution of the sodium/potassium salt of a carboxylic acid, giving an alkane at the anode with loss of CO<sub>2</sub>, is called:",
+        "cat": "WURTZ REACTION & COUPLING METHODS",
+        "q": "The Wurtz reaction is generally believed to proceed by a free-radical mechanism by default, but which alternative (ionic, S<sub>N</sub>2-type) mechanism has also been proposed?",
         "options": [
-          "Kolbe's electrolytic method",
-          "The Wurtz reaction",
-          "Corey–House synthesis",
-          "Clemmensen reduction"
+          "R–X + 2Na → R:⁻ Na⁺ + NaX, then the carbanion R:⁻ attacks a second R–X in an S<sub>N</sub>2 step",
+          "Simple homolysis of R–X with no involvement of sodium at all",
+          "Direct addition of Na across the C–X bond without breaking it",
+          "A concerted six-membered pericyclic transition state"
         ],
         "correct": 0,
-        "expl": "At the anode, 2RCOO⁻ loses electrons and decarboxylates to two R• radicals which combine to R–R (plus CO₂), while H₂ is liberated at the cathode."
+        "expl": "Two mechanisms have been suggested for Wurtz coupling: the default free-radical pathway, and an ionic pathway where Na first reduces R–X to give a carbanion (R:⁻ Na⁺) that then does a nucleophilic (S<sub>N</sub>2) displacement on a second molecule of R–X."
       },
       {
-        "cat": "PREPARATION METHODS",
-        "q": "Heating sodium acetate with soda-lime (NaOH + CaO) gives methane by a reaction known as:",
+        "cat": "WURTZ REACTION & COUPLING METHODS",
+        "q": "Reactivity of an alkyl halide towards the Wurtz reaction (for a given alkyl group) follows the order:",
         "options": [
-          "Decarboxylation",
-          "Wurtz reaction",
-          "Hydrogenation",
-          "Kolbe electrolysis"
+          "R–I > R–Br > R–Cl > R–F",
+          "R–F > R–Cl > R–Br > R–I",
+          "R–Br > R–I > R–Cl > R–F",
+          "All halides react equally fast"
         ],
         "correct": 0,
-        "expl": "CH₃COONa + NaOH —(CaO, Δ)→ CH₄ + Na₂CO₃; this soda-lime decarboxylation removes one carbon from any carboxylic acid salt to give the alkane with one fewer carbon."
+        "expl": "A weaker, more easily broken C–X bond reacts faster; since bond strength falls C–F > C–Cl > C–Br > C–I, reactivity in Wurtz coupling runs the other way: R–I is the fastest and R–F essentially doesn't react at all."
       },
       {
-        "cat": "PREPARATION METHODS",
-        "q": "Which method is the most reliable way to make an unsymmetrical alkane R–R' cleanly, avoiding a mixture of products?",
+        "cat": "WURTZ REACTION & COUPLING METHODS",
+        "q": "When Zn dust (in THF) is used as the reducing metal instead of Na for a Wurtz-type coupling (2RX + Zn → R–R + ZnX₂), the reaction is specifically called the:",
+        "options": [
+          "Frankland reaction",
+          "Wurtz–Fittig reaction",
+          "Fittig reaction",
+          "Ullmann reaction"
+        ],
+        "correct": 0,
+        "expl": "The mechanism is the same as the ordinary Wurtz reaction; only the metal is swapped for zinc, and this variant is named the Frankland reaction."
+      },
+      {
+        "cat": "WURTZ REACTION & COUPLING METHODS",
+        "q": "The Wurtz–Fittig reaction couples an aryl halide with an alkyl halide using sodium in dry ether to give:",
+        "options": [
+          "An alkylbenzene (Ar–R)",
+          "A biaryl (Ar–Ar)",
+          "A dialkyl ether",
+          "A symmetrical alkane (R–R) only"
+        ],
+        "correct": 0,
+        "expl": "2 Na + R–I + Br–C₆H₅ → R–C₆H₅ + NaBr + NaI: the Wurtz–Fittig reaction extends Wurtz-type coupling to make an alkyl-substituted benzene from an aryl halide plus an alkyl halide."
+      },
+      {
+        "cat": "WURTZ REACTION & COUPLING METHODS",
+        "q": "The Fittig reaction couples two molecules of an aryl halide (e.g. chlorobenzene) with sodium in dry ether to give:",
+        "options": [
+          "A biaryl, such as biphenyl (Ar–Ar)",
+          "An alkylbenzene (Ar–R)",
+          "A symmetrical alkane",
+          "Phenol"
+        ],
+        "correct": 0,
+        "expl": "2 C₆H₅–Cl + 2Na → C₆H₅–C₆H₅ + 2NaCl: this is simply the aryl–aryl version of the Wurtz coupling idea, giving a biaryl product."
+      },
+      {
+        "cat": "WURTZ REACTION & COUPLING METHODS",
+        "q": "The Ullmann reaction couples two aryl halides (Ar–X, X = Cl, Br, I) using copper metal, and (unlike Wurtz) proceeds through:",
+        "options": [
+          "Oxidative addition of Ar–X to Cu, followed by reductive elimination of the biaryl",
+          "A simple free-radical chain mechanism",
+          "Direct S<sub>N</sub>2 attack of one aryl halide on another",
+          "Protonation of the aryl halide by copper"
+        ],
+        "correct": 0,
+        "expl": "Cu first inserts into the Ar–X bond (oxidative addition) to give Ar–Cu–X; a second equivalent of Ar–X then reacts and the aryl groups are reductively eliminated together as the biaryl Ar–Ar, regenerating CuX — this is explicitly not a free-radical mechanism."
+      },
+      {
+        "cat": "WURTZ REACTION & COUPLING METHODS",
+        "q": "A key limitation of the Wurtz reaction is that treating two different alkyl halides R–X and R'–X together with sodium gives:",
+        "options": [
+          "A statistical mixture of R–R, R'–R', and R–R'",
+          "Only the cross-product R–R' cleanly",
+          "No reaction at all",
+          "Exclusively R–R with R'–X left unreacted"
+        ],
+        "correct": 0,
+        "expl": "Because both alkyl radicals are generated together in solution and can combine with either partner, using two different halides gives an unavoidable statistical mixture of three coupling products — which is why Wurtz is used only to make symmetrical alkanes from a single halide."
+      },
+      {
+        "cat": "COREY-HOUSE SYNTHESIS & ORGANOCUPRATES",
+        "q": "The most reliable method to prepare an unsymmetrical alkane R–R' cleanly (avoiding the statistical-mixture problem of Wurtz) is:",
         "options": [
           "Corey–House synthesis (lithium dialkylcuprate + alkyl halide)",
-          "Wurtz reaction on two different halides",
+          "The plain Wurtz reaction on two different halides",
           "Kolbe electrolysis of two different acid salts",
           "Simple hydrogenation of an alkene"
         ],
         "correct": 0,
-        "expl": "Because Wurtz or Kolbe with two different starting materials statistically gives a mixture of R–R, R'–R', and R–R', the Gilman reagent R₂CuLi reacting selectively with a different alkyl halide R'X is the standard clean route to an unsymmetrical alkane."
+        "expl": "Reacting a lithium dialkylcuprate (Gilman reagent, R₂CuLi) with a different alkyl halide R'–X selectively gives R–R', because the mechanism only uses one of the two alkyl groups on copper as the nucleophile."
       },
       {
-        "cat": "PREPARATION METHODS",
-        "q": "Treating a Grignard reagent (RMgX) with water gives:",
+        "cat": "COREY-HOUSE SYNTHESIS & ORGANOCUPRATES",
+        "q": "A lithium dialkylcuprate, R₂CuLi (the Gilman reagent), is prepared by treating an alkyl halide with lithium metal to form R–Li, then reacting this with:",
+        "options": [
+          "Cuprous iodide (CuI) in ether/THF",
+          "Elemental copper directly",
+          "Magnesium in dry ether",
+          "Zinc dust"
+        ],
+        "correct": 0,
+        "expl": "R–X —Li→ R–Li —CuI (THF)→ R₂CuLi + LiI: the organolithium reagent first forms, and reaction with CuI (transmetallation) converts it into the organocuprate."
+      },
+      {
+        "cat": "COREY-HOUSE SYNTHESIS & ORGANOCUPRATES",
+        "q": "In transmetallation, an organometallic compound transfers its alkyl group to a new metal when that new metal is:",
+        "options": [
+          "More electronegative than the original metal",
+          "Less electronegative than the original metal",
+          "Exactly as electronegative as the original metal",
+          "Any metal at all, regardless of electronegativity"
+        ],
+        "correct": 0,
+        "expl": "Transmetallation proceeds toward the less polar, more stable C–metal bond — so the alkyl group moves onto whichever metal is more electronegative (closer to carbon's own electronegativity, ≈2.5), e.g. Li (≈1.0) transfers its alkyl group to Cu (≈1.9)."
+      },
+      {
+        "cat": "COREY-HOUSE SYNTHESIS & ORGANOCUPRATES",
+        "q": "In the Corey–House reaction R₂CuLi + R'–X → R–R', the alkyl group on copper acts as a strong nucleophile and the reaction generally follows which mechanism?",
+        "options": [
+          "S<sub>N</sub>2, so it works with methyl, 1°, and 2° (sometimes) alkyl halides but fails with 3° halides",
+          "S<sub>N</sub>1, so it works best with 3° halides",
+          "E2 elimination exclusively",
+          "Free-radical substitution, unaffected by halide class"
+        ],
+        "correct": 0,
+        "expl": "Because the carbanionic alkyl group on copper is a strong nucleophile that displaces the halide by back-side attack (S<sub>N</sub>2), tertiary alkyl halides give mostly elimination instead and are a poor substrate for this reaction; R' itself (on the halide) can be 1°, 2°, or even 3°."
+      },
+      {
+        "cat": "COREY-HOUSE SYNTHESIS & ORGANOCUPRATES",
+        "q": "A major advantage of organocuprates over simple Grignard or organolithium reagents in substitution reactions is that organocuprates can also react cleanly with:",
+        "options": [
+          "Vinylic and aryl halides, which don't undergo S<sub>N</sub>2 with Grignard/organolithium reagents",
+          "Only primary alkyl halides",
+          "Only tertiary alkyl halides",
+          "No halides other than simple 1° alkyl halides"
+        ],
+        "correct": 0,
+        "expl": "Vinylic and aryl C–X bonds resist ordinary nucleophilic (S<sub>N</sub>2/S<sub>N</sub>1) attack, but organocuprates react with them anyway (through a different, non-S<sub>N</sub>2 pathway at the metal), letting Corey–House build alkyl-substituted alkenes and arenes that Wurtz-type methods cannot."
+      },
+      {
+        "cat": "COREY-HOUSE SYNTHESIS & ORGANOCUPRATES",
+        "q": "When an organocuprate reacts with a vinylic halide, the configuration of the starting alkene (cis or trans) in the product is:",
+        "options": [
+          "Retained — the reaction is stereospecific",
+          "Always inverted",
+          "Scrambled into a mixture of cis and trans",
+          "Destroyed, giving the alkyne instead"
+        ],
+        "correct": 0,
+        "expl": "The substitution at the sp² vinylic carbon is stereospecific: the groups on the double bond keep their relative positions, so a cis-alkenyl halide gives a cis-alkene product and a trans-alkenyl halide gives a trans-alkene product."
+      },
+      {
+        "cat": "COREY-HOUSE SYNTHESIS & ORGANOCUPRATES",
+        "q": "Besides plain alkyl/vinylic/aryl halides, organocuprates (R₂CuLi) can also substitute a leaving group on compounds bearing other functional groups, such as an acid halide, to directly give a:",
+        "options": [
+          "Ketone",
+          "Carboxylic acid",
+          "Alcohol",
+          "Alkane only, with the functional group destroyed"
+        ],
+        "correct": 0,
+        "expl": "R₂CuLi reacts with an acyl (acid) halide by replacing the halide with one R group, giving a ketone — organocuprates are mild and selective enough to leave the carbonyl itself untouched while only the leaving group is substituted."
+      },
+      {
+        "cat": "DECARBOXYLATION & KOLBE ELECTROLYSIS",
+        "q": "Heating the sodium salt of a carboxylic acid with soda-lime (NaOH + CaO) gives the alkane with one fewer carbon. This reaction is called:",
+        "options": [
+          "Decarboxylation",
+          "Wurtz reaction",
+          "Kolbe electrolysis",
+          "Corey–House synthesis"
+        ],
+        "correct": 0,
+        "expl": "R–COONa + NaOH —(CaO, Δ)→ R–H + Na₂CO₃: soda-lime decarboxylation removes –COONa as Na₂CO₃, leaving the alkane R–H."
+      },
+      {
+        "cat": "DECARBOXYLATION & KOLBE ELECTROLYSIS",
+        "q": "In the soda-lime decarboxylation reaction, what role does the CaO actually play in the chemistry (as opposed to NaOH)?",
+        "options": [
+          "No direct chemical role — CaO is just mixed in because it's cheaper and easier to handle than pure solid NaOH",
+          "CaO is the actual base that removes CO₂",
+          "CaO reduces the carbon chain by one more carbon",
+          "CaO oxidizes the carboxylate to CO₂ directly"
+        ],
+        "correct": 0,
+        "expl": "NaOH alone does the decarboxylation chemistry. CaO is added because pure solid NaOH is hygroscopic and corrosive to handle, while soda-lime (NaOH + CaO, 3:1) is a much easier, cheaper solid to work with, and CaO conveniently also absorbs atmospheric CO₂ and water like NaOH does."
+      },
+      {
+        "cat": "DECARBOXYLATION & KOLBE ELECTROLYSIS",
+        "q": "Decarboxylation of a carboxylate proceeds via loss of CO₂ to generate a carbanion in the rate-determining step. Therefore, decarboxylation is faster (more favorable) when the resulting carbanion is:",
+        "options": [
+          "More stable (e.g., stabilized by nearby electron-withdrawing groups)",
+          "Less stable",
+          "Exactly as stable regardless of substituents",
+          "Unrelated to carbanion stability"
+        ],
+        "correct": 0,
+        "expl": "Since the C–C bond breaks heterolytically to form a carbanion in the slow step, any factor that stabilizes that carbanion (such as a nearby electron-withdrawing/nitro group, or aromatic/allylic delocalization) speeds up decarboxylation."
+      },
+      {
+        "cat": "DECARBOXYLATION & KOLBE ELECTROLYSIS",
+        "q": "If a carboxylic acid or its salt has an electron-withdrawing group at the β-position relative to –COOH, decarboxylation can occur:",
+        "options": [
+          "Simply on heating, without needing soda-lime at all",
+          "Only with soda-lime and never by heating alone",
+          "Only under Kolbe electrolytic conditions",
+          "Not at all, since EWGs block decarboxylation"
+        ],
+        "correct": 0,
+        "expl": "A β-electron-withdrawing group (as in β-keto acids) stabilizes the developing carbanion/enolate so effectively that simple heating alone is enough to drive off CO₂, without requiring the soda-lime reagent."
+      },
+      {
+        "cat": "DECARBOXYLATION & KOLBE ELECTROLYSIS",
+        "q": "Decarboxylation of sodium benzoate (C₆H₅COONa) with soda-lime gives:",
+        "options": [
+          "Benzene",
+          "Toluene",
+          "Cyclohexane",
+          "Phenol"
+        ],
+        "correct": 0,
+        "expl": "C₆H₅COONa + NaOH —(CaO,Δ)→ C₆H₆ + Na₂CO₃ — removing the –COONa group from the aromatic ring leaves plain benzene, <svg viewBox=\"0 0 120 110\" width=\"22\" height=\"20\" style=\"vertical-align:middle;margin:0 3px;\"><polygon points=\"60,13 96,34 96,76 60,97 24,76 24,34\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"7\"/><circle cx=\"60\" cy=\"55\" r=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"5\"/></svg> benzene."
+      },
+      {
+        "cat": "DECARBOXYLATION & KOLBE ELECTROLYSIS",
+        "q": "Kolbe's electrolytic method makes a symmetrical alkane by electrolysing a concentrated aqueous solution of a carboxylate salt. At the anode, the mechanism proceeds as:",
+        "options": [
+          "2RCOO⁻ → 2RCOO• (lose e⁻) → 2R• + 2CO₂ → R–R",
+          "2RCOO⁻ directly gains electrons to form R–R",
+          "R–R forms by simple ionic combination of two RCOO⁻ ions",
+          "CO₂ and R–R form only at the cathode"
+        ],
+        "correct": 0,
+        "expl": "At the anode the carboxylate loses an electron to form a carboxyl radical, which rapidly loses CO₂ to give an alkyl radical; two such alkyl radicals then combine to give the symmetrical alkane R–R."
+      },
+      {
+        "cat": "DECARBOXYLATION & KOLBE ELECTROLYSIS",
+        "q": "In Kolbe's electrolysis, what happens at the cathode?",
+        "options": [
+          "Water is reduced: 2Na⁺ + 2e⁻ + 2H₂O → 2NaOH + H₂",
+          "The carboxylate is reduced directly to the alkane",
+          "CO₂ is generated at the cathode instead of the anode",
+          "Nothing — the cathode is inert in this reaction"
+        ],
+        "correct": 0,
+        "expl": "While decarboxylation and radical coupling happen at the anode, the cathode simply reduces water, liberating H₂ gas and regenerating NaOH in solution."
+      },
+      {
+        "cat": "CATALYTIC HYDROGENATION",
+        "q": "Catalytic hydrogenation of an alkene or alkyne with H₂ over Ni, Pd, or Pt is:",
+        "options": [
+          "Exothermic (ΔH < 0)",
+          "Endothermic (ΔH > 0)",
+          "Thermoneutral",
+          "Exothermic only for alkynes, endothermic for alkenes"
+        ],
+        "correct": 0,
+        "expl": "Hydrogenation is exothermic because the new, strong C–H and additional C–C σ-bonds formed release more energy than is needed to break the weaker H–H and π-bonds."
+      },
+      {
+        "cat": "CATALYTIC HYDROGENATION",
+        "q": "In catalytic hydrogenation, the metal surface's real role is to:",
+        "options": [
+          "Adsorb both H₂ and the alkene/alkyne, lowering the activation energy and enabling syn addition of the two H atoms from the same face",
+          "Act as a Lewis acid that polarizes the C=C bond",
+          "Supply electrons for an S<sub>N</sub>1-type mechanism",
+          "Oxidize the alkene before H₂ is added"
+        ],
+        "correct": 0,
+        "expl": "H₂ and the unsaturated substrate are both adsorbed onto the metal surface, and both hydrogen atoms are delivered to the same face of the double/triple bond, giving syn (cis) addition, with the metal lowering the overall activation energy of the reaction."
+      },
+      {
+        "cat": "CATALYTIC HYDROGENATION",
+        "q": "Raney nickel is prepared by treating a nickel–aluminium alloy with:",
+        "options": [
+          "Concentrated NaOH, which dissolves out the aluminium as sodium aluminate, leaving a highly porous, catalytically active nickel",
+          "Dilute HCl, which dissolves the nickel",
+          "Heating the alloy alone with no other reagent",
+          "Concentrated H₂SO₄, which dissolves both metals"
+        ],
+        "correct": 0,
+        "expl": "Ni–Al alloy + NaOH removes the aluminium (as soluble sodium aluminate), leaving behind a spongy, high-surface-area nickel that is an excellent hydrogenation catalyst."
+      },
+      {
+        "cat": "CATALYTIC HYDROGENATION",
+        "q": "Catalytic hydrogenation of a cis-alkene by syn addition, when it creates two new similar stereocentres with no other pre-existing chiral centre, gives:",
+        "options": [
+          "A meso compound",
+          "A pair of enantiomers",
+          "A single pure enantiomer",
+          "No stereocentres at all"
+        ],
+        "correct": 0,
+        "expl": "Because both new H atoms add from the same face (syn addition) and the alkene was cis, the two new stereocentres end up with an internal mirror plane, producing the achiral meso diastereomer as a single compound."
+      },
+      {
+        "cat": "CATALYTIC HYDROGENATION",
+        "q": "Under the same syn-addition conditions, hydrogenating the corresponding trans-alkene (in place of the cis one above) instead gives:",
+        "options": [
+          "A racemic pair of enantiomers",
+          "The same meso compound",
+          "A mixture of diastereomers",
+          "An achiral product with no stereocentres"
+        ],
+        "correct": 0,
+        "expl": "Starting from the trans-alkene, syn addition places the two new stereocentres without the internal mirror symmetry the cis-alkene gave, producing the two enantiomers in equal (racemic) amounts instead of the single meso compound."
+      },
+      {
+        "cat": "CATALYTIC HYDROGENATION",
+        "q": "In terms of ease of catalytic hydrogenation, greater steric crowding around the double/triple bond makes the reaction rate:",
+        "options": [
+          "Lower — rate is inversely related to steric crowding",
+          "Higher",
+          "Unaffected",
+          "Dependent only on the catalyst, never on the substrate"
+        ],
+        "correct": 0,
+        "expl": "More heavily substituted (bulkier) alkenes/alkynes have more trouble adsorbing flat against the catalyst surface, so the rate of catalytic hydrogenation is roughly proportional to 1/(steric crowding) — a terminal, unhindered double bond hydrogenates fastest."
+      },
+      {
+        "cat": "CATALYTIC HYDROGENATION",
+        "q": "Which is generally true when comparing catalysts for the same substrate?",
+        "options": [
+          "Raney nickel gives a faster rate of hydrogenation than plain Ni/H₂",
+          "Plain Ni/H₂ is always faster than Raney nickel",
+          "Both give identical rates in all cases",
+          "Neither catalyst can hydrogenate alkynes"
+        ],
+        "correct": 0,
+        "expl": "Because Raney nickel is far more finely divided and porous (much higher effective surface area) than ordinary nickel, it hydrogenates a given substrate faster under comparable conditions."
+      },
+      {
+        "cat": "PARTIAL REDUCTION & DIIMIDE",
+        "q": "Hydrogenating an alkyne over Lindlar's catalyst (Pd deposited on CaCO₃ or BaSO₄, poisoned with a lead salt/quinoline) stops at the alkene stage and delivers H₂ by:",
+        "options": [
+          "Syn addition, giving the cis-alkene as the major product",
+          "Anti addition, giving the trans-alkene",
+          "Radical addition, giving a mixture of cis and trans",
+          "No addition — Lindlar's catalyst is inactive toward alkynes"
+        ],
+        "correct": 0,
+        "expl": "The catalyst poison (quinoline, or a lead salt like lead acetate) deliberately lowers the catalyst's activity just enough to stop hydrogenation at the alkene stage; both H atoms still add from the same face (syn addition), so the alkyne is converted to the cis-alkene."
+      },
+      {
+        "cat": "PARTIAL REDUCTION & DIIMIDE",
+        "q": "Nickel boride (Ni₂B, the \"P-2 catalyst\") is another catalyst used to partially reduce alkynes to alkenes; like Lindlar's catalyst, it proceeds by:",
+        "options": [
+          "Syn addition, giving the cis-alkene",
+          "Anti addition, giving the trans-alkene",
+          "A free-radical mechanism giving trans-alkene as major product",
+          "Full reduction straight to the alkane"
+        ],
+        "correct": 0,
+        "expl": "Ni₂B (P-2 catalyst) is a milder alternative to Lindlar's catalyst that similarly delivers both hydrogens from the same face of the alkyne, also stopping cleanly at the cis-alkene."
+      },
+      {
+        "cat": "PARTIAL REDUCTION & DIIMIDE",
+        "q": "Reducing an alkyne with Na (or Li) dissolved in liquid NH₃ (Birch-type conditions) gives the corresponding alkene by:",
+        "options": [
+          "Anti addition, giving the trans-alkene as the major product",
+          "Syn addition, giving the cis-alkene",
+          "No reaction — alkynes are inert to dissolving-metal conditions",
+          "Complete reduction to the alkane"
+        ],
+        "correct": 0,
+        "expl": "This dissolving-metal reduction proceeds through a vinyl radical/vinyl anion sequence (electron transfer, protonation, second electron transfer, second protonation) rather than on a metal surface, and delivers the two H atoms from opposite faces — anti addition — giving predominantly the more stable trans-alkene."
+      },
+      {
+        "cat": "PARTIAL REDUCTION & DIIMIDE",
+        "q": "In the Na/liquid-NH₃ reduction of an internal alkyne, the mechanism generates a vinyl radical intermediate that is then converted to the alkene product via:",
+        "options": [
+          "A second electron transfer to give a vinyl anion, followed by protonation by the solvent (NH₃)",
+          "Direct H–H addition from molecular hydrogen",
+          "Simple radical dimerization",
+          "Direct protonation of the vinyl radical without any further electron transfer"
+        ],
+        "correct": 0,
+        "expl": "The sequence is: alkyne + e⁻ → radical anion → protonation → vinyl radical + e⁻ → vinyl anion → protonation (by NH₃) → alkene; the trans geometry is favoured because the more stable, less hindered vinyl radical/anion intermediate forms preferentially."
+      },
+      {
+        "cat": "PARTIAL REDUCTION & DIIMIDE",
+        "q": "Diimide (HN=NH), generated in situ, selectively reduces alkenes and alkynes (nonpolar, symmetrical multiple bonds) but does not touch polar multiple bonds like C=O or C=N because:",
+        "options": [
+          "Diimide is short-lived and self-destructs to N₂ + hydrazine before it can react with the less-reactive polar bonds",
+          "Polar bonds are inherently stronger than C=C or C≡C bonds",
+          "Diimide only reacts under strongly acidic conditions, which polar bonds don't tolerate",
+          "Diimide preferentially reduces only aromatic rings"
+        ],
+        "correct": 0,
+        "expl": "Diimide is a fleeting reactive species that disproportionates to N₂ and N₂H₄ if it doesn't react immediately; this short lifetime makes it selective for the fast-reacting nonpolar π-systems (C=C, C≡C, N=N) while sparing the slower-reacting polar C=O/C=N bonds."
+      },
+      {
+        "cat": "PARTIAL REDUCTION & DIIMIDE",
+        "q": "Diimide reduces a C=C double bond through a pericyclic mechanism involving:",
+        "options": [
+          "A six-membered cyclic transition state, giving syn addition of both H atoms with loss of N₂",
+          "An open-chain radical-chain mechanism",
+          "Sequential one-electron transfers, like the Birch reduction",
+          "Simple ionic addition of H⁺ and H⁻"
+        ],
+        "correct": 0,
+        "expl": "Diimide and the alkene come together in a concerted, six-membered cyclic transition state (bonds breaking and forming simultaneously); both H atoms are delivered to the same face of the double bond (syn addition) as N₂ is expelled."
+      },
+      {
+        "cat": "PARTIAL REDUCTION & DIIMIDE",
+        "q": "Diimide can be generated in situ for use as a reducing agent from hydrazine (N₂H₄) by treating it with:",
+        "options": [
+          "An oxidant such as H₂O₂ or O₂ (or light, hν)",
+          "A strong reducing agent like LiAlH₄",
+          "Concentrated HCl alone",
+          "Sodium metal in ether"
+        ],
+        "correct": 0,
+        "expl": "N₂H₄ + H₂O₂ (or O₂, or another oxidant, sometimes with light) oxidizes hydrazine just enough to form the reactive diimide HN=NH in solution, ready to reduce a nearby alkene/alkyne."
+      },
+      {
+        "cat": "CARBONYL-TO-ALKANE REDUCTIONS",
+        "q": "Clemmensen reduction converts an aldehyde or ketone carbonyl fully to a CH₂/CH₃ group using:",
+        "options": [
+          "Zn–Hg amalgam with concentrated HCl (acidic conditions)",
+          "NH₂–NH₂ with KOH in ethylene glycol (basic conditions)",
+          "Ethanedithiol followed by Raney nickel (neutral conditions)",
+          "LiAlH₄ in dry ether"
+        ],
+        "correct": 0,
+        "expl": "R–CHO/R–CO–R' + Zn(Hg)/HCl, Δ → R–CH₃/R–CH₂–R' + ZnCl₂ + H₂O; Clemmensen reduction runs in strongly acidic conditions and is chosen when the rest of the molecule can tolerate acid but not base."
+      },
+      {
+        "cat": "CARBONYL-TO-ALKANE REDUCTIONS",
+        "q": "Wolff–Kishner reduction converts a carbonyl to a CH₂/CH₃ group by first forming a hydrazone (R₂C=N–NH₂) and then heating it with KOH in ethylene glycol. This reaction runs in:",
+        "options": [
+          "Basic conditions, and is chosen when the substrate is acid-sensitive",
+          "Acidic conditions, chosen for base-sensitive substrates",
+          "Neutral conditions only",
+          "Strongly oxidizing conditions"
+        ],
+        "correct": 0,
+        "expl": "Because Wolff–Kishner uses hydrazine and hot base rather than acid, it's the reduction of choice for substrates bearing base-tolerant but acid-sensitive functional groups — the opposite scenario to Clemmensen."
+      },
+      {
+        "cat": "CARBONYL-TO-ALKANE REDUCTIONS",
+        "q": "In the exceptional case of Clemmensen-reducing a 1,3-diketone such as 5,5-dimethylcyclohexane-1,3-dione, the major product is not the expected 1,1-dimethylcyclohexane but instead a ring-contracted methyl ketone. This happens because:",
+        "options": [
+          "An intermediate carbocation undergoes a 1,2-alkyl shift (ring contraction) before the second carbonyl is fully reduced",
+          "Zn–Hg cannot reduce 1,3-diketones at all",
+          "The acidic medium hydrolyses the ring completely",
+          "HCl adds across the ring without reducing either carbonyl"
+        ],
+        "correct": 0,
+        "expl": "Partial reduction/dehydration of one carbonyl generates a cationic intermediate; rather than simply completing reduction, a neighbouring C–C bond migrates (1,2-alkyl shift), contracting the six-membered ring to a five-membered one and giving 2,4,4-trimethylcyclopentanone as the major product."
+      },
+      {
+        "cat": "CARBONYL-TO-ALKANE REDUCTIONS",
+        "q": "The Mozingo reduction converts a ketone/aldehyde to a CH₂ group by first forming a cyclic dithioacetal (using ethane-1,2-dithiol and dry HCl) and then desulfurizing it with:",
+        "options": [
+          "Raney nickel / H₂ (reductive desulfurization)",
+          "Zn–Hg amalgam with HCl",
+          "NH₂NH₂ with KOH",
+          "LiAlH₄ alone"
+        ],
+        "correct": 0,
+        "expl": "The carbonyl is first protected as a 1,3-dithiolane, then Raney nickel (which is loaded with adsorbed hydrogen) reductively cleaves both C–S bonds, replacing the ring with two C–H bonds — an essentially neutral-condition alternative to Clemmensen/Wolff–Kishner."
+      },
+      {
+        "cat": "CARBONYL-TO-ALKANE REDUCTIONS",
+        "q": "Compared to Clemmensen (strongly acidic) and Wolff–Kishner (strongly basic) conditions, the Mozingo reduction is especially useful when the rest of the molecule contains a group that is:",
+        "options": [
+          "Sensitive to both strong acid and strong base",
+          "Sensitive only to strong acid",
+          "Sensitive only to strong base",
+          "Only sensitive to oxidizing conditions"
+        ],
+        "correct": 0,
+        "expl": "Because the dithioacetal-formation and Raney-nickel desulfurization steps avoid strongly acidic or strongly basic conditions, Mozingo reduction is the fallback method when a substrate can't survive either of the other two carbonyl-reduction methods."
+      },
+      {
+        "cat": "CARBONYL-TO-ALKANE REDUCTIONS",
+        "q": "Treating an alcohol (R–OH) with excess HI in the presence of red phosphorus (as a catalyst/HI regenerator) at elevated temperature ultimately gives:",
+        "options": [
+          "The fully reduced alkane, R–H",
+          "The alkyl iodide, R–I, with no further reaction",
+          "An ether, R–O–R",
+          "No reaction — alcohols are inert to HI/red P"
+        ],
+        "correct": 0,
+        "expl": "HI/red P first converts –OH to –I (red P regenerates HI from the I₂ byproduct, keeping the reagent in excess), and then, under forcing/excess conditions, further reduces the C–I bond itself, ultimately replacing the original –OH with plain –H."
+      },
+      {
+        "cat": "CARBONYL-TO-ALKANE REDUCTIONS",
+        "q": "HI/red phosphorus is considered an unusually powerful, \"exhaustive\" reducing combination because, given excess reagent and heat, it can even reduce a ketone/aldehyde carbonyl all the way down to a simple CH₂/CH₃ group by:",
+        "options": [
+          "First converting the C=O to a C–I (via the alcohol) and then reducing that C–I bond to C–H",
+          "Directly inserting H₂ across the C=O in one step",
+          "Oxidizing the carbonyl to a carboxylic acid first",
+          "Leaving carbonyls completely untouched under all conditions"
+        ],
+        "correct": 0,
+        "expl": "HI/red P can first reduce the carbonyl to the alcohol and then to the alkyl iodide, and finally reduce that C–I bond too — which is why it's grouped with Clemmensen/Wolff–Kishner/Mozingo as one of the standard ways to fully deoxygenate a carbonyl to a CH₂/CH₃ group."
+      },
+      {
+        "cat": "PREPARATION FROM CARBIDES & GRIGNARD",
+        "q": "Hydrolysis of aluminium carbide, Al₄C₃, with water gives:",
+        "options": [
+          "Methane, CH₄ (+ Al(OH)₃)",
+          "Acetylene, C₂H₂",
+          "Propyne, CH₃–C≡CH",
+          "Ethylene, C₂H₄"
+        ],
+        "correct": 0,
+        "expl": "Al₄C₃ + 12H₂O → 4Al(OH)₃ + 3CH₄: aluminium carbide is a \"methanide\" and its hydrolysis is a classic laboratory preparation of methane."
+      },
+      {
+        "cat": "PREPARATION FROM CARBIDES & GRIGNARD",
+        "q": "Hydrolysis of calcium carbide, CaC₂, with water gives:",
+        "options": [
+          "Acetylene, C₂H₂ (not an alkane)",
+          "Methane, CH₄",
+          "Ethane, C₂H₆",
+          "Propane, C₃H₈"
+        ],
+        "correct": 0,
+        "expl": "CaC₂ + 2H₂O → Ca(OH)₂ + C₂H₂: calcium carbide is an \"acetylide\" (contains the C≡C²⁻ unit) and its hydrolysis is the classic industrial/lab route to acetylene, not an alkane — a common point of confusion with methanide carbides like Al₄C₃ or Be₂C."
+      },
+      {
+        "cat": "PREPARATION FROM CARBIDES & GRIGNARD",
+        "q": "Hydrolysis of beryllium carbide, Be₂C, with water gives:",
+        "options": [
+          "Methane, CH₄ (+ Be(OH)₂)",
+          "Acetylene, C₂H₂",
+          "Propyne, CH₃–C≡CH",
+          "Ethane, C₂H₆"
+        ],
+        "correct": 0,
+        "expl": "Be₂C + 2H₂O → 2Be(OH)₂ + CH₄: like Al₄C₃, beryllium carbide is a methanide, giving methane on hydrolysis."
+      },
+      {
+        "cat": "PREPARATION FROM CARBIDES & GRIGNARD",
+        "q": "Hydrolysis of magnesium carbide, Mg₂C₃ (a so-called \"allylenide\"), with water gives:",
+        "options": [
+          "Propyne (methylacetylene), CH₃–C≡CH",
+          "Methane, CH₄",
+          "Propane, C₃H₈",
+          "Allene, CH₂=C=CH₂"
+        ],
+        "correct": 0,
+        "expl": "Mg₂C₃ + 4H₂O → 2Mg(OH)₂ + CH₃–C≡CH: this carbide contains a three-carbon unit and hydrolyses specifically to propyne, unlike the two-carbon acetylide (CaC₂) or one-carbon methanide (Al₄C₃/Be₂C) carbides."
+      },
+      {
+        "cat": "PREPARATION FROM CARBIDES & GRIGNARD",
+        "q": "Treating a Grignard reagent (R–MgX) with water (or any active-hydrogen compound) gives:",
         "options": [
           "The corresponding alkane, R–H",
           "An alcohol, R–OH",
@@ -2359,7 +2899,19 @@
           "An alkene"
         ],
         "correct": 0,
-        "expl": "The polarized, basic C–Mg bond is protonated by even a weak acid like water, quenching it to R–H + Mg(OH)X — which is why Grignard reactions must be kept rigorously moisture-free until this step is wanted."
+        "expl": "The polarized, basic C–Mg bond is protonated by even a weak acid like water, quenching it to R–H + Mg(OH)X — which is why Grignard reactions must be kept rigorously moisture-free until this quenching step is actually wanted."
+      },
+      {
+        "cat": "PREPARATION FROM CARBIDES & GRIGNARD",
+        "q": "Among Al₄C₃, CaC₂, Be₂C, and Mg₂C₃, the carbides that give methane (rather than an alkyne) on hydrolysis are:",
+        "options": [
+          "Al₄C₃ and Be₂C only",
+          "CaC₂ and Mg₂C₃ only",
+          "All four give methane",
+          "None of them give methane"
+        ],
+        "correct": 0,
+        "expl": "Al₄C₃ and Be₂C are both \"methanides\" (isolated C⁴⁻ centres) and hydrolyse to methane, while CaC₂ (an acetylide, C₂²⁻) gives acetylene and Mg₂C₃ (an allylenide, C₃⁴⁻) gives propyne — the carbide's structure, not just \"any carbide,\" determines the hydrolysis product."
       },
       {
         "cat": "PHYSICAL PROPERTIES",
@@ -2422,6 +2974,18 @@
         "expl": "Even-carbon chains pack more symmetrically into the crystal lattice than odd-chain ones of similar length, giving them a modestly higher melting point and producing the characteristic zig-zag (odd-even) trend."
       },
       {
+        "cat": "PHYSICAL PROPERTIES",
+        "q": "The intermolecular forces responsible for holding pure liquid/solid alkanes together are exclusively:",
+        "options": [
+          "Van der Waals (London dispersion) forces",
+          "Hydrogen bonds",
+          "Dipole–dipole forces",
+          "Ionic bonds"
+        ],
+        "correct": 0,
+        "expl": "With no polar bonds or lone pairs available for hydrogen bonding or significant dipole–dipole interaction, only weak, universal London dispersion forces hold alkane molecules to one another — which is also why their boiling points are relatively low for their molecular size."
+      },
+      {
         "cat": "FREE RADICAL HALOGENATION",
         "q": "The three mechanistic steps of free-radical halogenation of an alkane, in the correct order, are:",
         "options": [
@@ -2482,6 +3046,18 @@
         "expl": "Because H-abstraction by Br• is endothermic, its transition state resembles the product radical more closely (Hammond postulate), making bromination far more sensitive to radical stability and hence much more selective for tertiary over primary C–H bonds than chlorination."
       },
       {
+        "cat": "FREE RADICAL HALOGENATION",
+        "q": "Which termination step is possible in the radical chlorination of methane?",
+        "options": [
+          "Cl• + Cl• → Cl₂, or CH₃• + CH₃• → CHゃ–CHゃ, or CH₃• + Cl• → CH₃Cl",
+          "Only Cl• + Cl• → Cl₂ is possible",
+          "Only CH₃• + Cl• → CH₃Cl is possible",
+          "Termination cannot occur once the chain has started"
+        ],
+        "correct": 0,
+        "expl": "Termination consumes radicals without producing more, and any two radicals present in solution can combine — giving Cl₂ back, a small amount of ethane as a side-product, or CH₃Cl directly."
+      },
+      {
         "cat": "COMBUSTION, OXIDATION & CRACKING",
         "q": "Complete combustion of an alkane in excess oxygen produces:",
         "options": [
@@ -2527,7 +3103,7 @@
           "The Wurtz reaction"
         ],
         "correct": 0,
-        "expl": "This cyclization-plus-dehydrogenation converts a straight-chain C₆ (or higher) alkane into an aromatic ring, and is used industrially to raise the octane number of petrol."
+        "expl": "This cyclization-plus-dehydrogenation converts a straight-chain C₆ (or higher) alkane into an aromatic ring, <svg viewBox=\"0 0 120 110\" width=\"22\" height=\"20\" style=\"vertical-align:middle;margin:0 3px;\"><polygon points=\"60,13 96,34 96,76 60,97 24,76 24,34\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"7\"/><circle cx=\"60\" cy=\"55\" r=\"24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"5\"/></svg> benzene, and is used industrially to raise the octane number of petrol."
       },
       {
         "cat": "COMBUSTION, OXIDATION & CRACKING",
@@ -2540,6 +3116,18 @@
         ],
         "correct": 0,
         "expl": "Isomerization rearranges a straight-chain alkane into a more branched isomer without changing the molecular formula, which raises the octane rating of the fuel."
+      },
+      {
+        "cat": "COMBUSTION, OXIDATION & CRACKING",
+        "q": "Passing a lower alkane/air mixture over a catalyst (e.g. Cu or Mo₂O₃) under controlled temperature and pressure, so that it is only partially oxidized instead of fully combusted, can give:",
+        "options": [
+          "Alcohols, aldehydes, or carboxylic acids depending on conditions",
+          "Exclusively CO₂ and H₂O, same as combustion",
+          "Only elemental carbon",
+          "Only unreacted starting alkane"
+        ],
+        "correct": 0,
+        "expl": "Controlled catalytic oxidation deliberately stops short of full combustion, giving industrially useful oxygenated products (alcohols/aldehydes/acids) from cheap alkane feedstocks instead of just heat."
       },
       {
         "cat": "CONFORMATIONS (ETHANE)",
@@ -2600,15 +3188,33 @@
         ],
         "correct": 0,
         "expl": "Looking straight down the C–C bond, front-atom bonds are drawn radiating from a central point and back-atom bonds radiate from the edge of a circle behind it, making the dihedral (torsional) angle between them easy to read off."
+      },
+      {
+        "cat": "CONFORMATIONS (ETHANE)",
+        "q": "Because ethane rotates freely between conformations at room temperature and they interconvert far faster than they can be separated, staggered and eclipsed ethane are best described as:",
+        "options": [
+          "The same compound in different conformations, not different compounds",
+          "Two different constitutional isomers",
+          "Two different configurational (cis/trans) isomers",
+          "Enantiomers of each other"
+        ],
+        "correct": 0,
+        "expl": "Since no bond is broken during the interconversion and the energy barrier is easily crossed at room temperature, staggered and eclipsed ethane are simply different snapshots of one and the same molecule, not separate compounds."
       }
     ],
     "catColors": {
       "NOMENCLATURE & CLASSIFICATION": "#38bdf8",
       "ISOMERISM": "#a78bfa",
-      "PREPARATION METHODS": "#fbbf24",
+      "WURTZ REACTION & COUPLING METHODS": "#fbbf24",
+      "COREY-HOUSE SYNTHESIS & ORGANOCUPRATES": "#eab308",
+      "DECARBOXYLATION & KOLBE ELECTROLYSIS": "#f97316",
+      "CATALYTIC HYDROGENATION": "#4ade80",
+      "PARTIAL REDUCTION & DIIMIDE": "#2dd4bf",
+      "CARBONYL-TO-ALKANE REDUCTIONS": "#c084fc",
+      "PREPARATION FROM CARBIDES & GRIGNARD": "#facc15",
       "PHYSICAL PROPERTIES": "#f472b6",
       "FREE RADICAL HALOGENATION": "#fb923c",
-      "COMBUSTION, OXIDATION & CRACKING": "#4ade80",
+      "COMBUSTION, OXIDATION & CRACKING": "#84cc16",
       "CONFORMATIONS (ETHANE)": "#22d3ee"
     }
   }

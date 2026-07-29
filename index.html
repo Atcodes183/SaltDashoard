@@ -542,7 +542,7 @@ body{ padding:28px 16px 60px; }
       <div class="section-card wide" id="cardHydrocarbons">
         <div class="icon" style="background:rgba(251,146,60,0.12); color:#fb923c;">⛓</div>
         <h3>Hydrocarbons</h3>
-        <p>Alkanes — nomenclature, isomerism, preparation methods, physical properties, free-radical halogenation, combustion/cracking, and ethane conformations.</p>
+        <p>Alkanes — nomenclature, isomerism, Wurtz/Corey-House/Kolbe preparation methods, catalytic & partial hydrogenation, named reductions, carbide chemistry, physical properties, halogenation, combustion/cracking, and ethane conformations.</p>
         <div class="meta">→ open chapter</div>
       </div>
     </div>
@@ -600,7 +600,7 @@ body{ padding:28px 16px 60px; }
       <div class="section-card" id="cardAlkane">
         <div class="icon" style="background:rgba(251,146,60,0.12); color:#fb923c;">⛓</div>
         <h3>Alkane</h3>
-        <p>Nomenclature &amp; classification, isomerism, preparation methods, physical properties, free-radical halogenation, combustion/oxidation/cracking, and ethane conformations.</p>
+        <p>Nomenclature &amp; isomerism, Wurtz-family couplings, Corey-House synthesis, decarboxylation &amp; Kolbe electrolysis, catalytic &amp; partial hydrogenation, named carbonyl reductions, carbide chemistry, physical properties, halogenation, combustion/cracking, and ethane conformations.</p>
         <div class="meta">→ <span id="alkaneCount">0</span> questions</div>
       </div>
       <div class="section-card wide" id="cardHistoryHydro">
@@ -997,6 +997,9 @@ const SECTION_CHAPTER = { anion:'salt', prelim:'salt', alkane:'hydro' };
 // by Vikrant Kumar (VCH Sir). Keyed by section -> category name,
 // matching the category names already used in questions.json.
 // ============================================================
+// Small inline benzene-ring glyph, reused wherever a note mentions benzene as a product
+const BENZENE_SVG = `<svg viewBox="0 0 120 110" width="30" height="27" style="vertical-align:middle;margin:0 4px -4px 4px;"><polygon points="60,13 96,34 96,76 60,97 24,76 24,34" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="60" cy="55" r="24" fill="none" stroke="currentColor" stroke-width="5"/></svg>`;
+
 const STUDY_NOTES = {
 
 anion: {
@@ -1434,14 +1437,115 @@ alkane: {
 <p>Degree of unsaturation (DoU) for CₙH₂ₙ₊₂ works out to (2n+2 − 2n)/2 = 0 for every n, which is exactly what "saturated, acyclic" means — confirmation that no amount of branching can introduce a ring or multiple bond.</p>
 `,
 
-'PREPARATION METHODS': `
-<p><b>Hydrogenation of unsaturated hydrocarbons:</b> alkenes/alkynes + H₂ over a finely divided Pt/Pd/Ni catalyst (Sabatier–Senderens reaction) add hydrogen across the multiple bond to give the corresponding alkane.</p>
-<p><b>Wurtz reaction:</b> 2 R–X + 2Na (dry ethereal solution) → R–R + 2NaX, going through free alkyl radicals. Works best for making a <i>symmetrical</i> alkane from one halide; using two different halides R–X and R'–X gives a statistical mixture of R–R, R'–R', and R–R', so it's a poor choice for a clean unsymmetrical product. Tertiary halides give poor yields because elimination (to alkene) competes with coupling.</p>
-<p><b>Wurtz–Fittig reaction:</b> an aryl halide + an alkyl halide + Na in dry ether gives an alkylbenzene (Ar–R), extending the same radical-coupling idea to aromatic substrates.</p>
-<p><b>Kolbe's electrolytic method:</b> electrolysis of a concentrated aqueous solution of the sodium/potassium salt of a carboxylic acid. At the anode, 2RCOO⁻ loses electrons and decarboxylates: 2RCOO⁻ → 2RCOO• → 2R• + 2CO₂, and the R• radicals combine to R–R; H₂ is liberated at the cathode.</p>
-<p><b>Decarboxylation (soda-lime reaction):</b> sodium/potassium salt of a carboxylic acid heated with soda-lime (NaOH + CaO, the CaO simply prevents the NaOH from corroding the glass) gives the alkane with one fewer carbon: R–COONa + NaOH →(CaO, Δ)→ R–H + Na₂CO₃.</p>
-<p><b>From Grignard reagents:</b> RMgX (made from RX + Mg in dry ether) reacts with water or any active-hydrogen compound (alcohols, amines) by simple protonolysis of the polarized, basic C–Mg bond: RMgX + H₂O → R–H + Mg(OH)X. This is why Grignard reactions must stay moisture-free until this quenching step is actually wanted.</p>
-<p><b>Corey–House synthesis:</b> the most reliable route to an <i>unsymmetrical</i> alkane. An alkyl halide is first converted to a lithium dialkylcuprate ("Gilman reagent," R₂CuLi, via R–Li then + CuI); reacting this with a different alkyl halide R'–X selectively gives R–R', avoiding the statistical-mixture problem of Wurtz/Kolbe.</p>
+'WURTZ REACTION & COUPLING METHODS': `
+<p><b>Wurtz reaction:</b> 2 R–X + 2Na (dry ethereal solution) → R–R + 2NaX. Works best for making a <i>symmetrical</i> alkane from a single halide; using two different halides R–X and R'–X gives an unavoidable statistical mixture of R–R, R'–R', and R–R', so it's a poor choice for a clean unsymmetrical product.</p>
+<p><b>Two mechanisms are proposed</b> for the Wurtz coupling:</p>
+<table>
+<tr><th>Mechanism</th><th>Pathway</th></tr>
+<tr><td>Free-radical (default/most accepted)</td><td>R–X + Na → R• + NaX (single electron transfer), then R• + R• → R–R</td></tr>
+<tr><td>Ionic / Sɴ2 (alternative, suggested by default for some substrates)</td><td>R–X + 2Na → R⁻Na⁺ + NaX (carbanion forms first), then R⁻ attacks a second R–X in an Sɴ2 step to displace X⁻</td></tr>
+</table>
+<p><b>Reactivity of alkyl halides in Wurtz coupling</b> (for a given alkyl group): <b>R–I > R–Br > R–Cl > R–F</b> — a weaker C–X bond reacts faster, and R–F essentially doesn't react. When a milder metal is used (weaker reducing agent than Na, e.g. Zn or Sn), the medium usually needs to be made acidic (e.g. Zn/CH₃COOH or Sn/HCl) to drive the reaction.</p>
+<p>Since Wurtz forms a new C–C bond by joining two existing alkyl groups, the smallest alkane it can make is <b>ethane</b> (from CH₃–X + CH₃–X); it is fundamentally appropriate only for building <b>symmetrical</b> alkanes.</p>
+<p><b>Intramolecular Wurtz coupling</b> (cyclization) is faster than the corresponding intermolecular coupling. A dihalide can cyclize onto itself if this forms a 3- to 6-membered ring; if the resulting ring would need more than 6 carbons, intermolecular coupling dominates instead and the compound polymerizes.</p>
+<p><b>Frankland reaction:</b> exactly the Wurtz mechanism, but with <b>Zn dust (in THF)</b> in place of sodium: 2R–X + Zn → R–R + ZnX₂.</p>
+<p><b>Wurtz–Fittig reaction:</b> couples an <i>aryl</i> halide with an <i>alkyl</i> halide using Na in dry ether, giving an alkylbenzene: 2Na + R–X + X–C₆H₅ → R–C₆H₅ + 2NaX.</p>
+<p><b>Fittig reaction:</b> couples two molecules of an <i>aryl</i> halide with Na in dry ether, giving a biaryl: 2 C₆H₅–X + 2Na → C₆H₅–C₆H₅ + 2NaX.</p>
+<p><b>Ullmann reaction (Ullmann coupling):</b> couples two aryl halides using copper metal — <i>not</i> a free-radical mechanism. Mechanism: Ar–X + Cu →(oxidative addition)→ Ar–Cu–X; this reacts with a second Ar–X →(oxidative addition)→ an Ar–Cu(X)–Ar intermediate, which then →(reductive elimination)→ Ar–Ar + CuX₂ (regenerating Cu/CuX to continue the cycle).</p>
+`,
+
+'COREY-HOUSE SYNTHESIS & ORGANOCUPRATES': `
+<p>The most reliable way to build an <b>unsymmetrical</b> alkane R–R' cleanly (avoiding the statistical-mixture problem of Wurtz/Kolbe) is the <b>Corey–House synthesis</b>, which reacts a lithium dialkylcuprate with a different alkyl halide.</p>
+<p><b>Preparing the reagent — organocuprates (Gilman reagents):</b></p>
+<p style="text-align:center">R–X —(Li, ether)→ R–Li —(CuI, THF)→ R₂CuLi + LiI</p>
+<p>The step R–Li + CuI → R₂CuLi is an example of <b>transmetallation</b>: when an organometallic compound is added to a halide of a <i>more electronegative</i> metal, the alkyl group transfers to the more electronegative (and hence less reactive/more stable C–metal bond) metal. Approximate electronegativities: Li ≈ 1.0, Mg ≈ 1.2, Cd ≈ 1.5, Cu ≈ 1.9, C ≈ 2.5 — so an alkyl group on Li readily transfers onto Cu (closer to carbon's own electronegativity, giving a more covalent, less reactive C–Cu bond), and similarly a Grignard reagent (RMgCl) transmetallates onto CdCl₂ to give the less-reactive R₂Cd (diethylcadmium-type reagents).</p>
+<p><b>The coupling step:</b> R₂CuLi + R'–X → R–R' + RCu + LiX. The alkyl group on copper is strongly carbanionic/nucleophilic and displaces the halide by back-side attack, so this step follows an <b>Sɴ2 mechanism</b>: R'–X can be methyl, primary, or (sometimes) secondary, but <b>tertiary halides fail</b> (elimination dominates instead, since Sɴ2 is blocked at a 3° centre).</p>
+<p><b>Why Corey–House beats Wurtz/Kolbe for unsymmetrical alkanes:</b> two different alkyl groups can be used — one built into the cuprate, the other supplied as a separate alkyl halide — with only <i>one</i> clean product, R–R'.</p>
+<p><b>Reaction with vinylic and aryl halides:</b> unlike Grignard/organolithium reagents (which cannot do Sɴ2/Sɴ1 chemistry on sp² C–X bonds), organocuprates <i>can</i> react with vinylic and aryl halides to install an alkyl group on a double bond or a benzene ring — and this substitution is <b>stereospecific</b>: the configuration of the starting alkene (cis or trans) is exactly retained in the alkene product.</p>
+<p><b>Reaction with other functional groups:</b> organocuprates react selectively with an acid (acyl) halide, replacing only the halide with an R group to directly give a <b>ketone</b>, while leaving the carbonyl itself untouched — a good example of the reagent's mild, chemoselective character.</p>
+`,
+
+'DECARBOXYLATION & KOLBE ELECTROLYSIS': `
+<p><b>Decarboxylation (soda-lime reaction):</b> heating the sodium/potassium salt of a carboxylic acid with soda-lime removes –COONa as Na₂CO₃, leaving the alkane with one fewer carbon:</p>
+<p style="text-align:center">R–COONa + NaOH —(CaO, Δ)→ R–H + Na₂CO₃</p>
+<p><b>Mechanism:</b> proceeds through acid–base chemistry followed by C–C bond cleavage — the carboxylate is deprotonated/rearranged so that the C–C(=O)O⁻ bond breaks heterolytically, generating a <b>carbanion R⁻</b> plus CO₂ (as carbonate after reacting with the base). Formation of this carbanion is the <b>slowest step (rate-determining step)</b>, so anything that stabilizes the carbanion speeds up the whole reaction.</p>
+<p><b>Purpose of using soda-lime (NaOH + CaO, 3:1) instead of pure NaOH:</b> CaO itself does <i>no</i> chemistry here — pure solid NaOH is difficult to handle (highly hygroscopic, absorbs atmospheric water and CO₂, and becomes a corrosive puddle if left exposed, and is costlier). Soda-lime is easier and cheaper to handle, and the CaO component still absorbs CO₂ and moisture from the air like NaOH does — a purely practical, not chemical, reason.</p>
+<p><b>Reactivity trend:</b> since the RDS generates a carbanion, decarboxylation is <i>faster</i> when that carbanion is <i>more stable</i> — e.g. carbanions stabilized by nearby electron-withdrawing groups (–NO₂, halogens) or by resonance/aromatic delocalization decarboxylate more readily than simple alkyl carbanions.</p>
+<p><b>Special case — β-keto/EWG acids:</b> if a strong electron-withdrawing group sits at the β-position to –COOH (as in β-keto acids), the developing carbanion/enolate is stabilized enough that decarboxylation happens on simple heating <i>alone</i>, without needing soda-lime at all.</p>
+<p><b>Worked example:</b> C₆H₅COONa + NaOH —(CaO, Δ)→ ${BENZENE_SVG} + Na₂CO₃ — decarboxylating sodium benzoate gives plain benzene.</p>
+<p><b>Kolbe's electrolytic method:</b> electrolysis of a concentrated aqueous solution of the sodium/potassium salt of a carboxylic acid gives a symmetrical alkane. This reaction is <b>ionic overall but proceeds through free radicals</b> at the anode:</p>
+<table>
+<tr><th>Electrode</th><th>Reaction</th></tr>
+<tr><td>Anode (oxidation)</td><td>2RCOO⁻ → 2RCOO• (lose e⁻) → 2R• + 2CO₂ (lose CO₂) → R–R (radicals couple)</td></tr>
+<tr><td>Cathode (reduction)</td><td>2Na⁺ + 2e⁻ + 2H₂O → 2NaOH + H₂↑</td></tr>
+</table>
+<p><b>Note:</b> since Kolbe couples two identical R groups from one starting acid, like Wurtz, the major product is always a <b>symmetrical</b> alkane; the pH of the solution rises as the reaction proceeds (NaOH accumulates at the cathode).</p>
+`,
+
+'CATALYTIC HYDROGENATION': `
+<p>Hydrogenation of an alkene or alkyne (H₂ over finely divided Pt, Pd, or Ni) to give an alkane is <b>exothermic</b> (ΔH < 0) — the new C–H and C–C σ-bonds formed release more energy than is needed to break the H–H bond and the π-bond(s).</p>
+<p><b>Purpose/role of the catalyst:</b> Ni, Pd, and Pt act as <b>surface catalysts</b> — both H₂ and the unsaturated substrate are adsorbed onto the metal's active sites, which lowers the activation energy of the reaction and holds the molecule in place so that both H atoms are delivered to the <i>same face</i> — i.e., catalytic hydrogenation is a <b>syn (cis) addition</b>.</p>
+<p><b>Raney nickel</b> is prepared from a Ni–Al alloy treated with concentrated NaOH, which dissolves out the aluminium as soluble sodium aluminate, leaving behind a highly porous, spongy nickel of very large surface area — this makes it a substantially faster hydrogenation catalyst than ordinary Ni/H₂, because activation energy drops further and more active sites are available per gram of metal.</p>
+<p><b>Stereochemistry of syn addition</b> (when the alkene creates two new, similar potential stereocentres with no other pre-existing chiral centre in the molecule):</p>
+<table>
+<tr><th>Starting alkene</th><th>Addition</th><th>Product</th></tr>
+<tr><td>cis-alkene</td><td>syn addition</td><td>meso compound (achiral, has an internal mirror plane)</td></tr>
+<tr><td>trans-alkene</td><td>syn addition</td><td>racemic pair of enantiomers</td></tr>
+</table>
+<p>(A related, complementary way the same idea is phrased: a cis-alkene undergoing syn addition gives the <i>erythro</i> diastereomer, while a trans-alkene undergoing syn addition gives the <i>threo</i> diastereomer, when the two new substituents are similar-but-not-identical.)</p>
+<p><b>Ease/rate of catalytic hydrogenation:</b> rate ∝ 1 / (steric crowding around the multiple bond) — a terminal, unhindered double/triple bond hydrogenates fastest; more substituted or internal alkenes/alkynes react slower because they adsorb less easily onto the flat catalyst surface. Raney nickel gives a faster rate than plain Ni/H₂ for the same substrate.</p>
+<p><b>Order of reactivity of different functional groups towards H₂/Pd</b> (lower temperature needed = reacts first/more easily): acid halide (–COX) > C≡C > C=C (all react around 25–30°C) > C=O > C≡N > –NO₂ (30–50°C) > R–X (50–100°C) > benzene ring (100–150°C) > ester, R–CO–O–R' (250–300°C, hardest to reduce).</p>
+<p><b>Homogeneous vs heterogeneous catalysts:</b></p>
+<table>
+<tr><th>Homogeneous (dissolved in the reaction medium)</th><th>Heterogeneous (solid surface catalyst)</th></tr>
+<tr><td>H₂/Rh, H₂/Ir</td><td>H₂/Ni, Raney nickel (Ni–H)</td></tr>
+<tr><td>H₂/[Rh(PPh₃)₃Cl] — Wilkinson's catalyst, chloridotris(triphenylphosphine)rhodium(I), a red-brown solid</td><td>H₂/Pt, H₂/Pd, H₂/Pd–C (charcoal), H₂/PtO₂ (Adams' catalyst)</td></tr>
+</table>
+`,
+
+'PARTIAL REDUCTION & DIIMIDE': `
+<p>Reducing an alkyne all the way to an alkyne's <i>alkene</i> stage (without going further to the alkane) needs a catalyst that is deliberately made less active, or a fundamentally different (non-surface) mechanism:</p>
+<table>
+<tr><th>Method</th><th>Catalyst / reagent</th><th>Addition type</th><th>Product (if geometrical isomerism possible)</th></tr>
+<tr><td>Lindlar's catalyst</td><td>Pd deposited on CaCO₃ or BaSO₄, poisoned with a lead salt (e.g. Pb(CH₃COO)₂) or quinoline — the poison lowers the catalyst's activity just enough to stop it at the alkene stage</td><td>Syn addition (catalyst surface)</td><td><b>cis</b>-alkene (major)</td></tr>
+<tr><td>Nickel boride, Ni₂B ("P-2" catalyst)</td><td>Milder alternative to Lindlar's catalyst</td><td>Syn addition (catalyst surface)</td><td><b>cis</b>-alkene (major)</td></tr>
+<tr><td>Na or Li in liquid NH₃ / ROH</td><td>Dissolving-metal (Birch-type) reduction</td><td>Anti addition (stepwise electron-transfer mechanism, not a surface)</td><td><b>trans</b>-alkene (major)</td></tr>
+</table>
+<p><b>Mechanism of the Na/liquid-NH₃ reduction:</b> alkyne + e⁻ → radical anion → protonation (by NH₃) → vinyl radical + e⁻ → vinyl anion → protonation (by NH₃) → alkene. The more stable, less sterically hindered vinyl radical/vinyl anion intermediate forms preferentially, which is why the more stable <b>trans</b>-alkene ends up as the major product (with some cis as the minor product).</p>
+<p><b>Birch reduction of aromatic rings</b> (Na/Li in liquid NH₃/ROH) reduces benzene to a 1,4-cyclohexadiene, and the regiochemistry depends on the ring substituent: an electron-donating group (EDG) ends up on an <i>unreduced</i> (still sp², still part of a C=C) carbon of the diene product, while an electron-withdrawing group (EWG) ends up on a carbon that <i>is</i> reduced (becomes sp³) in the product.</p>
+<p><b>Diimide (HN=NH) reduction — a metal-free alternative:</b> diimide is generated in situ (e.g. N₂H₄ + H₂O₂, or N₂H₄ + O₂/hν, both mild oxidants) and is short-lived — if it doesn't react immediately with a substrate, it self-destructs by disproportionation back to N₂ + N₂H₄. This short lifetime is exactly why it is <b>selective</b>: it reacts fast with symmetrical/nonpolar multiple bonds (C=C, C≡C, N=N) but essentially never gets the chance to react with the slower, polar C=O or C=N bonds.</p>
+<p><b>Mechanism:</b> diimide approaches the alkene/alkyne through a concerted, six-membered <b>pericyclic transition state</b>; both H atoms are delivered to the same face of the multiple bond (<b>syn addition</b>) as N₂ is expelled — this is formally a type of transfer hydrogenation, since H₂ is never generated as a free, separate molecule.</p>
+`,
+
+'CARBONYL-TO-ALKANE REDUCTIONS': `
+<p>Four classic named methods fully deoxygenate an aldehyde/ketone carbonyl down to a plain CH₂/CH₃ group, chosen according to what other functional groups the rest of the molecule can tolerate:</p>
+<table>
+<tr><th>Method</th><th>Conditions</th><th>Best suited for substrates that are…</th></tr>
+<tr><td>Clemmensen reduction</td><td>Zn–Hg amalgam, conc. HCl, Δ (strongly acidic)</td><td>Acid-tolerant, base-sensitive</td></tr>
+<tr><td>Wolff–Kishner reduction</td><td>NH₂–NH₂ (hydrazine), KOH, ethylene glycol, Δ (strongly basic)</td><td>Base-tolerant, acid-sensitive</td></tr>
+<tr><td>Mozingo reduction</td><td>Ethane-1,2-dithiol/dry HCl (forms a dithioacetal), then Raney Ni (neutral desulfurization)</td><td>Sensitive to <i>both</i> strong acid and strong base</td></tr>
+<tr><td>HI / red phosphorus</td><td>Excess HI, red P as catalyst/HI-regenerator, Δ (very forcing)</td><td>Simple substrates needing exhaustive reduction — this reagent is powerful enough to strip out almost any oxygen/halogen functionality</td></tr>
+</table>
+<p><b>Clemmensen reduction:</b> R–CHO / R–CO–R' + Zn(Hg)/HCl, Δ → R–CH₃ / R–CH₂–R' + ZnCl₂ + H₂O. Mechanism (acidic medium): the carbonyl is protonated, Zn transfers electrons to reduce the resulting carbocation stepwise (Zn → Zn²⁺ + 2e⁻ feeding the substrate), passing through an alcohol-like intermediate before final loss of water gives the fully reduced CH₂/CH₃ group.</p>
+<p><b>Exceptional case — ring contraction:</b> Clemmensen-reducing a 1,3-diketone such as 5,5-dimethylcyclohexane-1,3-dione does <i>not</i> give the expected 1,1-dimethylcyclohexane. Instead, after one carbonyl is protonated/dehydrated, the resulting cationic intermediate undergoes a <b>1,2-alkyl shift</b> (ring contraction) rather than simply completing reduction, and the major product is the ring-contracted methyl ketone <b>2,4,4-trimethylcyclopentanone</b>.</p>
+<p><b>Wolff–Kishner reduction:</b> R–CHO / R–CO–R' + NH₂–NH₂ —(ethylene glycol, KOH, Δ)→ R–CH₃ / R–CH₂–R' + N₂. Mechanism (basic medium): the carbonyl first condenses with hydrazine to form a hydrazone (R₂C=N–NH₂); base then deprotonates it, and a series of proton transfers convert it to a diazo species (R₂C=N=N) which loses N₂ to leave a carbanion, immediately protonated by solvent to give the final CH₂/CH₃ group.</p>
+<p><b>Mozingo reduction:</b> the carbonyl is first converted to a cyclic 1,3-dithiolane using ethane-1,2-dithiol/dry HCl, then this thioacetal is desulfurized with Raney nickel (which carries adsorbed H₂ on its surface), reductively replacing both C–S bonds with C–H bonds. Since neither step needs strongly acidic or strongly basic conditions, this is the fallback method when the substrate can't survive either Clemmensen or Wolff–Kishner.</p>
+<p><b>Reduction by HI/red phosphorus:</b> red phosphorus continually regenerates HI from the I₂ byproduct, keeping a large excess of HI available. R–OH + HI (excess, red P, Δ) → R–I → (further reduced) → R–H; R–Cl/Br/I similarly end up as R–H by halide reduction. Under forcing excess conditions this reagent combination can even carry a ketone/aldehyde all the way to R–CH₂–R'/R–CH₃ (via the alcohol, then the iodide, then reduction of that C–I bond) — an unusually exhaustive reduction compared to the other three methods above.</p>
+`,
+
+'PREPARATION FROM CARBIDES & GRIGNARD': `
+<p>Certain metal carbides react with water in simple non-redox (hydrolysis/disproportionation-type) reactions to directly give small alkanes or alkynes — the identity of the product depends entirely on the structure of the carbide, so these are worth telling apart carefully:</p>
+<table>
+<tr><th>Carbide</th><th>Type</th><th>Hydrolysis reaction</th><th>Product</th></tr>
+<tr><td>Al₄C₃</td><td>Methanide (isolated C⁴⁻ centres)</td><td>Al₄C₃ + 12H₂O → 4Al(OH)₃ + 3CH₄</td><td><b>Methane</b></td></tr>
+<tr><td>Be₂C</td><td>Methanide</td><td>Be₂C + 2H₂O → 2Be(OH)₂ + CH₄</td><td><b>Methane</b></td></tr>
+<tr><td>CaC₂</td><td>Acetylide (C₂²⁻ unit, C≡C)</td><td>CaC₂ + 2H₂O → Ca(OH)₂ + C₂H₂</td><td><b>Acetylene</b> (not an alkane — classic point of confusion)</td></tr>
+<tr><td>Mg₂C₃</td><td>Allylenide (C₃⁴⁻ unit)</td><td>Mg₂C₃ + 4H₂O → 2Mg(OH)₂ + CH₃–C≡CH</td><td><b>Propyne</b> (methylacetylene)</td></tr>
+</table>
+<p>So among these four, only Al₄C₃ and Be₂C ("methanides") give methane; CaC₂ gives acetylene and Mg₂C₃ gives propyne — the specific carbide structure, not just "any metal carbide," determines what comes out on hydrolysis.</p>
+<p><b>From Grignard reagents:</b> R–MgX (prepared from R–X + Mg turnings in dry ether) reacts with water — or any compound with an active/acidic hydrogen, such as an alcohol or amine — by simple protonolysis of the strongly polarized, basic C–Mg bond:</p>
+<p style="text-align:center">R–MgX + H₂O → R–H + Mg(OH)X</p>
+<p>This is why every step of a Grignard synthesis up to this point must be kept rigorously free of moisture (dry ether, dry glassware) — the reagent is quenched by even trace water, so this protonolysis is only wanted as the deliberate final step.</p>
 `,
 
 'PHYSICAL PROPERTIES': `
@@ -1450,6 +1554,7 @@ alkane: {
 <p><b>Melting point (odd–even alternation):</b> alkanes with an even number of carbons pack more symmetrically into a crystal lattice than a neighbouring odd-carbon chain of similar length, giving them a modestly higher melting point — plotting melting point against carbon number gives a characteristic zig-zag rather than a smooth curve.</p>
 <p><b>Solubility:</b> alkanes are nonpolar, so they cannot hydrogen-bond with water and are essentially insoluble in it, but they dissolve readily in nonpolar organic solvents like benzene, CCl₄, or ether ("like dissolves like").</p>
 <p><b>Density:</b> liquid alkanes are less dense than water (typically ≈0.6–0.8 g/mL), so they float on it — the reason an oil/hydrocarbon spill spreads as a surface layer.</p>
+<p><b>Intermolecular forces:</b> with no polar bonds or lone pairs, alkane molecules attract each other purely through weak, universal <b>van der Waals (London dispersion) forces</b> — no hydrogen bonding or significant dipole–dipole interaction is possible, which is why alkanes have relatively low boiling points for their molecular size.</p>
 `,
 
 'FREE RADICAL HALOGENATION': `
@@ -1470,7 +1575,7 @@ alkane: {
 <p><b>Incomplete combustion:</b> with a limited O₂ supply, carbon isn't fully oxidized, giving CO and/or soot (elemental carbon) alongside water instead of CO₂.</p>
 <p><b>Controlled catalytic oxidation:</b> passing a lower alkane/air (or O₂) mixture over a catalyst (e.g. Cu, Mo₂O₃) under controlled temperature and pressure gives partial-oxidation products — alcohols, aldehydes, or carboxylic acids — rather than full combustion; used industrially to make simple oxygenated organics from petroleum gas fractions.</p>
 <p><b>Isomerization:</b> heating a straight-chain (n-) alkane with anhydrous AlCl₃ + a trace of HCl rearranges it into its more branched isomer (e.g. n-butane → isobutane) without changing the molecular formula. Branched alkanes burn more efficiently in an engine (less "knocking"), so isomerization is used to raise the octane number of a fuel fraction.</p>
-<p><b>Aromatization (catalytic reforming):</b> heating an n-alkane of 6 or more carbons over Cr₂O₃/Al₂O₃ or Pt at high temperature and pressure cyclizes and dehydrogenates it into an aromatic ring (e.g. n-hexane → benzene). Also used industrially to raise octane number.</p>
+<p><b>Aromatization (catalytic reforming):</b> heating an n-alkane of 6 or more carbons over Cr₂O₃/Al₂O₃ or Pt at high temperature and pressure cyclizes and dehydrogenates it into an aromatic ring — e.g. n-hexane → ${BENZENE_SVG}. Also used industrially to raise octane number.</p>
 <p><b>Pyrolysis (cracking):</b> heating higher alkanes to around 773 K in the absence of air breaks C–C bonds homolytically (free-radical mechanism), fragmenting them into a mixture of smaller alkanes and alkenes. This is the industrial process that converts heavy petroleum fractions into the lighter fractions (like gasoline) that are in higher demand.</p>
 `,
 
@@ -1482,17 +1587,16 @@ alkane: {
 <tr><td>Staggered</td><td>60°</td><td>More stable (lowest energy) — bonding electron pairs are maximally separated, minimizing torsional (Pitzer) strain</td></tr>
 <tr><td>Eclipsed</td><td>0°</td><td>Less stable (highest energy) — aligned C–H bonds maximize electron-electron repulsion between them</td></tr>
 </table>
-<p>The energy barrier to rotation (staggered → eclipsed) in ethane is small, only about <b>12.5 kJ/mol (≈3 kcal/mol)</b>, arising purely from torsional strain since ethane has no bulky substituents to add steric strain. This barrier is easily crossed by ordinary thermal energy at room temperature, so the molecule rotates freely and rapidly between conformations rather than existing as isolable, fixed forms.</p>
+<p>The energy barrier to rotation (staggered → eclipsed) in ethane is small, only about <b>12.5 kJ/mol (≈3 kcal/mol)</b>, arising purely from torsional strain since ethane has no bulky substituents to add steric strain. This barrier is easily crossed by ordinary thermal energy at room temperature, so the molecule rotates freely and rapidly between conformations rather than existing as isolable, fixed forms — staggered and eclipsed ethane are the same compound in different conformations, not different compounds.</p>
 `
 
 }
-
 };
 
 const SECTION_META = {
   anion:  { title:'Anion Analysis', desc:'Group reagents, confirmatory tests, and color reactions for carbonate, sulphite, thiosulphate, sulphide, nitrite, nitrate, and the halides through sulphate.' },
   prelim: { title:'Preliminary Tests & Cation Groups', desc:'Physical tests, flame test colors, borax bead & microcosmic salt colors, charcoal cavity, cobalt nitrate, dry heat, and the cation group division table.' },
-  alkane: { title:'Alkane', desc:'Nomenclature & classification, isomerism, preparation methods, physical properties, free-radical halogenation, combustion/oxidation/cracking, and ethane conformations.' }
+  alkane: { title:'Alkane', desc:'Nomenclature & isomerism, Wurtz/Corey-House/decarboxylation & Kolbe preparation methods, catalytic & partial hydrogenation, Clemmensen/Wolff-Kishner/Mozingo reductions, carbide chemistry, physical properties, free-radical halogenation, combustion/cracking, and ethane conformations.' }
 };
 let currentSection = null;
 const SECTION_APPS = {}; // sectionKey -> quiz app instance, filled in BOOTSTRAP
