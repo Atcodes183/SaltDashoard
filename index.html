@@ -649,6 +649,12 @@ mark.study-hit{ background:rgba(52,211,153,0.28); color:var(--text); border-radi
         <div class="meta">→ view past results</div>
       </div>
     </div>
+          <div class="section-card" id="cardAlkene_alkyne">
+        <div class="icon" style="background:#a3e6351f; color:#a3e635;">⚡</div>
+        <h3>Alkene & Alkyne</h3>
+        <p>Elimination mechanisms (E1/E2/E1cB), Zaitsev vs Hofmann products, alcohol dehydration, dehalogenation of vicinal dihalides, the Wittig reaction, and alkyne preparation, acidity & isomerization.</p>
+        <div class="meta">→ <span id="alkene_alkyneCount">0</span> questions</div>
+      </div>
     <div class="more-note">More sections (e.g. alkenes, alkynes, aromatic hydrocarbons) can be added here as separate cards.</div>
   </div>
 
@@ -714,6 +720,9 @@ mark.study-hit{ background:rgba(52,211,153,0.28); color:var(--text); border-radi
 
   <!-- ======= ALKANE APP ======= -->
   <div class="app-shell" id="app-alkane" data-title="Alkane"></div>
+
+  <!-- ======= ALKENE & ALKYNE APP ======= -->
+  <div class="app-shell" id="app-alkene_alkyne" data-title="Alkene & Alkyne"></div>
 
   <!-- ======= HISTORY VIEW ======= -->
   <div class="app-shell" id="app-history">
@@ -1071,7 +1080,7 @@ const CHAPTER_META = {
   salt:  { title:'Salt Analysis', open: openSaltAnalysis },
   hydro: { title:'Hydrocarbons',  open: openHydrocarbons }
 };
-const SECTION_CHAPTER = { anion:'salt', prelim:'salt', alkane:'hydro' };
+const SECTION_CHAPTER = { anion:'salt', prelim:'salt', alkane:'hydro' , alkene_alkyne:'hydro' };
 
 // ---- Sub-chapter menu (Study / 30-Min Revision / Flashcards), shared
 // by Anion Analysis and Preliminary Tests via SECTION_META lookup ----
@@ -1673,6 +1682,86 @@ alkane: {
 </table>
 <p>The energy barrier to rotation (staggered → eclipsed) in ethane is small, only about <b>12.5 kJ/mol (≈3 kcal/mol)</b>, arising purely from torsional strain since ethane has no bulky substituents to add steric strain. This barrier is easily crossed by ordinary thermal energy at room temperature, so the molecule rotates freely and rapidly between conformations rather than existing as isolable, fixed forms — staggered and eclipsed ethane are the same compound in different conformations, not different compounds.</p>
 `
+,
+
+'ISOMERIZATION, AROMATIZATION & CONTROLLED OXIDATION': `
+<p><b>Isomerization:</b> lower alkanes (butane or higher) are not isomerized directly at high temperature, but heating an alkane with anhydrous AlCl<sub>3</sub> + HCl (general form AlX<sub>3</sub> + HX; X = Cl, Br, I, or Al<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub>) rearranges it into its more stable, more branched isomer. E.g. n-butane &rarr; isobutane with AlCl<sub>3</sub>/HCl at 400&deg;C. n-Heptane isomerizes to its most stable form, triptane (2,2,3-trimethylbutane, trivial name), and n-octane isomerizes to 2,2,3-trimethylbutane (iso-octane). This reaction is used industrially in petroleum refining to convert unbranched (low octane number) alkanes into branched (higher octane number, better fuel) alkanes.</p>
+<p><b>Aromatization (reforming):</b> n-alkanes with six or more carbons, heated to 773 K at 10&ndash;20 atmospheric pressure over oxides of vanadium, molybdenum, or chromium supported on alumina, get dehydrogenated and cyclized into benzene and its homologues &mdash; converting an aliphatic chain into an aromatic ring. Examples: n-hexane &rarr; benzene; n-heptane &rarr; toluene; n-octane &rarr; a mixture of o-xylene and ethylbenzene.</p>
+<p><b>Reaction with steam (NCERT):</b> methane reacts with steam at 1273 K over a nickel catalyst to give carbon monoxide and dihydrogen: CH<sub>4</sub> + H<sub>2</sub>O &rarr;(Ni/&Delta;) CO + 3H<sub>2</sub>. This is used industrially to prepare dihydrogen gas.</p>
+`,
+
+'REDOX & CYCLOPROPANE ADDITION': `
+<p><b>Redox behaviour:</b> since alkane carbons already sit at their minimum oxidation state, alkanes cannot be reduced further, and they resist oxidation in general (they don't decompose from oxidation by potassium permanganate the way alcohols do) &mdash; with one notable exception: a tertiary C&ndash;H bond has enough electron density (similar in character to alkene/alkyne C&ndash;H) that hot KMnO<sub>4</sub> can oxidize it directly to a tertiary alcohol, e.g. (CH<sub>3</sub>)<sub>3</sub>C&ndash;H + (O) &rarr;(KMnO<sub>4</sub>) (CH<sub>3</sub>)<sub>3</sub>C&ndash;OH (colourless product). KMnO<sub>4</sub> in acidic medium is a stronger oxidizing agent than in basic medium; the reagent used this way is also called Baeyer's reagent.</p>
+<p><b>Controlled oxidation:</b> alkanes heated with a regulated (limited) supply of dioxygen or air at high pressure, in the presence of suitable catalysts, give a variety of useful oxidation products instead of full combustion: 2CH<sub>4</sub> + O<sub>2</sub> &rarr;(Cu/523K/100atm) 2CH<sub>3</sub>OH (methanol); 2CH<sub>3</sub>CH<sub>3</sub> + 3O<sub>2</sub> &rarr;(Mo<sub>2</sub>O<sub>3</sub>/&Delta;) 2CH<sub>3</sub>COOH + 2H<sub>2</sub>O (ethanoic acid).</p>
+<p><b>Addition reactions of cyclopropane:</b> alkanes in general never give addition reactions, but cyclopropane is the one exception &mdash; its angle strain (bond angles compressed to 60&deg; instead of the ideal 109.5&deg;) makes the ring highly reactive, so it undergoes addition (ring-opening) with suitable reagents: Cl<sub>2</sub>/light at room temperature gives the monochlorinated ring-opened product; Cl<sub>2</sub>/FeCl<sub>3</sub> opens the ring at both ends to give the 1,3-dichloropropane; HX opens the ring to give a mono-halopropane; H<sub>2</sub>/Ni at 80&deg;C reduces it straight to propane; and dilute H<sub>2</sub>SO<sub>4</sub> (H<sup>+</sup>) opens the ring to give propan-1-ol.</p>
+`
+
+
+},
+
+alkene_alkyne: {
+'ELIMINATION MECHANISMS: E1, E2 & E1cB': `
+
+<p><b>E2 (dehydrohalogenation of alkyl halide):</b> a single-step, concerted reaction proceeding through an anti-periplanar transition state (α and β carbons, and the leaving group/β-H, must be anti-coplanar). Rate = k[substrate][base], so it is second order (bimolecular) overall, and since it's a single step there is no possibility of rearrangement. E2 needs a strong base and high temperature, and a good leaving group (-Cl, -Br, -I). It also shows a primary kinetic isotope effect (rate H &gt; D &gt; T), and is stereospecific if both the α and β carbons are chiral centres.</p>
+<p><b>E1cB:</b> when the leaving group is poor (e.g. -F) or the β-carbon carries an electron-withdrawing or conjugating leaving group (like -SR<sub>2</sub><sup>+</sup>, -NR<sub>3</sub><sup>+</sup>), the mechanism instead goes through E1cB &mdash; deprotonation of the β-H forms a carbanion first (stabilized by the EWG/conjugation), and loss of the leaving group follows. Weak bases like PhO<sup>-</sup>K<sup>+</sup>, CH<sub>3</sub>COO<sup>-</sup>Na<sup>+</sup>, H<sub>2</sub>O, or CH<sub>3</sub>OH with heat favour this path for R-F.</p>
+
+`,
+
+'ZAITSEV vs HOFMANN PRODUCT': `
+
+<p><b>Zaitsev (Saytzeff) rule:</b> if the substrate is unsymmetrical, having two or more different types of β-H, and the base used is not sterically crowded, the more substituted (more stable) alkene is the major product &mdash; this is the standard outcome for ordinary E2.</p>
+<p><b>Hofmann product:</b> if the base is sterically crowded (bulky), it removes the β-H that's least hindered/most accessible, giving the less-substituted alkene as the major product instead &mdash; this is referred to as the anti-Zaitsev or Hofmann product. Bulky bases like sodium/potassium tert-butoxide and LDA (lithium diisopropylamide) favour Hofmann elimination, as does NaNH<sub>2</sub> and alcoholic KOH with heat under certain substrates.</p>
+<p><b>Exception — conjugation wins:</b> if the β-carbon is attached to a phenyl or vinyl group, the resulting conjugated (more stable) alkene becomes the major product regardless of the base used (i.e. the Zaitsev-type conjugated product still dominates even with a bulky base).</p>
+
+`,
+
+'DEHYDRATION OF ALCOHOLS': `
+
+<p><b>Mechanism:</b> H<sub>2</sub>SO<sub>4</sub> plays three roles at once in alcohol dehydration &mdash; catalyst, acid, and dehydrating agent (H<sub>3</sub>PO<sub>4</sub> or KHSO<sub>4</sub> can substitute for it). The reaction is favoured by high temperature. Since the rate-determining step involves carbocation formation, the possibility of rearrangement (hydride/alkyl shift, or ring expansion/contraction) must always be considered.</p>
+<p><b>Reactivity order:</b> 3&deg; ROH &gt; 2&deg; ROH &gt; 1&deg; ROH &mdash; reactivity decreases as substitution on the carbon bearing -OH decreases, since more substituted carbocations are more stable. Required temperature ranges: 1&deg; alcohols need 170&ndash;180&deg;C; 2&deg; alcohols need 100&ndash;140&deg;C; 3&deg; alcohols need only 25&ndash;80&deg;C.</p>
+<p><b>Protonic (oxy) acids vs Lewis acids:</b> in the presence of a protonic acid, dehydration proceeds by the E1 mechanism, and the rate follows 3&deg;ROH &gt; 2&deg;ROH &gt; 1&deg;ROH. In the presence of a Lewis acid (P<sub>2</sub>O<sub>5</sub>, Al<sub>2</sub>O<sub>3</sub>, ThO<sub>2</sub>, or POCl<sub>3</sub>), dehydration instead proceeds through the E2 mechanism.</p>
+<p><b>1&deg; alcohols without a usable β-H</b> (or with a sterically crowded one) undergo dehydration through a Hofmann-type elimination mechanism instead of the usual E1 route.</p>
+
+`,
+
+'DEHALOGENATION OF VICINAL DIHALIDES': `
+
+<p>Vicinal dihalides (halogens on adjacent carbons) can be reduced back to the alkene by removing both halogens:</p>
+<table>
+<tr><th>Reagent</th><th>Byproduct</th></tr>
+<tr><td>Zn / AcOH</td><td>ZnX<sub>2</sub></td></tr>
+<tr><td>Mg / Et<sub>2</sub>O</td><td>MgX<sub>2</sub></td></tr>
+<tr><td>NaI / acetone</td><td>IBr (or I<sub>2</sub>) + NaBr</td></tr>
+</table>
+<p><b>Mechanism (Zn or Mg):</b> the metal donates two electrons (Zn &rarr; Zn<sup>2+</sup> + 2e<sup>-</sup>), which are used to expel both halide ions from the adjacent carbons in one concerted step, forming the alkene directly.</p>
+<p><b>Mechanism (NaI/acetone):</b> iodide first displaces one halide (SN2-like) to give a mixed dihalide intermediate, which then eliminates the second halide together with the newly installed iodide to form the alkene, releasing IBr (or I<sub>2</sub>) and NaBr. The reaction is driven forward because NaBr (or KBr) precipitates out of solution in acetone, pulling the equilibrium toward completion &mdash; the same driving force used in the Finkelstein reaction.</p>
+<p>All of these dehalogenation eliminations proceed through an anti-coplanar transition state, just like E2.</p>
+
+`,
+
+'WITTIG REACTION & YLIDES': `
+
+<p><b>Ylide:</b> a compound bearing formal positive and negative charges on adjacent atoms, with an overall neutral charge. Three common types: sulfur ylide, nitrogen ylide, and phosphorus ylide (also written as R<sub>3</sub>P=CHR', the most important one for alkene synthesis).</p>
+<p><b>Wittig reaction:</b> an aldehyde or ketone reacts with a phosphorus ylide (R<sub>3</sub>P=CH<sub>2</sub>, generated from a phosphonium salt) to give an alkene plus triphenylphosphine oxide (O=PPh<sub>3</sub>) as the byproduct: R<sub>2</sub>C=O + Ph<sub>3</sub>P=CH<sub>2</sub> &rarr; R<sub>2</sub>C=CH<sub>2</sub> + O=PPh<sub>3</sub>. This is a key method for converting a carbonyl group directly into a C=C double bond at a defined position, without the ambiguity of an elimination reaction.</p>
+
+`,
+
+'ALKYNE PREPARATION': `
+
+<p><b>From vicinal dihalides (via vinyl halide):</b> alcoholic KOH removes one HX from a vicinal (or geminal) dihalide to give a vinyl halide, which is very unreactive to further elimination under mild conditions (the C-X bond in a vinyl halide is stronger/less reactive). Removing the second HX to reach the alkyne needs a much stronger base under vigorous conditions, typically sodamide (NaNH<sub>2</sub>).</p>
+<p><b>From vicinal tetrahalides/trihalides (dehalogenation):</b> heating with Zn dust removes halogens from adjacent carbons to directly form the triple bond, e.g. a 1,1,2,2-tetrahalide + Zn dust/&Delta; &rarr; alkyne + 2 ZnX<sub>2</sub>. A geminal trihalide (R-CX<sub>3</sub>) with Zn dust similarly gives a terminal alkyne (R-C&equiv;C-H) + ZnX<sub>2</sub>.</p>
+<p><b>Hydrolysis of carbides:</b> CaC<sub>2</sub> (calcium carbide, containing the acetylide C<sub>2</sub><sup>2-</sup> unit) + water &rarr; ethyne (HC&equiv;CH) + Ca(OH)<sub>2</sub> + heat. Mg<sub>2</sub>C<sub>3</sub> (containing a C<sub>3</sub><sup>4-</sup> unit) + water &rarr; propyne (allylene) + Mg(OH)<sub>2</sub> + heat. Methanide-type carbides give methane instead of an alkyne: Al<sub>4</sub>C<sub>3</sub> + water &rarr; 3 CH<sub>4</sub> + 4 Al(OH)<sub>3</sub> + heat; Be<sub>2</sub>C + water &rarr; CH<sub>4</sub> + 2 Be(OH)<sub>2</sub> + heat. The product depends entirely on the carbide's internal structure (acetylide C&equiv;C unit vs isolated carbon), so it's worth telling these apart carefully.</p>
+<p><b>Berthelot's synthesis:</b> carbon and hydrogen combine directly across an electric arc at about 1200&deg;C to give ethyne (2C + H<sub>2</sub> &rarr; HC&equiv;CH).</p>
+
+`,
+
+'ALKYNE ACIDITY, ISOMERIZATION & METAL ACETYLIDES': `
+
+<p><b>Terminal alkyne acidity / metal acetylides:</b> a terminal alkyne's C-H is acidic enough to be displaced by certain metal ions, giving a precipitate: with ammoniacal AgNO<sub>3</sub> ([Ag(NH<sub>3</sub>)<sub>2</sub>]<sup>+</sup>, Tollen's reagent) it gives a white precipitate of the silver acetylide (R-C&equiv;C-Ag); with ammoniacal Cu<sub>2</sub>Cl<sub>2</sub>/CuCl ([Cu(NH<sub>3</sub>)<sub>2</sub>]<sup>+</sup>) it gives a red precipitate of the copper acetylide (R-C&equiv;C-Cu). Internal alkynes give no such precipitate (no terminal C-H to displace), which makes this test diagnostic for terminal alkynes specifically.</p>
+<p><b>Base-catalyzed isomerization:</b> a 1-alkyne treated with alcoholic KOH/&Delta; (a weak/moderate base) isomerizes into the more thermodynamically stable internal 2-alkyne. Conversely, a 2-alkyne (or any internal alkyne) treated with a strong base like NaNH<sub>2</sub> in liquid NH<sub>3</sub> isomerizes into the terminal 1-alkyne &mdash; the strong base deprotonates the terminal-most acidic position to form the acetylide anion, and since the terminal alkyne is continuously removed from equilibrium as its stable acetylide salt, the equilibrium keeps shifting toward the terminal isomer (Le Chatelier's principle) until conversion is essentially complete.</p>
+<p><b>Alkylation of acetylides (building higher alkynes):</b> a terminal alkyne is first converted to its sodium acetylide with Na in liquid NH<sub>3</sub> (2 R-C&equiv;C-H + 2Na &rarr; 2 R-C&equiv;C-Na<sup>+</sup> + H<sub>2</sub>). This acetylide then reacts with a primary alkyl halide via SN2 (R-C&equiv;C-Na<sup>+</sup> + X-R' &rarr; R-C&equiv;C-R' + NaX) to build a higher, unsymmetrical alkyne.</p>
+
+`
 
 }
 };
@@ -1680,7 +1769,8 @@ alkane: {
 const SECTION_META = {
   anion:  { title:'Anion Analysis', desc:'Group reagents, confirmatory tests, and color reactions for carbonate, sulphite, thiosulphate, sulphide, nitrite, nitrate, and the halides through sulphate.' },
   prelim: { title:'Preliminary Tests & Cation Groups', desc:'Physical tests, flame test colors, borax bead & microcosmic salt colors, charcoal cavity, cobalt nitrate, dry heat, and the cation group division table.' },
-  alkane: { title:'Alkane', desc:'Nomenclature & isomerism, Wurtz/Corey-House/decarboxylation & Kolbe preparation methods, catalytic & partial hydrogenation, Clemmensen/Wolff-Kishner/Mozingo reductions, carbide chemistry, physical properties, free-radical halogenation, combustion/cracking, and ethane conformations.' }
+  alkane: { title:'Alkane', desc:'Nomenclature & isomerism, Wurtz/Corey-House/decarboxylation & Kolbe preparation methods, catalytic & partial hydrogenation, Clemmensen/Wolff-Kishner/Mozingo reductions, carbide chemistry, physical properties, free-radical halogenation, combustion/cracking, and ethane conformations.' },
+  alkene_alkyne: { title:'Alkene & Alkyne', desc:'Elimination mechanisms (E1/E2/E1cB), Zaitsev vs Hofmann products, alcohol dehydration, dehalogenation of vicinal dihalides, the Wittig reaction, and alkyne preparation, acidity & isomerization.' }
 };
 let currentSection = null;
 const SECTION_APPS = {}; // sectionKey -> quiz app instance, filled in BOOTSTRAP
@@ -2517,6 +2607,11 @@ fetch('./questions.json')
     document.getElementById('cardAnion').addEventListener('click', ()=> openSubmenu('anion'));
     document.getElementById('cardPrelim').addEventListener('click', ()=> openSubmenu('prelim'));
     document.getElementById('cardAlkane').addEventListener('click', ()=> openSubmenu('alkane'));
+
+    const alkene_alkyneApp = initQuizApp('app-alkene_alkyne', data.alkene_alkyne.questions, data.alkene_alkyne.catColors, 'Alkene & Alkyne', 'alkene_alkyne');
+    SECTION_APPS.alkene_alkyne = alkene_alkyneApp;
+    document.getElementById('alkene_alkyneCount').textContent = data.alkene_alkyne.questions.length;
+    document.getElementById('cardAlkene_alkyne').addEventListener('click', ()=> openSubmenu('alkene_alkyne'));
   })
   .catch(err => {
     console.error('Failed to load questions.json', err);

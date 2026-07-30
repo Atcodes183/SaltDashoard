@@ -134,3 +134,47 @@ The quiz-bank facts shown further down each Study category (and all of
 30-Min Revision) are generated purely from `questions.json`'s `q` /
 `options[correct]` / `expl` fields, so any question you add there
 automatically appears in Flashcards, Study, and Revision.
+
+## Quick-add mode (new topic from a notes PDF)
+
+`add_topic.py` adds a whole new section (nav card, Study notes, catColors,
+questions, and every wiring point) to an **existing chapter** (`salt` or
+`hydro`) in one pass, so a new topic doesn't need a hand edit across
+`index.html` every time.
+
+Workflow: send Claude the notes PDF and say "quick add this." Claude
+extracts the notes as text (cheap — no page rasterization needed for
+plain text notes), builds a small spec JSON (categories, catColors,
+STUDY_NOTES html per category, and the quiz questions), and runs:
+
+```bash
+python3 add_topic.py spec.json
+```
+
+`spec.json` shape:
+
+```json
+{
+  "key": "cation",
+  "title": "Cation Analysis",
+  "desc": "One-line description for the nav card.",
+  "chapter": "salt",
+  "icon": "\ud83e\uddea",
+  "iconColor": "#fbbf24",
+  "wide": false,
+  "catColors": { "GROUP I": "#fbbf24" },
+  "notes": { "GROUP I": "<p>...</p>" },
+  "questions": [
+    {"cat": "GROUP I", "q": "...", "options": ["a","b","c","d"], "correct": 0, "expl": "..."}
+  ]
+}
+```
+
+The script patches `questions.json` plus six spots in `index.html`
+(nav card, app-shell container, `STUDY_NOTES`, `SECTION_META`,
+`SECTION_CHAPTER`, and the `BOOTSTRAP` fetch block) and exits with an
+error instead of a half-applied edit if any anchor it expects has moved
+(e.g. after a manual restructure of `index.html`). A brand-new chapter
+(beyond Salt Analysis / Hydrocarbons) still needs one manual dashboard
+block first — see the "Adding a new chapter" note above — after which
+`add_topic.py` can add sections to it the same way.

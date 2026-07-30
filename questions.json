@@ -3200,6 +3200,102 @@
         ],
         "correct": 0,
         "expl": "Since no bond is broken during the interconversion and the energy barrier is easily crossed at room temperature, staggered and eclipsed ethane are simply different snapshots of one and the same molecule, not separate compounds."
+      },
+      {
+        "cat": "ISOMERIZATION, AROMATIZATION & CONTROLLED OXIDATION",
+        "q": "n-Butane is converted to isobutane at 400&deg;C using which reagent?",
+        "options": [
+          "Anhydrous AlCl<sub>3</sub> + HCl",
+          "H<sub>2</sub>/Ni",
+          "KMnO<sub>4</sub>/&Delta;",
+          "Cr<sub>2</sub>O<sub>3</sub>-Al<sub>2</sub>O<sub>3</sub>, &Delta;"
+        ],
+        "correct": 0,
+        "expl": "Isomerization of an unbranched alkane to its more stable branched isomer is done by heating with anhydrous AlCl3 and HCl (general form AlX3 + HX)."
+      },
+      {
+        "cat": "ISOMERIZATION, AROMATIZATION & CONTROLLED OXIDATION",
+        "q": "n-Heptane isomerizes into its most stable branched form, known by which trivial name?",
+        "options": [
+          "Isooctane",
+          "Triptane",
+          "Neopentane",
+          "Isoheptane"
+        ],
+        "correct": 1,
+        "expl": "n-Heptane converts into 2,2,3-trimethylbutane, whose trivial name is triptane."
+      },
+      {
+        "cat": "ISOMERIZATION, AROMATIZATION & CONTROLLED OXIDATION",
+        "q": "n-Hexane heated at 773 K, 10-20 atm over Cr<sub>2</sub>O<sub>3</sub>-Al<sub>2</sub>O<sub>3</sub> gives mainly:",
+        "options": [
+          "Cyclohexane",
+          "Benzene",
+          "Toluene",
+          "o-Xylene"
+        ],
+        "correct": 1,
+        "expl": "Aromatization (reforming) dehydrogenates and cyclizes n-hexane specifically into benzene; n-heptane instead gives toluene, and n-octane gives o-xylene/ethylbenzene."
+      },
+      {
+        "cat": "ISOMERIZATION, AROMATIZATION & CONTROLLED OXIDATION",
+        "q": "What does the aromatization/reforming reaction achieve, industrially?",
+        "options": [
+          "Converts aliphatic hydrocarbons to aromatic ones to raise octane number",
+          "Converts branched alkanes to unbranched ones",
+          "Removes sulphur impurities from petrol",
+          "Cracks heavy oil into lighter fractions"
+        ],
+        "correct": 0,
+        "expl": "Reforming converts straight-chain aliphatic alkanes into aromatic rings (benzene/toluene/xylenes), which have a higher octane number, improving fuel quality."
+      },
+      {
+        "cat": "REDOX & CYCLOPROPANE ADDITION",
+        "q": "Why can alkanes generally not be reduced further?",
+        "options": [
+          "Their carbons are already at the minimum oxidation state",
+          "They have no C-H bonds",
+          "They are too stable thermodynamically",
+          "They lack any functional group"
+        ],
+        "correct": 0,
+        "expl": "Since alkane carbons already sit at their minimum oxidation state, further reduction is not possible."
+      },
+      {
+        "cat": "REDOX & CYCLOPROPANE ADDITION",
+        "q": "Which C-H bond in an alkane is oxidized directly by hot KMnO<sub>4</sub> (Baeyer's reagent) to give an alcohol?",
+        "options": [
+          "Primary C-H",
+          "Secondary C-H",
+          "Tertiary C-H",
+          "None — alkanes never react with KMnO4"
+        ],
+        "correct": 2,
+        "expl": "A tertiary C-H has enough electron density (similar to alkene/alkyne C-H) to be oxidized by hot KMnO4 directly to the corresponding tertiary alcohol; this is the one exception to alkanes resisting oxidation."
+      },
+      {
+        "cat": "REDOX & CYCLOPROPANE ADDITION",
+        "q": "Why does cyclopropane give addition reactions, unlike other alkanes?",
+        "options": [
+          "It has a double bond",
+          "It is aromatic",
+          "Its ring strain (60&deg; bond angles) makes it highly reactive",
+          "It has an odd number of carbons"
+        ],
+        "correct": 2,
+        "expl": "Cyclopropane's bond angles are compressed to 60 degrees instead of the ideal 109.5 degrees, creating severe angle strain that makes the ring open readily via addition."
+      },
+      {
+        "cat": "REDOX & CYCLOPROPANE ADDITION",
+        "q": "Cyclopropane + H<sub>2</sub>/Ni at 80&deg;C gives:",
+        "options": [
+          "Cyclohexane",
+          "Propane",
+          "Propan-1-ol",
+          "1,3-dichloropropane"
+        ],
+        "correct": 1,
+        "expl": "Catalytic hydrogenation of cyclopropane's strained ring gives straight-chain propane."
       }
     ],
     "catColors": {
@@ -3215,7 +3311,322 @@
       "PHYSICAL PROPERTIES": "#f472b6",
       "FREE RADICAL HALOGENATION": "#fb923c",
       "COMBUSTION, OXIDATION & CRACKING": "#84cc16",
-      "CONFORMATIONS (ETHANE)": "#22d3ee"
+      "CONFORMATIONS (ETHANE)": "#22d3ee",
+      "ISOMERIZATION, AROMATIZATION & CONTROLLED OXIDATION": "#fdba74",
+      "REDOX & CYCLOPROPANE ADDITION": "#f43f5e"
+    }
+  },
+  "alkene_alkyne": {
+    "questions": [
+      {
+        "cat": "ELIMINATION MECHANISMS: E1, E2 & E1cB",
+        "q": "What is the molecularity/order of a typical E2 dehydrohalogenation reaction?",
+        "options": [
+          "1",
+          "2",
+          "0",
+          "3"
+        ],
+        "correct": 1,
+        "expl": "E2 rate = k[substrate][base], so it is second order overall (bimolecular), consistent with its single concerted step."
+      },
+      {
+        "cat": "ELIMINATION MECHANISMS: E1, E2 & E1cB",
+        "q": "Which transition-state geometry does E2 elimination require?",
+        "options": [
+          "Syn-periplanar",
+          "Anti-periplanar",
+          "Gauche",
+          "Eclipsed only"
+        ],
+        "correct": 1,
+        "expl": "E2 proceeds through a single-step, anti-periplanar transition state — also referred to as anti-elimination."
+      },
+      {
+        "cat": "ELIMINATION MECHANISMS: E1, E2 & E1cB",
+        "q": "Why does R-F often go through E1cB instead of E2?",
+        "options": [
+          "Fluoride is too good a leaving group",
+          "Fluoride is a poor leaving group, so deprotonation happens first",
+          "Fluorine has no beta-hydrogens",
+          "E1cB only applies to fluorides"
+        ],
+        "correct": 1,
+        "expl": "Since F- is a poor leaving group, the beta-H is removed first to form a carbanion (especially if stabilized by an EWG/conjugating group), and loss of fluoride follows — this is the E1cB pathway."
+      },
+      {
+        "cat": "ELIMINATION MECHANISMS: E1, E2 & E1cB",
+        "q": "An E2 reaction on a substrate with chiral alpha and beta carbons is:",
+        "options": [
+          "Non-specific",
+          "Stereospecific",
+          "Only regioselective",
+          "Racemizing"
+        ],
+        "correct": 1,
+        "expl": "E2 is stereospecific when both the alpha and beta carbons are chiral centres, since the anti-periplanar requirement fixes the relative geometry of the product."
+      },
+      {
+        "cat": "ZAITSEV vs HOFMANN PRODUCT",
+        "q": "With an unsymmetrical substrate and a non-bulky strong base, E2 elimination gives mainly the:",
+        "options": [
+          "Less substituted (Hofmann) alkene",
+          "More substituted (Zaitsev) alkene",
+          "Terminal alkene only",
+          "Most polar alkene"
+        ],
+        "correct": 1,
+        "expl": "With an ordinary (non-bulky) strong base, the more substituted, more stable alkene forms preferentially — the Zaitsev (Saytzeff) rule."
+      },
+      {
+        "cat": "ZAITSEV vs HOFMANN PRODUCT",
+        "q": "Which of these bases favours the Hofmann (less substituted) elimination product?",
+        "options": [
+          "NaOH (aqueous)",
+          "Potassium tert-butoxide",
+          "HCl",
+          "H2SO4"
+        ],
+        "correct": 1,
+        "expl": "Bulky bases like potassium/sodium tert-butoxide (and LDA) remove the least hindered beta-H, favouring the less substituted Hofmann product."
+      },
+      {
+        "cat": "ZAITSEV vs HOFMANN PRODUCT",
+        "q": "If the beta-carbon of an alkyl halide is attached to a phenyl group, the major elimination product is:",
+        "options": [
+          "Always the Hofmann product, regardless of base",
+          "The conjugated (phenyl-stabilized) alkene, even with a bulky base",
+          "Racemic",
+          "Unpredictable"
+        ],
+        "correct": 1,
+        "expl": "Conjugation with phenyl (or vinyl) stabilizes the resulting alkene strongly enough that it remains the major product even when a bulky, Hofmann-favouring base is used."
+      },
+      {
+        "cat": "DEHYDRATION OF ALCOHOLS",
+        "q": "What three roles does H2SO4 play in the acid-catalyzed dehydration of an alcohol?",
+        "options": [
+          "Catalyst, acid, and dehydrating agent",
+          "Oxidizer, reducer, and solvent",
+          "Nucleophile, base, and catalyst",
+          "Only a catalyst"
+        ],
+        "correct": 0,
+        "expl": "H2SO4 in this reaction acts simultaneously as the catalyst, the acid, and the dehydrating agent (H3PO4 or KHSO4 can be substituted for the same purpose)."
+      },
+      {
+        "cat": "DEHYDRATION OF ALCOHOLS",
+        "q": "Rank the reactivity of alcohols toward acid-catalyzed (E1) dehydration.",
+        "options": [
+          "1&deg; > 2&deg; > 3&deg;",
+          "3&deg; > 2&deg; > 1&deg;",
+          "2&deg; > 3&deg; > 1&deg;",
+          "All equal"
+        ],
+        "correct": 1,
+        "expl": "Since the RDS involves carbocation formation, more substituted (more stable) carbocations form faster, so reactivity follows 3 degree > 2 degree > 1 degree alcohols."
+      },
+      {
+        "cat": "DEHYDRATION OF ALCOHOLS",
+        "q": "In the presence of a Lewis acid catalyst (e.g. Al2O3, P2O5), alcohol dehydration proceeds mainly through which mechanism?",
+        "options": [
+          "E1",
+          "E2",
+          "SN1",
+          "E1cB"
+        ],
+        "correct": 1,
+        "expl": "Lewis acids like P2O5, Al2O3, ThO2, or POCl3 push alcohol dehydration through the E2 mechanism, unlike protonic acids which favour E1."
+      },
+      {
+        "cat": "DEHYDRATION OF ALCOHOLS",
+        "q": "Why must rearrangement always be considered in acid-catalyzed alcohol dehydration?",
+        "options": [
+          "The RDS generates a carbocation intermediate",
+          "The reaction is radical-based",
+          "Water acts as a nucleophile",
+          "It never actually happens"
+        ],
+        "correct": 0,
+        "expl": "Because the rate-determining step forms a carbocation, hydride/alkyl shifts or ring expansion/contraction are always a possibility that must be checked for."
+      },
+      {
+        "cat": "DEHALOGENATION OF VICINAL DIHALIDES",
+        "q": "Zn/AcOH converts a vicinal dihalide into an alkene by:",
+        "options": [
+          "Donating 2 electrons that expel both halides at once",
+          "A radical chain mechanism",
+          "SN1 substitution followed by elimination",
+          "Simple heating with no mechanism"
+        ],
+        "correct": 0,
+        "expl": "Zn is oxidized to Zn2+, donating two electrons that are used to expel both halide ions from the adjacent carbons in one concerted step, forming the alkene."
+      },
+      {
+        "cat": "DEHALOGENATION OF VICINAL DIHALIDES",
+        "q": "What drives the NaI/acetone dehalogenation of a vicinal dihalide to completion?",
+        "options": [
+          "High temperature only",
+          "Precipitation of NaBr (or KBr) out of acetone",
+          "Formation of a stable gas",
+          "The reaction doesn't need driving — it's spontaneous"
+        ],
+        "correct": 1,
+        "expl": "NaBr/KBr is insoluble in acetone and precipitates out, pulling the equilibrium toward the elimination product — the same driving force behind the Finkelstein reaction."
+      },
+      {
+        "cat": "DEHALOGENATION OF VICINAL DIHALIDES",
+        "q": "Dehalogenation eliminations of vicinal dihalides (Zn, Mg, or NaI routes) proceed through which geometry?",
+        "options": [
+          "Syn-coplanar",
+          "Anti-coplanar",
+          "Random, non-specific",
+          "Gauche only"
+        ],
+        "correct": 1,
+        "expl": "Like E2, these dehalogenation eliminations require an anti-coplanar arrangement of the two leaving halogens."
+      },
+      {
+        "cat": "WITTIG REACTION & YLIDES",
+        "q": "What defines a ylide?",
+        "options": [
+          "A compound with formal positive and negative charges on adjacent atoms, net neutral",
+          "A carbanion with no charge separation",
+          "A compound with two positive charges",
+          "A radical intermediate"
+        ],
+        "correct": 0,
+        "expl": "A ylide carries formal positive and negative charges on adjacent atoms while being overall neutral in charge — phosphorus, nitrogen, and sulfur ylides are the common types."
+      },
+      {
+        "cat": "WITTIG REACTION & YLIDES",
+        "q": "In the Wittig reaction, a ketone reacts with a phosphorus ylide to give an alkene plus which byproduct?",
+        "options": [
+          "Triphenylphosphine oxide (O=PPh3)",
+          "Water",
+          "Carbon dioxide",
+          "Triphenylphosphine (PPh3), unoxidized"
+        ],
+        "correct": 0,
+        "expl": "R2C=O + Ph3P=CH2 gives the new alkene R2C=CH2 along with triphenylphosphine oxide, O=PPh3, as the byproduct."
+      },
+      {
+        "cat": "WITTIG REACTION & YLIDES",
+        "q": "What is the main synthetic value of the Wittig reaction?",
+        "options": [
+          "It converts a carbonyl group directly into a C=C bond at a defined position",
+          "It reduces alkynes to alkenes",
+          "It performs a Zaitsev elimination",
+          "It epoxidizes alkenes"
+        ],
+        "correct": 0,
+        "expl": "Unlike elimination reactions, which can give a mixture of alkene regiochemistries, the Wittig reaction installs the new double bond at exactly the carbon that carried the carbonyl."
+      },
+      {
+        "cat": "ALKYNE PREPARATION",
+        "q": "Why does dehydrohalogenation of a vicinal dihalide with alcoholic KOH often stop at the vinyl halide stage?",
+        "options": [
+          "Vinyl halides are very unreactive to further mild elimination",
+          "The reaction is complete after one HX loss",
+          "Vinyl halides can't lose more HX under any conditions",
+          "KOH only removes one equivalent of HX ever"
+        ],
+        "correct": 0,
+        "expl": "The C-X bond in a vinyl halide is much less reactive under mild conditions, so a stronger base (like NaNH2) and more vigorous conditions are needed to remove the second HX and reach the alkyne."
+      },
+      {
+        "cat": "ALKYNE PREPARATION",
+        "q": "Hydrolysis of CaC2 (calcium carbide) gives:",
+        "options": [
+          "Methane",
+          "Ethyne (acetylene)",
+          "Propyne",
+          "Ethane"
+        ],
+        "correct": 1,
+        "expl": "CaC2 contains the acetylide C2(2-) unit, so its hydrolysis gives ethyne (HC≡CH) + Ca(OH)2 + heat."
+      },
+      {
+        "cat": "ALKYNE PREPARATION",
+        "q": "Hydrolysis of Al4C3 (aluminium carbide) gives which gas?",
+        "options": [
+          "Ethyne",
+          "Propyne",
+          "Methane",
+          "Ethene"
+        ],
+        "correct": 2,
+        "expl": "Al4C3 is a methanide-type carbide (isolated carbon, not an acetylide unit), so its hydrolysis gives methane, not an alkyne."
+      },
+      {
+        "cat": "ALKYNE PREPARATION",
+        "q": "Berthelot's synthesis of ethyne combines carbon and hydrogen using:",
+        "options": [
+          "An electric arc at about 1200&deg;C",
+          "A Grignard reagent",
+          "Catalytic hydrogenation",
+          "Ammoniacal AgNO3"
+        ],
+        "correct": 0,
+        "expl": "Berthelot's synthesis passes an electric arc between carbon electrodes in a hydrogen atmosphere at around 1200 degrees C to give ethyne directly."
+      },
+      {
+        "cat": "ALKYNE ACIDITY, ISOMERIZATION & METAL ACETYLIDES",
+        "q": "A terminal alkyne with ammoniacal AgNO3 (Tollen's reagent) gives:",
+        "options": [
+          "A red precipitate of copper acetylide",
+          "A white precipitate of silver acetylide",
+          "No visible reaction",
+          "A blue solution"
+        ],
+        "correct": 1,
+        "expl": "Terminal alkynes give a white precipitate of the silver acetylide (R-C≡C-Ag) with ammoniacal AgNO3; internal alkynes give no such precipitate."
+      },
+      {
+        "cat": "ALKYNE ACIDITY, ISOMERIZATION & METAL ACETYLIDES",
+        "q": "Why is the silver/copper acetylide test diagnostic specifically for terminal alkynes?",
+        "options": [
+          "Only terminal alkynes have an acidic C-H that the metal ion can displace",
+          "Internal alkynes are always unreactive",
+          "Terminal alkynes are always coloured",
+          "Internal alkynes react faster"
+        ],
+        "correct": 0,
+        "expl": "Only a terminal alkyne has a C-H directly on the triple bond acidic enough to be displaced by Ag+ or Cu+, forming the insoluble acetylide; internal alkynes have no such C-H."
+      },
+      {
+        "cat": "ALKYNE ACIDITY, ISOMERIZATION & METAL ACETYLIDES",
+        "q": "Treating a 2-alkyne with NaNH2 in liquid NH3 shifts it toward the:",
+        "options": [
+          "Terminal 1-alkyne",
+          "More internal alkyne",
+          "Corresponding alkene",
+          "Corresponding alkane"
+        ],
+        "correct": 0,
+        "expl": "NaNH2, a strong base, deprotonates the terminal-most acidic position to form the stable acetylide anion; since this removes the terminal alkyne from equilibrium, the reaction drives essentially to completion toward the 1-alkyne (Le Chatelier's principle)."
+      },
+      {
+        "cat": "ALKYNE ACIDITY, ISOMERIZATION & METAL ACETYLIDES",
+        "q": "To build a higher, unsymmetrical alkyne from a terminal alkyne, the correct sequence is:",
+        "options": [
+          "Form the sodium acetylide with Na/NH3, then alkylate with a primary R-X",
+          "Add HBr, then eliminate with KOH",
+          "React directly with another alkyne",
+          "Reduce with H2/Lindlar first"
+        ],
+        "correct": 0,
+        "expl": "The terminal alkyne is first converted to its sodium acetylide (Na, liquid NH3), which then reacts via SN2 with a primary alkyl halide to build the new, longer alkyne chain."
+      }
+    ],
+    "catColors": {
+      "ELIMINATION MECHANISMS: E1, E2 & E1cB": "#60a5fa",
+      "ZAITSEV vs HOFMANN PRODUCT": "#fbbf24",
+      "DEHYDRATION OF ALCOHOLS": "#34d399",
+      "DEHALOGENATION OF VICINAL DIHALIDES": "#fb7185",
+      "WITTIG REACTION & YLIDES": "#c084fc",
+      "ALKYNE PREPARATION": "#22d3ee",
+      "ALKYNE ACIDITY, ISOMERIZATION & METAL ACETYLIDES": "#a3e635"
     }
   }
 }
