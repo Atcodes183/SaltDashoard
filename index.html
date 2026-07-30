@@ -246,6 +246,12 @@ body{ padding:28px 16px 60px; }
 }
 
 /* ---- Pie / donut chart ---- */
+.pbBanner{
+  margin-top:14px; padding:12px 16px; border-radius:11px;
+  background:rgba(240,163,78,0.12); border:1px solid var(--flame);
+  color:var(--flame); font-size:13.5px; font-weight:600;
+  display:flex; align-items:center; gap:8px;
+}
 .donut-panel{
   background:var(--panel);
   border:1px solid var(--panel-border);
@@ -467,6 +473,25 @@ body{ padding:28px 16px 60px; }
 .study-jump a:hover{ color:var(--mint); border-color:var(--mint); }
 .study-jump-count{ color:var(--muted); }
 
+.study-search-row{ display:flex; gap:8px; margin:0 0 18px; }
+.study-search-input{
+  flex:1; font-family:'JetBrains Mono', monospace; font-size:13px;
+  background:var(--optbg); border:1px solid var(--optborder); color:var(--text);
+  padding:10px 14px; border-radius:9px; outline:none;
+  transition:border-color .12s ease;
+}
+.study-search-input::placeholder{ color:var(--muted); }
+.study-search-input:focus{ border-color:var(--mint); }
+.study-search-clear{
+  font-family:'JetBrains Mono', monospace; font-size:13px;
+  background:transparent; border:1px solid var(--panel-border); color:var(--muted);
+  padding:0 14px; border-radius:9px; cursor:pointer;
+}
+.study-search-clear:hover{ color:var(--wrong); border-color:var(--wrong); }
+.study-search-count{ font-size:11.5px; color:var(--muted); margin:-10px 0 18px; }
+mark.study-hit{ background:rgba(52,211,153,0.28); color:var(--text); border-radius:3px; padding:0 1px; }
+.search-hide{ display:none !important; }
+
 .study-cat{ margin-bottom:34px; scroll-margin-top:20px; }
 .study-cat h3{
   font-family:'Source Serif 4', Georgia, serif;
@@ -663,6 +688,11 @@ body{ padding:28px 16px 60px; }
     <div class="crumb" data-role="crumb"></div>
     <div class="back-row"><button class="back-btn" data-role="studyBack">&larr; Back</button></div>
     <h2 class="app-title" id="studyTitle">Study</h2>
+    <div class="study-search-row">
+      <input type="text" id="studySearch" class="study-search-input" placeholder="Search reagents, tests, colors, reactions…">
+      <button id="studySearchClear" class="study-search-clear hide" title="Clear search">✕</button>
+    </div>
+    <div class="study-search-count hide" id="studySearchCount"></div>
     <div class="study-jump" id="studyJump"></div>
     <div id="studyBody"></div>
   </div>
@@ -1698,6 +1728,56 @@ function groupByCategory(questions){
   return order.map(cat=>({cat, items:map[cat]}));
 }
 
+function setupStudySearch(){
+  const input = document.getElementById('studySearch');
+  const clearBtn = document.getElementById('studySearchClear');
+  const countEl = document.getElementById('studySearchCount');
+  input.value = '';
+  clearBtn.classList.add('hide');
+  countEl.classList.add('hide');
+
+  function applyFilter(){
+    const q = input.value.trim().toLowerCase();
+    clearBtn.classList.toggle('hide', q === '');
+
+    if(q === ''){
+      document.querySelectorAll('#studyBody .study-cat').forEach(catEl=>{
+        catEl.classList.remove('search-hide');
+        catEl.querySelectorAll('.study-fact').forEach(li=>li.classList.remove('search-hide'));
+        const list = catEl.querySelector('.study-fact-list');
+        if(list) list.classList.add('hide'); // back to default collapsed state
+      });
+      countEl.classList.add('hide');
+      return;
+    }
+
+    let totalMatches = 0;
+    document.querySelectorAll('#studyBody .study-cat').forEach(catEl=>{
+      const catName = catEl.querySelector('h3').textContent.toLowerCase();
+      const notesEl = catEl.querySelector('.study-notes');
+      const notesMatch = notesEl ? notesEl.textContent.toLowerCase().includes(q) : false;
+      let catFactMatch = false;
+      catEl.querySelectorAll('.study-fact').forEach(li=>{
+        const match = li.textContent.toLowerCase().includes(q);
+        li.classList.toggle('search-hide', !match);
+        if(match){ catFactMatch = true; totalMatches++; }
+      });
+      const show = catName.includes(q) || notesMatch || catFactMatch;
+      catEl.classList.toggle('search-hide', !show);
+      const list = catEl.querySelector('.study-fact-list');
+      if(list && catFactMatch) list.classList.remove('hide');
+    });
+
+    countEl.classList.remove('hide');
+    countEl.textContent = totalMatches === 0
+      ? 'No matching facts — try a different term.'
+      : totalMatches + ' matching fact' + (totalMatches===1?'':'s') + ' found.';
+  }
+
+  input.oninput = applyFilter;
+  clearBtn.onclick = ()=>{ input.value = ''; applyFilter(); input.focus(); };
+}
+
 function openStudy(sectionKey){
   currentSection = sectionKey;
   const meta = SECTION_META[sectionKey];
@@ -1732,6 +1812,7 @@ function openStudy(sectionKey){
       btn.nextElementSibling.classList.toggle('hide');
     });
   });
+  setupStudySearch();
 
   animatedSwitch(()=>{
     document.querySelector('.wrap').classList.add('wide');
@@ -1853,6 +1934,7 @@ function quizTemplate(title){
           <button class="reviewMistakesBtn" data-role="reviewBtn">✗ Review mistakes (<span data-role="reviewCount">0</span>)</button>
         </div>
         <p data-role="reportSub">Here's how the run went, and where to focus next.</p>
+        <div class="pbBanner hide" data-role="pbBanner"></div>
       </div>
 
       <div class="donut-panel">
@@ -2310,9 +2392,22 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
       report.classList.add('show');
     }, report);
 
+    const attempted = stats.correct + stats.wrong + stats.skipped > 0;
+    const priorRecords = (loadHistory()[sectionKey]) || [];
+    const prevBest = priorRecords.length ? Math.max(...priorRecords.map(r=>r.accTotal)) : null;
+
     // Only log a history entry if at least one question was actually seen.
-    if(stats.correct + stats.wrong + stats.skipped > 0){
+    if(attempted){
       saveHistoryRecord(sectionKey, { ts: Date.now(), ...stats });
+    }
+
+    const pbBanner = $('pbBanner');
+    if(attempted && prevBest !== null && stats.accTotal > prevBest){
+      pbBanner.classList.remove('hide');
+      pbBanner.innerHTML = `🏆 New personal best for this section — ${stats.accTotal}%, up from ${prevBest}%.`;
+    } else {
+      pbBanner.classList.add('hide');
+      pbBanner.innerHTML = '';
     }
 
     renderProgressDashboard();
