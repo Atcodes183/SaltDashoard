@@ -297,6 +297,20 @@ body{ padding:28px 16px 60px; }
 .catfrac{ width:80px; flex:0 0 auto; text-align:right; font-size:12.5px; color:var(--muted); }
 .catpct{ width:54px; flex:0 0 auto; text-align:right; font-size:13px; font-weight:600; }
 
+.progStats{ display:flex; gap:10px; flex-wrap:wrap; margin:14px 0 4px; }
+.progStat{
+  flex:1 1 120px; min-width:110px;
+  background:var(--panel); border:1px solid var(--panel-border); border-radius:12px;
+  padding:14px 12px; text-align:center;
+}
+.progNum{ font-family:'Source Serif 4', Georgia, serif; font-size:22px; color:var(--text); }
+.progNum.up{ color:var(--mint); }
+.progNum.down{ color:var(--wrong); }
+.progNum.flat{ color:var(--muted); }
+.progLbl{ font-size:11px; color:var(--muted); margin-top:4px; text-transform:uppercase; letter-spacing:.04em; }
+.progChart{ display:block; width:100%; height:auto; margin:16px 0 4px; }
+.progCatTrend .catfrac{ width:70px; font-size:12px; }
+
 .restartRow{ text-align:center; margin-top:34px; }
 .restartBtn{
   font-family:'JetBrains Mono', monospace; font-size:14px; background:var(--mint); color:#04140c;
@@ -846,6 +860,46 @@ function sparklineSVG(values){
   }).join(' ');
   return `<svg class="hist-spark" viewBox="0 0 ${w} ${h}" width="100%" height="${h}" preserveAspectRatio="none">
     <polyline points="${pts}" fill="none" stroke="#34d399" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
+}
+
+function trendChartSVG(values){
+  const w = 640, h = 180, padL = 32, padR = 12, padT = 14, padB = 22;
+  const innerW = w - padL - padR, innerH = h - padT - padB;
+  const n = values.length;
+  const stepX = n > 1 ? innerW / (n-1) : 0;
+  const xAt = i => padL + i*stepX;
+  const yAt = v => padT + innerH - (v/100)*innerH;
+
+  let gridHtml = '';
+  [0,25,50,75,100].forEach(g=>{
+    const y = yAt(g);
+    gridHtml += `<line x1="${padL}" y1="${y.toFixed(1)}" x2="${w-padR}" y2="${y.toFixed(1)}" stroke="var(--panel-border)" stroke-width="1"/>
+      <text x="${padL-6}" y="${(y+3).toFixed(1)}" text-anchor="end" font-size="9" fill="var(--muted)">${g}</text>`;
+  });
+
+  const linePts = values.map((v,i)=>`${xAt(i).toFixed(1)},${yAt(v).toFixed(1)}`).join(' ');
+  const areaPts = `${xAt(0).toFixed(1)},${yAt(0).toFixed(1)} ${linePts} ${xAt(n-1).toFixed(1)},${yAt(0).toFixed(1)}`;
+
+  const dots = values.map((v,i)=>{
+    const isLast = i === n-1;
+    return `<circle cx="${xAt(i).toFixed(1)}" cy="${yAt(v).toFixed(1)}" r="${isLast?4.5:3}" fill="${isLast?'var(--flame)':'var(--mint)'}" stroke="var(--bg)" stroke-width="1.4"/>`;
+  }).join('');
+
+  let xLabelHtml = '';
+  const labelEvery = Math.max(1, Math.ceil(n/8));
+  values.forEach((v,i)=>{
+    if(i % labelEvery === 0 || i === n-1){
+      xLabelHtml += `<text x="${xAt(i).toFixed(1)}" y="${h-6}" text-anchor="middle" font-size="9" fill="var(--muted)">#${i+1}</text>`;
+    }
+  });
+
+  return `<svg class="progChart" viewBox="0 0 ${w} ${h}">
+    ${gridHtml}
+    <polygon points="${areaPts}" fill="rgba(52,211,153,0.12)" stroke="none"/>
+    <polyline points="${linePts}" fill="none" stroke="var(--mint)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    ${dots}
+    ${xLabelHtml}
   </svg>`;
 }
 
@@ -1826,6 +1880,9 @@ function quizTemplate(title){
       <div class="sectionLbl">Breakdown by category</div>
       <div data-role="catBreakdown"></div>
 
+      <div class="sectionLbl">Your progress</div>
+      <div class="progressDash" data-role="progressDash"></div>
+
       <div class="restartRow">
         <button class="restartBtn" data-role="restartBtn">Restart test</button>
       </div>
@@ -2131,7 +2188,12 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     reviewCount.textContent = mistakeIdx.length;
     reviewBtn.disabled = mistakeIdx.length === 0;
 
-    return { correct: correct.length, wrong: wrong.length, skipped: skipped.length, notReached, total: TOTAL, accTotal, mistakeIdx };
+    // Compact per-category snapshot (only categories actually seen this run)
+    // so the progress dashboard can chart category mastery across attempts.
+    const catSnapshot = {};
+    rows.forEach(r=>{ if(r.seen > 0) catSnapshot[r.cat] = { correct: r.correct, seen: r.seen }; });
+
+    return { correct: correct.length, wrong: wrong.length, skipped: skipped.length, notReached, total: TOTAL, accTotal, mistakeIdx, catStats: catSnapshot };
   }
 
   function renderReviewList(mistakeIdx){
@@ -2174,6 +2236,69 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     });
   }
 
+  function renderProgressDashboard(){
+    const dash = $('progressDash');
+    const records = (loadHistory()[sectionKey]) || [];
+
+    if(records.length === 0){
+      dash.innerHTML = '<div class="hist-empty">No past attempts yet — this fills in once you\'ve submitted a test.</div>';
+      return;
+    }
+
+    const accVals = records.map(r=>r.accTotal);
+    const best = Math.max(...accVals);
+    const avg = Math.round(accVals.reduce((a,b)=>a+b,0)/accVals.length);
+    const delta = accVals[accVals.length-1] - accVals[0];
+    const deltaClass = delta>0 ? 'up' : (delta<0 ? 'down' : 'flat');
+    const deltaSign = delta>0 ? '+' : '';
+
+    let html = `
+      <div class="progStats">
+        <div class="progStat"><div class="progNum">${records.length}</div><div class="progLbl">attempts logged</div></div>
+        <div class="progStat"><div class="progNum up">${best}%</div><div class="progLbl">best accuracy</div></div>
+        <div class="progStat"><div class="progNum">${avg}%</div><div class="progLbl">average accuracy</div></div>
+        <div class="progStat"><div class="progNum ${deltaClass}">${records.length>1 ? deltaSign+delta+'%' : '—'}</div><div class="progLbl">since first attempt</div></div>
+      </div>
+      ${trendChartSVG(accVals)}
+    `;
+
+    // Category mastery trend: latest attempt vs the one before it.
+    const latestRec = records[records.length-1];
+    const prevRec = records.length>1 ? records[records.length-2] : null;
+    if(latestRec.catStats){
+      const catRows = Object.entries(latestRec.catStats).map(([cat, s])=>{
+        const pct = s.seen>0 ? Math.round((s.correct/s.seen)*100) : null;
+        let trendHtml = '<span style="color:var(--muted)">first data point</span>';
+        if(pct!==null && prevRec && prevRec.catStats && prevRec.catStats[cat]){
+          const ps = prevRec.catStats[cat];
+          const prevPct = ps.seen>0 ? Math.round((ps.correct/ps.seen)*100) : null;
+          if(prevPct!==null){
+            const d = pct - prevPct;
+            trendHtml = d>0 ? `<span style="color:var(--mint)">▲ ${d}%</span>`
+              : d<0 ? `<span style="color:var(--wrong)">▼ ${Math.abs(d)}%</span>`
+              : '<span style="color:var(--muted)">• flat</span>';
+          }
+        }
+        return { cat, pct, trendHtml };
+      }).filter(r=>r.pct!==null).sort((a,b)=>a.pct-b.pct);
+
+      if(catRows.length){
+        const rowsHtml = catRows.map(r=>{
+          const color = CAT_COLORS[r.cat] || '#34d399';
+          return `<div class="catrow progCatTrend">
+            <div class="catname">${r.cat}</div>
+            <div class="catbar-track"><div class="catbar-fill" style="width:${r.pct}%; background:${color}"></div></div>
+            <div class="catfrac">${r.trendHtml}</div>
+            <div class="catpct" style="color:${r.pct<70?'var(--wrong)':color}">${r.pct}%</div>
+          </div>`;
+        }).join('');
+        html += `<div class="sectionLbl" style="margin-top:22px;">Category mastery (latest attempt)</div>${rowsHtml}`;
+      }
+    }
+
+    dash.innerHTML = html;
+  }
+
   let lastMistakeIdx = [];
 
   function showReport(){
@@ -2189,6 +2314,8 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     if(stats.correct + stats.wrong + stats.skipped > 0){
       saveHistoryRecord(sectionKey, { ts: Date.now(), ...stats });
     }
+
+    renderProgressDashboard();
 
     // Reshuffle so the next attempt at this test isn't in the same order.
     reshuffleOrder();
