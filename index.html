@@ -516,6 +516,12 @@ mark.study-hit{ background:rgba(52,211,153,0.28); color:var(--text); border-radi
   background:var(--optbg); border:1px solid var(--panel-border); border-left:3px solid var(--mint);
   border-radius:8px; padding:10px 14px; margin:0 0 12px; line-height:1.9; white-space:pre-wrap;
 }
+.study-diagram{
+  background:var(--optbg); border:1px solid var(--panel-border); border-radius:12px;
+  padding:16px 14px 12px; margin:0 0 16px; display:flex; flex-direction:column; align-items:center; gap:6px;
+}
+.study-diagram svg{ width:100%; height:auto; }
+.study-diagram figcaption{ font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--muted); text-align:center; line-height:1.5; }
 .study-table{ width:100%; border-collapse:collapse; margin:0 0 14px; font-size:12.5px; }
 .study-table th, .study-table td{
   border:1px solid var(--panel-border); padding:7px 10px; text-align:left; vertical-align:top;
@@ -1093,6 +1099,165 @@ const SECTION_CHAPTER = { anion:'salt', prelim:'salt', alkane:'hydro' , alkene_a
 // Small inline benzene-ring glyph, reused wherever a note mentions benzene as a product
 const BENZENE_SVG = `<svg viewBox="0 0 120 110" width="30" height="27" style="vertical-align:middle;margin:0 4px -4px 4px;"><polygon points="60,13 96,34 96,76 60,97 24,76 24,34" fill="none" stroke="currentColor" stroke-width="7"/><circle cx="60" cy="55" r="24" fill="none" stroke="currentColor" stroke-width="5"/></svg>`;
 
+// Larger reaction-scheme diagrams used inside STUDY_NOTES (Alkane section)
+const SVG_BENZENE_STRUCTURE = `<svg viewBox="0 0 680 215" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:560px;"><polygon points="95.0,53.0 131.4,74.0 131.4,116.0 95.0,137.0 58.6,116.0 58.6,74.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="98.1" y1="66.6" x2="118.0" y2="78.1" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="118.0" y1="111.9" x2="98.1" y2="123.4" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="68.8" y1="106.5" x2="68.8" y2="83.5" stroke="#dfe8e2" stroke-width="3.2"/>
+<polygon points="345.0,53.0 381.4,74.0 381.4,116.0 345.0,137.0 308.6,116.0 308.6,74.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="371.2" y1="83.5" x2="371.2" y2="106.5" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="341.9" y1="123.4" x2="322.0" y2="111.9" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="322.0" y1="78.1" x2="341.9" y2="66.6" stroke="#dfe8e2" stroke-width="3.2"/>
+<polygon points="600.0,53.0 636.4,74.0 636.4,116.0 600.0,137.0 563.6,116.0 563.6,74.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<circle cx="600" cy="95" r="21.8" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="155.0" y1="95.0" x2="285.0" y2="95.0" stroke="#34d399" stroke-width="2.4"/><polygon points="285.0,95.0 278.8,98.3 278.8,91.7" fill="#34d399"/><line x1="285.0" y1="87.0" x2="155.0" y2="87.0" stroke="#34d399" stroke-width="2.4"/><polygon points="155.0,87.0 161.2,83.7 161.2,90.3" fill="#34d399"/>
+<line x1="405.0" y1="95.0" x2="530.0" y2="95.0" stroke="#34d399" stroke-width="2.6"/><polygon points="530.0,95.0 522.9,98.8 522.9,91.2" fill="#34d399"/>
+<text x="220.0" y="81.0" font-family="Arial, sans-serif" font-size="12" fill="#9fb3a8" text-anchor="middle" font-weight="400">resonance</text>
+<text x="467.0" y="81.0" font-family="Arial, sans-serif" font-size="12" fill="#9fb3a8" text-anchor="middle" font-weight="400">hybrid</text>
+<text x="95.0" y="168.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="middle" font-weight="400">Kekulé structure I</text>
+<text x="345.0" y="168.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="middle" font-weight="400">Kekulé structure II</text>
+<text x="600.0" y="168.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="middle" font-weight="400">actual structure</text>
+<text x="600.0" y="186.0" font-family="Arial, sans-serif" font-size="10.5" fill="#9fb3a8" text-anchor="middle" font-weight="400">(all 6 C–C bonds identical, ~139 pm;</text>
+<text x="600.0" y="200.0" font-family="Arial, sans-serif" font-size="10.5" fill="#9fb3a8" text-anchor="middle" font-weight="400">6 π electrons delocalised over the ring)</text></svg>`;
+
+const SVG_EAS_MECHANISM = `<svg viewBox="0 0 780 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:680px;"><polygon points="80.0,70.0 114.6,90.0 114.6,130.0 80.0,150.0 45.4,130.0 45.4,90.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<circle cx="80" cy="110" r="20.8" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<text x="80.0" y="180.0" font-family="Arial, sans-serif" font-size="11" fill="#9fb3a8" text-anchor="middle" font-weight="400">benzene (aromatic — 6π delocalised)</text>
+<text x="80.0" y="40.0" font-family="Arial, sans-serif" font-size="15" fill="#f0a34e" text-anchor="middle" font-weight="700">E⁺</text>
+<line x1="80" y1="52" x2="80" y2="68" stroke="#f0a34e" stroke-width="2.2" stroke-dasharray="3,3"/>
+<line x1="140.0" y1="110.0" x2="320.0" y2="110.0" stroke="#34d399" stroke-width="2.6"/><polygon points="320.0,110.0 312.9,113.8 312.9,106.2" fill="#34d399"/>
+<text x="230.0" y="94.0" font-family="Arial, sans-serif" font-size="12" fill="#eef3ef" text-anchor="middle" font-weight="400">slow (RDS)</text>
+<text x="230.0" y="132.0" font-family="Arial, sans-serif" font-size="10.5" fill="#9fb3a8" text-anchor="middle" font-weight="400">electrophile attacks π cloud</text>
+<polygon points="390.0,70.0 424.6,90.0 424.6,130.0 390.0,150.0 355.4,130.0 355.4,90.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="414.9" y1="99.1" x2="414.9" y2="120.9" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="387.0" y1="137.1" x2="368.1" y2="126.1" stroke="#dfe8e2" stroke-width="3.2"/>
+<text x="390.0" y="118.0" font-family="Arial, sans-serif" font-size="17" fill="#f0a34e" text-anchor="middle" font-weight="700">+</text>
+<line x1="390.0" y1="70.0" x2="366.0" y2="44.0" stroke="#f0a34e" stroke-width="2.6"/>
+<text x="360.0" y="38.0" font-family="Arial, sans-serif" font-size="13" fill="#f0a34e" text-anchor="middle" font-weight="400">E</text>
+<line x1="390.0" y1="70.0" x2="414.0" y2="44.0" stroke="#eef3ef" stroke-width="2.6"/>
+<text x="420.0" y="38.0" font-family="Arial, sans-serif" font-size="13" fill="#eef3ef" text-anchor="middle" font-weight="400">H</text>
+<text x="390.0" y="180.0" font-family="Arial, sans-serif" font-size="11" fill="#9fb3a8" text-anchor="middle" font-weight="400">arenium ion / σ-complex (non-aromatic,</text>
+<text x="390.0" y="196.0" font-family="Arial, sans-serif" font-size="11" fill="#9fb3a8" text-anchor="middle" font-weight="400">+ve charge delocalised over C2,C4,C6)</text>
+<line x1="450.0" y1="110.0" x2="630.0" y2="110.0" stroke="#34d399" stroke-width="2.6"/><polygon points="630.0,110.0 622.9,113.8 622.9,106.2" fill="#34d399"/>
+<text x="540.0" y="94.0" font-family="Arial, sans-serif" font-size="12" fill="#eef3ef" text-anchor="middle" font-weight="400">fast</text>
+<text x="540.0" y="132.0" font-family="Arial, sans-serif" font-size="10.5" fill="#9fb3a8" text-anchor="middle" font-weight="400">– H⁺ (base removes proton)</text>
+<polygon points="700.0,70.0 734.6,90.0 734.6,130.0 700.0,150.0 665.4,130.0 665.4,90.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<circle cx="700" cy="110" r="20.8" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="700.0" y1="70.0" x2="700.0" y2="50.0" stroke="#f0a34e" stroke-width="2.6"/>
+<text x="700.0" y="41.0" font-family="Arial, sans-serif" font-size="14" fill="#f0a34e" text-anchor="middle" font-weight="400">E</text>
+<text x="700.0" y="180.0" font-family="Arial, sans-serif" font-size="11" fill="#9fb3a8" text-anchor="middle" font-weight="400">substituted benzene (aromaticity restored)</text></svg>`;
+
+const SVG_BENZENE_REACTIONS = `<svg viewBox="0 0 700 584" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:640px;"><polygon points="78.0,60.0 105.7,76.0 105.7,108.0 78.0,124.0 50.3,108.0 50.3,76.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<circle cx="78" cy="92" r="16.6" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="122.0" y1="92.0" x2="300.0" y2="92.0" stroke="#34d399" stroke-width="2.6"/><polygon points="300.0,92.0 292.9,95.8 292.9,88.2" fill="#34d399"/>
+<text x="211.0" y="76.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="middle" font-weight="400">+ Cl₂</text>
+<text x="211.0" y="113.0" font-family="Arial, sans-serif" font-size="10.5" fill="#9fb3a8" text-anchor="middle" font-weight="400">anhyd. FeCl₃ (dark)</text>
+<polygon points="365.0,60.0 392.7,76.0 392.7,108.0 365.0,124.0 337.3,108.0 337.3,76.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<circle cx="365" cy="92" r="16.6" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="365.0" y1="60.0" x2="365.0" y2="40.0" stroke="#f0a34e" stroke-width="2.6"/>
+<text x="365.0" y="31.0" font-family="Arial, sans-serif" font-size="13" fill="#f0a34e" text-anchor="middle" font-weight="400">Cl</text>
+<text x="430.0" y="96.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="start" font-weight="400">+ HCl</text>
+<text x="560.0" y="76.0" font-family="Arial, sans-serif" font-size="11.5" fill="#9fb3a8" text-anchor="start" font-weight="600">Halogenation</text>
+<text x="560.0" y="96.0" font-family="Arial, sans-serif" font-size="11.5" fill="#eef3ef" text-anchor="start" font-weight="400">chlorobenzene</text>
+<polygon points="78.0,168.0 105.7,184.0 105.7,216.0 78.0,232.0 50.3,216.0 50.3,184.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<circle cx="78" cy="200" r="16.6" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="122.0" y1="200.0" x2="300.0" y2="200.0" stroke="#34d399" stroke-width="2.6"/><polygon points="300.0,200.0 292.9,203.8 292.9,196.2" fill="#34d399"/>
+<text x="211.0" y="184.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="middle" font-weight="400">+ HNO₃ (conc.)</text>
+<text x="211.0" y="221.0" font-family="Arial, sans-serif" font-size="10.5" fill="#9fb3a8" text-anchor="middle" font-weight="400">conc. H₂SO₄, 50–60°C</text>
+<polygon points="365.0,168.0 392.7,184.0 392.7,216.0 365.0,232.0 337.3,216.0 337.3,184.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<circle cx="365" cy="200" r="16.6" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="365.0" y1="168.0" x2="365.0" y2="148.0" stroke="#f0a34e" stroke-width="2.6"/>
+<text x="365.0" y="139.0" font-family="Arial, sans-serif" font-size="13" fill="#f0a34e" text-anchor="middle" font-weight="400">NO₂</text>
+<text x="430.0" y="204.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="start" font-weight="400">+ H₂O</text>
+<text x="560.0" y="184.0" font-family="Arial, sans-serif" font-size="11.5" fill="#9fb3a8" text-anchor="start" font-weight="600">Nitration</text>
+<text x="560.0" y="204.0" font-family="Arial, sans-serif" font-size="11.5" fill="#eef3ef" text-anchor="start" font-weight="400">nitrobenzene</text>
+<polygon points="78.0,276.0 105.7,292.0 105.7,324.0 78.0,340.0 50.3,324.0 50.3,292.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<circle cx="78" cy="308" r="16.6" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="122.0" y1="308.0" x2="300.0" y2="308.0" stroke="#34d399" stroke-width="2.6"/><polygon points="300.0,308.0 292.9,311.8 292.9,304.2" fill="#34d399"/>
+<text x="211.0" y="292.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="middle" font-weight="400">+ fuming H₂SO₄</text>
+<text x="211.0" y="329.0" font-family="Arial, sans-serif" font-size="10.5" fill="#9fb3a8" text-anchor="middle" font-weight="400">SO₃, heat</text>
+<polygon points="365.0,276.0 392.7,292.0 392.7,324.0 365.0,340.0 337.3,324.0 337.3,292.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<circle cx="365" cy="308" r="16.6" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="365.0" y1="276.0" x2="365.0" y2="256.0" stroke="#f0a34e" stroke-width="2.6"/>
+<text x="365.0" y="247.0" font-family="Arial, sans-serif" font-size="13" fill="#f0a34e" text-anchor="middle" font-weight="400">SO₃H</text>
+<text x="430.0" y="312.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="start" font-weight="400">+ H₂O</text>
+<text x="560.0" y="292.0" font-family="Arial, sans-serif" font-size="11.5" fill="#9fb3a8" text-anchor="start" font-weight="600">Sulphonation</text>
+<text x="560.0" y="312.0" font-family="Arial, sans-serif" font-size="11.5" fill="#eef3ef" text-anchor="start" font-weight="400">benzenesulphonic acid</text>
+<polygon points="78.0,384.0 105.7,400.0 105.7,432.0 78.0,448.0 50.3,432.0 50.3,400.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<circle cx="78" cy="416" r="16.6" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="122.0" y1="416.0" x2="300.0" y2="416.0" stroke="#34d399" stroke-width="2.6"/><polygon points="300.0,416.0 292.9,419.8 292.9,412.2" fill="#34d399"/>
+<text x="211.0" y="400.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="middle" font-weight="400">+ R–Cl</text>
+<text x="211.0" y="437.0" font-family="Arial, sans-serif" font-size="10.5" fill="#9fb3a8" text-anchor="middle" font-weight="400">anhyd. AlCl₃</text>
+<polygon points="365.0,384.0 392.7,400.0 392.7,432.0 365.0,448.0 337.3,432.0 337.3,400.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<circle cx="365" cy="416" r="16.6" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="365.0" y1="384.0" x2="365.0" y2="364.0" stroke="#f0a34e" stroke-width="2.6"/>
+<text x="365.0" y="355.0" font-family="Arial, sans-serif" font-size="13" fill="#f0a34e" text-anchor="middle" font-weight="400">R</text>
+<text x="430.0" y="420.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="start" font-weight="400">+ HCl</text>
+<text x="560.0" y="400.0" font-family="Arial, sans-serif" font-size="11.5" fill="#9fb3a8" text-anchor="start" font-weight="600">Friedel–Crafts alkylation</text>
+<text x="560.0" y="420.0" font-family="Arial, sans-serif" font-size="11.5" fill="#eef3ef" text-anchor="start" font-weight="400">alkylbenzene</text>
+<polygon points="78.0,492.0 105.7,508.0 105.7,540.0 78.0,556.0 50.3,540.0 50.3,508.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<circle cx="78" cy="524" r="16.6" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="122.0" y1="524.0" x2="300.0" y2="524.0" stroke="#34d399" stroke-width="2.6"/><polygon points="300.0,524.0 292.9,527.8 292.9,520.2" fill="#34d399"/>
+<text x="211.0" y="508.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="middle" font-weight="400">+ R–COCl</text>
+<text x="211.0" y="545.0" font-family="Arial, sans-serif" font-size="10.5" fill="#9fb3a8" text-anchor="middle" font-weight="400">anhyd. AlCl₃</text>
+<polygon points="365.0,492.0 392.7,508.0 392.7,540.0 365.0,556.0 337.3,540.0 337.3,508.0" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<circle cx="365" cy="524" r="16.6" fill="none" stroke="#dfe8e2" stroke-width="3.2"/>
+<line x1="365.0" y1="492.0" x2="365.0" y2="472.0" stroke="#f0a34e" stroke-width="2.6"/>
+<text x="365.0" y="463.0" font-family="Arial, sans-serif" font-size="13" fill="#f0a34e" text-anchor="middle" font-weight="400">COR</text>
+<text x="430.0" y="528.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="start" font-weight="400">+ HCl</text>
+<text x="560.0" y="508.0" font-family="Arial, sans-serif" font-size="11.5" fill="#9fb3a8" text-anchor="start" font-weight="600">Friedel–Crafts acylation</text>
+<text x="560.0" y="528.0" font-family="Arial, sans-serif" font-size="11.5" fill="#eef3ef" text-anchor="start" font-weight="400">aryl ketone</text></svg>`;
+
+const SVG_WURTZ = `<svg viewBox="0 0 700 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:600px;"><text x="20.0" y="65.0" font-family="Arial, sans-serif" font-size="16" fill="#eef3ef" text-anchor="start" font-weight="400">2</text>
+<polyline points="42.0,68.0 66.0,53.0" fill="none" stroke="#dfe8e2" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="84.0" y="57.0" font-family="Arial, sans-serif" font-size="13" fill="#fb7185" text-anchor="start" font-weight="400">Br</text>
+<text x="130.0" y="65.0" font-family="Arial, sans-serif" font-size="16" fill="#eef3ef" text-anchor="start" font-weight="400">+</text>
+<text x="155.0" y="65.0" font-family="Arial, sans-serif" font-size="15" fill="#eef3ef" text-anchor="start" font-weight="400">2 Na</text>
+<line x1="230.0" y1="60.0" x2="390.0" y2="60.0" stroke="#34d399" stroke-width="2.6"/><polygon points="390.0,60.0 382.9,63.8 382.9,56.2" fill="#34d399"/>
+<text x="310.0" y="44.0" font-family="Arial, sans-serif" font-size="12.5" fill="#eef3ef" text-anchor="middle" font-weight="400">dry ether</text>
+<text x="310.0" y="82.0" font-family="Arial, sans-serif" font-size="10.5" fill="#9fb3a8" text-anchor="middle" font-weight="400">(Sᴴᴽ2-like coupling)</text>
+<polyline points="410.0,68.0 434.0,53.0 458.0,68.0 482.0,53.0" fill="none" stroke="#dfe8e2" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="408.0" y="94.0" font-family="Arial, sans-serif" font-size="11" fill="#9fb3a8" text-anchor="start" font-weight="400">n-butane</text>
+<text x="545.0" y="65.0" font-family="Arial, sans-serif" font-size="15" fill="#eef3ef" text-anchor="start" font-weight="400">+  2 NaBr</text></svg>`;
+
+const SVG_KOLBE = `<svg viewBox="0 0 720 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:600px;"><text x="20.0" y="75.0" font-family="Arial, sans-serif" font-size="15" fill="#eef3ef" text-anchor="start" font-weight="400">2 CH₃COO⁻Na⁺</text>
+<text x="20.0" y="96.0" font-family="Arial, sans-serif" font-size="10.5" fill="#9fb3a8" text-anchor="start" font-weight="400">(sodium acetate, aq.)</text>
+<rect x="230" y="36" width="90" height="66" rx="4" fill="none" stroke="#9fb3a8" stroke-width="2"/>
+<line x1="258" y1="40" x2="258" y2="98" stroke="#eef3ef" stroke-width="4"/>
+<line x1="292" y1="40" x2="292" y2="98" stroke="#eef3ef" stroke-width="4"/>
+<text x="258.0" y="30.0" font-family="Arial, sans-serif" font-size="9.5" fill="#9fb3a8" text-anchor="middle" font-weight="400">anode</text>
+<text x="292.0" y="30.0" font-family="Arial, sans-serif" font-size="9.5" fill="#9fb3a8" text-anchor="middle" font-weight="400">cathode</text>
+<text x="275.0" y="122.0" font-family="Arial, sans-serif" font-size="11" fill="#eef3ef" text-anchor="middle" font-weight="400">electrolysis</text>
+<line x1="200.0" y1="70.0" x2="226.0" y2="70.0" stroke="#34d399" stroke-width="2.6"/><polygon points="226.0,70.0 218.9,73.8 218.9,66.2" fill="#34d399"/>
+<line x1="326.0" y1="70.0" x2="380.0" y2="70.0" stroke="#34d399" stroke-width="2.6"/><polygon points="380.0,70.0 372.9,73.8 372.9,66.2" fill="#34d399"/>
+<polyline points="390.0,78.0 412.0,64.0" fill="none" stroke="#dfe8e2" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<text x="386.0" y="100.0" font-family="Arial, sans-serif" font-size="10.5" fill="#9fb3a8" text-anchor="start" font-weight="400">ethane</text>
+<text x="475.0" y="56.0" font-family="Arial, sans-serif" font-size="13" fill="#eef3ef" text-anchor="start" font-weight="400">+ 2CO₂</text>
+<text x="475.0" y="76.0" font-family="Arial, sans-serif" font-size="13" fill="#eef3ef" text-anchor="start" font-weight="400">+ 2NaOH</text>
+<text x="475.0" y="96.0" font-family="Arial, sans-serif" font-size="13" fill="#eef3ef" text-anchor="start" font-weight="400">+ H₂ (at cathode)</text></svg>`;
+
+const SVG_HALOGENATION_MECH = `<svg viewBox="0 0 860 312" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:720px;"><text x="20.0" y="30.0" font-family="Arial, sans-serif" font-size="11.5" fill="#f0a34e" text-anchor="start" font-weight="700">Initiation</text>
+<text x="20.0" y="54.0" font-family="Arial, sans-serif" font-size="13.5" fill="#eef3ef" text-anchor="start" font-weight="400">Cl–Cl</text>
+<line x1="430.0" y1="48.0" x2="520.0" y2="48.0" stroke="#34d399" stroke-width="2.6"/><polygon points="520.0,48.0 512.9,51.8 512.9,44.2" fill="#34d399"/>
+<text x="475.0" y="36.0" font-family="Arial, sans-serif" font-size="10" fill="#9fb3a8" text-anchor="middle" font-weight="400">hν or Δ (bond homolysis)</text>
+<text x="535.0" y="54.0" font-family="Arial, sans-serif" font-size="13.5" fill="#eef3ef" text-anchor="start" font-weight="400">Cl•  +  •Cl</text>
+<text x="20.0" y="106.0" font-family="Arial, sans-serif" font-size="11.5" fill="#f0a34e" text-anchor="start" font-weight="700">Propagation ①</text>
+<text x="20.0" y="130.0" font-family="Arial, sans-serif" font-size="13.5" fill="#eef3ef" text-anchor="start" font-weight="400">CH₄  +  Cl•</text>
+<line x1="430.0" y1="124.0" x2="520.0" y2="124.0" stroke="#34d399" stroke-width="2.6"/><polygon points="520.0,124.0 512.9,127.8 512.9,120.2" fill="#34d399"/>
+<text x="475.0" y="112.0" font-family="Arial, sans-serif" font-size="10" fill="#9fb3a8" text-anchor="middle" font-weight="400">H abstraction</text>
+<text x="535.0" y="130.0" font-family="Arial, sans-serif" font-size="13.5" fill="#eef3ef" text-anchor="start" font-weight="400">•CH₃  +  H–Cl</text>
+<text x="20.0" y="182.0" font-family="Arial, sans-serif" font-size="11.5" fill="#f0a34e" text-anchor="start" font-weight="700">Propagation ②</text>
+<text x="20.0" y="206.0" font-family="Arial, sans-serif" font-size="13.5" fill="#eef3ef" text-anchor="start" font-weight="400">•CH₃  +  Cl–Cl</text>
+<line x1="430.0" y1="200.0" x2="520.0" y2="200.0" stroke="#34d399" stroke-width="2.6"/><polygon points="520.0,200.0 512.9,203.8 512.9,196.2" fill="#34d399"/>
+<text x="475.0" y="188.0" font-family="Arial, sans-serif" font-size="10" fill="#9fb3a8" text-anchor="middle" font-weight="400">Cl abstraction</text>
+<text x="535.0" y="206.0" font-family="Arial, sans-serif" font-size="13.5" fill="#eef3ef" text-anchor="start" font-weight="400">CH₃Cl  +  Cl•</text>
+<text x="20.0" y="226.0" font-family="Arial, sans-serif" font-size="10" fill="#9fb3a8" text-anchor="start" font-weight="400">→ Cl• re-enters step ②: chain reaction</text>
+<text x="20.0" y="258.0" font-family="Arial, sans-serif" font-size="11.5" fill="#f0a34e" text-anchor="start" font-weight="700">Termination</text>
+<text x="20.0" y="282.0" font-family="Arial, sans-serif" font-size="13.5" fill="#eef3ef" text-anchor="start" font-weight="400">•CH₃  +  Cl•  (or  •CH₃+•CH₃  /  Cl•+Cl•)</text>
+<line x1="430.0" y1="276.0" x2="520.0" y2="276.0" stroke="#34d399" stroke-width="2.6"/><polygon points="520.0,276.0 512.9,279.8 512.9,272.2" fill="#34d399"/>
+<text x="475.0" y="264.0" font-family="Arial, sans-serif" font-size="10" fill="#9fb3a8" text-anchor="middle" font-weight="400">radical–radical combination</text>
+<text x="535.0" y="282.0" font-family="Arial, sans-serif" font-size="13.5" fill="#eef3ef" text-anchor="start" font-weight="400">CH₃Cl  (or  C₂H₆  /  Cl₂)</text></svg>`;
+
 const STUDY_NOTES = {
 
 anion: {
@@ -1532,6 +1697,7 @@ alkane: {
 
 'WURTZ REACTION & COUPLING METHODS': `
 <p><b>Wurtz reaction:</b> 2 R–X + 2Na (dry ethereal solution) → R–R + 2NaX. Works best for making a <i>symmetrical</i> alkane from a single halide; using two different halides R–X and R'–X gives an unavoidable statistical mixture of R–R, R'–R', and R–R', so it's a poor choice for a clean unsymmetrical product.</p>
+<figure class="study-diagram">${SVG_WURTZ}<figcaption>Worked example: two molecules of ethyl bromide couple through the Wurtz reaction to give n-butane.</figcaption></figure>
 <p><b>Two mechanisms are proposed</b> for the Wurtz coupling:</p>
 <table>
 <tr><th>Mechanism</th><th>Pathway</th></tr>
@@ -1560,6 +1726,7 @@ alkane: {
 
 'DECARBOXYLATION & KOLBE ELECTROLYSIS': `
 <p><b>Decarboxylation (soda-lime reaction):</b> heating the sodium/potassium salt of a carboxylic acid with soda-lime removes –COONa as Na₂CO₃, leaving the alkane with one fewer carbon:</p>
+<figure class="study-diagram">${SVG_KOLBE}<figcaption>Kolbe electrolysis: aqueous sodium/potassium salt of a carboxylic acid is electrolysed; the alkyl radicals formed at the anode dimerise to a symmetrical alkane, while H₂ is liberated at the cathode.</figcaption></figure>
 <p style="text-align:center">R–COONa + NaOH —(CaO, Δ)→ R–H + Na₂CO₃</p>
 <p><b>Mechanism:</b> proceeds through acid–base chemistry followed by C–C bond cleavage — the carboxylate is deprotonated/rearranged so that the C–C(=O)O⁻ bond breaks heterolytically, generating a <b>carbanion R⁻</b> plus CO₂ (as carbonate after reacting with the base). Formation of this carbanion is the <b>slowest step (rate-determining step)</b>, so anything that stabilizes the carbanion speeds up the whole reaction.</p>
 <p><b>Purpose of using soda-lime (NaOH + CaO, 3:1) instead of pure NaOH:</b> CaO itself does <i>no</i> chemistry here — pure solid NaOH is difficult to handle (highly hygroscopic, absorbs atmospheric water and CO₂, and becomes a corrosive puddle if left exposed, and is costlier). Soda-lime is easier and cheaper to handle, and the CaO component still absorbs CO₂ and moisture from the air like NaOH does — a purely practical, not chemical, reason.</p>
@@ -1658,6 +1825,7 @@ alkane: {
 <tr><td>Propagation</td><td>X• + R–H → R• + HX, then R• + X₂ → R–X + X• — the regenerated X• keeps the chain going.</td></tr>
 <tr><td>Termination</td><td>Any two radicals combine (X•+X•, R•+R•, or R•+X•), consuming radicals and ending the chain.</td></tr>
 </table>
+<figure class="study-diagram">${SVG_HALOGENATION_MECH}<figcaption>Free-radical chain mechanism for methane chlorination (CH₄ + Cl₂ → CH₃Cl + HCl). Propagation ① and ② repeat over and over — this is what makes it a chain reaction.</figcaption></figure>
 <p><b>Reactivity of the halogens:</b> F₂ ≫ Cl₂ > Br₂ ≫ I₂. F₂ is so exothermic the reaction is almost explosive and poorly selective; Cl₂ reacts readily; Br₂ is slower (the H-abstraction step is endothermic) but far more selective; I₂'s H-abstraction step is endothermic enough that iodination barely proceeds at all unless the HI formed is removed by an oxidizer (e.g. HIO₃ or HNO₃) to pull the equilibrium forward.</p>
 <p><b>Regioselectivity (which C–H bond reacts):</b> the rate of H-abstraction follows 3° > 2° > 1° > CH₄, because more-substituted carbon radicals are more stable (hyperconjugation + inductive donation from alkyl groups), lowering the transition-state energy for their formation.</p>
 <p><b>Chlorination vs bromination selectivity:</b> since Br• abstraction is endothermic, its transition state (Hammond postulate) resembles the product radical closely, so bromination is highly sensitive to radical stability and strongly favors the more substituted position; chlorination's transition state is earlier/more reactant-like, so it is far less selective and gives more of a statistical mixture.</p>
@@ -1694,6 +1862,41 @@ alkane: {
 <p><b>Redox behaviour:</b> since alkane carbons already sit at their minimum oxidation state, alkanes cannot be reduced further, and they resist oxidation in general (they don't decompose from oxidation by potassium permanganate the way alcohols do) &mdash; with one notable exception: a tertiary C&ndash;H bond has enough electron density (similar in character to alkene/alkyne C&ndash;H) that hot KMnO<sub>4</sub> can oxidize it directly to a tertiary alcohol, e.g. (CH<sub>3</sub>)<sub>3</sub>C&ndash;H + (O) &rarr;(KMnO<sub>4</sub>) (CH<sub>3</sub>)<sub>3</sub>C&ndash;OH (colourless product). KMnO<sub>4</sub> in acidic medium is a stronger oxidizing agent than in basic medium; the reagent used this way is also called Baeyer's reagent.</p>
 <p><b>Controlled oxidation:</b> alkanes heated with a regulated (limited) supply of dioxygen or air at high pressure, in the presence of suitable catalysts, give a variety of useful oxidation products instead of full combustion: 2CH<sub>4</sub> + O<sub>2</sub> &rarr;(Cu/523K/100atm) 2CH<sub>3</sub>OH (methanol); 2CH<sub>3</sub>CH<sub>3</sub> + 3O<sub>2</sub> &rarr;(Mo<sub>2</sub>O<sub>3</sub>/&Delta;) 2CH<sub>3</sub>COOH + 2H<sub>2</sub>O (ethanoic acid).</p>
 <p><b>Addition reactions of cyclopropane:</b> alkanes in general never give addition reactions, but cyclopropane is the one exception &mdash; its angle strain (bond angles compressed to 60&deg; instead of the ideal 109.5&deg;) makes the ring highly reactive, so it undergoes addition (ring-opening) with suitable reagents: Cl<sub>2</sub>/light at room temperature gives the monochlorinated ring-opened product; Cl<sub>2</sub>/FeCl<sub>3</sub> opens the ring at both ends to give the 1,3-dichloropropane; HX opens the ring to give a mono-halopropane; H<sub>2</sub>/Ni at 80&deg;C reduces it straight to propane; and dilute H<sub>2</sub>SO<sub>4</sub> (H<sup>+</sup>) opens the ring to give propan-1-ol.</p>
+`,
+
+'AROMATIC HYDROCARBONS (BENZENE)': `
+<p>Benzene (C₆H₆) is the parent aromatic hydrocarbon — a planar, cyclic, fully-conjugated ring that behaves nothing like a normal triene, because its six π electrons are <b>delocalised</b> over all six carbons rather than locked into three alternating double bonds.</p>
+<p><b>Structure and resonance:</b> the two Kekulé structures (double bonds on alternating C–C bonds) are not two different molecules interconverting — they are two contributing structures to a single <b>resonance hybrid</b>, which is the real structure of benzene. Because of this delocalisation, all six C–C bonds are experimentally identical, with a bond length of about 139 pm — intermediate between a pure C–C single bond (154 pm) and a pure C=C double bond (134 pm).</p>
+<figure class="study-diagram">${SVG_BENZENE_STRUCTURE}<figcaption>Benzene is not "really" either Kekulé structure — it is the resonance hybrid, usually drawn as a hexagon with an inscribed circle for the delocalised π system.</figcaption></figure>
+<p><b>Aromaticity (Hückel's rule):</b> a ring system is aromatic only if it is (i) cyclic, (ii) planar, (iii) fully conjugated (every ring atom has a p-orbital), and (iv) has exactly <b>(4n+2) π electrons</b> in that conjugated system (n = 0, 1, 2…). Benzene has 6 π electrons (n=1), satisfying Hückel's rule, which is why it is unusually stable (aromatic stabilisation/resonance energy) and strongly prefers <b>substitution</b> reactions that preserve the ring over <b>addition</b> reactions that would destroy the aromatic sextet.</p>
+<p><b>Why benzene undergoes substitution, not addition:</b> the π cloud above and below the ring plane makes benzene electron-rich, so it reacts as a nucleophile toward electron-poor species — i.e. it undergoes <b>electrophilic substitution</b> (not electrophilic addition like an alkene). Substitution replaces a ring H with the electrophile while regenerating the fully-conjugated, aromatic (and therefore extra-stable) ring in the product; addition would permanently destroy that aromatic stabilisation, so it is strongly disfavoured under ordinary EAS conditions.</p>
+<p><b>General mechanism of electrophilic aromatic substitution (EAS)</b> — three stages:</p>
+<ul class="study-notes-list">
+<li><b>Generation of the electrophile (E⁺):</b> the reagent is first activated by a catalyst/co-reagent into a strong electrophile (e.g. Cl₂ + FeCl₃ → Cl⁺[FeCl₄]⁻; HNO₃ + H₂SO₄ → NO₂⁺, the nitronium ion).</li>
+<li><b>Formation of the arenium ion (σ-complex, slow / rate-determining step):</b> the π cloud attacks E⁺, forming a new C–E σ-bond at one carbon, which becomes sp³. This carbon now carries both the new substituent and its original H. The ring is no longer aromatic — it is a resonance-stabilised cyclohexadienyl <b>cation</b>, with the positive charge delocalised over three ring carbons.</li>
+<li><b>Loss of H⁺ (fast, re-aromatisation):</b> a base (often the counter-ion generated in step 1, e.g. FeCl₄⁻) removes the H on the sp³ carbon; both electrons of that C–H bond go back into the ring, restoring full conjugation and the aromatic sextet. This step is fast because so much stabilisation (aromaticity) is regained.</li>
+</ul>
+<figure class="study-diagram">${SVG_EAS_MECHANISM}<figcaption>General electrophilic aromatic substitution mechanism: attack of E⁺ (slow, rate-determining) gives the resonance-stabilised, non-aromatic arenium ion, which then loses H⁺ (fast) to restore aromaticity.</figcaption></figure>
+<p><b>The five classic electrophilic substitution reactions of benzene:</b></p>
+<figure class="study-diagram">${SVG_BENZENE_REACTIONS}<figcaption>Halogenation, nitration, sulphonation, and Friedel–Crafts alkylation/acylation all follow the same three-step EAS mechanism above, differing only in how the electrophile E⁺ is generated.</figcaption></figure>
+<ul class="study-notes-list">
+<li><b>Halogenation:</b> C₆H₆ + Cl₂ —(anhyd. FeCl₃ or AlCl₃, dark)→ C₆H₅Cl + HCl. The Lewis acid catalyst polarises Cl–Cl to generate Cl⁺ (as Cl–FeCl₄⁻). Iodination needs an oxidising agent (e.g. HNO₃ or HIO₃) to keep pulling the equilibrium forward, since HI otherwise reduces the product back to benzene.</li>
+<li><b>Nitration:</b> C₆H₆ + HNO₃(conc.) —(conc. H₂SO₄, 50–60°C)→ C₆H₅NO₂ + H₂O. H₂SO₄ protonates HNO₃, which then loses water to generate the electrophile <b>NO₂⁺ (nitronium ion)</b>: HNO₃ + 2H₂SO₄ → NO₂⁺ + H₃O⁺ + 2HSO₄⁻.</li>
+<li><b>Sulphonation:</b> C₆H₆ + fuming H₂SO₄ (H₂SO₄ + SO₃, oleum) —(heat)→ C₆H₅SO₃H + H₂O. The electrophile is SO₃ itself (a strongly electron-poor sulphur centre); this reaction is <b>reversible</b> — heating benzenesulphonic acid with superheated steam/dilute H₂SO₄ reverses it back to benzene (useful as a way to temporarily "block" a ring position during a synthesis).</li>
+<li><b>Friedel–Crafts alkylation:</b> C₆H₆ + R–Cl —(anhyd. AlCl₃)→ C₆H₅–R + HCl. AlCl₃ polarises/ionises R–Cl to generate a carbocation-like R⁺ electrophile. <b>Limitations:</b> fails on a ring already carrying a strong deactivating/EWG substituent (e.g. –NO₂, –NH₂ salts with AlCl₃); tends to <b>over-alkylate</b> (polyalkylation), since the alkyl product ring is more electron-rich and reacts faster than benzene itself; and 1° carbocations formed can <b>rearrange</b> (hydride/alkyl shift) to a more stable cation before attacking the ring, so the alkyl group installed isn't always the one you started with.</li>
+<li><b>Friedel–Crafts acylation:</b> C₆H₆ + R–COCl (acid chloride) —(anhyd. AlCl₃)→ C₆H₅–COR (aryl ketone) + HCl. The acylium ion (R–C≡O⁺ ↔ R–C⁺=O) is the electrophile. Acylation avoids both problems of alkylation: it never over-reacts (the ketone product is deactivated toward further substitution, since the carbonyl is an EWG) and the acylium ion does not rearrange (resonance-stabilised as drawn). An aryl ketone made this way can be reduced straight to an alkylbenzene by Clemmensen (Zn–Hg/HCl) or Wolff–Kishner (NH₂NH₂/KOH) conditions — so acylation followed by reduction is the reliable route to a straight-chain (unrearranged) alkylbenzene.</li>
+</ul>
+<p><b>Directive influence of a substituent already on the ring</b> — an existing group controls both <i>where</i> the next electrophile attacks and <i>how fast</i> the ring reacts, based on how it donates or withdraws electron density into the ring by resonance and/or induction:</p>
+<table class="study-table">
+<tr><th>Class</th><th>Effect on rate</th><th>Directs new group to</th><th>Examples</th></tr>
+<tr><td><b>Strong activators</b> (lone pair conjugates directly into ring)</td><td>Strongly activating (much faster than benzene)</td><td>ortho/para</td><td>–OH, –OR, –NH₂, –NHR, –NHCOCH₃</td></tr>
+<tr><td><b>Weak activators</b> (hyperconjugation / weak donation)</td><td>Mildly activating</td><td>ortho/para</td><td>–CH₃ and other alkyl groups, –C₆H₅</td></tr>
+<tr><td><b>Weakly deactivating o,p-directors</b> (lone pair donates by resonance but strong inductive pull dominates the rate)</td><td>Deactivating overall</td><td>ortho/para</td><td>–F, –Cl, –Br, –I</td></tr>
+<tr><td><b>Deactivators / meta directors</b> (electron-withdrawing by resonance and/or induction; no lone pair to donate, or a full/partial positive charge next to the ring)</td><td>Strongly deactivating (much slower than benzene)</td><td>meta</td><td>–NO₂, –CN, –SO₃H, –CHO, –COR, –COOH, –COOR, –NR₃⁺</td></tr>
+</table>
+<p><b>Why o,p-directors put the new group ortho/para:</b> drawing the resonance structures of the arenium ion for attack at each position shows that only ortho and para attack place positive charge directly on (or adjacent to, for induction) the ring carbon bearing the donor group — where a lone pair (or an adjacent C–H) can best stabilise that charge. Attack meta to a donor never gets this extra stabilisation.</p>
+<p><b>Why meta directors put the new group meta:</b> for an EWG, ortho/para attack would put positive charge on (or right next to) the already electron-poor substituted carbon — a highly destabilising arrangement — so the ring instead is attacked preferentially at the meta position, where the developing positive charge stays furthest from the EWG.</p>
+<p><b>Halogens are the exception that proves the rule:</b> a halogen's strong <b>inductive</b> electron-withdrawal (very electronegative, close to the ring) dominates and slows the overall reaction down (net deactivating), but its lone pairs can still donate by <b>resonance</b> at the ortho/para arenium-ion structures once attack has occurred there, so the regiochemistry still favours ortho/para even though the reaction as a whole is slower than benzene.</p>
 `
 
 
@@ -1769,7 +1972,7 @@ alkene_alkyne: {
 const SECTION_META = {
   anion:  { title:'Anion Analysis', desc:'Group reagents, confirmatory tests, and color reactions for carbonate, sulphite, thiosulphate, sulphide, nitrite, nitrate, and the halides through sulphate.' },
   prelim: { title:'Preliminary Tests & Cation Groups', desc:'Physical tests, flame test colors, borax bead & microcosmic salt colors, charcoal cavity, cobalt nitrate, dry heat, and the cation group division table.' },
-  alkane: { title:'Alkane', desc:'Nomenclature & isomerism, Wurtz/Corey-House/decarboxylation & Kolbe preparation methods, catalytic & partial hydrogenation, Clemmensen/Wolff-Kishner/Mozingo reductions, carbide chemistry, physical properties, free-radical halogenation, combustion/cracking, and ethane conformations.' },
+  alkane: { title:'Alkane', desc:'Nomenclature & isomerism, Wurtz/Corey-House/decarboxylation & Kolbe preparation methods, catalytic & partial hydrogenation, Clemmensen/Wolff-Kishner/Mozingo reductions, carbide chemistry, physical properties, free-radical halogenation, combustion/cracking, ethane conformations, and benzene structure & electrophilic substitution (halogenation, nitration, sulphonation, Friedel-Crafts, directive effects).' },
   alkene_alkyne: { title:'Alkene & Alkyne', desc:'Elimination mechanisms (E1/E2/E1cB), Zaitsev vs Hofmann products, alcohol dehydration, dehalogenation of vicinal dihalides, the Wittig reaction, and alkyne preparation, acidity & isomerization.' }
 };
 let currentSection = null;

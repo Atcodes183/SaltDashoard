@@ -3296,6 +3296,102 @@
         ],
         "correct": 1,
         "expl": "Catalytic hydrogenation of cyclopropane's strained ring gives straight-chain propane."
+      },
+      {
+        "cat": "AROMATIC HYDROCARBONS (BENZENE)",
+        "q": "Why are all six C–C bonds in benzene experimentally identical (~139 pm) rather than alternating single/double bonds?",
+        "options": [
+          "Benzene is a resonance hybrid of the Kekulé structures, with 6 π electrons delocalised equally over all six carbons",
+          "The molecule rapidly interconverts between the two Kekulé structures, averaging the bond lengths over time",
+          "Steric strain forces all ring bonds to relax to the same length",
+          "Benzene has no double bonds at all in its ground state"
+        ],
+        "correct": 0,
+        "expl": "The two Kekulé structures are not separate, interconverting molecules — they are contributing structures to one resonance hybrid, the true (single) structure of benzene, in which the 6 π electrons are delocalised over the whole ring, equalising all the C–C bonds."
+      },
+      {
+        "cat": "AROMATIC HYDROCARBONS (BENZENE)",
+        "q": "Which condition, by Hückel's rule, is NOT required for a ring system to be aromatic?",
+        "options": [
+          "Every ring atom must carry a negative formal charge",
+          "The ring must be cyclic and planar",
+          "The ring must be fully conjugated (a p-orbital on every ring atom)",
+          "The π system must contain (4n+2) π electrons"
+        ],
+        "correct": 0,
+        "expl": "Hückel's rule requires a cyclic, planar, fully conjugated ring with (4n+2) π electrons — formal charge on the atoms is irrelevant; aromatic species can be neutral (benzene), cationic (tropylium), or anionic (cyclopentadienide)."
+      },
+      {
+        "cat": "AROMATIC HYDROCARBONS (BENZENE)",
+        "q": "Benzene reacts with electrophiles mainly by substitution rather than addition because:",
+        "options": [
+          "Addition would permanently destroy the aromatic (resonance) stabilisation of the ring, which substitution regenerates",
+          "Benzene has no π electrons available for an electrophile to attack",
+          "Addition reactions are always slower than substitution reactions for any alkene",
+          "Only alkynes, not aromatic rings, can undergo addition"
+        ],
+        "correct": 0,
+        "expl": "An addition product would leave the ring only partially conjugated, losing the large aromatic stabilisation energy; substitution restores full conjugation in the product, so it is strongly preferred energetically."
+      },
+      {
+        "cat": "AROMATIC HYDROCARBONS (BENZENE)",
+        "q": "In the electrophilic aromatic substitution mechanism, which step is the slow, rate-determining step?",
+        "options": [
+          "Formation of the resonance-stabilised arenium ion (σ-complex) by attack of E⁺ on the ring",
+          "Generation of the electrophile E⁺ from the reagent and catalyst",
+          "Loss of H⁺ from the arenium ion to restore aromaticity",
+          "Diffusion of the electrophile to the vicinity of the ring"
+        ],
+        "correct": 0,
+        "expl": "Attack of the electrophile breaks the ring's aromaticity to form the arenium ion — a high-energy, non-aromatic carbocation intermediate — which makes this step rate-determining. The final deprotonation step is fast because it regains aromatic stabilisation."
+      },
+      {
+        "cat": "AROMATIC HYDROCARBONS (BENZENE)",
+        "q": "What is the electrophile generated in situ during nitration of benzene with conc. HNO₃/conc. H₂SO₄?",
+        "options": [
+          "NO₂⁺ (nitronium ion)",
+          "NO₂⁻ (nitrite ion)",
+          "HNO₃ itself, unmodified",
+          "SO₃ (sulphur trioxide)"
+        ],
+        "correct": 0,
+        "expl": "Conc. H₂SO₄ protonates HNO₃, which then loses water to generate the nitronium ion NO₂⁺ — the true electrophile that is attacked by the benzene π system."
+      },
+      {
+        "cat": "AROMATIC HYDROCARBONS (BENZENE)",
+        "q": "Friedel–Crafts acylation is generally preferred over Friedel–Crafts alkylation as a route to an alkylbenzene (followed by Clemmensen/Wolff–Kishner reduction) mainly because:",
+        "options": [
+          "The acylium electrophile doesn't rearrange, and the ketone product is deactivated so the reaction stops after mono-substitution",
+          "Acylation works even on strongly deactivated rings such as nitrobenzene",
+          "Acylation does not require a Lewis acid catalyst",
+          "Acylation always gives a meta-substituted product while alkylation gives ortho/para"
+        ],
+        "correct": 0,
+        "expl": "Unlike an alkyl carbocation, the acylium ion (R–C≡O⁺ ↔ R–C⁺=O) is resonance-stabilised and does not rearrange, and the aryl ketone product is deactivating, which shuts down further (poly-)substitution — avoiding both classic problems of direct alkylation."
+      },
+      {
+        "cat": "AROMATIC HYDROCARBONS (BENZENE)",
+        "q": "Which of these substituents is a meta-director on a benzene ring?",
+        "options": [
+          "–NO₂",
+          "–OH",
+          "–CH₃",
+          "–Cl"
+        ],
+        "correct": 0,
+        "expl": "–NO₂ strongly withdraws electron density (inductively and by resonance) and has no lone pair to donate into the ring, so ortho/para attack would place positive charge right next to it — highly destabilising. Meta attack avoids this, making –NO₂ a meta director (and a strong deactivator)."
+      },
+      {
+        "cat": "AROMATIC HYDROCARBONS (BENZENE)",
+        "q": "Halogens (–F, –Cl, –Br, –I) on a benzene ring are unusual because they are:",
+        "options": [
+          "Deactivating overall (rate slower than benzene) but still ortho/para-directing",
+          "Activating overall and meta-directing",
+          "Deactivating overall and meta-directing",
+          "Activating overall and ortho/para-directing"
+        ],
+        "correct": 0,
+        "expl": "A halogen's strong inductive electron-withdrawal (it's very electronegative and close to the ring) dominates the rate, making the ring less reactive than benzene overall — but its lone pairs can still donate by resonance at the ortho/para positions once attack occurs there, so it still directs new substituents ortho/para."
       }
     ],
     "catColors": {
@@ -3313,7 +3409,8 @@
       "COMBUSTION, OXIDATION & CRACKING": "#84cc16",
       "CONFORMATIONS (ETHANE)": "#22d3ee",
       "ISOMERIZATION, AROMATIZATION & CONTROLLED OXIDATION": "#fdba74",
-      "REDOX & CYCLOPROPANE ADDITION": "#f43f5e"
+      "REDOX & CYCLOPROPANE ADDITION": "#f43f5e",
+      "AROMATIC HYDROCARBONS (BENZENE)": "#60a5fa"
     }
   },
   "alkene_alkyne": {
