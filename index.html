@@ -512,9 +512,33 @@ mark.study-hit{ background:rgba(52,211,153,0.28); color:var(--text); border-radi
 .study-notes-list li{ padding-left:14px; position:relative; }
 .study-notes-list li::before{ content:"–"; position:absolute; left:0; color:var(--panel-border); }
 .study-eqn{
-  font-family:'JetBrains Mono',monospace; font-size:12px; color:#c9d6cf;
-  background:var(--optbg); border:1px solid var(--panel-border); border-left:3px solid var(--mint);
-  border-radius:8px; padding:10px 14px; margin:0 0 12px; line-height:1.9; white-space:pre-wrap;
+  font-family:'JetBrains Mono',monospace; font-size:15.5px; font-weight:500; color:#e3f7ee;
+  background:linear-gradient(135deg, rgba(52,211,153,.09), var(--optbg) 60%);
+  border:1px solid var(--panel-border); border-left:4px solid var(--mint);
+  border-radius:10px; padding:16px 20px; margin:0 0 16px; line-height:2; white-space:pre-wrap;
+  letter-spacing:.01em; box-shadow:0 2px 16px rgba(52,211,153,.07);
+  position:relative;
+}
+.study-eqn::before{
+  content:"REACTION"; display:block; font-family:'JetBrains Mono',monospace; font-size:9.5px;
+  letter-spacing:.18em; color:var(--mint); opacity:.7; margin-bottom:9px; font-weight:700;
+}
+.study-eqn br{ display:block; content:""; margin-top:4px; }
+.rxn-arrow{ color:var(--mint); font-weight:800; font-size:1.2em; padding:0 2px; }
+.study-eqn.worked-example{ padding:18px 22px; }
+.study-eqn.worked-example::before{ content:none; }
+.worked-label{
+  display:inline-block; font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:700;
+  letter-spacing:.14em; text-transform:uppercase; color:#04140c; background:var(--mint);
+  border-radius:5px; padding:3px 8px; margin:0 10px 10px 0; vertical-align:middle;
+}
+.study-eqn.worked-example .worked-note{
+  display:block; margin-top:10px; font-family:'Source Serif 4', Georgia, serif;
+  font-size:13px; font-style:italic; font-weight:400; color:var(--muted); letter-spacing:0;
+}
+.study-table td:has(.rxn-arrow){
+  font-family:'JetBrains Mono',monospace; font-size:13.5px; font-weight:500;
+  color:#e3f7ee; background:rgba(52,211,153,.05);
 }
 .study-diagram{
   background:var(--optbg); border:1px solid var(--panel-border); border-radius:12px;
@@ -591,7 +615,7 @@ mark.study-hit{ background:rgba(52,211,153,0.28); color:var(--text); border-radi
 .reagent-q-text{ font-size:14.5px; line-height:1.5; margin:0 0 8px; }
 .reagent-q-answer{ font-size:13.5px; color:var(--mint); margin:0 0 6px; }
 .reagent-q-expl{ font-size:13px; color:var(--muted); line-height:1.55; }
-mark.reagent-hit{ background:var(--flame); color:#1a1006; font-weight:700; border-radius:3px; padding:0 3px; }
+mark.reagent-hit, mark.study-hit{ background:var(--flame); color:#1a1006; font-weight:700; border-radius:3px; padding:0 3px; }
 </style>
 </head>
 <body>
@@ -1472,182 +1496,182 @@ anion: {
 `,
 
 "CARBONATE/BICARBONATE": `
-<p><b>Test for CO₃²⁻/HCO₃⁻:</b> Salt + dilute or conc. HCl (or dilute/conc. H₂SO₄) → a colorless, odorless gas with brisk effervescence (CO₂).</p>
-<p><b>Limewater test:</b> Ca(OH)₂ (limewater) + excess CO₂ → CaCO₃↓ (white precipitate) →(excess CO₂)→ Ca(HCO₃)₂ (soluble) — milkiness appears, then disappears with excess CO₂.</p>
-<p><b>Baryta-water test:</b> Ba(OH)₂ (baryta water) + excess CO₂ → BaCO₃↓ (white precipitate) →(excess CO₂)→ Ba(HCO₃)₂ (soluble) — milkiness appears, then disappears.</p>
+<p><b>Test for CO₃²⁻/HCO₃⁻:</b> Salt + dilute or conc. HCl (or dilute/conc. H₂SO₄) <span class="rxn-arrow">→</span> a colorless, odorless gas with brisk effervescence (CO₂).</p>
+<p><b>Limewater test:</b> Ca(OH)₂ (limewater) + excess CO₂ <span class="rxn-arrow">→</span> CaCO₃↓ (white precipitate) <span class="rxn-arrow">→</span>(excess CO₂)<span class="rxn-arrow">→</span> Ca(HCO₃)₂ (soluble) — milkiness appears, then disappears with excess CO₂.</p>
+<p><b>Baryta-water test:</b> Ba(OH)₂ (baryta water) + excess CO₂ <span class="rxn-arrow">→</span> BaCO₃↓ (white precipitate) <span class="rxn-arrow">→</span>(excess CO₂)<span class="rxn-arrow">→</span> Ba(HCO₃)₂ (soluble) — milkiness appears, then disappears.</p>
 <p><b>Distinguishing CO₂ from SO₂:</b> CO₂ is a non-reducing gas; SO₂ is a reducing gas that decolorizes/changes these reagents, while CO₂ leaves them unaffected:</p>
 <table class="study-table">
 <tr><th>Reagent</th><th>Change caused by SO₂</th></tr>
-<tr><td>MnO₄⁻ (Purple) | H⁺</td><td>→ Mn²⁺ (Colorless)</td></tr>
-<tr><td>Cr₂O₇²⁻ (Orange-red) | H⁺</td><td>→ Cr³⁺ (Green)</td></tr>
-<tr><td>XO₃⁻ (e.g. IO₃⁻, BrO₃⁻) | H⁺</td><td>→ X₂ (I₂: violet/purple, Br₂: orange-red)</td></tr>
-<tr><td>X₂ | H₂O</td><td>→ HX (colorless) — halogen is decolorized</td></tr>
-<tr><td>Conc. HNO₃</td><td>→ NO₂↑ (reddish brown)</td></tr>
+<tr><td>MnO₄⁻ (Purple) | H⁺</td><td><span class="rxn-arrow">→</span> Mn²⁺ (Colorless)</td></tr>
+<tr><td>Cr₂O₇²⁻ (Orange-red) | H⁺</td><td><span class="rxn-arrow">→</span> Cr³⁺ (Green)</td></tr>
+<tr><td>XO₃⁻ (e.g. IO₃⁻, BrO₃⁻) | H⁺</td><td><span class="rxn-arrow">→</span> X₂ (I₂: violet/purple, Br₂: orange-red)</td></tr>
+<tr><td>X₂ | H₂O</td><td><span class="rxn-arrow">→</span> HX (colorless) — halogen is decolorized</td></tr>
+<tr><td>Conc. HNO₃</td><td><span class="rxn-arrow">→</span> NO₂↑ (reddish brown)</td></tr>
 </table>
 <p>CO₂ or CO₃²⁻ remains unaffected with all of the above reagents.</p>
-<p><b>Thermal decomposition:</b> Bicarbonate salt e.g. NaHCO₃ →(Δ)→ Na₂CO₃ + H₂O + CO₂↑</p>
-<p><b>Reaction with AgNO₃:</b> Na₂CO₃ + AgNO₃ → Ag₂CO₃↓ (white ppt) ⇌ Ag₂O↓ (brown, soluble in NH₃ and HNO₃) + CO₂↑. Ag₂CO₃↓ →(Δ)→ Ag↓ + CO₂↑ + O₂↑.</p>
+<p><b>Thermal decomposition:</b> Bicarbonate salt e.g. NaHCO₃ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> Na₂CO₃ + H₂O + CO₂↑</p>
+<p><b>Reaction with AgNO₃:</b> Na₂CO₃ + AgNO₃ <span class="rxn-arrow">→</span> Ag₂CO₃↓ (white ppt) <span class="rxn-arrow">⇌</span> Ag₂O↓ (brown, soluble in NH₃ and HNO₃) + CO₂↑. Ag₂CO₃↓ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> Ag↓ + CO₂↑ + O₂↑.</p>
 <p><b>Reaction with metal chlorides/salts (Na₂CO₃ +):</b></p>
 <ul class="study-notes-list">
-<li>MgCl₂ → MgCO₃·Mg(OH)₂↓</li>
-<li>Pb(OAc)₂ → PbCO₃·Pb(OH)₂↓</li>
-<li>ZnCl₂ → ZnCO₃·Zn(OH)₂↓</li>
-<li>HgCl₂ → 3HgCO₃·HgO↓ (reddish brown)</li>
-<li>CuSO₄ → CuCO₃·Cu(OH)₂↓ (green)</li>
-<li>Hg₂(NO₃)₂ → Hg₂CO₃↓ (yellow) ⇌ Hg₂O↓ (black) + CO₂↑</li>
-<li>CaCl₂ → CaCO₃↓, SrCl₂ → SrCO₃↓, BaCl₂ → BaCO₃↓</li>
-<li>NaHCO₃ + CaCl₂ (or BaCl₂ or SrCl₂) → <b>no precipitate</b> (bicarbonates of these cations are soluble)</li>
+<li>MgCl₂ <span class="rxn-arrow">→</span> MgCO₃·Mg(OH)₂↓</li>
+<li>Pb(OAc)₂ <span class="rxn-arrow">→</span> PbCO₃·Pb(OH)₂↓</li>
+<li>ZnCl₂ <span class="rxn-arrow">→</span> ZnCO₃·Zn(OH)₂↓</li>
+<li>HgCl₂ <span class="rxn-arrow">→</span> 3HgCO₃·HgO↓ (reddish brown)</li>
+<li>CuSO₄ <span class="rxn-arrow">→</span> CuCO₃·Cu(OH)₂↓ (green)</li>
+<li>Hg₂(NO₃)₂ <span class="rxn-arrow">→</span> Hg₂CO₃↓ (yellow) <span class="rxn-arrow">⇌</span> Hg₂O↓ (black) + CO₂↑</li>
+<li>CaCl₂ <span class="rxn-arrow">→</span> CaCO₃↓, SrCl₂ <span class="rxn-arrow">→</span> SrCO₃↓, BaCl₂ <span class="rxn-arrow">→</span> BaCO₃↓</li>
+<li>NaHCO₃ + CaCl₂ (or BaCl₂ or SrCl₂) <span class="rxn-arrow">→</span> <b>no precipitate</b> (bicarbonates of these cations are soluble)</li>
 </ul>
 <p><b>Na₂CO₃ vs NaHCO₃ titration (n-factor):</b> Methyl orange indicates the 2nd/final equivalence point for neutralization of Na₂CO₃ (n-factor = 2), and it's also the only equivalence point for neutralization of NaHCO₃ (n-factor = 1) by acid. Phenolphthalein fails for NaHCO₃, but indicates the first equivalence point of Na₂CO₃ (n-factor = 1).</p>
 `,
 
 "SULPHITE/BISULPHITE": `
-<p>BaSO₃ is soluble in an oxidizing medium and in conc. HCl: BaSO₃ + HCl(conc.) → BaCl₂(soluble) + H₂O + SO₂↑. The insoluble BaSO₄ is likewise soluble in conc. H₂SO₄ due to formation of soluble Ba(HSO₄)₂.</p>
-<p><b>Reaction with AgNO₃:</b> Sulphite salt + AgNO₃ → [Ag(SO₃)]⁻ (clear solution) →(AgNO₃)→ Ag₂SO₃↓ (white, reducing precipitate) →(boil)→ Ag↓ + SO₂ + SO₄²⁻ (sulphur is in the +4 oxidation state, so it can be oxidized). In an oxidizing medium, Ag₂SO₃↓ → Ag₂SO₄↓.</p>
-<p><b>Gas test:</b> Sulphite salt + (Zn|HCl or Fe|HCl) → H₂S↑ (rotten-egg smell).</p>
+<p>BaSO₃ is soluble in an oxidizing medium and in conc. HCl: BaSO₃ + HCl(conc.) <span class="rxn-arrow">→</span> BaCl₂(soluble) + H₂O + SO₂↑. The insoluble BaSO₄ is likewise soluble in conc. H₂SO₄ due to formation of soluble Ba(HSO₄)₂.</p>
+<p><b>Reaction with AgNO₃:</b> Sulphite salt + AgNO₃ <span class="rxn-arrow">→</span> [Ag(SO₃)]⁻ (clear solution) <span class="rxn-arrow">→</span>(AgNO₃)<span class="rxn-arrow">→</span> Ag₂SO₃↓ (white, reducing precipitate) <span class="rxn-arrow">→</span>(boil)<span class="rxn-arrow">→</span> Ag↓ + SO₂ + SO₄²⁻ (sulphur is in the +4 oxidation state, so it can be oxidized). In an oxidizing medium, Ag₂SO₃↓ <span class="rxn-arrow">→</span> Ag₂SO₄↓.</p>
+<p><b>Gas test:</b> Sulphite salt + (Zn|HCl or Fe|HCl) <span class="rxn-arrow">→</span> H₂S↑ (rotten-egg smell).</p>
 <p><b>Bisulphite test:</b> Aldehydes and simple (methyl) ketones give a white crystalline addition product with NaHSO₃:</p>
-<div class="study-eqn">R−CH=O + NaHSO₃ → R−CH(OH)−SO₃Na<br>R−C(=O)−CH₃ + NaHSO₃ → R−C(OH)(CH₃)−SO₃Na</div>
+<div class="study-eqn">R−CH=O + NaHSO₃ <span class="rxn-arrow">→</span> R−CH(OH)−SO₃Na<br>R−C(=O)−CH₃ + NaHSO₃ <span class="rxn-arrow">→</span> R−C(OH)(CH₃)−SO₃Na</div>
 `,
 
 "THIOSULPHATE": `
 <p>Structure: Na₂S₂O₃ — 2Na⁺[O₃S=S]²⁻ (contains a weak S–S π-bond). All thiosulphate salts are soluble <b>except</b> Ag₂S₂O₃, Cu₂S₂O₃, PbS₂O₃, HgS₂O₃, BaS₂O₃, Bi₂(S₂O₃)₃.</p>
-<p>H₂S₂O₃ is unstable: H₂S₂O₃ →(Δ)→ H₂O + SO₂↑ + S↓.</p>
-<p><b>Reaction with group reagent</b> (dilute H₂SO₄, or dilute/conc. HCl): thiosulphate salt → S↓ (yellowish ppt/white turbidity) + SO₂↑ (suffocating smell).</p>
-<div class="study-eqn">Na₂S₂O₃ + dil. HCl → NaCl + S↓ + SO₂↑ + H₂O<br>Na₂S₂O₃ + dil. H₂SO₄ → Na₂SO₄ + S↓ + SO₂↑ + H₂O</div>
+<p>H₂S₂O₃ is unstable: H₂S₂O₃ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> H₂O + SO₂↑ + S↓.</p>
+<p><b>Reaction with group reagent</b> (dilute H₂SO₄, or dilute/conc. HCl): thiosulphate salt <span class="rxn-arrow">→</span> S↓ (yellowish ppt/white turbidity) + SO₂↑ (suffocating smell).</p>
+<div class="study-eqn">Na₂S₂O₃ + dil. HCl <span class="rxn-arrow">→</span> NaCl + S↓ + SO₂↑ + H₂O<br>Na₂S₂O₃ + dil. H₂SO₄ <span class="rxn-arrow">→</span> Na₂SO₄ + S↓ + SO₂↑ + H₂O</div>
 <p><b>Reaction with halogens:</b></p>
-<div class="study-eqn">Na₂S₂O₃ + I₂ or I₃⁻ (blue-black) →(starch)→ Na₂S₄O₆ + NaI (colorless)<br>Na₂S₂O₃ + Cl₂ (yellowish-green) → Na₂SO₄ + NaCl (colorless)<br>Na₂S₂O₃ + Br₂ (reddish brown) → Na₂SO₄ + NaBr (colorless)<br>Na₂S₂O₃ + F₂ (yellow) → Na₂SO₄ + NaF (colorless)</div>
-<p><b>Reaction with oxidizing agents</b> (thiosulphate is oxidized to SO₄²⁻): MnO₄⁻ (purple) | H⁺ → Mn²⁺ (colorless); Cr₂O₇²⁻ (orange-red) | H⁺ → Cr³⁺ (green); XO₃⁻ | H⁺ → X₂.</p>
+<div class="study-eqn">Na₂S₂O₃ + I₂ or I₃⁻ (blue-black) <span class="rxn-arrow">→</span>(starch)<span class="rxn-arrow">→</span> Na₂S₄O₆ + NaI (colorless)<br>Na₂S₂O₃ + Cl₂ (yellowish-green) <span class="rxn-arrow">→</span> Na₂SO₄ + NaCl (colorless)<br>Na₂S₂O₃ + Br₂ (reddish brown) <span class="rxn-arrow">→</span> Na₂SO₄ + NaBr (colorless)<br>Na₂S₂O₃ + F₂ (yellow) <span class="rxn-arrow">→</span> Na₂SO₄ + NaF (colorless)</div>
+<p><b>Reaction with oxidizing agents</b> (thiosulphate is oxidized to SO₄²⁻): MnO₄⁻ (purple) | H⁺ <span class="rxn-arrow">→</span> Mn²⁺ (colorless); Cr₂O₇²⁻ (orange-red) | H⁺ <span class="rxn-arrow">→</span> Cr³⁺ (green); XO₃⁻ | H⁺ <span class="rxn-arrow">→</span> X₂.</p>
 <p><b>Reaction with Ag⁺:</b></p>
 <ul class="study-notes-list">
-<li>Ag⁺-salt (soluble/insoluble) + Na₂S₂O₃ → Ag₂S₂O₃↓ (white)</li>
-<li>Ag₂S₂O₃↓ + excess Na₂S₂O₃ → Na₃[Ag(S₂O₃)₂] (soluble)</li>
-<li>Ag₂S₂O₃↓ + H₂O → Ag₂S↓ (black) + (via excess Na₂S₂O₃) → Na₃[Ag(S₂O₃)₂] (soluble), or (via HCN) → [Ag(CN)₂]⁻ + S²⁻</li>
-<li>Ag₂S↓ (black) + NH₃ → insoluble in NH₃</li>
+<li>Ag⁺-salt (soluble/insoluble) + Na₂S₂O₃ <span class="rxn-arrow">→</span> Ag₂S₂O₃↓ (white)</li>
+<li>Ag₂S₂O₃↓ + excess Na₂S₂O₃ <span class="rxn-arrow">→</span> Na₃[Ag(S₂O₃)₂] (soluble)</li>
+<li>Ag₂S₂O₃↓ + H₂O <span class="rxn-arrow">→</span> Ag₂S↓ (black) + (via excess Na₂S₂O₃) <span class="rxn-arrow">→</span> Na₃[Ag(S₂O₃)₂] (soluble), or (via HCN) <span class="rxn-arrow">→</span> [Ag(CN)₂]⁻ + S²⁻</li>
+<li>Ag₂S↓ (black) + NH₃ <span class="rxn-arrow">→</span> insoluble in NH₃</li>
 </ul>
 <p><b>Reaction with other cations (all via excess Na₂S₂O₃ forming soluble complexes, hydrolyzing back in water):</b></p>
 <ul class="study-notes-list">
-<li>Pb(OAc)₂ → PbS₂O₃↓ (white) →(excess Na₂S₂O₃)→ Na₂[Pb(S₂O₃)₂] (soluble); →(H₂O)→ PbS↓ (black)</li>
-<li>HgCl₂ → HgS₂O₃↓ (white) →(excess)→ Na₂[Hg(S₂O₃)₂] (soluble); →(H₂O)→ HgS↓ (black)</li>
-<li>BiCl₃ → Bi₂(S₂O₃)₃↓ (white) →(excess)→ Na₃[Bi(S₂O₃)₂] (soluble); →(H₂O)→ Bi₂S₃↓ (dark brown)</li>
-<li>CuSO₄ → Cu₂S₂O₃ (soluble, weak O.A.) → Cu₂S₂O₃↓ (white) + Na₂S₄O₆; →(H₂O)→ Cu₂S↓ (dark grey to black); Cu₂S₂O₃↓ →(excess Na₂S₂O₃)→ Na₄[Cu₆(S₂O₃)₅]</li>
+<li>Pb(OAc)₂ <span class="rxn-arrow">→</span> PbS₂O₃↓ (white) <span class="rxn-arrow">→</span>(excess Na₂S₂O₃)<span class="rxn-arrow">→</span> Na₂[Pb(S₂O₃)₂] (soluble); <span class="rxn-arrow">→</span>(H₂O)<span class="rxn-arrow">→</span> PbS↓ (black)</li>
+<li>HgCl₂ <span class="rxn-arrow">→</span> HgS₂O₃↓ (white) <span class="rxn-arrow">→</span>(excess)<span class="rxn-arrow">→</span> Na₂[Hg(S₂O₃)₂] (soluble); <span class="rxn-arrow">→</span>(H₂O)<span class="rxn-arrow">→</span> HgS↓ (black)</li>
+<li>BiCl₃ <span class="rxn-arrow">→</span> Bi₂(S₂O₃)₃↓ (white) <span class="rxn-arrow">→</span>(excess)<span class="rxn-arrow">→</span> Na₃[Bi(S₂O₃)₂] (soluble); <span class="rxn-arrow">→</span>(H₂O)<span class="rxn-arrow">→</span> Bi₂S₃↓ (dark brown)</li>
+<li>CuSO₄ <span class="rxn-arrow">→</span> Cu₂S₂O₃ (soluble, weak O.A.) <span class="rxn-arrow">→</span> Cu₂S₂O₃↓ (white) + Na₂S₄O₆; <span class="rxn-arrow">→</span>(H₂O)<span class="rxn-arrow">→</span> Cu₂S↓ (dark grey to black); Cu₂S₂O₃↓ <span class="rxn-arrow">→</span>(excess Na₂S₂O₃)<span class="rxn-arrow">→</span> Na₄[Cu₆(S₂O₃)₅]</li>
 </ul>
-<p><b>Reaction with CN⁻ / FeCl₃ (blood-red complex):</b> Na₂S₂O₃ + CN⁻-salt → SCN⁻ + SO₃²⁻ →(Pb²⁺)→ PbSO₃↓ (white); →(FeCl₃)→ Fe(SCN)₃↓ (blood-red precipitate).</p>
-<p>Na₂S₂O₃ + FeCl₃ → Fe₂(S₂O₃)₃ (violet ppt., weak O.A.) →(Na₂S₂O₃)→ FeS₂O₃ (green solution) + Na₂S₄O₆.</p>
-<p>Na₂S₂O₃ + [Ni(en)₃](NO₃)₂ → [Ni(en)₃]S₂O₃↓ (violet precipitate) + NaNO₃.</p>
+<p><b>Reaction with CN⁻ / FeCl₃ (blood-red complex):</b> Na₂S₂O₃ + CN⁻-salt <span class="rxn-arrow">→</span> SCN⁻ + SO₃²⁻ <span class="rxn-arrow">→</span>(Pb²⁺)<span class="rxn-arrow">→</span> PbSO₃↓ (white); <span class="rxn-arrow">→</span>(FeCl₃)<span class="rxn-arrow">→</span> Fe(SCN)₃↓ (blood-red precipitate).</p>
+<p>Na₂S₂O₃ + FeCl₃ <span class="rxn-arrow">→</span> Fe₂(S₂O₃)₃ (violet ppt., weak O.A.) <span class="rxn-arrow">→</span>(Na₂S₂O₃)<span class="rxn-arrow">→</span> FeS₂O₃ (green solution) + Na₂S₄O₆.</p>
+<p>Na₂S₂O₃ + [Ni(en)₃](NO₃)₂ <span class="rxn-arrow">→</span> [Ni(en)₃]S₂O₃↓ (violet precipitate) + NaNO₃.</p>
 `,
 
 "SULPHIDE/BISULPHIDE": `
-<p>Group 1 (alkali metal) sulphides are soluble; group 2 (alkaline earth) sulphides are sparingly soluble but generally dissolve due to hydrolysis: MS + H₂O ⇌ M(OH)₂ + M(SH)₂. Aqueous solutions of group 1/2 sulphides are alkaline (basic) due to anionic hydrolysis.</p>
-<div class="study-eqn">MgS + H₂O → Mg(OH)₂↓ + H₂S<br>Al₂S₃ + H₂O → Al(OH)₃↓ + H₂S<br>Cr₂S₃ + H₂O → Cr(OH)₃↓ (green) + H₂S</div>
-<p>With H₂O₂ or Na₂O₂ | Δ, Cr(OH)₃ → CrO₄²⁻ (yellow aqueous solution).</p>
-<p><b>Reaction with group reagent:</b> Sulphide salt + (dilute H₂SO₄ or dilute/conc. HCl) → H₂S↑ (rotten-egg smell). Most sulphides dissolve in dilute HCl/H₂SO₄; group-2 sulphides are insoluble in dilute HCl but soluble in conc. HCl, conc. HNO₃, or dilute HNO₃.</p>
+<p>Group 1 (alkali metal) sulphides are soluble; group 2 (alkaline earth) sulphides are sparingly soluble but generally dissolve due to hydrolysis: MS + H₂O <span class="rxn-arrow">⇌</span> M(OH)₂ + M(SH)₂. Aqueous solutions of group 1/2 sulphides are alkaline (basic) due to anionic hydrolysis.</p>
+<div class="study-eqn">MgS + H₂O <span class="rxn-arrow">→</span> Mg(OH)₂↓ + H₂S<br>Al₂S₃ + H₂O <span class="rxn-arrow">→</span> Al(OH)₃↓ + H₂S<br>Cr₂S₃ + H₂O <span class="rxn-arrow">→</span> Cr(OH)₃↓ (green) + H₂S</div>
+<p>With H₂O₂ or Na₂O₂ | Δ, Cr(OH)₃ <span class="rxn-arrow">→</span> CrO₄²⁻ (yellow aqueous solution).</p>
+<p><b>Reaction with group reagent:</b> Sulphide salt + (dilute H₂SO₄ or dilute/conc. HCl) <span class="rxn-arrow">→</span> H₂S↑ (rotten-egg smell). Most sulphides dissolve in dilute HCl/H₂SO₄; group-2 sulphides are insoluble in dilute HCl but soluble in conc. HCl, conc. HNO₃, or dilute HNO₃.</p>
 <p><b>Reaction with AgNO₃/Pb(OAc)₂/Cd(NO₃)₂:</b></p>
 <ul class="study-notes-list">
-<li>+ AgNO₃ → Ag₂S↓ (black) →(excess KCN)→ [Ag(CN)₂]⁻ + S²⁻ ; →(excess Na₂S₂O₃)→ Na₃[Ag(S₂O₃)₂]</li>
-<li>+ Pb(OAc)₂ → PbS↓ (black) →(H₂O₂|Δ)→ PbSO₄↓ (white)</li>
-<li>+ Cd(NO₃)₂ → CdS↓ (yellow) →(H₂O₂|Δ)→ CdSO₄↓ (white)</li>
+<li>+ AgNO₃ <span class="rxn-arrow">→</span> Ag₂S↓ (black) <span class="rxn-arrow">→</span>(excess KCN)<span class="rxn-arrow">→</span> [Ag(CN)₂]⁻ + S²⁻ ; <span class="rxn-arrow">→</span>(excess Na₂S₂O₃)<span class="rxn-arrow">→</span> Na₃[Ag(S₂O₃)₂]</li>
+<li>+ Pb(OAc)₂ <span class="rxn-arrow">→</span> PbS↓ (black) <span class="rxn-arrow">→</span>(H₂O₂|Δ)<span class="rxn-arrow">→</span> PbSO₄↓ (white)</li>
+<li>+ Cd(NO₃)₂ <span class="rxn-arrow">→</span> CdS↓ (yellow) <span class="rxn-arrow">→</span>(H₂O₂|Δ)<span class="rxn-arrow">→</span> CdSO₄↓ (white)</li>
 </ul>
-<p><b>Reaction with aqua regia</b> (3:1 HCl:HNO₃, a strong oxidizing, pungent yellow liquid) — these sulphides are only slightly soluble in conc. HNO₃ alone: HgS → HgCl₂; CoS → CoCl₂; NiS → NiCl₂.</p>
-<p><b>Nitroprusside test:</b> Soluble sulphide salt + Na₂[Fe(CN)₅NO] (sodium nitroprusside, red) → violet-colored solution. Not given by free H₂S (needs significant S²⁻ concentration). Sulphide gives nucleophilic addition with the nitrosonium group to form a thionitrite: S²⁻ + N≡O⁺ → ⁻S−N=O (thionitrite, resonance with perthionitrite).</p>
-<p><b>Methylene blue test</b> (for H₂S): p-dimethylamino aniline + H₂S →(H₂SO₄, FeCl₃)→ methylene blue (blue dye) + Fe²⁺ + H₂O.</p>
+<p><b>Reaction with aqua regia</b> (3:1 HCl:HNO₃, a strong oxidizing, pungent yellow liquid) — these sulphides are only slightly soluble in conc. HNO₃ alone: HgS <span class="rxn-arrow">→</span> HgCl₂; CoS <span class="rxn-arrow">→</span> CoCl₂; NiS <span class="rxn-arrow">→</span> NiCl₂.</p>
+<p><b>Nitroprusside test:</b> Soluble sulphide salt + Na₂[Fe(CN)₅NO] (sodium nitroprusside, red) <span class="rxn-arrow">→</span> violet-colored solution. Not given by free H₂S (needs significant S²⁻ concentration). Sulphide gives nucleophilic addition with the nitrosonium group to form a thionitrite: S²⁻ + N≡O⁺ <span class="rxn-arrow">→</span> ⁻S−N=O (thionitrite, resonance with perthionitrite).</p>
+<p><b>Methylene blue test</b> (for H₂S): p-dimethylamino aniline + H₂S <span class="rxn-arrow">→</span>(H₂SO₄, FeCl₃)<span class="rxn-arrow">→</span> methylene blue (blue dye) + Fe²⁺ + H₂O.</p>
 <p>Sulphide salts with FeCl₃, FeCl₂ and BiCl₃ give Fe₂S₃ (black ppt.), FeS (black ppt.) and Bi₂S₃ (dark-brown ppt.) respectively.</p>
 `,
 
 "NITRITE": `
-<p>All nitrites are soluble except AgNO₂ (white precipitate). HNO₂ is unstable: HNO₂ → NO↑ + HNO₃ + H₂O ⇒ NO↑ + O₂(from air) →(aerial oxidation)→ NO₂↑ (reddish brown).</p>
-<p><b>Reaction with group reagent</b> (dilute H₂SO₄ or dilute/conc. HCl): nitrite salt → colorless gas (NO) which turns reddish-brown (NO₂) on aerial oxidation.</p>
-<div class="study-eqn">KNO₂ + dil. HCl → KCl + NO↑ + HNO₃ + H₂O<br>KNO₂ + dil. H₂SO₄ → K₂SO₄ + NO↑ + HNO₃ + H₂O</div>
-<p><b>Reaction with AgNO₃:</b> Nitrite salt (soluble) + AgNO₃ → AgNO₂↓ (white ppt., reducing in nature). AgNO₂ is oxidized back to AgNO₃ by: MnO₄⁻ (purple)|H⁺→Mn²⁺(colorless); Cr₂O₇²⁻ (orange-red)|H⁺→Cr³⁺(green); XO₃⁻|H⁺→X₂; X₂|H₂O→HX.</p>
-<p><b>Ring test:</b> Nitrite salt + dilute H₂SO₄ + FeSO₄(aq) → brown-colored complex (unstable, decomposes on warming/shaking).</p>
-<div class="study-eqn">KNO₂ + dil. H₂SO₄ → KHSO₄ + NO↑ + HNO₃ + H₂O<br>[Fe(H₂O)₆]SO₄ + NO → [Fe(H₂O)₅NO]SO₄↓ (brown ring) →(warm)→ FeSO₄ + NO</div>
+<p>All nitrites are soluble except AgNO₂ (white precipitate). HNO₂ is unstable: HNO₂ <span class="rxn-arrow">→</span> NO↑ + HNO₃ + H₂O ⇒ NO↑ + O₂(from air) <span class="rxn-arrow">→</span>(aerial oxidation)<span class="rxn-arrow">→</span> NO₂↑ (reddish brown).</p>
+<p><b>Reaction with group reagent</b> (dilute H₂SO₄ or dilute/conc. HCl): nitrite salt <span class="rxn-arrow">→</span> colorless gas (NO) which turns reddish-brown (NO₂) on aerial oxidation.</p>
+<div class="study-eqn">KNO₂ + dil. HCl <span class="rxn-arrow">→</span> KCl + NO↑ + HNO₃ + H₂O<br>KNO₂ + dil. H₂SO₄ <span class="rxn-arrow">→</span> K₂SO₄ + NO↑ + HNO₃ + H₂O</div>
+<p><b>Reaction with AgNO₃:</b> Nitrite salt (soluble) + AgNO₃ <span class="rxn-arrow">→</span> AgNO₂↓ (white ppt., reducing in nature). AgNO₂ is oxidized back to AgNO₃ by: MnO₄⁻ (purple)|H⁺<span class="rxn-arrow">→</span>Mn²⁺(colorless); Cr₂O₇²⁻ (orange-red)|H⁺<span class="rxn-arrow">→</span>Cr³⁺(green); XO₃⁻|H⁺<span class="rxn-arrow">→</span>X₂; X₂|H₂O<span class="rxn-arrow">→</span>HX.</p>
+<p><b>Ring test:</b> Nitrite salt + dilute H₂SO₄ + FeSO₄(aq) <span class="rxn-arrow">→</span> brown-colored complex (unstable, decomposes on warming/shaking).</p>
+<div class="study-eqn">KNO₂ + dil. H₂SO₄ <span class="rxn-arrow">→</span> KHSO₄ + NO↑ + HNO₃ + H₂O<br>[Fe(H₂O)₆]SO₄ + NO <span class="rxn-arrow">→</span> [Fe(H₂O)₅NO]SO₄↓ (brown ring) <span class="rxn-arrow">→</span>(warm)<span class="rxn-arrow">→</span> FeSO₄ + NO</div>
 <p>(3 unpaired e⁻, colored due to LMCT.) In the nitrite ring test, dilute H₂SO₄ is used — with conc. H₂SO₄, NO may be further oxidized to NO₂.</p>
-<p><b>Iodide test:</b> Nitrite salt + KI (acidified with a non-oxidizing acid like CH₃COOH or H₃PO₄) →(starch)→ blue-black solution. KI + KNO₂ + CH₃COOH → CH₃COOK + I₂ + H₂O + NO↑.</p>
+<p><b>Iodide test:</b> Nitrite salt + KI (acidified with a non-oxidizing acid like CH₃COOH or H₃PO₄) <span class="rxn-arrow">→</span>(starch)<span class="rxn-arrow">→</span> blue-black solution. KI + KNO₂ + CH₃COOH <span class="rxn-arrow">→</span> CH₃COOK + I₂ + H₂O + NO↑.</p>
 <p>Nitrite salt reduces MnO₄⁻|H⁺, Cr₂O₇²⁻|H⁺, XO₃⁻|H⁺, X₂ − H₂O, itself getting converted to the nitrate salt.</p>
-<p><b>With Zn/Al–NaOH:</b> Nitrite salt →(Zn–NaOH)→ NH₃↑; →(Al–NaOH)→ NH₃↑ (gives white dense fumes of NH₄Cl with HCl).</p>
-<p>Nitrite salt + NH₄Cl →(Δ)→ colorless, odourless, tasteless gas: KNO₂ + NH₄Cl → KCl + NH₄NO₂ →(Δ)→ N₂ + H₂O.</p>
+<p><b>With Zn/Al–NaOH:</b> Nitrite salt <span class="rxn-arrow">→</span>(Zn–NaOH)<span class="rxn-arrow">→</span> NH₃↑; <span class="rxn-arrow">→</span>(Al–NaOH)<span class="rxn-arrow">→</span> NH₃↑ (gives white dense fumes of NH₄Cl with HCl).</p>
+<p>Nitrite salt + NH₄Cl <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> colorless, odourless, tasteless gas: KNO₂ + NH₄Cl <span class="rxn-arrow">→</span> KCl + NH₄NO₂ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> N₂ + H₂O.</p>
 <p><b>Nitrite salt + dilute HCl with organic groups:</b></p>
 <table class="study-table">
-<tr><td>R−NH₂ → R−OH + N₂</td><td>R−CONH₂ → R−COOH + N₂</td><td>R−SO₂−NH₂ → R−SO₃H + N₂</td></tr>
-<tr><td>Urea CO(NH₂)₂ → CO₂ + H₂O + N₂</td><td>Thio-urea CS(NH₂)₂ → CSO + H₂O + N₂ (unpleasant smell)</td><td>HO−SO₂−NH₂ → H₂SO₄ + N₂</td></tr>
+<tr><td>R−NH₂ <span class="rxn-arrow">→</span> R−OH + N₂</td><td>R−CONH₂ <span class="rxn-arrow">→</span> R−COOH + N₂</td><td>R−SO₂−NH₂ <span class="rxn-arrow">→</span> R−SO₃H + N₂</td></tr>
+<tr><td>Urea CO(NH₂)₂ <span class="rxn-arrow">→</span> CO₂ + H₂O + N₂</td><td>Thio-urea CS(NH₂)₂ <span class="rxn-arrow">→</span> CSO + H₂O + N₂ (unpleasant smell)</td><td>HO−SO₂−NH₂ <span class="rxn-arrow">→</span> H₂SO₄ + N₂</td></tr>
 </table>
-<p><b>Griess-Ilosvay's test:</b> Sulphanilamide (Griess reagent 1) + NO₂⁻ → a diazonium intermediate, which couples with Griess reagent 2 (an N-substituted naphthylamine) → an orange-red / pink azo dye.</p>
+<p><b>Griess-Ilosvay's test:</b> Sulphanilamide (Griess reagent 1) + NO₂⁻ <span class="rxn-arrow">→</span> a diazonium intermediate, which couples with Griess reagent 2 (an N-substituted naphthylamine) <span class="rxn-arrow">→</span> an orange-red / pink azo dye.</p>
 `,
 
 "NITRATE": `
 <p>All nitrates are soluble <b>except</b> some oxo-/hydroxo-nitrate salts: BiONO₃ (brown), Hg(OH)NO₃ (yellowish brown), Co(OH)NO₃ (blue) — these dissolve in strongly acidic medium like conc. HNO₃.</p>
 <p><b>Reaction with group reagent:</b></p>
-<div class="study-eqn">Nitrate salt + conc. H₂SO₄, Δ → reddish-brown fume (NO₂)<br>Nitrate salt + conc. H₂SO₄, Cu-chips, Δ → intense reddish-brown fume (NO₂)</div>
-<div class="study-eqn">KNO₃ + conc. H₂SO₄, Δ → KHSO₄ + HNO₃ →(Δ)→ NO₂↑ + H₂O + O₂<br>KNO₃ + conc. H₂SO₄, Cu-chips, Δ → KHSO₄ + CuSO₄ + NO₂↑ + H₂O</div>
-<p><b>Ring test:</b> Nitrate salt + conc. H₂SO₄ + FeSO₄(aq, large excess), Δ → brown ring/colored complex (unstable, decomposes on warming/shaking).</p>
-<div class="study-eqn">KNO₃ + H₂SO₄ → KHSO₄ + HNO₃<br>FeSO₄ + H₂SO₄ + HNO₃ (as O.A.) → Fe₂(SO₄)₃ + H₂SO₄ + NO↑<br>[Fe(H₂O)₆]SO₄ + NO → [Fe(H₂O)₅NO]SO₄↓ (brown ring) →(warm)→ FeSO₄ + NO</div>
+<div class="study-eqn">Nitrate salt + conc. H₂SO₄, Δ <span class="rxn-arrow">→</span> reddish-brown fume (NO₂)<br>Nitrate salt + conc. H₂SO₄, Cu-chips, Δ <span class="rxn-arrow">→</span> intense reddish-brown fume (NO₂)</div>
+<div class="study-eqn">KNO₃ + conc. H₂SO₄, Δ <span class="rxn-arrow">→</span> KHSO₄ + HNO₃ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> NO₂↑ + H₂O + O₂<br>KNO₃ + conc. H₂SO₄, Cu-chips, Δ <span class="rxn-arrow">→</span> KHSO₄ + CuSO₄ + NO₂↑ + H₂O</div>
+<p><b>Ring test:</b> Nitrate salt + conc. H₂SO₄ + FeSO₄(aq, large excess), Δ <span class="rxn-arrow">→</span> brown ring/colored complex (unstable, decomposes on warming/shaking).</p>
+<div class="study-eqn">KNO₃ + H₂SO₄ <span class="rxn-arrow">→</span> KHSO₄ + HNO₃<br>FeSO₄ + H₂SO₄ + HNO₃ (as O.A.) <span class="rxn-arrow">→</span> Fe₂(SO₄)₃ + H₂SO₄ + NO↑<br>[Fe(H₂O)₆]SO₄ + NO <span class="rxn-arrow">→</span> [Fe(H₂O)₅NO]SO₄↓ (brown ring) <span class="rxn-arrow">→</span>(warm)<span class="rxn-arrow">→</span> FeSO₄ + NO</div>
 <p><b>Role of FeSO₄</b> in the ring test: (1) complexing/precipitating agent, (2) reducing agent.</p>
-<p><b>With Zn/Al–NaOH:</b> Nitrate salt →(Zn–NaOH)→ NH₃↑; →(Al–NaOH)→ NH₃↑ (ammonia gives white dense fumes of NH₄Cl with HCl).</p>
+<p><b>With Zn/Al–NaOH:</b> Nitrate salt <span class="rxn-arrow">→</span>(Zn–NaOH)<span class="rxn-arrow">→</span> NH₃↑; <span class="rxn-arrow">→</span>(Al–NaOH)<span class="rxn-arrow">→</span> NH₃↑ (ammonia gives white dense fumes of NH₄Cl with HCl).</p>
 `,
 
 "CHLORIDE": `
 <p>All chloride salts are soluble <b>except</b> AgCl, PbCl₂, Hg₂Cl₂, CuCl, SbOCl, BiOCl, Sn(OH)Cl. SbOCl, BiOCl and Sn(OH)Cl are soluble in conc. HCl.</p>
 <p><b>Reaction with group reagent:</b></p>
-<div class="study-eqn">Chloride salt + conc. H₂SO₄, KCl, Δ → HCl↑ (pungent gas, makes white dense fumes of NH₄Cl with NH₃)<br>Chloride salt + conc. H₂SO₄, MnO₂ or PbO₂, Δ → Cl₂↑ (yellowish-green gas)</div>
-<div class="study-eqn">KCl + Conc. H₂SO₄ + KCl → KHSO₄ + HCl↑ →(NH₃)→ NH₄Cl (white dense fumes)<br>KCl + MnO₂ + Conc. H₂SO₄ → KHSO₄ + MnCl₂ + Cl₂↑ + H₂O<br>KCl + PbO₂ + Conc. H₂SO₄ → KHSO₄ + PbCl₂ + Cl₂↑ + H₂O</div>
+<div class="study-eqn">Chloride salt + conc. H₂SO₄, KCl, Δ <span class="rxn-arrow">→</span> HCl↑ (pungent gas, makes white dense fumes of NH₄Cl with NH₃)<br>Chloride salt + conc. H₂SO₄, MnO₂ or PbO₂, Δ <span class="rxn-arrow">→</span> Cl₂↑ (yellowish-green gas)</div>
+<div class="study-eqn">KCl + Conc. H₂SO₄ + KCl <span class="rxn-arrow">→</span> KHSO₄ + HCl↑ <span class="rxn-arrow">→</span>(NH₃)<span class="rxn-arrow">→</span> NH₄Cl (white dense fumes)<br>KCl + MnO₂ + Conc. H₂SO₄ <span class="rxn-arrow">→</span> KHSO₄ + MnCl₂ + Cl₂↑ + H₂O<br>KCl + PbO₂ + Conc. H₂SO₄ <span class="rxn-arrow">→</span> KHSO₄ + PbCl₂ + Cl₂↑ + H₂O</div>
 <p>PbCl₂ is insoluble in cold water but soluble in hot water or in conc. HCl (forms PbCl₄²⁻).</p>
 <p><b>Reaction with AgNO₃ / Hg₂(NO₃)₂ / conc. H₂SO₄ + oxide:</b></p>
 <ul class="study-notes-list">
-<li>Chloride + AgNO₃ → AgCl↓ (white) →(NH₃)→ [Ag(NH₃)₂]⁺ + Cl⁻; →(excess Na₂S₂O₃)→ Na₃[Ag(S₂O₃)₂] + Cl⁻; →(KCN)→ [Ag(CN)₂]⁻ + Cl⁻</li>
-<li>Chloride + Hg₂(NO₃)₂ → Hg₂Cl₂↓ (white/yellowish white) →(NH₃)→ (HgNH₂Cl + Hg)↓ (black); this black mixture →(aqua regia)→ HgCl₂ →(NH₃)→ HgNH₂Cl↓ (white)</li>
-<li>Chloride + conc. H₂SO₄ + Sb₂O₃ → SbCl₃ →(H₂O)→ SbOCl↓ (orange)</li>
-<li>Chloride + conc. H₂SO₄ + Bi₂O₃ → BiCl₃ →(H₂O)→ BiOCl↓ (white)</li>
+<li>Chloride + AgNO₃ <span class="rxn-arrow">→</span> AgCl↓ (white) <span class="rxn-arrow">→</span>(NH₃)<span class="rxn-arrow">→</span> [Ag(NH₃)₂]⁺ + Cl⁻; <span class="rxn-arrow">→</span>(excess Na₂S₂O₃)<span class="rxn-arrow">→</span> Na₃[Ag(S₂O₃)₂] + Cl⁻; <span class="rxn-arrow">→</span>(KCN)<span class="rxn-arrow">→</span> [Ag(CN)₂]⁻ + Cl⁻</li>
+<li>Chloride + Hg₂(NO₃)₂ <span class="rxn-arrow">→</span> Hg₂Cl₂↓ (white/yellowish white) <span class="rxn-arrow">→</span>(NH₃)<span class="rxn-arrow">→</span> (HgNH₂Cl + Hg)↓ (black); this black mixture <span class="rxn-arrow">→</span>(aqua regia)<span class="rxn-arrow">→</span> HgCl₂ <span class="rxn-arrow">→</span>(NH₃)<span class="rxn-arrow">→</span> HgNH₂Cl↓ (white)</li>
+<li>Chloride + conc. H₂SO₄ + Sb₂O₃ <span class="rxn-arrow">→</span> SbCl₃ <span class="rxn-arrow">→</span>(H₂O)<span class="rxn-arrow">→</span> SbOCl↓ (orange)</li>
+<li>Chloride + conc. H₂SO₄ + Bi₂O₃ <span class="rxn-arrow">→</span> BiCl₃ <span class="rxn-arrow">→</span>(H₂O)<span class="rxn-arrow">→</span> BiOCl↓ (white)</li>
 </ul>
-<p><b>Chromyl chloride test</b> (CrO₂Cl₂ — reddish vapour): Chloride salt (in excess) + K₂Cr₂O₇ + conc. H₂SO₄, Δ → reddish vapour (CrO₂Cl₂) →(aqueous KOH)→ yellow solution (K₂CrO₄).</p>
-<div class="study-eqn">KCl + H₂SO₄ → KHSO₄ + HCl<br>K₂Cr₂O₇ + H₂SO₄ → K₂SO₄ + H₂Cr₂O₇<br>H₂Cr₂O₇ →(conc. H₂SO₄, dehydrating agent)→ CrO₃ (orange-red)<br>CrO₃ + HCl → CrO₂Cl₂</div>
-<p><b>Negative chromyl-chloride test cases:</b> (i) insoluble chlorides — AgCl, PbCl₂, Hg₂Cl₂, CuCl; (ii) chlorides with significant covalent character — SnCl₄, HgCl₂; (iii) chlorides that hydrolyze in water to insoluble salts — SnCl₂ →(H₂O)→ Sn(OH)Cl↓; SbCl₃ →(H₂O)→ SbOCl↓ (orange); BiCl₃ →(H₂O)→ BiOCl↓ (white).</p>
-<p>This test cannot be extended to fluoride (HF handling is impractical) nor performed for bromide/iodide (HBr/HI formed would be oxidized too easily). A high concentration of Cl⁻ is required for the test to succeed, since part of the HCl also gets oxidized by the CrO₃ formed: CrO₃ + HCl → CrCl₃ + Cl₂↑ + H₂O — high Cl⁻ ensures enough HCl remains for the nucleophilic addition/substitution on CrO₃.</p>
-<p><b>Etard oxidation:</b> Toluene + CrO₂Cl₂ →(CS₂)→ chromium complex →(H₃O⁺)→ benzaldehyde.</p>
-<p><b>Yellow K₂CrO₄ solution reactions (chromate precipitates):</b> Pb(OAc)₂ → PbCrO₄↓ (bright yellow); AgNO₃ → Ag₂CrO₄↓ (brick-red); Hg₂(NO₃)₂ → Hg₂CrO₄↓ (brick-red); BaCl₂ → BaCrO₄↓ (yellow); HgCl₂ → HgCrO₄↓ (brick-red); CuSO₄ → CuCrO₄↓ (red-brown); CO₂ + H₂O → K₂Cr₂O₇ (orange-red solution).</p>
+<p><b>Chromyl chloride test</b> (CrO₂Cl₂ — reddish vapour): Chloride salt (in excess) + K₂Cr₂O₇ + conc. H₂SO₄, Δ <span class="rxn-arrow">→</span> reddish vapour (CrO₂Cl₂) <span class="rxn-arrow">→</span>(aqueous KOH)<span class="rxn-arrow">→</span> yellow solution (K₂CrO₄).</p>
+<div class="study-eqn">KCl + H₂SO₄ <span class="rxn-arrow">→</span> KHSO₄ + HCl<br>K₂Cr₂O₇ + H₂SO₄ <span class="rxn-arrow">→</span> K₂SO₄ + H₂Cr₂O₇<br>H₂Cr₂O₇ <span class="rxn-arrow">→</span>(conc. H₂SO₄, dehydrating agent)<span class="rxn-arrow">→</span> CrO₃ (orange-red)<br>CrO₃ + HCl <span class="rxn-arrow">→</span> CrO₂Cl₂</div>
+<p><b>Negative chromyl-chloride test cases:</b> (i) insoluble chlorides — AgCl, PbCl₂, Hg₂Cl₂, CuCl; (ii) chlorides with significant covalent character — SnCl₄, HgCl₂; (iii) chlorides that hydrolyze in water to insoluble salts — SnCl₂ <span class="rxn-arrow">→</span>(H₂O)<span class="rxn-arrow">→</span> Sn(OH)Cl↓; SbCl₃ <span class="rxn-arrow">→</span>(H₂O)<span class="rxn-arrow">→</span> SbOCl↓ (orange); BiCl₃ <span class="rxn-arrow">→</span>(H₂O)<span class="rxn-arrow">→</span> BiOCl↓ (white).</p>
+<p>This test cannot be extended to fluoride (HF handling is impractical) nor performed for bromide/iodide (HBr/HI formed would be oxidized too easily). A high concentration of Cl⁻ is required for the test to succeed, since part of the HCl also gets oxidized by the CrO₃ formed: CrO₃ + HCl <span class="rxn-arrow">→</span> CrCl₃ + Cl₂↑ + H₂O — high Cl⁻ ensures enough HCl remains for the nucleophilic addition/substitution on CrO₃.</p>
+<p><b>Etard oxidation:</b> Toluene + CrO₂Cl₂ <span class="rxn-arrow">→</span>(CS₂)<span class="rxn-arrow">→</span> chromium complex <span class="rxn-arrow">→</span>(H₃O⁺)<span class="rxn-arrow">→</span> benzaldehyde.</p>
+<p><b>Yellow K₂CrO₄ solution reactions (chromate precipitates):</b> Pb(OAc)₂ <span class="rxn-arrow">→</span> PbCrO₄↓ (bright yellow); AgNO₃ <span class="rxn-arrow">→</span> Ag₂CrO₄↓ (brick-red); Hg₂(NO₃)₂ <span class="rxn-arrow">→</span> Hg₂CrO₄↓ (brick-red); BaCl₂ <span class="rxn-arrow">→</span> BaCrO₄↓ (yellow); HgCl₂ <span class="rxn-arrow">→</span> HgCrO₄↓ (brick-red); CuSO₄ <span class="rxn-arrow">→</span> CuCrO₄↓ (red-brown); CO₂ + H₂O <span class="rxn-arrow">→</span> K₂Cr₂O₇ (orange-red solution).</p>
 `,
 
 "BROMIDE": `
 <p>All bromide salts are soluble <b>except</b> AgBr, PbBr₂, Hg₂Br₂, CuBr.</p>
 <p><b>Reaction with group reagent:</b></p>
-<div class="study-eqn">Bromide salt + conc. H₂SO₄ → reddish-brown fumes (Br₂)<br>KBr + conc. H₂SO₄ → KHSO₄ + HBr →(conc. H₂SO₄ as O.A.)→ Br₂ + SO₂ + H₂O</div>
-<div class="study-eqn">Bromide salt + orthophosphoric acid → colorless fumes, turning slightly reddish-brown<br>KBr + H₃PO₄ → KH₂PO₄ + HBr (colorless fumes)</div>
-<div class="study-eqn">Bromide salt + conc. H₂SO₄, MnO₂ or PbO₂ → intense reddish-brown fumes<br>KBr + MnO₂ + conc. H₂SO₄ → KHSO₄ + MnBr₂ (pink) + Br₂↑ + H₂O<br>KBr + PbO₂ + conc. H₂SO₄ → KHSO₄ + PbBr₂ (white) + Br₂↑ + H₂O</div>
+<div class="study-eqn">Bromide salt + conc. H₂SO₄ <span class="rxn-arrow">→</span> reddish-brown fumes (Br₂)<br>KBr + conc. H₂SO₄ <span class="rxn-arrow">→</span> KHSO₄ + HBr <span class="rxn-arrow">→</span>(conc. H₂SO₄ as O.A.)<span class="rxn-arrow">→</span> Br₂ + SO₂ + H₂O</div>
+<div class="study-eqn">Bromide salt + orthophosphoric acid <span class="rxn-arrow">→</span> colorless fumes, turning slightly reddish-brown<br>KBr + H₃PO₄ <span class="rxn-arrow">→</span> KH₂PO₄ + HBr (colorless fumes)</div>
+<div class="study-eqn">Bromide salt + conc. H₂SO₄, MnO₂ or PbO₂ <span class="rxn-arrow">→</span> intense reddish-brown fumes<br>KBr + MnO₂ + conc. H₂SO₄ <span class="rxn-arrow">→</span> KHSO₄ + MnBr₂ (pink) + Br₂↑ + H₂O<br>KBr + PbO₂ + conc. H₂SO₄ <span class="rxn-arrow">→</span> KHSO₄ + PbBr₂ (white) + Br₂↑ + H₂O</div>
 <p>MnO₂ or PbO₂ acts as the oxidizing agent in place of H₂SO₄, giving intense reddish-brown Br₂ fumes.</p>
-<p><b>Reaction with AgNO₃ / Pb(NO₃)₂:</b> Bromide salt + AgNO₃ → AgBr↓ (pale yellow) →(NH₃)→ [Ag(NH₃)₂]⁺ + Br⁻; →(excess Na₂S₂O₃)→ Na₃[Ag(S₂O₃)₂] + Br⁻; →(KCN)→ [Ag(CN)₂]⁻ + Br⁻. Bromide + Pb(NO₃)₂ → PbBr₂↓ (white) — not soluble in cold water but dissolves in hot water.</p>
-<p>Bromide salt gives Br₂ gas when reacted with: MnO₄⁻|H⁺→Mn²⁺; Cr₂O₇²⁻|H⁺→Cr³⁺; BrO₃⁻|H⁺→Br₂; conc. HNO₃→NO₂.</p>
-<p><b>Fluorescein test:</b> KBr is oxidized by MnO₂ in acidic medium to generate free Br₂ in-situ (2KBr + MnO₂ + 2H₂SO₄ → K₂SO₄ + MnSO₄ + 2H₂O + Br₂↑, brown vapour). Br₂ then does electrophilic substitution on fluorescein (yellow-orange dye in ethanol) → tetrabromofluorescein (Eosin Y, a bright pink/red dye) + 4HBr.</p>
+<p><b>Reaction with AgNO₃ / Pb(NO₃)₂:</b> Bromide salt + AgNO₃ <span class="rxn-arrow">→</span> AgBr↓ (pale yellow) <span class="rxn-arrow">→</span>(NH₃)<span class="rxn-arrow">→</span> [Ag(NH₃)₂]⁺ + Br⁻; <span class="rxn-arrow">→</span>(excess Na₂S₂O₃)<span class="rxn-arrow">→</span> Na₃[Ag(S₂O₃)₂] + Br⁻; <span class="rxn-arrow">→</span>(KCN)<span class="rxn-arrow">→</span> [Ag(CN)₂]⁻ + Br⁻. Bromide + Pb(NO₃)₂ <span class="rxn-arrow">→</span> PbBr₂↓ (white) — not soluble in cold water but dissolves in hot water.</p>
+<p>Bromide salt gives Br₂ gas when reacted with: MnO₄⁻|H⁺<span class="rxn-arrow">→</span>Mn²⁺; Cr₂O₇²⁻|H⁺<span class="rxn-arrow">→</span>Cr³⁺; BrO₃⁻|H⁺<span class="rxn-arrow">→</span>Br₂; conc. HNO₃<span class="rxn-arrow">→</span>NO₂.</p>
+<p><b>Fluorescein test:</b> KBr is oxidized by MnO₂ in acidic medium to generate free Br₂ in-situ (2KBr + MnO₂ + 2H₂SO₄ <span class="rxn-arrow">→</span> K₂SO₄ + MnSO₄ + 2H₂O + Br₂↑, brown vapour). Br₂ then does electrophilic substitution on fluorescein (yellow-orange dye in ethanol) <span class="rxn-arrow">→</span> tetrabromofluorescein (Eosin Y, a bright pink/red dye) + 4HBr.</p>
 <p>F₂ destroys/chars the fluorescein structure; Cl₂ destroys/bleaches it (turns completely white); Br₂ gives the bright pink/red Eosin Y dye; I₂ vapour is too weakly electrophilic at room temperature to give a distinct pink color.</p>
 <p>Because Eosin Y (from Br₂) and erythrosine (from I₂) both show shades of red/pink, the standard fluorescein paper test can't reliably separate bromide/iodide mixtures — the organic-layer test (with CHCl₃) is used instead. Br⁻ and I⁻ interfere with each other in the fluorescein test, so both must not be present together when confirming either anion by this test.</p>
-<p><b>Layer test:</b> X⁻ + X₂′ →(CHCl₃ as solvent)→ X′⁻ + a colored layer of X₂ over CHCl₃ (X′ must be a halogen above X in the periodic table).</p>
+<p><b>Layer test:</b> X⁻ + X₂′ <span class="rxn-arrow">→</span>(CHCl₃ as solvent)<span class="rxn-arrow">→</span> X′⁻ + a colored layer of X₂ over CHCl₃ (X′ must be a halogen above X in the periodic table).</p>
 <table class="study-table">
-<tr><td>Chloride (KCl) + F₂ →(CHCl₃)→ KF + yellowish-green layer of Cl₂</td><td>Bromide (KBr) + F₂ →(CHCl₃)→ KF + reddish-brown layer of Br₂</td></tr>
-<tr><td>Bromide (KBr) + Cl₂ →(CHCl₃)→ KCl + reddish-brown layer of Br₂</td><td>Iodide (KI) + (F₂, Cl₂ or Br₂) →(CHCl₃)→ (KF/KCl/KBr) + bluish-black layer of I₂</td></tr>
+<tr><td>Chloride (KCl) + F₂ <span class="rxn-arrow">→</span>(CHCl₃)<span class="rxn-arrow">→</span> KF + yellowish-green layer of Cl₂</td><td>Bromide (KBr) + F₂ <span class="rxn-arrow">→</span>(CHCl₃)<span class="rxn-arrow">→</span> KF + reddish-brown layer of Br₂</td></tr>
+<tr><td>Bromide (KBr) + Cl₂ <span class="rxn-arrow">→</span>(CHCl₃)<span class="rxn-arrow">→</span> KCl + reddish-brown layer of Br₂</td><td>Iodide (KI) + (F₂, Cl₂ or Br₂) <span class="rxn-arrow">→</span>(CHCl₃)<span class="rxn-arrow">→</span> (KF/KCl/KBr) + bluish-black layer of I₂</td></tr>
 </table>
 `,
 
 "IODIDE": `
 <p>All iodide salts are soluble <b>except</b> AgI, PbI₂, Hg₂I₂, CuI, BiI₃, HgI₂, BiOI.</p>
 <p><b>Reaction with group reagent:</b></p>
-<div class="study-eqn">Iodide salt + conc. H₂SO₄, Δ → violet fumes<br>KI + conc. H₂SO₄ →(Δ)→ KHSO₄ + HI →(Δ)→ I₂ + SO₂ + H₂O (total 4 gaseous products: I₂, HI, SO₂, H₂O)</div>
-<div class="study-eqn">Iodide salt + orthophosphoric acid, Δ → colorless fumes turning violet on aerial oxidation<br>KI + H₃PO₄ → K₃PO₄ + HI (colorless) →(O₂, aerial oxidation)→ I₂↑ (violet fumes)</div>
-<div class="study-eqn">Iodide salt + conc. H₂SO₄, MnO₂ or PbO₂ → intense violet fumes<br>KI + MnO₂ + conc. H₂SO₄ → KHSO₄ + MnI₂ (pink) + I₂↑ + H₂O<br>KI + PbO₂ + conc. H₂SO₄ → KHSO₄ + PbI₂ (yellow) + I₂↑ + H₂O</div>
-<p>PbI₂ is insoluble in water but partially soluble in KI solution (forms PbI₄²⁻). Iodide salt gives I₂ with: MnO₄⁻|H⁺→Mn²⁺; Cr₂O₇²⁻|H⁺→Cr³⁺; IO₃⁻|H⁺→I₂; conc. HNO₃→NO₂.</p>
-<p><b>Reaction with Cu²⁺:</b> KI + CuSO₄ → CuI₂ (unstable) → (Cu₂I₂ + I₂), brown →(Na₂S₂O₃)→ Cu₂I₂↓ (white). KCN + CuSO₄ → Cu(CN)₂ (yellow) → Cu₂(CN)₂ (white) + (CN)₂ →(KCN)→ K₃[Cu(CN)₄]. In general: KA + CuSO₄ + SO₂ + H₂O → Cu⁺A⁻↓ + H₂SO₄ + K₂SO₄, where A⁻ can be a halide (Cl⁻, Br⁻, I⁻) or pseudohalide (CN⁻, CNO⁻, CNS⁻).</p>
-<p><b>Reaction with Hg:</b> KI + Hg₂²⁺-salt → Hg₂I₂↓ (green) →(Δ, disproportionation)→ (HgI₂ + Hg)↓ →(excess KI)→ K₂[HgI₄] (Nessler's reagent, orange). KI + Hg²⁺-salt → HgI₂↓ (scarlet red) →(excess KI)→ K₂[HgI₄].</p>
-<p>K₂[HgI₄] is used for the qualitative estimation of NH₃/NH₄⁺: K₂[HgI₄] + NH₃ → Iodide of Millon's base (brown): NH₄⁺ + 2[HgI₄]²⁻ + 4OH⁻ → [O(Hg₂NH₂)]⁺I⁻ + 7I⁻ + 3H₂O.</p>
-<p>Iodide salt (KI) + H₃PO₄ + Bi₂O₃ → BiI₃ (black ppt.) →(H₂O)→ BiOI↓ (orange turbidity). Iodide salt + H₃PO₄ also liberates I₂↑ with F₂, Cl₂, Br₂, KNO₂, H₂O₂, or IO₃⁻ as the oxidizer.</p>
-<p>Note: I₂ can catalyze the reaction Ce⁴⁺ + AsO₃³⁻ + H₂O ⇌ Ce³⁺ + AsO₄³⁻ + H⁺. (See also BROMIDE for the fluorescein and layer tests, which distinguish I⁻ from Br⁻.)</p>
+<div class="study-eqn">Iodide salt + conc. H₂SO₄, Δ <span class="rxn-arrow">→</span> violet fumes<br>KI + conc. H₂SO₄ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> KHSO₄ + HI <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> I₂ + SO₂ + H₂O (total 4 gaseous products: I₂, HI, SO₂, H₂O)</div>
+<div class="study-eqn">Iodide salt + orthophosphoric acid, Δ <span class="rxn-arrow">→</span> colorless fumes turning violet on aerial oxidation<br>KI + H₃PO₄ <span class="rxn-arrow">→</span> K₃PO₄ + HI (colorless) <span class="rxn-arrow">→</span>(O₂, aerial oxidation)<span class="rxn-arrow">→</span> I₂↑ (violet fumes)</div>
+<div class="study-eqn">Iodide salt + conc. H₂SO₄, MnO₂ or PbO₂ <span class="rxn-arrow">→</span> intense violet fumes<br>KI + MnO₂ + conc. H₂SO₄ <span class="rxn-arrow">→</span> KHSO₄ + MnI₂ (pink) + I₂↑ + H₂O<br>KI + PbO₂ + conc. H₂SO₄ <span class="rxn-arrow">→</span> KHSO₄ + PbI₂ (yellow) + I₂↑ + H₂O</div>
+<p>PbI₂ is insoluble in water but partially soluble in KI solution (forms PbI₄²⁻). Iodide salt gives I₂ with: MnO₄⁻|H⁺<span class="rxn-arrow">→</span>Mn²⁺; Cr₂O₇²⁻|H⁺<span class="rxn-arrow">→</span>Cr³⁺; IO₃⁻|H⁺<span class="rxn-arrow">→</span>I₂; conc. HNO₃<span class="rxn-arrow">→</span>NO₂.</p>
+<p><b>Reaction with Cu²⁺:</b> KI + CuSO₄ <span class="rxn-arrow">→</span> CuI₂ (unstable) <span class="rxn-arrow">→</span> (Cu₂I₂ + I₂), brown <span class="rxn-arrow">→</span>(Na₂S₂O₃)<span class="rxn-arrow">→</span> Cu₂I₂↓ (white). KCN + CuSO₄ <span class="rxn-arrow">→</span> Cu(CN)₂ (yellow) <span class="rxn-arrow">→</span> Cu₂(CN)₂ (white) + (CN)₂ <span class="rxn-arrow">→</span>(KCN)<span class="rxn-arrow">→</span> K₃[Cu(CN)₄]. In general: KA + CuSO₄ + SO₂ + H₂O <span class="rxn-arrow">→</span> Cu⁺A⁻↓ + H₂SO₄ + K₂SO₄, where A⁻ can be a halide (Cl⁻, Br⁻, I⁻) or pseudohalide (CN⁻, CNO⁻, CNS⁻).</p>
+<p><b>Reaction with Hg:</b> KI + Hg₂²⁺-salt <span class="rxn-arrow">→</span> Hg₂I₂↓ (green) <span class="rxn-arrow">→</span>(Δ, disproportionation)<span class="rxn-arrow">→</span> (HgI₂ + Hg)↓ <span class="rxn-arrow">→</span>(excess KI)<span class="rxn-arrow">→</span> K₂[HgI₄] (Nessler's reagent, orange). KI + Hg²⁺-salt <span class="rxn-arrow">→</span> HgI₂↓ (scarlet red) <span class="rxn-arrow">→</span>(excess KI)<span class="rxn-arrow">→</span> K₂[HgI₄].</p>
+<p>K₂[HgI₄] is used for the qualitative estimation of NH₃/NH₄⁺: K₂[HgI₄] + NH₃ <span class="rxn-arrow">→</span> Iodide of Millon's base (brown): NH₄⁺ + 2[HgI₄]²⁻ + 4OH⁻ <span class="rxn-arrow">→</span> [O(Hg₂NH₂)]⁺I⁻ + 7I⁻ + 3H₂O.</p>
+<p>Iodide salt (KI) + H₃PO₄ + Bi₂O₃ <span class="rxn-arrow">→</span> BiI₃ (black ppt.) <span class="rxn-arrow">→</span>(H₂O)<span class="rxn-arrow">→</span> BiOI↓ (orange turbidity). Iodide salt + H₃PO₄ also liberates I₂↑ with F₂, Cl₂, Br₂, KNO₂, H₂O₂, or IO₃⁻ as the oxidizer.</p>
+<p>Note: I₂ can catalyze the reaction Ce⁴⁺ + AsO₃³⁻ + H₂O <span class="rxn-arrow">⇌</span> Ce³⁺ + AsO₄³⁻ + H⁺. (See also BROMIDE for the fluorescein and layer tests, which distinguish I⁻ from Br⁻.)</p>
 `,
 
 "SULPHATE": `
 <p>Ag₂SO₄, PbSO₄, BaSO₄ and SrSO₄ are insoluble. CaSO₄ and HgSO₄ are slightly soluble. HgSO₄·HgO is a yellow precipitate and Cr(OH)SO₄ is a green precipitate — both insoluble in water but soluble in strongly acidic medium.</p>
 <p><b>Reactions:</b></p>
 <ul class="study-notes-list">
-<li>Sulphate + AgNO₃ → Ag₂SO₄↓ (white) →(NH₃)→ [Ag(NH₃)₂]⁺; →(excess Na₂S₂O₃)→ Na₃[Ag(S₂O₃)₂]; →(KCN)→ [Ag(CN)₂]⁻</li>
-<li>Sulphate + Pb(NO₃)₂ → PbSO₄↓ (white) →(conc. H₂SO₄)→ Pb(HSO₄)₂ (soluble). Insoluble even in hot water.</li>
-<li>Sulphate + BaCl₂ → BaSO₄↓ (white) →(conc. H₂SO₄)→ soluble. Insoluble even in dilute/conc. HCl or HNO₃, dilute H₂SO₄, or X₂|H₂O.</li>
-<li>Sulphate + HgCl₂ → HgSO₄·H₂O↓ (yellow)</li>
+<li>Sulphate + AgNO₃ <span class="rxn-arrow">→</span> Ag₂SO₄↓ (white) <span class="rxn-arrow">→</span>(NH₃)<span class="rxn-arrow">→</span> [Ag(NH₃)₂]⁺; <span class="rxn-arrow">→</span>(excess Na₂S₂O₃)<span class="rxn-arrow">→</span> Na₃[Ag(S₂O₃)₂]; <span class="rxn-arrow">→</span>(KCN)<span class="rxn-arrow">→</span> [Ag(CN)₂]⁻</li>
+<li>Sulphate + Pb(NO₃)₂ <span class="rxn-arrow">→</span> PbSO₄↓ (white) <span class="rxn-arrow">→</span>(conc. H₂SO₄)<span class="rxn-arrow">→</span> Pb(HSO₄)₂ (soluble). Insoluble even in hot water.</li>
+<li>Sulphate + BaCl₂ <span class="rxn-arrow">→</span> BaSO₄↓ (white) <span class="rxn-arrow">→</span>(conc. H₂SO₄)<span class="rxn-arrow">→</span> soluble. Insoluble even in dilute/conc. HCl or HNO₃, dilute H₂SO₄, or X₂|H₂O.</li>
+<li>Sulphate + HgCl₂ <span class="rxn-arrow">→</span> HgSO₄·H₂O↓ (yellow)</li>
 </ul>
-<p>(Cross-reference: KI + conc. H₂SO₄ →(Δ)→ KHSO₄ + HI →(Δ)→ I₂ + SO₂ + H₂O — total 4 gaseous products, I₂/HI/SO₂/H₂O.)</p>
+<p>(Cross-reference: KI + conc. H₂SO₄ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> KHSO₄ + HI <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> I₂ + SO₂ + H₂O — total 4 gaseous products, I₂/HI/SO₂/H₂O.)</p>
 `
 },
 
@@ -1667,7 +1691,7 @@ prelim: {
 <tr><td>Brown</td><td>PbO₂, Bi₂S₃, Fe₂O₃ & Fe(OH)₃ (reddish brown), CdO, Fe₃O₄, FeCl₃(solid), K₂Cu[Fe(CN)₆], CuCrO₄ & SnS (chocolate brown)</td></tr>
 <tr><td>Black</td><td>PbS, CuS, NiS, HgS, CoS, FeS, Ag₂S, MnO₂ (brownish black), CuO, Co₃O₄</td></tr>
 </table>
-<p><b>Color of the salt's aqueous solution → ion present:</b></p>
+<p><b>Color of the salt's aqueous solution <span class="rxn-arrow">→</span> ion present:</b></p>
 <table class="study-table">
 <tr><th>Color of solution</th><th>Ion in solution</th></tr>
 <tr><td>Blue</td><td>Cu²⁺</td></tr>
@@ -1677,8 +1701,8 @@ prelim: {
 <tr><td>Purple</td><td>MnO₄⁻</td></tr>
 <tr><td>Pink</td><td>Mn²⁺, Co²⁺</td></tr>
 </table>
-<p><b>Smell:</b> Ammoniacal/pungent/urinal smell → NH₄⁺. Vinegar-like smell → CH₃COO⁻, HCOO⁻, C₂O₄²⁻. Rotten-egg smell → S²⁻.</p>
-<p><b>Density:</b> Heavy powder → Pb²⁺, Ba²⁺, Hg²⁺, Bi³⁺. Light, fluffy powder → CO₃²⁻.</p>
+<p><b>Smell:</b> Ammoniacal/pungent/urinal smell <span class="rxn-arrow">→</span> NH₄⁺. Vinegar-like smell <span class="rxn-arrow">→</span> CH₃COO⁻, HCOO⁻, C₂O₄²⁻. Rotten-egg smell <span class="rxn-arrow">→</span> S²⁻.</p>
+<p><b>Density:</b> Heavy powder <span class="rxn-arrow">→</span> Pb²⁺, Ba²⁺, Hg²⁺, Bi³⁺. Light, fluffy powder <span class="rxn-arrow">→</span> CO₃²⁻.</p>
 <p><b>Deliquescence:</b> The salt absorbs moisture and becomes paste-like. If it becomes colored, it may be Cu(NO₃)₂ or FeCl₃. If it remains colorless, it may be Zn(NO₃)₂, or chlorides of Zn²⁺/Mg²⁺, or salts of other s-block cations.</p>
 `,
 
@@ -1695,8 +1719,8 @@ prelim: {
 
 "FLAME TEST": `
 <p><b>Procedure:</b> A platinum wire, nichrome wire, or glass rod is first dipped in conc. HCl (cleaning the wire and ensuring no residual flame color), then into a little of the substance to be tested, then introduced into the <b>lower oxidizing zone</b> of the flame — the imparted flame color is observed.</p>
-<p><b>Example / mechanism:</b> Na₂CO₃ + conc. HCl → NaCl(s); NaCl(s) → NaCl(g) (thermal vaporization); NaCl(g) → Na⁺(g) + Cl⁻(g) (thermal ionization). Na⁺(g): heat from the burner excites an orbital electron to a higher energy level; as the excited electron drops back to its original level, it releases the extra energy as the characteristic flame color.</p>
-<p>The color actually arises from electronic transitions in short-lived species formed momentarily in the flame — the flame is rich in electrons, and (for sodium) the ions are temporarily reduced to atoms. The sodium D-line arises from the 3s¹→3p¹ transition in sodium atoms formed in the flame. Colors of different elements don't all arise from the same transition or species — e.g. the red line of lithium arises from a short-lived LiOH species formed in the flame.</p>
+<p><b>Example / mechanism:</b> Na₂CO₃ + conc. HCl <span class="rxn-arrow">→</span> NaCl(s); NaCl(s) <span class="rxn-arrow">→</span> NaCl(g) (thermal vaporization); NaCl(g) <span class="rxn-arrow">→</span> Na⁺(g) + Cl⁻(g) (thermal ionization). Na⁺(g): heat from the burner excites an orbital electron to a higher energy level; as the excited electron drops back to its original level, it releases the extra energy as the characteristic flame color.</p>
+<p>The color actually arises from electronic transitions in short-lived species formed momentarily in the flame — the flame is rich in electrons, and (for sodium) the ions are temporarily reduced to atoms. The sodium D-line arises from the 3s¹<span class="rxn-arrow">→</span>3p¹ transition in sodium atoms formed in the flame. Colors of different elements don't all arise from the same transition or species — e.g. the red line of lithium arises from a short-lived LiOH species formed in the flame.</p>
 <p><b>Role of conc. HCl:</b> it converts the salt into the cationic chloride, for which vaporization is easier than for any other cationic salt.</p>
 <p><b>Flame test results:</b></p>
 <table class="study-table">
@@ -1709,14 +1733,14 @@ prelim: {
 <tr><td>Cu²⁺ & BO₃³⁻</td><td>Green</td><td>Pb²⁺</td><td>Bluish</td></tr>
 </table>
 <p>Wavelengths (NCERT — s-block): Li 670.8 nm (crimson red), Na 589.2 nm (yellow), K 766.5 nm (violet), Rb 780.0 nm (red-violet), Cs 455.5 nm (blue).</p>
-<p><b>Special case — Na⁺ and K⁺ together:</b> the yellow of Na⁺ masks the K⁺ color. Repeat the test viewed through a double blue (cobalt) glass to confirm K⁺: Na⁺ → flame disappears through cobalt glass; K⁺ (violet/lilac with naked eye) → crimson-red flame through cobalt glass; Na⁺+K⁺ together → golden yellow with naked eye, but crimson-red through cobalt glass.</p>
+<p><b>Special case — Na⁺ and K⁺ together:</b> the yellow of Na⁺ masks the K⁺ color. Repeat the test viewed through a double blue (cobalt) glass to confirm K⁺: Na⁺ <span class="rxn-arrow">→</span> flame disappears through cobalt glass; K⁺ (violet/lilac with naked eye) <span class="rxn-arrow">→</span> crimson-red flame through cobalt glass; Na⁺+K⁺ together <span class="rxn-arrow">→</span> golden yellow with naked eye, but crimson-red through cobalt glass.</p>
 `,
 
 "BORAX BEAD TEST": `
 <p>Borax powder is taken in a hot platinum wire loop and held in the hottest part of the flame; the borax powder swells (loss of water of crystallization) and then shrinks into a transparent, colorless glassy bead of sodium metaborate and boric anhydride:</p>
-<div class="study-eqn">Na₂B₄O₇·10H₂O →(Δ, −10H₂O)→ 2NaBO₂ + B₂O₃ (glassy bead — transparent glassy mass, present as a bead/pearl)</div>
-<p>The hot bead is then touched to the salt sample, reheated, and the bead's color is observed: MO + B₂O₃ → M(BO₂)₂.</p>
-<p>The borax bead — containing a transition-metal salt — is brought first to the oxidizing flame (complete combustion; fuel + O₂ → CO₂ + H₂O) and then to the reducing flame (incomplete combustion due to limited O₂; fuel + O₂ → C-soot + H₂O), and the color change is observed.</p>
+<div class="study-eqn">Na₂B₄O₇·10H₂O <span class="rxn-arrow">→</span>(Δ, −10H₂O)<span class="rxn-arrow">→</span> 2NaBO₂ + B₂O₃ (glassy bead — transparent glassy mass, present as a bead/pearl)</div>
+<p>The hot bead is then touched to the salt sample, reheated, and the bead's color is observed: MO + B₂O₃ <span class="rxn-arrow">→</span> M(BO₂)₂.</p>
+<p>The borax bead — containing a transition-metal salt — is brought first to the oxidizing flame (complete combustion; fuel + O₂ <span class="rxn-arrow">→</span> CO₂ + H₂O) and then to the reducing flame (incomplete combustion due to limited O₂; fuel + O₂ <span class="rxn-arrow">→</span> C-soot + H₂O), and the color change is observed.</p>
 <ul class="study-notes-list">
 <li><b>In oxidizing flame:</b> the transition-metal salt is converted to the metal oxide, which then forms the metal metaborate (giving a characteristic color).</li>
 <li><b>In reducing flame:</b> the metal metaborate is reduced (in the presence of C) to give the metal or a metaborate with a lower oxidation state of the metal (giving the same or a different characteristic color).</li>
@@ -1740,15 +1764,15 @@ prelim: {
 <p>Microcosmic salt is Na(NH₄)HPO₄·4H₂O.</p>
 <p><b>Bead formation:</b> the salt is mixed with a little water to a paste, taken on a platinum wire loop, and heated.</p>
 <ul class="study-notes-list">
-<li><b>Step 1 — Dehydration</b> (crackling/decrepitation sound): Na(NH₄)HPO₄·4H₂O →(Δ)→ Na(NH₄)HPO₄ + 4H₂O↑</li>
-<li><b>Step 2 — Decomposition to the glassy bead:</b> further strong heating decomposes it to a colorless, transparent, glassy bead of sodium metaphosphate, evolving ammonia and water vapor: Na(NH₄)HPO₄ →(Δ)→ NaPO₃ + NH₃↑ + H₂O↑</li>
+<li><b>Step 1 — Dehydration</b> (crackling/decrepitation sound): Na(NH₄)HPO₄·4H₂O <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> Na(NH₄)HPO₄ + 4H₂O↑</li>
+<li><b>Step 2 — Decomposition to the glassy bead:</b> further strong heating decomposes it to a colorless, transparent, glassy bead of sodium metaphosphate, evolving ammonia and water vapor: Na(NH₄)HPO₄ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> NaPO₃ + NH₃↑ + H₂O↑</li>
 </ul>
 <p><b>General reactions with transition metals:</b></p>
 <ul class="study-notes-list">
-<li><b>Oxidizing flame:</b> the transition-metal salt decomposes to its oxide (MO), which reacts with the glassy sodium metaphosphate bead to form a characteristic-colored mixed phosphate: Transition metal oxide + NaPO₃ → NaMPO₄ (mixed phosphate)</li>
-<li><b>Reducing flame</b> (on a charcoal block, presence of carbon): the mixed phosphate is reduced back to the lower oxidation state or the free metal: NaMPO₄ + C → M + NaPO₃ + CO↑</li>
+<li><b>Oxidizing flame:</b> the transition-metal salt decomposes to its oxide (MO), which reacts with the glassy sodium metaphosphate bead to form a characteristic-colored mixed phosphate: Transition metal oxide + NaPO₃ <span class="rxn-arrow">→</span> NaMPO₄ (mixed phosphate)</li>
+<li><b>Reducing flame</b> (on a charcoal block, presence of carbon): the mixed phosphate is reduced back to the lower oxidation state or the free metal: NaMPO₄ + C <span class="rxn-arrow">→</span> M + NaPO₃ + CO↑</li>
 </ul>
-<p><b>Example — CuSO₄:</b> Initial decomposition: CuSO₄ →(Δ)→ CuO + SO₃↑. Oxidizing flame: CuO + NaPO₃ → NaCuPO₄ (blue bead). Reducing flame: NaCuPO₄ + C →(Pt-wire)→ Cu + NaPO₃ + CO↑ (bead turns red).</p>
+<p><b>Example — CuSO₄:</b> Initial decomposition: CuSO₄ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> CuO + SO₃↑. Oxidizing flame: CuO + NaPO₃ <span class="rxn-arrow">→</span> NaCuPO₄ (blue bead). Reducing flame: NaCuPO₄ + C <span class="rxn-arrow">→</span>(Pt-wire)<span class="rxn-arrow">→</span> Cu + NaPO₃ + CO↑ (bead turns red).</p>
 <p><b>Notes:</b> the bead is prepared the same way as in the borax bead test; the colorless transparent bead (sodium metaphosphate) combines with the metal oxide to form a colored orthophosphate; the colors obtained are the same as in the borax bead test.</p>
 `,
 
@@ -1765,8 +1789,8 @@ prelim: {
 <tr><td>Residue yellow when hot but white when cold (no bead)</td><td>Zn²⁺ may be present</td></tr>
 </table>
 <p><b>Cobalt nitrate test</b> (an extension of the charcoal cavity test): based on the reaction of cobalt nitrate with metallic oxides to form colored compounds; performed on salts that leave a white infusible residue in the charcoal cavity test. Add a drop of cobalt-nitrate solution to the residue left in the cavity, heat in an oxidizing flame, and observe the color.</p>
-<div class="study-eqn">Co(NO₃)₂ →(Δ)→ CoO(s) + NO₂(g) + O₂(g)<br>Metal oxide + CoO → mixed metal oxide (with characteristic color)</div>
-<p><b>Examples (amphoteric oxides):</b> Al₂O₃ + CoO → Al₂O₃·CoO (Thénard's blue); ZnO + CoO → ZnO·CoO (Rinmann's green); SnO + CoO → SnO·CoO (bluish green / azure); MgO + CoO → MgO·CoO (pink).</p>
+<div class="study-eqn">Co(NO₃)₂ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> CoO(s) + NO₂(g) + O₂(g)<br>Metal oxide + CoO <span class="rxn-arrow">→</span> mixed metal oxide (with characteristic color)</div>
+<p><b>Examples (amphoteric oxides):</b> Al₂O₃ + CoO <span class="rxn-arrow">→</span> Al₂O₃·CoO (Thénard's blue); ZnO + CoO <span class="rxn-arrow">→</span> ZnO·CoO (Rinmann's green); SnO + CoO <span class="rxn-arrow">→</span> SnO·CoO (bluish green / azure); MgO + CoO <span class="rxn-arrow">→</span> MgO·CoO (pink).</p>
 `,
 
 "DRY HEAT TEST": `
@@ -1775,22 +1799,22 @@ prelim: {
 <p><b>Color change:</b> most color changes on heating are due to loss of water of crystallization, or to formation of f-centres under hot conditions.</p>
 <table class="study-table">
 <tr><th>Action of heat</th><th>Inference</th></tr>
-<tr><td>Yellow (hot) → white (cold)</td><td>ZnO</td></tr>
-<tr><td>Yellow-brown (hot) → yellow (cold)</td><td>SnO₂, Bi₂O₃</td></tr>
-<tr><td>Red (cold) → black (hot)</td><td>Fe₂O₃</td></tr>
+<tr><td>Yellow (hot) <span class="rxn-arrow">→</span> white (cold)</td><td>ZnO</td></tr>
+<tr><td>Yellow-brown (hot) <span class="rxn-arrow">→</span> yellow (cold)</td><td>SnO₂, Bi₂O₃</td></tr>
+<tr><td>Red (cold) <span class="rxn-arrow">→</span> black (hot)</td><td>Fe₂O₃</td></tr>
 <tr><td>No solid residue</td><td>NH₄⁺ salt, PH₄⁺ salt</td></tr>
 <tr><td>H₂O is evolved</td><td>Compound is hydrated</td></tr>
 </table>
-<div class="study-eqn">ZnO (white, cold) ⇌(Δ, heated/cooled)⇌ ZnO (yellow, hot)<br>CuSO₄·5H₂O →(Δ)→ CuSO₄ (white)<br>CoCl₂·6H₂O →(−6H₂O, Δ)→ CoCl₂ (blue) [from pink]</div>
-<p><b>Sublimation:</b> white sublimates are given by HgCl₂, Hg₂Cl₂, As₂O₃, Sb₂O₃, NH₄X (X = Cl, Br, I). Colored sublimates indicate the nature of the basic radical: if black → HgS (vermilion) or Hg₂S; if yellow → HgI₂ or As₂S₃.</p>
+<div class="study-eqn">ZnO (white, cold) <span class="rxn-arrow">⇌</span>(Δ, heated/cooled)<span class="rxn-arrow">⇌</span> ZnO (yellow, hot)<br>CuSO₄·5H₂O <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> CuSO₄ (white)<br>CoCl₂·6H₂O <span class="rxn-arrow">→</span>(−6H₂O, Δ)<span class="rxn-arrow">→</span> CoCl₂ (blue) [from pink]</div>
+<p><b>Sublimation:</b> white sublimates are given by HgCl₂, Hg₂Cl₂, As₂O₃, Sb₂O₃, NH₄X (X = Cl, Br, I). Colored sublimates indicate the nature of the basic radical: if black <span class="rxn-arrow">→</span> HgS (vermilion) or Hg₂S; if yellow <span class="rxn-arrow">→</span> HgI₂ or As₂S₃.</p>
 <p><b>Gas evolved</b> — indicative of the acid radical present: CO₂ ⇒ certain carbonates or organic materials; SO₂ ⇒ sulphite, thiosulphate, or sulphide may be present; Cl₂ ⇒ certain chlorides may decompose thermally; Br₂ ⇒ certain bromides; I₂ ⇒ certain iodides; NO₂ ⇒ decomposition of nitrates; CO ⇒ decomposition of formates or oxalates.</p>
 <table class="study-table">
 <tr><th>Action of heat</th><th>Inference</th></tr>
-<tr><td>N₂ is evolved</td><td>NH₄⁺ + an oxidizing anion → ClO₄⁻, Cr₂O₇²⁻, IO₃⁻, NO₂⁻</td></tr>
+<tr><td>N₂ is evolved</td><td>NH₄⁺ + an oxidizing anion <span class="rxn-arrow">→</span> ClO₄⁻, Cr₂O₇²⁻, IO₃⁻, NO₂⁻</td></tr>
 <tr><td>N₂O is evolved</td><td>NH₄NO₃</td></tr>
 <tr><td>O₂ is evolved</td><td>NO₃⁻, ClO₄⁻, ClO₃⁻, BrO₃⁻, IO₃⁻, peroxide, MnO₄⁻, Cr₂O₇²⁻</td></tr>
 <tr><td>CO₂ is evolved</td><td>CO₃²⁻, HCO₃⁻ salts (Group-1 carbonates don't decompose on heating, except Li₂CO₃)</td></tr>
-<tr><td>NH₃ is evolved</td><td>NH₄⁺ + a non-oxidizing anion → Cl⁻, CO₃²⁻, SO₄²⁻, PO₄³⁻, C₂O₄²⁻</td></tr>
+<tr><td>NH₃ is evolved</td><td>NH₄⁺ + a non-oxidizing anion <span class="rxn-arrow">→</span> Cl⁻, CO₃²⁻, SO₄²⁻, PO₄³⁻, C₂O₄²⁻</td></tr>
 <tr><td>SO₂ is evolved</td><td>SO₃²⁻, HSO₃⁻</td></tr>
 <tr><td>Swells</td><td>Borates, alums</td></tr>
 </table>
@@ -1799,37 +1823,37 @@ prelim: {
 "GAS EVOLVED & HEATING": `
 <p>This category collects the detailed heating-effect equations for each salt family (all confirmed by the gas-evolved / residue clues above).</p>
 <p><b>Carbonates:</b> All carbonates except (Na, K, Rb, Cs) decompose on heating, giving CO₂:</p>
-<div class="study-eqn">Li₂CO₃ → Li₂O + CO₂ ; MCO₃ → MO + CO₂ [M = Be, Mg, Ca, Sr, Ba]<br>Ag₂CO₃(yellow) → 2Ag(black) + CO₂ + ½O₂<br>Cu(OH)₂·CuCO₃ (basic Cu(II) carbonate) →(Δ)→ 2CuO + CO₂ + H₂O<br>ZnCO₃(white) → ZnO [yellow hot, white cold] + CO₂<br>PbCO₃(yellow) → PbO + CO₂<br>2PbCO₃·Pb(OH)₂ (white lead) →(350°C)→ Pb₃O₄ + CO₂ + CO + H₂O<br>HgCO₃ → Hg + ½O₂ + CO₂<br>(NH₄)₂CO₃ → 2NH₃ + H₂O + CO₂</div>
+<div class="study-eqn">Li₂CO₃ <span class="rxn-arrow">→</span> Li₂O + CO₂ ; MCO₃ <span class="rxn-arrow">→</span> MO + CO₂ [M = Be, Mg, Ca, Sr, Ba]<br>Ag₂CO₃(yellow) <span class="rxn-arrow">→</span> 2Ag(black) + CO₂ + ½O₂<br>Cu(OH)₂·CuCO₃ (basic Cu(II) carbonate) <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> 2CuO + CO₂ + H₂O<br>ZnCO₃(white) <span class="rxn-arrow">→</span> ZnO [yellow hot, white cold] + CO₂<br>PbCO₃(yellow) <span class="rxn-arrow">→</span> PbO + CO₂<br>2PbCO₃·Pb(OH)₂ (white lead) <span class="rxn-arrow">→</span>(350°C)<span class="rxn-arrow">→</span> Pb₃O₄ + CO₂ + CO + H₂O<br>HgCO₃ <span class="rxn-arrow">→</span> Hg + ½O₂ + CO₂<br>(NH₄)₂CO₃ <span class="rxn-arrow">→</span> 2NH₃ + H₂O + CO₂</div>
 <p><b>Nitrates:</b></p>
-<div class="study-eqn">MNO₃ → KNO₂ + ½O₂ [M = Na, K, Rb, Cs]<br>2LiNO₃ → Li₂O + 2NO₂ + ½O₂<br>2M(NO₃)₂ → 2MO + 4NO₂ + O₂ [M = all bivalent metals: Zn²⁺, Mg²⁺, Sr²⁺, Ca²⁺, Ba²⁺, Cu²⁺, Pb²⁺]<br>Hg(NO₃)₂ → Hg + 2NO₂ + O₂ ; 2AgNO₃ → 2Ag + 2NO₂ + O₂<br>4Be(NO₃)₂ →(125°C)→ [Be₄O(NO₃)₆] + 2NO₂ + ½O₂</div>
+<div class="study-eqn">MNO₃ <span class="rxn-arrow">→</span> KNO₂ + ½O₂ [M = Na, K, Rb, Cs]<br>2LiNO₃ <span class="rxn-arrow">→</span> Li₂O + 2NO₂ + ½O₂<br>2M(NO₃)₂ <span class="rxn-arrow">→</span> 2MO + 4NO₂ + O₂ [M = all bivalent metals: Zn²⁺, Mg²⁺, Sr²⁺, Ca²⁺, Ba²⁺, Cu²⁺, Pb²⁺]<br>Hg(NO₃)₂ <span class="rxn-arrow">→</span> Hg + 2NO₂ + O₂ ; 2AgNO₃ <span class="rxn-arrow">→</span> 2Ag + 2NO₂ + O₂<br>4Be(NO₃)₂ <span class="rxn-arrow">→</span>(125°C)<span class="rxn-arrow">→</span> [Be₄O(NO₃)₆] + 2NO₂ + ½O₂</div>
 <p><b>Ammonium salts:</b> if the anionic part is oxidizing in nature, then N₂ (sometimes N₂O) is the product:</p>
-<div class="study-eqn">(NH₄)₂Cr₂O₇ → N₂ + Cr₂O₃ + 4H₂O<br>NH₄NO₂ → N₂ + 2H₂O ; NH₄NO₃ → N₂O + 2H₂O<br>2NH₄ClO₄ → N₂ + Cl₂ + 2O₂ + 4H₂O<br>2NH₄IO₃ → N₂ + I₂ + O₂ + 4H₂O</div>
+<div class="study-eqn">(NH₄)₂Cr₂O₇ <span class="rxn-arrow">→</span> N₂ + Cr₂O₃ + 4H₂O<br>NH₄NO₂ <span class="rxn-arrow">→</span> N₂ + 2H₂O ; NH₄NO₃ <span class="rxn-arrow">→</span> N₂O + 2H₂O<br>2NH₄ClO₄ <span class="rxn-arrow">→</span> N₂ + Cl₂ + 2O₂ + 4H₂O<br>2NH₄IO₃ <span class="rxn-arrow">→</span> N₂ + I₂ + O₂ + 4H₂O</div>
 <p>If the anionic part is weakly oxidizing or non-oxidizing, NH₃ is the product:</p>
-<div class="study-eqn">(NH₄)₂HPO₄ → HPO₃ + H₂O + 2NH₃<br>(NH₄)₂SO₄ → NH₃ + H₂SO₄ (write per one NH₄⁺)<br>2(NH₄)₃PO₄ → 2NH₃ + P₂O₅ + 3H₂O<br>(NH₄)₂CO₃ → 2NH₃ + H₂O + CO₂</div>
-<p><b>Bicarbonates:</b> all decompose to the carbonate + CO₂: 2NaHCO₃ →(Δ)→ Na₂CO₃ + CO₂ + H₂O. General net-ionic reaction: 2HCO₃⁻ → CO₃²⁻ + H₂O + CO₂.</p>
+<div class="study-eqn">(NH₄)₂HPO₄ <span class="rxn-arrow">→</span> HPO₃ + H₂O + 2NH₃<br>(NH₄)₂SO₄ <span class="rxn-arrow">→</span> NH₃ + H₂SO₄ (write per one NH₄⁺)<br>2(NH₄)₃PO₄ <span class="rxn-arrow">→</span> 2NH₃ + P₂O₅ + 3H₂O<br>(NH₄)₂CO₃ <span class="rxn-arrow">→</span> 2NH₃ + H₂O + CO₂</div>
+<p><b>Bicarbonates:</b> all decompose to the carbonate + CO₂: 2NaHCO₃ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> Na₂CO₃ + CO₂ + H₂O. General net-ionic reaction: 2HCO₃⁻ <span class="rxn-arrow">→</span> CO₃²⁻ + H₂O + CO₂.</p>
 <p><b>Sulphates:</b></p>
-<div class="study-eqn">CuSO₄·5H₂O →(sunlight,−2H₂O)→ CuSO₄·3H₂O →(100°C,−2H₂O)→ CuSO₄·H₂O →(220°C,−H₂O)→ CuSO₄<br>CuSO₄ →(750°C)→ CuO(black) + SO₃ ; →(&gt;800°C)→ CuO(black) + SO₂ + ½O₂<br>FeSO₄·7H₂O →(300°C,−7H₂O)→ FeSO₄ →(Δ, from 2 mol)→ Fe₂O₃ + SO₂ + SO₃<br>Fe₂(SO₄)₃ →(Δ)→ Fe₂O₃ + 3SO₃<br>CaSO₄·2H₂O (gypsum) →(120°C)→ (CaSO₄·½H₂O, plaster of Paris) + 1½H₂O; plaster of Paris + 1½H₂O ⇌ gypsum (hard porous mass); →(200°C,Δ)→ (CaSO₄+½H₂O) becomes dead-burnt</div>
-<div class="study-eqn">ZnSO₄·7H₂O →(70°C,−H₂O)→ ZnSO₄·6H₂O →(70–200°C,−5H₂O)→ ZnSO₄·H₂O →(&gt;200°C,−H₂O)→ ZnSO₄ →(&gt;800°C)→ ZnO + SO₂ + ½O₂<br>MgSO₄·7H₂O (Epsom salt) →(Δ,−7H₂O)→ MgSO₄ (same behaviour as ZnSO₄)<br>2NaHSO₃ → Na₂S₂O₅ + H₂O ; →(Δ)→ Na₂S + Na₂SO₄<br>2NaHSO₄ →(Δ)→ Na₂SO₄ + H₂O + SO₃<br>Na₂S₂O₃·5H₂O →(220°C)→ Na₂S₂O₃ + 5H₂O →(Δ, from 4 mol)→ 3Na₂SO₄ + Na₂S</div>
+<div class="study-eqn">CuSO₄·5H₂O <span class="rxn-arrow">→</span>(sunlight,−2H₂O)<span class="rxn-arrow">→</span> CuSO₄·3H₂O <span class="rxn-arrow">→</span>(100°C,−2H₂O)<span class="rxn-arrow">→</span> CuSO₄·H₂O <span class="rxn-arrow">→</span>(220°C,−H₂O)<span class="rxn-arrow">→</span> CuSO₄<br>CuSO₄ <span class="rxn-arrow">→</span>(750°C)<span class="rxn-arrow">→</span> CuO(black) + SO₃ ; <span class="rxn-arrow">→</span>(&gt;800°C)<span class="rxn-arrow">→</span> CuO(black) + SO₂ + ½O₂<br>FeSO₄·7H₂O <span class="rxn-arrow">→</span>(300°C,−7H₂O)<span class="rxn-arrow">→</span> FeSO₄ <span class="rxn-arrow">→</span>(Δ, from 2 mol)<span class="rxn-arrow">→</span> Fe₂O₃ + SO₂ + SO₃<br>Fe₂(SO₄)₃ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> Fe₂O₃ + 3SO₃<br>CaSO₄·2H₂O (gypsum) <span class="rxn-arrow">→</span>(120°C)<span class="rxn-arrow">→</span> (CaSO₄·½H₂O, plaster of Paris) + 1½H₂O; plaster of Paris + 1½H₂O <span class="rxn-arrow">⇌</span> gypsum (hard porous mass); <span class="rxn-arrow">→</span>(200°C,Δ)<span class="rxn-arrow">→</span> (CaSO₄+½H₂O) becomes dead-burnt</div>
+<div class="study-eqn">ZnSO₄·7H₂O <span class="rxn-arrow">→</span>(70°C,−H₂O)<span class="rxn-arrow">→</span> ZnSO₄·6H₂O <span class="rxn-arrow">→</span>(70–200°C,−5H₂O)<span class="rxn-arrow">→</span> ZnSO₄·H₂O <span class="rxn-arrow">→</span>(&gt;200°C,−H₂O)<span class="rxn-arrow">→</span> ZnSO₄ <span class="rxn-arrow">→</span>(&gt;800°C)<span class="rxn-arrow">→</span> ZnO + SO₂ + ½O₂<br>MgSO₄·7H₂O (Epsom salt) <span class="rxn-arrow">→</span>(Δ,−7H₂O)<span class="rxn-arrow">→</span> MgSO₄ (same behaviour as ZnSO₄)<br>2NaHSO₃ <span class="rxn-arrow">→</span> Na₂S₂O₅ + H₂O ; <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> Na₂S + Na₂SO₄<br>2NaHSO₄ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> Na₂SO₄ + H₂O + SO₃<br>Na₂S₂O₃·5H₂O <span class="rxn-arrow">→</span>(220°C)<span class="rxn-arrow">→</span> Na₂S₂O₃ + 5H₂O <span class="rxn-arrow">→</span>(Δ, from 4 mol)<span class="rxn-arrow">→</span> 3Na₂SO₄ + Na₂S</div>
 <p><b>Halide salts:</b></p>
-<div class="study-eqn">2FeCl₃ → 2FeCl₂ + Cl₂ ; AuCl₃ → AuCl + Cl₂<br>Hg₂Cl₂ → HgCl₂ + Hg ; NH₄Cl → NH₃ + HCl<br>Pb(SCN)₄ → Pb(SCN)₂ + (SCN)₂<br>PbCl₄ → PbCl₂ + Cl₂ ; [PbBr₄ → PbBr₂ + Br₂; PbI₄ does not exist]</div>
+<div class="study-eqn">2FeCl₃ <span class="rxn-arrow">→</span> 2FeCl₂ + Cl₂ ; AuCl₃ <span class="rxn-arrow">→</span> AuCl + Cl₂<br>Hg₂Cl₂ <span class="rxn-arrow">→</span> HgCl₂ + Hg ; NH₄Cl <span class="rxn-arrow">→</span> NH₃ + HCl<br>Pb(SCN)₄ <span class="rxn-arrow">→</span> Pb(SCN)₂ + (SCN)₂<br>PbCl₄ <span class="rxn-arrow">→</span> PbCl₂ + Cl₂ ; [PbBr₄ <span class="rxn-arrow">→</span> PbBr₂ + Br₂; PbI₄ does not exist]</div>
 <p><b>Hydrated chloride salts:</b></p>
-<div class="study-eqn">MgCl₂·6H₂O →(Δ)→ MgO + 2HCl + 5H₂O<br>2FeCl₃·6H₂O →(Δ)→ Fe₂O₃ + 6HCl + 9H₂O<br>2AlCl₃·6H₂O →(Δ)→ Al₂O₃ + 6HCl + 9H₂O<br>MCl₂·2H₂O → MO + 2HCl + H₂O [M = Cu²⁺, Zn²⁺, Sn²⁺]<br>CoCl₂·6H₂O(pink) →(50°C,−2H₂O)→ CoCl₂·4H₂O(pink) →(58°C,−2H₂O)→ CoCl₂·2H₂O(red-violet) →(140°C,−2H₂O)→ CoCl₂(blue)</div>
+<div class="study-eqn">MgCl₂·6H₂O <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> MgO + 2HCl + 5H₂O<br>2FeCl₃·6H₂O <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> Fe₂O₃ + 6HCl + 9H₂O<br>2AlCl₃·6H₂O <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> Al₂O₃ + 6HCl + 9H₂O<br>MCl₂·2H₂O <span class="rxn-arrow">→</span> MO + 2HCl + H₂O [M = Cu²⁺, Zn²⁺, Sn²⁺]<br>CoCl₂·6H₂O(pink) <span class="rxn-arrow">→</span>(50°C,−2H₂O)<span class="rxn-arrow">→</span> CoCl₂·4H₂O(pink) <span class="rxn-arrow">→</span>(58°C,−2H₂O)<span class="rxn-arrow">→</span> CoCl₂·2H₂O(red-violet) <span class="rxn-arrow">→</span>(140°C,−2H₂O)<span class="rxn-arrow">→</span> CoCl₂(blue)</div>
 <p>Hydrated Co²⁺ salt is pink; anhydrous Co²⁺ salt is blue.</p>
 <p><b>Oxides:</b></p>
-<div class="study-eqn">2Ag₂O →(Δ)→ 4Ag + O₂ ; ZnO(white,cold) ⇌(hot/cold)⇌ ZnO(yellow,hot)<br>PbO₂ → PbO + ½O₂ ; PbO(yellow,Massicot) ⇌(hot/cold)⇌ PbO(red,Litharge)<br>Pb₃O₄ (red lead) ⇌(500°C/350°C)⇌ 6PbO(Litharge) + O₂<br>HgO(yellow) →(Δ)→ HgO(red) →(strong heating,400°C)→ Hg + ½O₂<br>HgI₂(scarlet red) ⇌(127°C, on rubbing)⇌ HgI₂(yellow, sublimate) — color does not revert on cooling for HgI₂</div>
-<p><b>Dichromate / chromate:</b> 2K₂Cr₂O₇(yellow) →(Δ)→ 2K₂CrO₄ + Cr₂O₃(green) + ½O₂↑.</p>
+<div class="study-eqn">2Ag₂O <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> 4Ag + O₂ ; ZnO(white,cold) <span class="rxn-arrow">⇌</span>(hot/cold)<span class="rxn-arrow">⇌</span> ZnO(yellow,hot)<br>PbO₂ <span class="rxn-arrow">→</span> PbO + ½O₂ ; PbO(yellow,Massicot) <span class="rxn-arrow">⇌</span>(hot/cold)<span class="rxn-arrow">⇌</span> PbO(red,Litharge)<br>Pb₃O₄ (red lead) <span class="rxn-arrow">⇌</span>(500°C/350°C)<span class="rxn-arrow">⇌</span> 6PbO(Litharge) + O₂<br>HgO(yellow) <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> HgO(red) <span class="rxn-arrow">→</span>(strong heating,400°C)<span class="rxn-arrow">→</span> Hg + ½O₂<br>HgI₂(scarlet red) <span class="rxn-arrow">⇌</span>(127°C, on rubbing)<span class="rxn-arrow">⇌</span> HgI₂(yellow, sublimate) — color does not revert on cooling for HgI₂</div>
+<p><b>Dichromate / chromate:</b> 2K₂Cr₂O₇(yellow) <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> 2K₂CrO₄ + Cr₂O₃(green) + ½O₂↑.</p>
 <p><b>Phosphate salts:</b></p>
-<div class="study-eqn">NaH₂PO₄ (1° phosphate) →(Δ)→ H₂O + NaPO₃<br>Na₂HPO₄ (2° phosphate) →(Δ)→ H₂O + Na₂P₂O₇<br>Na₃PO₄ (3° phosphate) →(Δ)→ no effect<br>Na(NH₄)HPO₄·4H₂O →(Δ,−4H₂O)→ NaNH₄HPO₄ →(high temp)→ NaPO₃ + NH₃ + H₂O<br>2Mg(NH₄)PO₄ →(Δ)→ Mg₂P₂O₇ + 2NH₃ + H₂O</div>
+<div class="study-eqn">NaH₂PO₄ (1° phosphate) <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> H₂O + NaPO₃<br>Na₂HPO₄ (2° phosphate) <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> H₂O + Na₂P₂O₇<br>Na₃PO₄ (3° phosphate) <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> no effect<br>Na(NH₄)HPO₄·4H₂O <span class="rxn-arrow">→</span>(Δ,−4H₂O)<span class="rxn-arrow">→</span> NaNH₄HPO₄ <span class="rxn-arrow">→</span>(high temp)<span class="rxn-arrow">→</span> NaPO₃ + NH₃ + H₂O<br>2Mg(NH₄)PO₄ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> Mg₂P₂O₇ + 2NH₃ + H₂O</div>
 <p><b>Acids (heating):</b></p>
-<div class="study-eqn">2HNO₃(conc.) →(Δ)→ H₂O + 2NO₂ + ½O₂<br>H₂SO₄ →(444°C)→ H₂O + SO₃<br>H₂SO₄ →(&gt;800°C)→ H₂O + SO₂ + ½O₂</div>
+<div class="study-eqn">2HNO₃(conc.) <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> H₂O + 2NO₂ + ½O₂<br>H₂SO₄ <span class="rxn-arrow">→</span>(444°C)<span class="rxn-arrow">→</span> H₂O + SO₃<br>H₂SO₄ <span class="rxn-arrow">→</span>(&gt;800°C)<span class="rxn-arrow">→</span> H₂O + SO₂ + ½O₂</div>
 <p><b>Disproportionation on heating:</b></p>
-<div class="study-eqn">3H₂SO₃ → 2H₂SO₄ + S↓ + H₂O<br>3HNO₂ → HNO₃ + 2NO + H₂O<br>3HClO₃ → HClO₄ + 2ClO₂ + H₂O<br>3HOCl → 2HCl + HClO₃<br>4H₃PO₃ →(200°C,Δ)→ 3H₃PO₄ + PH₃<br>2H₃PO₂ → H₃PO₄ + PH₃<br>2NaH₂PO₂ → Na₂HPO₄ + PH₃<br>H₃PO₄ →(220°C)→ H₄P₂O₇ →(320°C)→ 4HPO₃ →(&gt;320°C)→ 2P₂O₅ + 2H₂O<br>4H₃BO₃ →(100°C)→ 4HBO₂ →(140°C)→ H₂B₄O₇ →(red hot)→ 2B₂O₃ + H₂O<br>H₂C₂O₄ →(Δ)→ H₂O + CO + CO₂</div>
+<div class="study-eqn">3H₂SO₃ <span class="rxn-arrow">→</span> 2H₂SO₄ + S↓ + H₂O<br>3HNO₂ <span class="rxn-arrow">→</span> HNO₃ + 2NO + H₂O<br>3HClO₃ <span class="rxn-arrow">→</span> HClO₄ + 2ClO₂ + H₂O<br>3HOCl <span class="rxn-arrow">→</span> 2HCl + HClO₃<br>4H₃PO₃ <span class="rxn-arrow">→</span>(200°C,Δ)<span class="rxn-arrow">→</span> 3H₃PO₄ + PH₃<br>2H₃PO₂ <span class="rxn-arrow">→</span> H₃PO₄ + PH₃<br>2NaH₂PO₂ <span class="rxn-arrow">→</span> Na₂HPO₄ + PH₃<br>H₃PO₄ <span class="rxn-arrow">→</span>(220°C)<span class="rxn-arrow">→</span> H₄P₂O₇ <span class="rxn-arrow">→</span>(320°C)<span class="rxn-arrow">→</span> 4HPO₃ <span class="rxn-arrow">→</span>(&gt;320°C)<span class="rxn-arrow">→</span> 2P₂O₅ + 2H₂O<br>4H₃BO₃ <span class="rxn-arrow">→</span>(100°C)<span class="rxn-arrow">→</span> 4HBO₂ <span class="rxn-arrow">→</span>(140°C)<span class="rxn-arrow">→</span> H₂B₄O₇ <span class="rxn-arrow">→</span>(red hot)<span class="rxn-arrow">→</span> 2B₂O₃ + H₂O<br>H₂C₂O₄ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> H₂O + CO + CO₂</div>
 <p><b>Acetate salts (heating):</b></p>
-<div class="study-eqn">2CH₃CO₂K →(Δ)→ K₂CO₃ + CH₃COCH₃<br>Pb(OAc)₂ →(Δ)→ PbO + CO₂ + CH₃COCH₃<br>Mg(OAc)₂ → MgO + CO₂ + CH₃COCH₃ ; Be(OAc)₂ → BeO + CO₂ + CH₃COCH₃<br>Ca(OAc)₂ → CaCO₃ + CH₃COCH₃ ; Ba(OAc)₂ → BaCO₃ + CH₃COCH₃</div>
+<div class="study-eqn">2CH₃CO₂K <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> K₂CO₃ + CH₃COCH₃<br>Pb(OAc)₂ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> PbO + CO₂ + CH₃COCH₃<br>Mg(OAc)₂ <span class="rxn-arrow">→</span> MgO + CO₂ + CH₃COCH₃ ; Be(OAc)₂ <span class="rxn-arrow">→</span> BeO + CO₂ + CH₃COCH₃<br>Ca(OAc)₂ <span class="rxn-arrow">→</span> CaCO₃ + CH₃COCH₃ ; Ba(OAc)₂ <span class="rxn-arrow">→</span> BaCO₃ + CH₃COCH₃</div>
 <p><b>Oxalate salts (heating):</b></p>
-<div class="study-eqn">7Na₂C₂O₄ → 7Na₂CO₃ + 2CO₂ + 3CO + 2C<br>SnC₂O₄ →(Δ)→ SnO + CO₂ + CO<br>FeC₂O₄ → FeO + CO + CO₂<br>Ag₂C₂O₄ →(Δ)→ 2Ag + 2CO₂<br>HgC₂O₄ → Hg + 2CO₂</div>
+<div class="study-eqn">7Na₂C₂O₄ <span class="rxn-arrow">→</span> 7Na₂CO₃ + 2CO₂ + 3CO + 2C<br>SnC₂O₄ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> SnO + CO₂ + CO<br>FeC₂O₄ <span class="rxn-arrow">→</span> FeO + CO + CO₂<br>Ag₂C₂O₄ <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> 2Ag + 2CO₂<br>HgC₂O₄ <span class="rxn-arrow">→</span> Hg + 2CO₂</div>
 <p><b>Formate salts (heating):</b></p>
-<div class="study-eqn">2HCO₂Na →(350°C)→ Na₂C₂O₄ + H₂↑<br>2HCOOAg →(Δ)→ HCOOH + 2Ag + CO₂<br>(HCOO)₂Hg → HCOOH + Hg + CO₂</div>
+<div class="study-eqn">2HCO₂Na <span class="rxn-arrow">→</span>(350°C)<span class="rxn-arrow">→</span> Na₂C₂O₄ + H₂↑<br>2HCOOAg <span class="rxn-arrow">→</span>(Δ)<span class="rxn-arrow">→</span> HCOOH + 2Ag + CO₂<br>(HCOO)₂Hg <span class="rxn-arrow">→</span> HCOOH + Hg + CO₂</div>
 `,
 
 "CATION GROUPS": `
@@ -1846,7 +1870,7 @@ prelim: {
 </table>
 <p><b>Group I</b> (reagent: dilute HCl; members Pb²⁺, Ag⁺, Hg₂²⁺; product: insoluble white chlorides): Kₛₚ(PbCl₂) = 2.4×10⁻⁴, Kₛₚ(AgCl) = 1.2×10⁻¹⁰, Kₛₚ(Hg₂Cl₂) = 2×10⁻¹⁸. PbCl₂ is soluble in hot water.</p>
 <p><b>Group II</b> (reagent: dilute HCl + H₂S; members Cu²⁺, Pb²⁺, Hg²⁺, Bi³⁺, Cd²⁺, As³⁺/As⁵⁺, Sb³⁺/Sb⁵⁺, Sn²⁺/Sn⁴⁺; product: insoluble sulphides): H₂S gives a very low concentration of S²⁻ in acidic medium, low concentration of S²⁻ in neutral medium, and high concentration of S²⁻ in basic medium. Sulphides with low Kₛₚ (Sb₂S₃, HgS, Bi₂S₃, CuS, As₂S₃) precipitate even at low S²⁻; sulphides with moderate Kₛₚ (PbS, CdS, SnS) need more S²⁻; sulphides with high Kₛₚ (CoS, NiS, ZnS, MnS) are soluble in dilute HCl and don't precipitate in Group II. SbCl₃, BiCl₃, HgCl₂, CuCl₂, AsCl₃, SnCl₂, PbCl₂, CdCl₂ can also be precipitated due to the dilute HCl present. Kₛₚ of PbS/CdS are moderate, so precipitation is observed only with a lot of water added. Pb²⁺ is kept in both Group I and Group II because Kₛₚ of PbCl₂ and PbS are not very low.</p>
-<p><b>Group III</b> (reagent: NH₄OH + NH₄Cl; members Fe³⁺, Cr³⁺, Al³⁺; product: insoluble hydroxides): NH₄OH (weak base) gives a low [OH⁻], and a very low [OH⁻] in presence of NH₄Cl (common-ion effect). Only hydroxides with very low Kₛₚ (Fe(OH)₃, Cr(OH)₃, Al(OH)₃) precipitate under this condition; moderate-Kₛₚ hydroxides (Zn(OH)₂, Ni(OH)₂, Co(OH)₂, Mn(OH)₂, Mg(OH)₂) and very-high-Kₛₚ hydroxides (Ca(OH)₂, Sr(OH)₂, Ba(OH)₂) don't precipitate. NH₄Cl can't be replaced by NH₄NO₃ (NO₃⁻ would oxidize Mn²⁺→Mn³⁺, wrongly precipitating Mn(OH)₃), by (NH₄)₂SO₄ (would precipitate SrSO₄/BaSO₄), or by (NH₄)₂C₂O₄/(NH₄)₂CO₃ (would precipitate oxalates/carbonates of Ca²⁺/Sr²⁺/Ba²⁺). Before testing with the Group III reagent, the salt solution is boiled with dilute HNO₃ to oxidize any Fe²⁺ to Fe³⁺ (Fe(OH)₃ has a much lower Kₛₚ than Fe(OH)₂ — otherwise Fe²⁺ would be missed). NH₄Cl in Group III also prevents precipitation of Ni²⁺ and Mg²⁺ by complexing them.</p>
+<p><b>Group III</b> (reagent: NH₄OH + NH₄Cl; members Fe³⁺, Cr³⁺, Al³⁺; product: insoluble hydroxides): NH₄OH (weak base) gives a low [OH⁻], and a very low [OH⁻] in presence of NH₄Cl (common-ion effect). Only hydroxides with very low Kₛₚ (Fe(OH)₃, Cr(OH)₃, Al(OH)₃) precipitate under this condition; moderate-Kₛₚ hydroxides (Zn(OH)₂, Ni(OH)₂, Co(OH)₂, Mn(OH)₂, Mg(OH)₂) and very-high-Kₛₚ hydroxides (Ca(OH)₂, Sr(OH)₂, Ba(OH)₂) don't precipitate. NH₄Cl can't be replaced by NH₄NO₃ (NO₃⁻ would oxidize Mn²⁺<span class="rxn-arrow">→</span>Mn³⁺, wrongly precipitating Mn(OH)₃), by (NH₄)₂SO₄ (would precipitate SrSO₄/BaSO₄), or by (NH₄)₂C₂O₄/(NH₄)₂CO₃ (would precipitate oxalates/carbonates of Ca²⁺/Sr²⁺/Ba²⁺). Before testing with the Group III reagent, the salt solution is boiled with dilute HNO₃ to oxidize any Fe²⁺ to Fe³⁺ (Fe(OH)₃ has a much lower Kₛₚ than Fe(OH)₂ — otherwise Fe²⁺ would be missed). NH₄Cl in Group III also prevents precipitation of Ni²⁺ and Mg²⁺ by complexing them.</p>
 <p><b>Group IV</b> (reagent: NH₄OH + H₂S; members Zn²⁺, Mn²⁺, Co²⁺, Ni²⁺; product: insoluble sulphides): due to the high S²⁻ concentration in the now-basic medium, sulphides of these (high-Kₛₚ) cations precipitate.</p>
 <p><b>Group V</b> (reagent: (NH₄)₂CO₃ + NH₄Cl, both good electrolytes; members Ca²⁺, Ba²⁺, Sr²⁺; product: insoluble white carbonates): NH₄Cl (slightly acidic) is added to prevent formation of basic magnesium carbonate (MgCO₃·Mg(OH)₂), which would form if only (NH₄)₂CO₃ (basic) were used.</p>
 <p><b>Group VI</b> (reagent: NH₄Cl + NH₄OH + (NH₄)₂HPO₄; member Mg²⁺; product: white Mg(NH₄)PO₄).</p>
@@ -1859,7 +1883,7 @@ alkane: {
 'NOMENCLATURE & CLASSIFICATION': `
 <p>Alkanes are saturated, acyclic hydrocarbons containing only C–C and C–H single bonds, so their degree of unsaturation is always zero, giving the general formula <b>CₙH₂ₙ₊₂</b>.</p>
 <p><b>Classifying carbon atoms</b> — by how many other carbon atoms a carbon is directly bonded to:</p>
-<table>
+<table class="study-table">
 <tr><th>Type</th><th>Bonded to</th><th>Example position</th></tr>
 <tr><td>Primary (1°)</td><td>1 other carbon</td><td>Terminal CH₃ groups, methyl branches</td></tr>
 <tr><td>Secondary (2°)</td><td>2 other carbons</td><td>Middle of an unbranched chain</td></tr>
@@ -1874,7 +1898,7 @@ alkane: {
 'ISOMERISM': `
 <p>Because alkanes have no functional group, ring, or π-bond to reposition, the <b>only</b> constitutional isomerism they can show is <b>chain (skeletal) isomerism</b> — different ways of branching the same carbon skeleton.</p>
 <p>Methane, ethane, and propane (≤3 carbons) have just <b>one</b> possible structure each — branching needs at least 4 carbons. From butane onward the isomer count grows quickly:</p>
-<table>
+<table class="study-table">
 <tr><th>Alkane</th><th>Molecular formula</th><th>No. of chain isomers</th></tr>
 <tr><td>Butane</td><td>C₄H₁₀</td><td>2 (n-butane, isobutane)</td></tr>
 <tr><td>Pentane</td><td>C₅H₁₂</td><td>3 (n-pentane, isopentane, neopentane)</td></tr>
@@ -1885,29 +1909,29 @@ alkane: {
 `,
 
 'WURTZ REACTION & COUPLING METHODS': `
-<p><b>Wurtz reaction:</b> 2 R–X + 2Na (dry ethereal solution) → R–R + 2NaX. Works best for making a <i>symmetrical</i> alkane from a single halide; using two different halides R–X and R'–X gives an unavoidable statistical mixture of R–R, R'–R', and R–R', so it's a poor choice for a clean unsymmetrical product.</p>
+<p><b>Wurtz reaction:</b> 2 R–X + 2Na (dry ethereal solution) <span class="rxn-arrow">→</span> R–R + 2NaX. Works best for making a <i>symmetrical</i> alkane from a single halide; using two different halides R–X and R'–X gives an unavoidable statistical mixture of R–R, R'–R', and R–R', so it's a poor choice for a clean unsymmetrical product.</p>
 <figure class="study-diagram">${SVG_WURTZ}<figcaption>Worked example: two molecules of ethyl bromide couple through the Wurtz reaction to give n-butane.</figcaption></figure>
 <p><b>Two mechanisms are proposed</b> for the Wurtz coupling:</p>
-<table>
+<table class="study-table">
 <tr><th>Mechanism</th><th>Pathway</th></tr>
-<tr><td>Free-radical (default/most accepted)</td><td>R–X + Na → R• + NaX (single electron transfer), then R• + R• → R–R</td></tr>
-<tr><td>Ionic / Sɴ2 (alternative, suggested by default for some substrates)</td><td>R–X + 2Na → R⁻Na⁺ + NaX (carbanion forms first), then R⁻ attacks a second R–X in an Sɴ2 step to displace X⁻</td></tr>
+<tr><td>Free-radical (default/most accepted)</td><td>R–X + Na <span class="rxn-arrow">→</span> R• + NaX (single electron transfer), then R• + R• <span class="rxn-arrow">→</span> R–R</td></tr>
+<tr><td>Ionic / Sɴ2 (alternative, suggested by default for some substrates)</td><td>R–X + 2Na <span class="rxn-arrow">→</span> R⁻Na⁺ + NaX (carbanion forms first), then R⁻ attacks a second R–X in an Sɴ2 step to displace X⁻</td></tr>
 </table>
 <p><b>Reactivity of alkyl halides in Wurtz coupling</b> (for a given alkyl group): <b>R–I > R–Br > R–Cl > R–F</b> — a weaker C–X bond reacts faster, and R–F essentially doesn't react. When a milder metal is used (weaker reducing agent than Na, e.g. Zn or Sn), the medium usually needs to be made acidic (e.g. Zn/CH₃COOH or Sn/HCl) to drive the reaction.</p>
 <p>Since Wurtz forms a new C–C bond by joining two existing alkyl groups, the smallest alkane it can make is <b>ethane</b> (from CH₃–X + CH₃–X); it is fundamentally appropriate only for building <b>symmetrical</b> alkanes.</p>
 <p><b>Intramolecular Wurtz coupling</b> (cyclization) is faster than the corresponding intermolecular coupling. A dihalide can cyclize onto itself if this forms a 3- to 6-membered ring; if the resulting ring would need more than 6 carbons, intermolecular coupling dominates instead and the compound polymerizes.</p>
-<p><b>Frankland reaction:</b> exactly the Wurtz mechanism, but with <b>Zn dust (in THF)</b> in place of sodium: 2R–X + Zn → R–R + ZnX₂.</p>
-<p><b>Wurtz–Fittig reaction:</b> couples an <i>aryl</i> halide with an <i>alkyl</i> halide using Na in dry ether, giving an alkylbenzene: 2Na + R–X + X–C₆H₅ → R–C₆H₅ + 2NaX.</p>
-<p><b>Fittig reaction:</b> couples two molecules of an <i>aryl</i> halide with Na in dry ether, giving a biaryl: 2 C₆H₅–X + 2Na → C₆H₅–C₆H₅ + 2NaX.</p>
-<p><b>Ullmann reaction (Ullmann coupling):</b> couples two aryl halides using copper metal — <i>not</i> a free-radical mechanism. Mechanism: Ar–X + Cu →(oxidative addition)→ Ar–Cu–X; this reacts with a second Ar–X →(oxidative addition)→ an Ar–Cu(X)–Ar intermediate, which then →(reductive elimination)→ Ar–Ar + CuX₂ (regenerating Cu/CuX to continue the cycle).</p>
+<p><b>Frankland reaction:</b> exactly the Wurtz mechanism, but with <b>Zn dust (in THF)</b> in place of sodium: 2R–X + Zn <span class="rxn-arrow">→</span> R–R + ZnX₂.</p>
+<p><b>Wurtz–Fittig reaction:</b> couples an <i>aryl</i> halide with an <i>alkyl</i> halide using Na in dry ether, giving an alkylbenzene: 2Na + R–X + X–C₆H₅ <span class="rxn-arrow">→</span> R–C₆H₅ + 2NaX.</p>
+<p><b>Fittig reaction:</b> couples two molecules of an <i>aryl</i> halide with Na in dry ether, giving a biaryl: 2 C₆H₅–X + 2Na <span class="rxn-arrow">→</span> C₆H₅–C₆H₅ + 2NaX.</p>
+<p><b>Ullmann reaction (Ullmann coupling):</b> couples two aryl halides using copper metal — <i>not</i> a free-radical mechanism. Mechanism: Ar–X + Cu <span class="rxn-arrow">→</span>(oxidative addition)<span class="rxn-arrow">→</span> Ar–Cu–X; this reacts with a second Ar–X <span class="rxn-arrow">→</span>(oxidative addition)<span class="rxn-arrow">→</span> an Ar–Cu(X)–Ar intermediate, which then <span class="rxn-arrow">→</span>(reductive elimination)<span class="rxn-arrow">→</span> Ar–Ar + CuX₂ (regenerating Cu/CuX to continue the cycle).</p>
 `,
 
 'COREY-HOUSE SYNTHESIS & ORGANOCUPRATES': `
 <p>The most reliable way to build an <b>unsymmetrical</b> alkane R–R' cleanly (avoiding the statistical-mixture problem of Wurtz/Kolbe) is the <b>Corey–House synthesis</b>, which reacts a lithium dialkylcuprate with a different alkyl halide.</p>
 <p><b>Preparing the reagent — organocuprates (Gilman reagents):</b></p>
-<p style="text-align:center">R–X —(Li, ether)→ R–Li —(CuI, THF)→ R₂CuLi + LiI</p>
-<p>The step R–Li + CuI → R₂CuLi is an example of <b>transmetallation</b>: when an organometallic compound is added to a halide of a <i>more electronegative</i> metal, the alkyl group transfers to the more electronegative (and hence less reactive/more stable C–metal bond) metal. Approximate electronegativities: Li ≈ 1.0, Mg ≈ 1.2, Cd ≈ 1.5, Cu ≈ 1.9, C ≈ 2.5 — so an alkyl group on Li readily transfers onto Cu (closer to carbon's own electronegativity, giving a more covalent, less reactive C–Cu bond), and similarly a Grignard reagent (RMgCl) transmetallates onto CdCl₂ to give the less-reactive R₂Cd (diethylcadmium-type reagents).</p>
-<p><b>The coupling step:</b> R₂CuLi + R'–X → R–R' + RCu + LiX. The alkyl group on copper is strongly carbanionic/nucleophilic and displaces the halide by back-side attack, so this step follows an <b>Sɴ2 mechanism</b>: R'–X can be methyl, primary, or (sometimes) secondary, but <b>tertiary halides fail</b> (elimination dominates instead, since Sɴ2 is blocked at a 3° centre).</p>
+<div class="study-eqn">R–X —(Li, ether)<span class="rxn-arrow">→</span> R–Li —(CuI, THF)<span class="rxn-arrow">→</span> R₂CuLi + LiI</div>
+<p>The step R–Li + CuI <span class="rxn-arrow">→</span> R₂CuLi is an example of <b>transmetallation</b>: when an organometallic compound is added to a halide of a <i>more electronegative</i> metal, the alkyl group transfers to the more electronegative (and hence less reactive/more stable C–metal bond) metal. Approximate electronegativities: Li ≈ 1.0, Mg ≈ 1.2, Cd ≈ 1.5, Cu ≈ 1.9, C ≈ 2.5 — so an alkyl group on Li readily transfers onto Cu (closer to carbon's own electronegativity, giving a more covalent, less reactive C–Cu bond), and similarly a Grignard reagent (RMgCl) transmetallates onto CdCl₂ to give the less-reactive R₂Cd (diethylcadmium-type reagents).</p>
+<p><b>The coupling step:</b> R₂CuLi + R'–X <span class="rxn-arrow">→</span> R–R' + RCu + LiX. The alkyl group on copper is strongly carbanionic/nucleophilic and displaces the halide by back-side attack, so this step follows an <b>Sɴ2 mechanism</b>: R'–X can be methyl, primary, or (sometimes) secondary, but <b>tertiary halides fail</b> (elimination dominates instead, since Sɴ2 is blocked at a 3° centre).</p>
 <p><b>Why Corey–House beats Wurtz/Kolbe for unsymmetrical alkanes:</b> two different alkyl groups can be used — one built into the cuprate, the other supplied as a separate alkyl halide — with only <i>one</i> clean product, R–R'.</p>
 <p><b>Reaction with vinylic and aryl halides:</b> unlike Grignard/organolithium reagents (which cannot do Sɴ2/Sɴ1 chemistry on sp² C–X bonds), organocuprates <i>can</i> react with vinylic and aryl halides to install an alkyl group on a double bond or a benzene ring — and this substitution is <b>stereospecific</b>: the configuration of the starting alkene (cis or trans) is exactly retained in the alkene product.</p>
 <p><b>Reaction with other functional groups:</b> organocuprates react selectively with an acid (acyl) halide, replacing only the halide with an R group to directly give a <b>ketone</b>, while leaving the carbonyl itself untouched — a good example of the reagent's mild, chemoselective character.</p>
@@ -1916,17 +1940,17 @@ alkane: {
 'DECARBOXYLATION & KOLBE ELECTROLYSIS': `
 <p><b>Decarboxylation (soda-lime reaction):</b> heating the sodium/potassium salt of a carboxylic acid with soda-lime removes –COONa as Na₂CO₃, leaving the alkane with one fewer carbon:</p>
 <figure class="study-diagram">${SVG_KOLBE}<figcaption>Kolbe electrolysis: aqueous sodium/potassium salt of a carboxylic acid is electrolysed; the alkyl radicals formed at the anode dimerise to a symmetrical alkane, while H₂ is liberated at the cathode.</figcaption></figure>
-<p style="text-align:center">R–COONa + NaOH —(CaO, Δ)→ R–H + Na₂CO₃</p>
+<div class="study-eqn">R–COONa + NaOH —(CaO, Δ)<span class="rxn-arrow">→</span> R–H + Na₂CO₃</div>
 <p><b>Mechanism:</b> proceeds through acid–base chemistry followed by C–C bond cleavage — the carboxylate is deprotonated/rearranged so that the C–C(=O)O⁻ bond breaks heterolytically, generating a <b>carbanion R⁻</b> plus CO₂ (as carbonate after reacting with the base). Formation of this carbanion is the <b>slowest step (rate-determining step)</b>, so anything that stabilizes the carbanion speeds up the whole reaction.</p>
 <p><b>Purpose of using soda-lime (NaOH + CaO, 3:1) instead of pure NaOH:</b> CaO itself does <i>no</i> chemistry here — pure solid NaOH is difficult to handle (highly hygroscopic, absorbs atmospheric water and CO₂, and becomes a corrosive puddle if left exposed, and is costlier). Soda-lime is easier and cheaper to handle, and the CaO component still absorbs CO₂ and moisture from the air like NaOH does — a purely practical, not chemical, reason.</p>
 <p><b>Reactivity trend:</b> since the RDS generates a carbanion, decarboxylation is <i>faster</i> when that carbanion is <i>more stable</i> — e.g. carbanions stabilized by nearby electron-withdrawing groups (–NO₂, halogens) or by resonance/aromatic delocalization decarboxylate more readily than simple alkyl carbanions.</p>
 <p><b>Special case — β-keto/EWG acids:</b> if a strong electron-withdrawing group sits at the β-position to –COOH (as in β-keto acids), the developing carbanion/enolate is stabilized enough that decarboxylation happens on simple heating <i>alone</i>, without needing soda-lime at all.</p>
-<p><b>Worked example:</b> C₆H₅COONa + NaOH —(CaO, Δ)→ ${BENZENE_SVG} + Na₂CO₃ — decarboxylating sodium benzoate gives plain benzene.</p>
+<div class="study-eqn worked-example"><span class="worked-label">Worked example</span>C₆H₅COONa + NaOH —(CaO, Δ)<span class="rxn-arrow">→</span> ${BENZENE_SVG} + Na₂CO₃<span class="worked-note">decarboxylating sodium benzoate gives plain benzene</span></div>
 <p><b>Kolbe's electrolytic method:</b> electrolysis of a concentrated aqueous solution of the sodium/potassium salt of a carboxylic acid gives a symmetrical alkane. This reaction is <b>ionic overall but proceeds through free radicals</b> at the anode:</p>
-<table>
+<table class="study-table">
 <tr><th>Electrode</th><th>Reaction</th></tr>
-<tr><td>Anode (oxidation)</td><td>2RCOO⁻ → 2RCOO• (lose e⁻) → 2R• + 2CO₂ (lose CO₂) → R–R (radicals couple)</td></tr>
-<tr><td>Cathode (reduction)</td><td>2Na⁺ + 2e⁻ + 2H₂O → 2NaOH + H₂↑</td></tr>
+<tr><td>Anode (oxidation)</td><td>2RCOO⁻ <span class="rxn-arrow">→</span> 2RCOO• (lose e⁻) <span class="rxn-arrow">→</span> 2R• + 2CO₂ (lose CO₂) <span class="rxn-arrow">→</span> R–R (radicals couple)</td></tr>
+<tr><td>Cathode (reduction)</td><td>2Na⁺ + 2e⁻ + 2H₂O <span class="rxn-arrow">→</span> 2NaOH + H₂↑</td></tr>
 </table>
 <p><b>Note:</b> since Kolbe couples two identical R groups from one starting acid, like Wurtz, the major product is always a <b>symmetrical</b> alkane; the pH of the solution rises as the reaction proceeds (NaOH accumulates at the cathode).</p>
 `,
@@ -1936,7 +1960,7 @@ alkane: {
 <p><b>Purpose/role of the catalyst:</b> Ni, Pd, and Pt act as <b>surface catalysts</b> — both H₂ and the unsaturated substrate are adsorbed onto the metal's active sites, which lowers the activation energy of the reaction and holds the molecule in place so that both H atoms are delivered to the <i>same face</i> — i.e., catalytic hydrogenation is a <b>syn (cis) addition</b>.</p>
 <p><b>Raney nickel</b> is prepared from a Ni–Al alloy treated with concentrated NaOH, which dissolves out the aluminium as soluble sodium aluminate, leaving behind a highly porous, spongy nickel of very large surface area — this makes it a substantially faster hydrogenation catalyst than ordinary Ni/H₂, because activation energy drops further and more active sites are available per gram of metal.</p>
 <p><b>Stereochemistry of syn addition</b> (when the alkene creates two new, similar potential stereocentres with no other pre-existing chiral centre in the molecule):</p>
-<table>
+<table class="study-table">
 <tr><th>Starting alkene</th><th>Addition</th><th>Product</th></tr>
 <tr><td>cis-alkene</td><td>syn addition</td><td>meso compound (achiral, has an internal mirror plane)</td></tr>
 <tr><td>trans-alkene</td><td>syn addition</td><td>racemic pair of enantiomers</td></tr>
@@ -1945,7 +1969,7 @@ alkane: {
 <p><b>Ease/rate of catalytic hydrogenation:</b> rate ∝ 1 / (steric crowding around the multiple bond) — a terminal, unhindered double/triple bond hydrogenates fastest; more substituted or internal alkenes/alkynes react slower because they adsorb less easily onto the flat catalyst surface. Raney nickel gives a faster rate than plain Ni/H₂ for the same substrate.</p>
 <p><b>Order of reactivity of different functional groups towards H₂/Pd</b> (lower temperature needed = reacts first/more easily): acid halide (–COX) > C≡C > C=C (all react around 25–30°C) > C=O > C≡N > –NO₂ (30–50°C) > R–X (50–100°C) > benzene ring (100–150°C) > ester, R–CO–O–R' (250–300°C, hardest to reduce).</p>
 <p><b>Homogeneous vs heterogeneous catalysts:</b></p>
-<table>
+<table class="study-table">
 <tr><th>Homogeneous (dissolved in the reaction medium)</th><th>Heterogeneous (solid surface catalyst)</th></tr>
 <tr><td>H₂/Rh, H₂/Ir</td><td>H₂/Ni, Raney nickel (Ni–H)</td></tr>
 <tr><td>H₂/[Rh(PPh₃)₃Cl] — Wilkinson's catalyst, chloridotris(triphenylphosphine)rhodium(I), a red-brown solid</td><td>H₂/Pt, H₂/Pd, H₂/Pd–C (charcoal), H₂/PtO₂ (Adams' catalyst)</td></tr>
@@ -1954,13 +1978,13 @@ alkane: {
 
 'PARTIAL REDUCTION & DIIMIDE': `
 <p>Reducing an alkyne all the way to an alkyne's <i>alkene</i> stage (without going further to the alkane) needs a catalyst that is deliberately made less active, or a fundamentally different (non-surface) mechanism:</p>
-<table>
+<table class="study-table">
 <tr><th>Method</th><th>Catalyst / reagent</th><th>Addition type</th><th>Product (if geometrical isomerism possible)</th></tr>
 <tr><td>Lindlar's catalyst</td><td>Pd deposited on CaCO₃ or BaSO₄, poisoned with a lead salt (e.g. Pb(CH₃COO)₂) or quinoline — the poison lowers the catalyst's activity just enough to stop it at the alkene stage</td><td>Syn addition (catalyst surface)</td><td><b>cis</b>-alkene (major)</td></tr>
 <tr><td>Nickel boride, Ni₂B ("P-2" catalyst)</td><td>Milder alternative to Lindlar's catalyst</td><td>Syn addition (catalyst surface)</td><td><b>cis</b>-alkene (major)</td></tr>
 <tr><td>Na or Li in liquid NH₃ / ROH</td><td>Dissolving-metal (Birch-type) reduction</td><td>Anti addition (stepwise electron-transfer mechanism, not a surface)</td><td><b>trans</b>-alkene (major)</td></tr>
 </table>
-<p><b>Mechanism of the Na/liquid-NH₃ reduction:</b> alkyne + e⁻ → radical anion → protonation (by NH₃) → vinyl radical + e⁻ → vinyl anion → protonation (by NH₃) → alkene. The more stable, less sterically hindered vinyl radical/vinyl anion intermediate forms preferentially, which is why the more stable <b>trans</b>-alkene ends up as the major product (with some cis as the minor product).</p>
+<p><b>Mechanism of the Na/liquid-NH₃ reduction:</b> alkyne + e⁻ <span class="rxn-arrow">→</span> radical anion <span class="rxn-arrow">→</span> protonation (by NH₃) <span class="rxn-arrow">→</span> vinyl radical + e⁻ <span class="rxn-arrow">→</span> vinyl anion <span class="rxn-arrow">→</span> protonation (by NH₃) <span class="rxn-arrow">→</span> alkene. The more stable, less sterically hindered vinyl radical/vinyl anion intermediate forms preferentially, which is why the more stable <b>trans</b>-alkene ends up as the major product (with some cis as the minor product).</p>
 <p><b>Birch reduction of aromatic rings</b> (Na/Li in liquid NH₃/ROH) reduces benzene to a 1,4-cyclohexadiene, and the regiochemistry depends on the ring substituent: an electron-donating group (EDG) ends up on an <i>unreduced</i> (still sp², still part of a C=C) carbon of the diene product, while an electron-withdrawing group (EWG) ends up on a carbon that <i>is</i> reduced (becomes sp³) in the product.</p>
 <p><b>Diimide (HN=NH) reduction — a metal-free alternative:</b> diimide is generated in situ (e.g. N₂H₄ + H₂O₂, or N₂H₄ + O₂/hν, both mild oxidants) and is short-lived — if it doesn't react immediately with a substrate, it self-destructs by disproportionation back to N₂ + N₂H₄. This short lifetime is exactly why it is <b>selective</b>: it reacts fast with symmetrical/nonpolar multiple bonds (C=C, C≡C, N=N) but essentially never gets the chance to react with the slower, polar C=O or C=N bonds.</p>
 <p><b>Mechanism:</b> diimide approaches the alkene/alkyne through a concerted, six-membered <b>pericyclic transition state</b>; both H atoms are delivered to the same face of the multiple bond (<b>syn addition</b>) as N₂ is expelled — this is formally a type of transfer hydrogenation, since H₂ is never generated as a free, separate molecule.</p>
@@ -1968,32 +1992,32 @@ alkane: {
 
 'CARBONYL-TO-ALKANE REDUCTIONS': `
 <p>Four classic named methods fully deoxygenate an aldehyde/ketone carbonyl down to a plain CH₂/CH₃ group, chosen according to what other functional groups the rest of the molecule can tolerate:</p>
-<table>
+<table class="study-table">
 <tr><th>Method</th><th>Conditions</th><th>Best suited for substrates that are…</th></tr>
 <tr><td>Clemmensen reduction</td><td>Zn–Hg amalgam, conc. HCl, Δ (strongly acidic)</td><td>Acid-tolerant, base-sensitive</td></tr>
 <tr><td>Wolff–Kishner reduction</td><td>NH₂–NH₂ (hydrazine), KOH, ethylene glycol, Δ (strongly basic)</td><td>Base-tolerant, acid-sensitive</td></tr>
 <tr><td>Mozingo reduction</td><td>Ethane-1,2-dithiol/dry HCl (forms a dithioacetal), then Raney Ni (neutral desulfurization)</td><td>Sensitive to <i>both</i> strong acid and strong base</td></tr>
 <tr><td>HI / red phosphorus</td><td>Excess HI, red P as catalyst/HI-regenerator, Δ (very forcing)</td><td>Simple substrates needing exhaustive reduction — this reagent is powerful enough to strip out almost any oxygen/halogen functionality</td></tr>
 </table>
-<p><b>Clemmensen reduction:</b> R–CHO / R–CO–R' + Zn(Hg)/HCl, Δ → R–CH₃ / R–CH₂–R' + ZnCl₂ + H₂O. Mechanism (acidic medium): the carbonyl is protonated, Zn transfers electrons to reduce the resulting carbocation stepwise (Zn → Zn²⁺ + 2e⁻ feeding the substrate), passing through an alcohol-like intermediate before final loss of water gives the fully reduced CH₂/CH₃ group.</p>
+<p><b>Clemmensen reduction:</b> R–CHO / R–CO–R' + Zn(Hg)/HCl, Δ <span class="rxn-arrow">→</span> R–CH₃ / R–CH₂–R' + ZnCl₂ + H₂O. Mechanism (acidic medium): the carbonyl is protonated, Zn transfers electrons to reduce the resulting carbocation stepwise (Zn <span class="rxn-arrow">→</span> Zn²⁺ + 2e⁻ feeding the substrate), passing through an alcohol-like intermediate before final loss of water gives the fully reduced CH₂/CH₃ group.</p>
 <p><b>Exceptional case — ring contraction:</b> Clemmensen-reducing a 1,3-diketone such as 5,5-dimethylcyclohexane-1,3-dione does <i>not</i> give the expected 1,1-dimethylcyclohexane. Instead, after one carbonyl is protonated/dehydrated, the resulting cationic intermediate undergoes a <b>1,2-alkyl shift</b> (ring contraction) rather than simply completing reduction, and the major product is the ring-contracted methyl ketone <b>2,4,4-trimethylcyclopentanone</b>.</p>
-<p><b>Wolff–Kishner reduction:</b> R–CHO / R–CO–R' + NH₂–NH₂ —(ethylene glycol, KOH, Δ)→ R–CH₃ / R–CH₂–R' + N₂. Mechanism (basic medium): the carbonyl first condenses with hydrazine to form a hydrazone (R₂C=N–NH₂); base then deprotonates it, and a series of proton transfers convert it to a diazo species (R₂C=N=N) which loses N₂ to leave a carbanion, immediately protonated by solvent to give the final CH₂/CH₃ group.</p>
+<p><b>Wolff–Kishner reduction:</b> R–CHO / R–CO–R' + NH₂–NH₂ —(ethylene glycol, KOH, Δ)<span class="rxn-arrow">→</span> R–CH₃ / R–CH₂–R' + N₂. Mechanism (basic medium): the carbonyl first condenses with hydrazine to form a hydrazone (R₂C=N–NH₂); base then deprotonates it, and a series of proton transfers convert it to a diazo species (R₂C=N=N) which loses N₂ to leave a carbanion, immediately protonated by solvent to give the final CH₂/CH₃ group.</p>
 <p><b>Mozingo reduction:</b> the carbonyl is first converted to a cyclic 1,3-dithiolane using ethane-1,2-dithiol/dry HCl, then this thioacetal is desulfurized with Raney nickel (which carries adsorbed H₂ on its surface), reductively replacing both C–S bonds with C–H bonds. Since neither step needs strongly acidic or strongly basic conditions, this is the fallback method when the substrate can't survive either Clemmensen or Wolff–Kishner.</p>
-<p><b>Reduction by HI/red phosphorus:</b> red phosphorus continually regenerates HI from the I₂ byproduct, keeping a large excess of HI available. R–OH + HI (excess, red P, Δ) → R–I → (further reduced) → R–H; R–Cl/Br/I similarly end up as R–H by halide reduction. Under forcing excess conditions this reagent combination can even carry a ketone/aldehyde all the way to R–CH₂–R'/R–CH₃ (via the alcohol, then the iodide, then reduction of that C–I bond) — an unusually exhaustive reduction compared to the other three methods above.</p>
+<p><b>Reduction by HI/red phosphorus:</b> red phosphorus continually regenerates HI from the I₂ byproduct, keeping a large excess of HI available. R–OH + HI (excess, red P, Δ) <span class="rxn-arrow">→</span> R–I <span class="rxn-arrow">→</span> (further reduced) <span class="rxn-arrow">→</span> R–H; R–Cl/Br/I similarly end up as R–H by halide reduction. Under forcing excess conditions this reagent combination can even carry a ketone/aldehyde all the way to R–CH₂–R'/R–CH₃ (via the alcohol, then the iodide, then reduction of that C–I bond) — an unusually exhaustive reduction compared to the other three methods above.</p>
 `,
 
 'PREPARATION FROM CARBIDES & GRIGNARD': `
 <p>Certain metal carbides react with water in simple non-redox (hydrolysis/disproportionation-type) reactions to directly give small alkanes or alkynes — the identity of the product depends entirely on the structure of the carbide, so these are worth telling apart carefully:</p>
-<table>
+<table class="study-table">
 <tr><th>Carbide</th><th>Type</th><th>Hydrolysis reaction</th><th>Product</th></tr>
-<tr><td>Al₄C₃</td><td>Methanide (isolated C⁴⁻ centres)</td><td>Al₄C₃ + 12H₂O → 4Al(OH)₃ + 3CH₄</td><td><b>Methane</b></td></tr>
-<tr><td>Be₂C</td><td>Methanide</td><td>Be₂C + 2H₂O → 2Be(OH)₂ + CH₄</td><td><b>Methane</b></td></tr>
-<tr><td>CaC₂</td><td>Acetylide (C₂²⁻ unit, C≡C)</td><td>CaC₂ + 2H₂O → Ca(OH)₂ + C₂H₂</td><td><b>Acetylene</b> (not an alkane — classic point of confusion)</td></tr>
-<tr><td>Mg₂C₃</td><td>Allylenide (C₃⁴⁻ unit)</td><td>Mg₂C₃ + 4H₂O → 2Mg(OH)₂ + CH₃–C≡CH</td><td><b>Propyne</b> (methylacetylene)</td></tr>
+<tr><td>Al₄C₃</td><td>Methanide (isolated C⁴⁻ centres)</td><td>Al₄C₃ + 12H₂O <span class="rxn-arrow">→</span> 4Al(OH)₃ + 3CH₄</td><td><b>Methane</b></td></tr>
+<tr><td>Be₂C</td><td>Methanide</td><td>Be₂C + 2H₂O <span class="rxn-arrow">→</span> 2Be(OH)₂ + CH₄</td><td><b>Methane</b></td></tr>
+<tr><td>CaC₂</td><td>Acetylide (C₂²⁻ unit, C≡C)</td><td>CaC₂ + 2H₂O <span class="rxn-arrow">→</span> Ca(OH)₂ + C₂H₂</td><td><b>Acetylene</b> (not an alkane — classic point of confusion)</td></tr>
+<tr><td>Mg₂C₃</td><td>Allylenide (C₃⁴⁻ unit)</td><td>Mg₂C₃ + 4H₂O <span class="rxn-arrow">→</span> 2Mg(OH)₂ + CH₃–C≡CH</td><td><b>Propyne</b> (methylacetylene)</td></tr>
 </table>
 <p>So among these four, only Al₄C₃ and Be₂C ("methanides") give methane; CaC₂ gives acetylene and Mg₂C₃ gives propyne — the specific carbide structure, not just "any metal carbide," determines what comes out on hydrolysis.</p>
 <p><b>From Grignard reagents:</b> R–MgX (prepared from R–X + Mg turnings in dry ether) reacts with water — or any compound with an active/acidic hydrogen, such as an alcohol or amine — by simple protonolysis of the strongly polarized, basic C–Mg bond:</p>
-<p style="text-align:center">R–MgX + H₂O → R–H + Mg(OH)X</p>
+<div class="study-eqn">R–MgX + H₂O <span class="rxn-arrow">→</span> R–H + Mg(OH)X</div>
 <p>This is why every step of a Grignard synthesis up to this point must be kept rigorously free of moisture (dry ether, dry glassware) — the reagent is quenched by even trace water, so this protonolysis is only wanted as the deliberate final step.</p>
 `,
 
@@ -2008,36 +2032,36 @@ alkane: {
 
 'FREE RADICAL HALOGENATION': `
 <p>Alkanes react with halogens (X₂) under heat or UV light via a <b>free-radical chain mechanism</b> with three stages:</p>
-<table>
+<table class="study-table">
 <tr><th>Step</th><th>What happens</th></tr>
-<tr><td>Initiation</td><td>X₂ →(hν or Δ)→ 2X• — homolytic fission of the weak X–X bond by light/heat energy.</td></tr>
-<tr><td>Propagation</td><td>X• + R–H → R• + HX, then R• + X₂ → R–X + X• — the regenerated X• keeps the chain going.</td></tr>
+<tr><td>Initiation</td><td>X₂ <span class="rxn-arrow">→</span>(hν or Δ)<span class="rxn-arrow">→</span> 2X• — homolytic fission of the weak X–X bond by light/heat energy.</td></tr>
+<tr><td>Propagation</td><td>X• + R–H <span class="rxn-arrow">→</span> R• + HX, then R• + X₂ <span class="rxn-arrow">→</span> R–X + X• — the regenerated X• keeps the chain going.</td></tr>
 <tr><td>Termination</td><td>Any two radicals combine (X•+X•, R•+R•, or R•+X•), consuming radicals and ending the chain.</td></tr>
 </table>
-<figure class="study-diagram">${SVG_HALOGENATION_MECH}<figcaption>Free-radical chain mechanism for methane chlorination (CH₄ + Cl₂ → CH₃Cl + HCl). Propagation ① and ② repeat over and over — this is what makes it a chain reaction.</figcaption></figure>
+<figure class="study-diagram">${SVG_HALOGENATION_MECH}<figcaption>Free-radical chain mechanism for methane chlorination (CH₄ + Cl₂ <span class="rxn-arrow">→</span> CH₃Cl + HCl). Propagation ① and ② repeat over and over — this is what makes it a chain reaction.</figcaption></figure>
 <p><b>Reactivity of the halogens:</b> F₂ ≫ Cl₂ > Br₂ ≫ I₂. F₂ is so exothermic the reaction is almost explosive and poorly selective; Cl₂ reacts readily; Br₂ is slower (the H-abstraction step is endothermic) but far more selective; I₂'s H-abstraction step is endothermic enough that iodination barely proceeds at all unless the HI formed is removed by an oxidizer (e.g. HIO₃ or HNO₃) to pull the equilibrium forward.</p>
 <p><b>Regioselectivity (which C–H bond reacts):</b> the rate of H-abstraction follows 3° > 2° > 1° > CH₄, because more-substituted carbon radicals are more stable (hyperconjugation + inductive donation from alkyl groups), lowering the transition-state energy for their formation.</p>
 <p><b>Chlorination vs bromination selectivity:</b> since Br• abstraction is endothermic, its transition state (Hammond postulate) resembles the product radical closely, so bromination is highly sensitive to radical stability and strongly favors the more substituted position; chlorination's transition state is earlier/more reactant-like, so it is far less selective and gives more of a statistical mixture.</p>
 `,
 
 'COMBUSTION, OXIDATION & CRACKING': `
-<p><b>Complete combustion:</b> CₙH₂ₙ₊₂ + excess O₂ → n CO₂ + (n+1) H₂O, strongly exothermic. Branched isomers release slightly less heat of combustion than their straight-chain counterpart of the same formula (branched isomers are marginally more stable).</p>
+<p><b>Complete combustion:</b> CₙH₂ₙ₊₂ + excess O₂ <span class="rxn-arrow">→</span> n CO₂ + (n+1) H₂O, strongly exothermic. Branched isomers release slightly less heat of combustion than their straight-chain counterpart of the same formula (branched isomers are marginally more stable).</p>
 <p><b>Incomplete combustion:</b> with a limited O₂ supply, carbon isn't fully oxidized, giving CO and/or soot (elemental carbon) alongside water instead of CO₂.</p>
 <p><b>Controlled catalytic oxidation:</b> passing a lower alkane/air (or O₂) mixture over a catalyst (e.g. Cu, Mo₂O₃) under controlled temperature and pressure gives partial-oxidation products — alcohols, aldehydes, or carboxylic acids — rather than full combustion; used industrially to make simple oxygenated organics from petroleum gas fractions.</p>
-<p><b>Isomerization:</b> heating a straight-chain (n-) alkane with anhydrous AlCl₃ + a trace of HCl rearranges it into its more branched isomer (e.g. n-butane → isobutane) without changing the molecular formula. Branched alkanes burn more efficiently in an engine (less "knocking"), so isomerization is used to raise the octane number of a fuel fraction.</p>
-<p><b>Aromatization (catalytic reforming):</b> heating an n-alkane of 6 or more carbons over Cr₂O₃/Al₂O₃ or Pt at high temperature and pressure cyclizes and dehydrogenates it into an aromatic ring — e.g. n-hexane → ${BENZENE_SVG}. Also used industrially to raise octane number.</p>
+<p><b>Isomerization:</b> heating a straight-chain (n-) alkane with anhydrous AlCl₃ + a trace of HCl rearranges it into its more branched isomer (e.g. n-butane <span class="rxn-arrow">→</span> isobutane) without changing the molecular formula. Branched alkanes burn more efficiently in an engine (less "knocking"), so isomerization is used to raise the octane number of a fuel fraction.</p>
+<p><b>Aromatization (catalytic reforming):</b> heating an n-alkane of 6 or more carbons over Cr₂O₃/Al₂O₃ or Pt at high temperature and pressure cyclizes and dehydrogenates it into an aromatic ring — e.g. n-hexane <span class="rxn-arrow">→</span> ${BENZENE_SVG}. Also used industrially to raise octane number.</p>
 <p><b>Pyrolysis (cracking):</b> heating higher alkanes to around 773 K in the absence of air breaks C–C bonds homolytically (free-radical mechanism), fragmenting them into a mixture of smaller alkanes and alkenes. This is the industrial process that converts heavy petroleum fractions into the lighter fractions (like gasoline) that are in higher demand.</p>
 `,
 
 'CONFORMATIONS (ETHANE)': `
 <p>Free rotation about the C–C σ-bond in ethane generates infinitely many arrangements of the two sets of H atoms relative to each other, called <b>conformations</b> — unlike constitutional/configurational isomers, conformers interconvert by simple bond rotation, with no bonds broken, so they can't be isolated as separate compounds.</p>
 <p>The two limiting (extreme) conformations, best visualized with a <b>Newman projection</b> (viewed straight down the C–C axis, front carbon as a dot, rear carbon as a circle):</p>
-<table>
+<table class="study-table">
 <tr><th>Conformation</th><th>Dihedral angle between front/back H's</th><th>Relative stability</th></tr>
 <tr><td>Staggered</td><td>60°</td><td>More stable (lowest energy) — bonding electron pairs are maximally separated, minimizing torsional (Pitzer) strain</td></tr>
 <tr><td>Eclipsed</td><td>0°</td><td>Less stable (highest energy) — aligned C–H bonds maximize electron-electron repulsion between them</td></tr>
 </table>
-<p>The energy barrier to rotation (staggered → eclipsed) in ethane is small, only about <b>12.5 kJ/mol (≈3 kcal/mol)</b>, arising purely from torsional strain since ethane has no bulky substituents to add steric strain. This barrier is easily crossed by ordinary thermal energy at room temperature, so the molecule rotates freely and rapidly between conformations rather than existing as isolable, fixed forms — staggered and eclipsed ethane are the same compound in different conformations, not different compounds.</p>
+<p>The energy barrier to rotation (staggered <span class="rxn-arrow">→</span> eclipsed) in ethane is small, only about <b>12.5 kJ/mol (≈3 kcal/mol)</b>, arising purely from torsional strain since ethane has no bulky substituents to add steric strain. This barrier is easily crossed by ordinary thermal energy at room temperature, so the molecule rotates freely and rapidly between conformations rather than existing as isolable, fixed forms — staggered and eclipsed ethane are the same compound in different conformations, not different compounds.</p>
 `
 ,
 
@@ -2061,7 +2085,7 @@ alkane: {
 <p><b>Why benzene undergoes substitution, not addition:</b> the π cloud above and below the ring plane makes benzene electron-rich, so it reacts as a nucleophile toward electron-poor species — i.e. it undergoes <b>electrophilic substitution</b> (not electrophilic addition like an alkene). Substitution replaces a ring H with the electrophile while regenerating the fully-conjugated, aromatic (and therefore extra-stable) ring in the product; addition would permanently destroy that aromatic stabilisation, so it is strongly disfavoured under ordinary EAS conditions.</p>
 <p><b>General mechanism of electrophilic aromatic substitution (EAS)</b> — three stages:</p>
 <ul class="study-notes-list">
-<li><b>Generation of the electrophile (E⁺):</b> the reagent is first activated by a catalyst/co-reagent into a strong electrophile (e.g. Cl₂ + FeCl₃ → Cl⁺[FeCl₄]⁻; HNO₃ + H₂SO₄ → NO₂⁺, the nitronium ion).</li>
+<li><b>Generation of the electrophile (E⁺):</b> the reagent is first activated by a catalyst/co-reagent into a strong electrophile (e.g. Cl₂ + FeCl₃ <span class="rxn-arrow">→</span> Cl⁺[FeCl₄]⁻; HNO₃ + H₂SO₄ <span class="rxn-arrow">→</span> NO₂⁺, the nitronium ion).</li>
 <li><b>Formation of the arenium ion (σ-complex, slow / rate-determining step):</b> the π cloud attacks E⁺, forming a new C–E σ-bond at one carbon, which becomes sp³. This carbon now carries both the new substituent and its original H. The ring is no longer aromatic — it is a resonance-stabilised cyclohexadienyl <b>cation</b>, with the positive charge delocalised over three ring carbons.</li>
 <li><b>Loss of H⁺ (fast, re-aromatisation):</b> a base (often the counter-ion generated in step 1, e.g. FeCl₄⁻) removes the H on the sp³ carbon; both electrons of that C–H bond go back into the ring, restoring full conjugation and the aromatic sextet. This step is fast because so much stabilisation (aromaticity) is regained.</li>
 </ul>
@@ -2069,11 +2093,11 @@ alkane: {
 <p><b>The five classic electrophilic substitution reactions of benzene:</b></p>
 <figure class="study-diagram">${SVG_BENZENE_REACTIONS}<figcaption>Halogenation, nitration, sulphonation, and Friedel–Crafts alkylation/acylation all follow the same three-step EAS mechanism above, differing only in how the electrophile E⁺ is generated.</figcaption></figure>
 <ul class="study-notes-list">
-<li><b>Halogenation:</b> C₆H₆ + Cl₂ —(anhyd. FeCl₃ or AlCl₃, dark)→ C₆H₅Cl + HCl. The Lewis acid catalyst polarises Cl–Cl to generate Cl⁺ (as Cl–FeCl₄⁻). Iodination needs an oxidising agent (e.g. HNO₃ or HIO₃) to keep pulling the equilibrium forward, since HI otherwise reduces the product back to benzene.</li>
-<li><b>Nitration:</b> C₆H₆ + HNO₃(conc.) —(conc. H₂SO₄, 50–60°C)→ C₆H₅NO₂ + H₂O. H₂SO₄ protonates HNO₃, which then loses water to generate the electrophile <b>NO₂⁺ (nitronium ion)</b>: HNO₃ + 2H₂SO₄ → NO₂⁺ + H₃O⁺ + 2HSO₄⁻.</li>
-<li><b>Sulphonation:</b> C₆H₆ + fuming H₂SO₄ (H₂SO₄ + SO₃, oleum) —(heat)→ C₆H₅SO₃H + H₂O. The electrophile is SO₃ itself (a strongly electron-poor sulphur centre); this reaction is <b>reversible</b> — heating benzenesulphonic acid with superheated steam/dilute H₂SO₄ reverses it back to benzene (useful as a way to temporarily "block" a ring position during a synthesis).</li>
-<li><b>Friedel–Crafts alkylation:</b> C₆H₆ + R–Cl —(anhyd. AlCl₃)→ C₆H₅–R + HCl. AlCl₃ polarises/ionises R–Cl to generate a carbocation-like R⁺ electrophile. <b>Limitations:</b> fails on a ring already carrying a strong deactivating/EWG substituent (e.g. –NO₂, –NH₂ salts with AlCl₃); tends to <b>over-alkylate</b> (polyalkylation), since the alkyl product ring is more electron-rich and reacts faster than benzene itself; and 1° carbocations formed can <b>rearrange</b> (hydride/alkyl shift) to a more stable cation before attacking the ring, so the alkyl group installed isn't always the one you started with.</li>
-<li><b>Friedel–Crafts acylation:</b> C₆H₆ + R–COCl (acid chloride) —(anhyd. AlCl₃)→ C₆H₅–COR (aryl ketone) + HCl. The acylium ion (R–C≡O⁺ ↔ R–C⁺=O) is the electrophile. Acylation avoids both problems of alkylation: it never over-reacts (the ketone product is deactivated toward further substitution, since the carbonyl is an EWG) and the acylium ion does not rearrange (resonance-stabilised as drawn). An aryl ketone made this way can be reduced straight to an alkylbenzene by Clemmensen (Zn–Hg/HCl) or Wolff–Kishner (NH₂NH₂/KOH) conditions — so acylation followed by reduction is the reliable route to a straight-chain (unrearranged) alkylbenzene.</li>
+<li><b>Halogenation:</b> C₆H₆ + Cl₂ —(anhyd. FeCl₃ or AlCl₃, dark)<span class="rxn-arrow">→</span> C₆H₅Cl + HCl. The Lewis acid catalyst polarises Cl–Cl to generate Cl⁺ (as Cl–FeCl₄⁻). Iodination needs an oxidising agent (e.g. HNO₃ or HIO₃) to keep pulling the equilibrium forward, since HI otherwise reduces the product back to benzene.</li>
+<li><b>Nitration:</b> C₆H₆ + HNO₃(conc.) —(conc. H₂SO₄, 50–60°C)<span class="rxn-arrow">→</span> C₆H₅NO₂ + H₂O. H₂SO₄ protonates HNO₃, which then loses water to generate the electrophile <b>NO₂⁺ (nitronium ion)</b>: HNO₃ + 2H₂SO₄ <span class="rxn-arrow">→</span> NO₂⁺ + H₃O⁺ + 2HSO₄⁻.</li>
+<li><b>Sulphonation:</b> C₆H₆ + fuming H₂SO₄ (H₂SO₄ + SO₃, oleum) —(heat)<span class="rxn-arrow">→</span> C₆H₅SO₃H + H₂O. The electrophile is SO₃ itself (a strongly electron-poor sulphur centre); this reaction is <b>reversible</b> — heating benzenesulphonic acid with superheated steam/dilute H₂SO₄ reverses it back to benzene (useful as a way to temporarily "block" a ring position during a synthesis).</li>
+<li><b>Friedel–Crafts alkylation:</b> C₆H₆ + R–Cl —(anhyd. AlCl₃)<span class="rxn-arrow">→</span> C₆H₅–R + HCl. AlCl₃ polarises/ionises R–Cl to generate a carbocation-like R⁺ electrophile. <b>Limitations:</b> fails on a ring already carrying a strong deactivating/EWG substituent (e.g. –NO₂, –NH₂ salts with AlCl₃); tends to <b>over-alkylate</b> (polyalkylation), since the alkyl product ring is more electron-rich and reacts faster than benzene itself; and 1° carbocations formed can <b>rearrange</b> (hydride/alkyl shift) to a more stable cation before attacking the ring, so the alkyl group installed isn't always the one you started with.</li>
+<li><b>Friedel–Crafts acylation:</b> C₆H₆ + R–COCl (acid chloride) —(anhyd. AlCl₃)<span class="rxn-arrow">→</span> C₆H₅–COR (aryl ketone) + HCl. The acylium ion (R–C≡O⁺ ↔ R–C⁺=O) is the electrophile. Acylation avoids both problems of alkylation: it never over-reacts (the ketone product is deactivated toward further substitution, since the carbonyl is an EWG) and the acylium ion does not rearrange (resonance-stabilised as drawn). An aryl ketone made this way can be reduced straight to an alkylbenzene by Clemmensen (Zn–Hg/HCl) or Wolff–Kishner (NH₂NH₂/KOH) conditions — so acylation followed by reduction is the reliable route to a straight-chain (unrearranged) alkylbenzene.</li>
 </ul>
 <p><b>Directive influence of a substituent already on the ring</b> — an existing group controls both <i>where</i> the next electrophile attacks and <i>how fast</i> the ring reacts, based on how it donates or withdraws electron density into the ring by resonance and/or induction:</p>
 <table class="study-table">
@@ -2119,7 +2143,7 @@ alkene_alkyne: {
 'DEHALOGENATION OF VICINAL DIHALIDES': `
 
 <p>Vicinal dihalides (halogens on adjacent carbons) can be reduced back to the alkene by removing both halogens:</p>
-<table>
+<table class="study-table">
 <tr><th>Reagent</th><th>Byproduct</th></tr>
 <tr><td>Zn / AcOH</td><td>ZnX<sub>2</sub></td></tr>
 <tr><td>Mg / Et<sub>2</sub>O</td><td>MgX<sub>2</sub></td></tr>
@@ -2210,6 +2234,66 @@ function groupByCategory(questions){
   return order.map(cat=>({cat, items:map[cat]}));
 }
 
+function clearHighlights(root){
+  root.querySelectorAll('mark.study-hit').forEach(m=>{
+    const parent = m.parentNode;
+    while(m.firstChild) parent.insertBefore(m.firstChild, m);
+    parent.removeChild(m);
+    parent.normalize();
+  });
+}
+
+// Highlights every case-insensitive occurrence of `query` inside `root`,
+// even when the match spans across inline tags (e.g. AgNO<sub>3</sub>) —
+// walks actual text nodes so formatting (sub/sup/b/tables) is preserved.
+function highlightTextNodes(root, query){
+  if(!query) return;
+  const lowerQ = query.toLowerCase();
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null);
+  const textNodes = [];
+  let node;
+  while(node = walker.nextNode()) textNodes.push(node);
+
+  let combined = '';
+  const boundaries = [];
+  textNodes.forEach(n=>{
+    const start = combined.length;
+    combined += n.textContent;
+    boundaries.push({node:n, start, end: combined.length});
+  });
+  const lowerCombined = combined.toLowerCase();
+
+  const matches = [];
+  let idx = 0;
+  while(true){
+    idx = lowerCombined.indexOf(lowerQ, idx);
+    if(idx === -1) break;
+    matches.push([idx, idx + lowerQ.length]);
+    idx += lowerQ.length;
+  }
+  if(matches.length === 0) return;
+
+  boundaries.forEach(b=>{
+    const localMatches = [];
+    matches.forEach(([ms, me])=>{
+      const s = Math.max(ms, b.start) - b.start;
+      const e = Math.min(me, b.end) - b.start;
+      if(s < e) localMatches.push([s, e]);
+    });
+    if(localMatches.length === 0) return;
+    localMatches.sort((a,c)=> c[0] - a[0]); // right-to-left so earlier offsets stay valid
+    let currentNode = b.node;
+    localMatches.forEach(([s, e])=>{
+      const afterMatch = currentNode.splitText(s);
+      afterMatch.splitText(e - s);
+      const mark = document.createElement('mark');
+      mark.className = 'study-hit';
+      afterMatch.parentNode.insertBefore(mark, afterMatch);
+      mark.appendChild(afterMatch);
+    });
+  });
+}
+
 function setupStudySearch(){
   const input = document.getElementById('studySearch');
   const clearBtn = document.getElementById('studySearchClear');
@@ -2221,6 +2305,7 @@ function setupStudySearch(){
   function applyFilter(){
     const q = input.value.trim().toLowerCase();
     clearBtn.classList.toggle('hide', q === '');
+    clearHighlights(document.getElementById('studyBody'));
 
     if(q === ''){
       document.querySelectorAll('#studyBody .study-cat').forEach(catEl=>{
@@ -2248,6 +2333,11 @@ function setupStudySearch(){
       catEl.classList.toggle('search-hide', !show);
       const list = catEl.querySelector('.study-fact-list');
       if(list && catFactMatch) list.classList.remove('hide');
+
+      if(show){
+        if(notesMatch) highlightTextNodes(notesEl, q);
+        catEl.querySelectorAll('.study-fact:not(.search-hide)').forEach(li=> highlightTextNodes(li, q));
+      }
     });
 
     countEl.classList.remove('hide');
