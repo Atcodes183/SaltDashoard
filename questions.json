@@ -3714,6 +3714,630 @@
         ],
         "correct": 0,
         "expl": "The terminal alkyne is first converted to its sodium acetylide (Na, liquid NH3), which then reacts via SN2 with a primary alkyl halide to build the new, longer alkyne chain."
+      },
+      {
+        "cat": "ALKENE STABILITY, GEOMETRICAL ISOMERISM & PHYSICAL PROPERTIES",
+        "q": "Which of these alkenes is expected to be the most stable?",
+        "options": [
+          "But-1-ene",
+          "cis-But-2-ene",
+          "trans-But-2-ene",
+          "2-Methylbut-2-ene"
+        ],
+        "correct": 3,
+        "expl": "2-Methylbut-2-ene is trisubstituted; more substituted alkenes are more stable due to greater hyperconjugative donation into the pi system and relief of steric strain, so it outranks the mono- and disubstituted butenes."
+      },
+      {
+        "cat": "ALKENE STABILITY, GEOMETRICAL ISOMERISM & PHYSICAL PROPERTIES",
+        "q": "How does heat of hydrogenation relate to alkene stability?",
+        "options": [
+          "Higher heat of hydrogenation means more stable alkene",
+          "Lower heat of hydrogenation means more stable alkene",
+          "They are unrelated",
+          "Heat of hydrogenation depends only on molecular mass"
+        ],
+        "correct": 1,
+        "expl": "All alkenes hydrogenate to the same (or comparable) alkane product, so a more stable (lower-energy) starting alkene releases less heat on hydrogenation — lower heat of hydrogenation signals greater stability."
+      },
+      {
+        "cat": "ALKENE STABILITY, GEOMETRICAL ISOMERISM & PHYSICAL PROPERTIES",
+        "q": "What structural condition is required for an alkene to show geometrical (cis-trans/E-Z) isomerism?",
+        "options": [
+          "Each doubly-bonded carbon must bear two different substituents",
+          "The alkene must be terminal",
+          "The alkene must have at least 6 carbons",
+          "Both doubly-bonded carbons must bear identical substituents"
+        ],
+        "correct": 0,
+        "expl": "Restricted rotation about C=C only produces distinct isomers when each sp2 carbon of the double bond carries two different groups; if either carbon has two identical substituents, no geometrical isomerism is possible."
+      },
+      {
+        "cat": "ALKENE STABILITY, GEOMETRICAL ISOMERISM & PHYSICAL PROPERTIES",
+        "q": "In CIP-based E/Z nomenclature, what does the 'E' descriptor mean?",
+        "options": [
+          "Higher-priority groups are on the same side",
+          "Higher-priority groups are on opposite sides",
+          "The alkene is unstable",
+          "The alkene is terminal"
+        ],
+        "correct": 1,
+        "expl": "E (entgegen, 'opposite') is assigned when the higher-CIP-priority group on each double-bond carbon lies on opposite sides of the double bond; Z (zusammen, 'together') is used when they're on the same side."
+      },
+      {
+        "cat": "ALKENE STABILITY, GEOMETRICAL ISOMERISM & PHYSICAL PROPERTIES",
+        "q": "Between cis-but-2-ene and trans-but-2-ene, which is generally more stable and why?",
+        "options": [
+          "cis, due to dipole cancellation",
+          "trans, due to lower steric strain between the two methyl groups",
+          "cis, because it has a higher heat of hydrogenation",
+          "They have identical stability"
+        ],
+        "correct": 1,
+        "expl": "In the trans isomer the two methyl groups sit on opposite sides, minimising steric clash; in the cis isomer they are on the same side and repel each other, so trans-but-2-ene is the more stable (lower heat of hydrogenation) isomer."
+      },
+      {
+        "cat": "ELECTROPHILIC ADDITION: HYDROGENATION & HALOGENATION OF ALKENES",
+        "q": "What is the stereochemical outcome of catalytic hydrogenation (Pt/Pd/Ni) of an alkene?",
+        "options": [
+          "Anti (trans) addition",
+          "Syn (cis) addition",
+          "Random, no stereochemical preference",
+          "Only occurs at the more substituted carbon"
+        ],
+        "correct": 1,
+        "expl": "Both hydrogen atoms are delivered from the same face of the alkene while it is adsorbed on the metal catalyst surface, so catalytic hydrogenation is a syn addition."
+      },
+      {
+        "cat": "ELECTROPHILIC ADDITION: HYDROGENATION & HALOGENATION OF ALKENES",
+        "q": "What reactive intermediate forms when Br2 adds to an alkene?",
+        "options": [
+          "A free carbocation",
+          "A cyclic bromonium ion (bridged halonium ion)",
+          "A bromide free radical",
+          "A carbanion"
+        ],
+        "correct": 1,
+        "expl": "The alkene's pi electrons attack Br2, displacing Br⁻ and forming a three-membered, positively-charged, bridged bromonium ion rather than an open carbocation."
+      },
+      {
+        "cat": "ELECTROPHILIC ADDITION: HYDROGENATION & HALOGENATION OF ALKENES",
+        "q": "What is the overall stereochemistry when Br2 adds across a double bond?",
+        "options": [
+          "Syn addition",
+          "Anti (trans) addition",
+          "No defined stereochemistry",
+          "Retention at both carbons"
+        ],
+        "correct": 1,
+        "expl": "Bromide ion attacks the bromonium ion from the face opposite the bridging bromine (backside, SN2-like opening), so the two bromine atoms end up anti to each other — anti addition."
+      },
+      {
+        "cat": "ELECTROPHILIC ADDITION: HYDROGENATION & HALOGENATION OF ALKENES",
+        "q": "What observation indicates a positive test for unsaturation using bromine water/Br2 in CCl4?",
+        "options": [
+          "Formation of a white precipitate",
+          "Decolorization of the orange/red bromine color",
+          "Evolution of a gas",
+          "A blue color develops"
+        ],
+        "correct": 1,
+        "expl": "Alkenes (and alkynes) rapidly add Br2 without needing light or a catalyst, consuming the reagent and decolorizing the orange/red bromine solution — alkanes do not react this way under mild conditions."
+      },
+      {
+        "cat": "ELECTROPHILIC ADDITION: HYDROGENATION & HALOGENATION OF ALKENES",
+        "q": "When Br2 adds to an unsymmetrical alkene in the presence of water (halohydrin formation), where does the -OH end up?",
+        "options": [
+          "On the less substituted carbon",
+          "On the more substituted carbon",
+          "Equally on both carbons",
+          "On neither carbon; it stays as a dibromide"
+        ],
+        "correct": 1,
+        "expl": "Water (the external nucleophile) opens the bridged bromonium ion at the more substituted carbon, which carries more positive/carbocation-like character, giving a halohydrin with Markovnikov-type regiochemistry while anti stereochemistry is retained."
+      },
+      {
+        "cat": "MARKOVNIKOV ADDITION: HYDROHALOGENATION & ACID-CATALYSED HYDRATION",
+        "q": "According to Markovnikov's rule, what is the major product of propene + HBr?",
+        "options": [
+          "1-Bromopropane",
+          "2-Bromopropane",
+          "1,2-Dibromopropane",
+          "Propane"
+        ],
+        "correct": 1,
+        "expl": "H adds to the carbon already bearing more hydrogens (C1), and Br goes to the more substituted carbon (C2) since the mechanism proceeds through the more stable secondary carbocation — giving 2-bromopropane as the major product."
+      },
+      {
+        "cat": "MARKOVNIKOV ADDITION: HYDROHALOGENATION & ACID-CATALYSED HYDRATION",
+        "q": "What reactive intermediate does the ionic (Markovnikov) mechanism for HX addition to an alkene proceed through?",
+        "options": [
+          "A carbanion",
+          "A free radical",
+          "A carbocation",
+          "A halonium ion only"
+        ],
+        "correct": 2,
+        "expl": "Protonation of the alkene by H⁺ generates the more stable (more substituted) carbocation, which is then captured by the halide ion — this carbocation pathway is what dictates Markovnikov regiochemistry."
+      },
+      {
+        "cat": "MARKOVNIKOV ADDITION: HYDROHALOGENATION & ACID-CATALYSED HYDRATION",
+        "q": "Since Markovnikov HX addition proceeds via a carbocation, what side-reaction must always be considered?",
+        "options": [
+          "Polymerization only",
+          "Rearrangement (hydride or alkyl shift) to a more stable carbocation",
+          "Reduction of the double bond",
+          "Wittig-type olefination"
+        ],
+        "correct": 1,
+        "expl": "Any carbocation intermediate can undergo a 1,2-hydride or alkyl shift to reach a more stable carbocation before the halide traps it, so rearranged products must always be checked for in this mechanism."
+      },
+      {
+        "cat": "MARKOVNIKOV ADDITION: HYDROHALOGENATION & ACID-CATALYSED HYDRATION",
+        "q": "Acid-catalysed hydration of an alkene (H3O+/H2SO4, H2O) follows which regiochemical rule?",
+        "options": [
+          "Anti-Markovnikov, via hydroboration",
+          "Markovnikov, via a carbocation intermediate",
+          "Random addition",
+          "Anti addition only, no regiochemical preference"
+        ],
+        "correct": 1,
+        "expl": "Protonation of the alkene gives the more stable carbocation, which water then attacks (followed by deprotonation), placing -OH on the more substituted carbon — the same Markovnikov logic as HX addition, including the possibility of rearrangement."
+      },
+      {
+        "cat": "MARKOVNIKOV ADDITION: HYDROHALOGENATION & ACID-CATALYSED HYDRATION",
+        "q": "3,3-Dimethylbut-1-ene reacts with HCl. What is the major product, accounting for rearrangement?",
+        "options": [
+          "2-Chloro-3,3-dimethylbutane (unrearranged Markovnikov product)",
+          "2-Chloro-2,3-dimethylbutane (via a methyl shift to a tertiary carbocation)",
+          "1-Chloro-3,3-dimethylbutane (anti-Markovnikov)",
+          "3-Chloro-2,2-dimethylbutane"
+        ],
+        "correct": 1,
+        "expl": "Protonation first gives a secondary carbocation adjacent to a quaternary-like tert-butyl group; a 1,2-methyl shift converts it into the much more stable tertiary carbocation, which chloride then captures, giving 2-chloro-2,3-dimethylbutane as the major (rearranged) product."
+      },
+      {
+        "cat": "ANTI-MARKOVNIKOV ADDITION: PEROXIDE EFFECT & HYDROBORATION-OXIDATION",
+        "q": "The peroxide (Kharasch) effect, which reverses Markovnikov addition, is observed with which hydrogen halide?",
+        "options": [
+          "HCl only",
+          "HBr only",
+          "HI only",
+          "All hydrogen halides equally"
+        ],
+        "correct": 1,
+        "expl": "The peroxide effect is specific to HBr — the propagation steps of the radical chain are thermodynamically favourable only for Br; for HCl the initial H-abstraction step is too endothermic, and for HI the propagation step is too endothermic, so the ionic Markovnikov pathway dominates for both."
+      },
+      {
+        "cat": "ANTI-MARKOVNIKOV ADDITION: PEROXIDE EFFECT & HYDROBORATION-OXIDATION",
+        "q": "What kind of mechanism operates in the peroxide-effect addition of HBr to an alkene?",
+        "options": [
+          "Ionic, via a carbocation",
+          "Free-radical chain mechanism",
+          "Concerted pericyclic mechanism",
+          "SN2 at the alkene carbon"
+        ],
+        "correct": 1,
+        "expl": "Peroxides generate radicals that abstract a bromine atom fragment to start a chain: a bromine radical adds to give the more stable (e.g. secondary/tertiary) carbon radical, which then abstracts H from another HBr — reversing the regiochemistry compared to the ionic mechanism."
+      },
+      {
+        "cat": "ANTI-MARKOVNIKOV ADDITION: PEROXIDE EFFECT & HYDROBORATION-OXIDATION",
+        "q": "In hydroboration of an unsymmetrical alkene, boron preferentially bonds to which carbon?",
+        "options": [
+          "The more substituted carbon",
+          "The less hindered/less substituted carbon",
+          "Whichever carbon is closer to any existing halogen",
+          "It is random"
+        ],
+        "correct": 1,
+        "expl": "Steric and electronic effects in the concerted, four-centered transition state favour boron attaching to the less crowded, less substituted carbon, which is why hydroboration-oxidation delivers the anti-Markovnikov alcohol."
+      },
+      {
+        "cat": "ANTI-MARKOVNIKOV ADDITION: PEROXIDE EFFECT & HYDROBORATION-OXIDATION",
+        "q": "What is the stereochemical outcome of hydroboration (addition of B-H across the double bond)?",
+        "options": [
+          "Anti addition",
+          "Syn addition",
+          "No defined stereochemistry",
+          "Only occurs on aromatic rings"
+        ],
+        "correct": 1,
+        "expl": "Hydroboration proceeds through a single concerted four-centred transition state in which B and H add to the same face of the alkene, making it a syn addition; oxidation (H2O2/NaOH) then replaces C-B with C-OH with retention of configuration."
+      },
+      {
+        "cat": "ANTI-MARKOVNIKOV ADDITION: PEROXIDE EFFECT & HYDROBORATION-OXIDATION",
+        "q": "Why does hydroboration-oxidation not give rearranged products, unlike acid-catalysed hydration?",
+        "options": [
+          "Because it is even slower than acid hydration",
+          "Because it proceeds through a concerted mechanism with no free carbocation intermediate",
+          "Because boron is unreactive towards alkenes",
+          "Because it only works on aromatic alkenes"
+        ],
+        "correct": 1,
+        "expl": "Since B-H addition is concerted (one step, no discrete carbocation forms), there is no intermediate capable of a hydride or alkyl shift, so hydroboration-oxidation cleanly gives the unrearranged anti-Markovnikov alcohol."
+      },
+      {
+        "cat": "OXYMERCURATION-DEMERCURATION OF ALKENES",
+        "q": "What is the overall regiochemistry of the alcohol produced by oxymercuration-demercuration?",
+        "options": [
+          "Anti-Markovnikov (as in hydroboration)",
+          "Markovnikov (OH on the more substituted carbon)",
+          "Equal mixture of both regiochemistries",
+          "No alcohol forms; only a mercury salt"
+        ],
+        "correct": 1,
+        "expl": "Water opens the bridged mercurinium ion at the more substituted carbon (which bears more positive character), so after demercuration the -OH ends up on the more substituted carbon — a Markovnikov-type alcohol."
+      },
+      {
+        "cat": "OXYMERCURATION-DEMERCURATION OF ALKENES",
+        "q": "Why does oxymercuration-demercuration avoid the rearranged by-products seen in direct acid-catalysed hydration?",
+        "options": [
+          "Because Hg(OAc)2 is unreactive",
+          "Because the bridged mercurinium ion prevents formation of a free, rearrangement-prone carbocation",
+          "Because no water is involved",
+          "Because it proceeds through a radical mechanism"
+        ],
+        "correct": 1,
+        "expl": "The mercury bridges both carbons in a mercurinium ion (similar to a bromonium ion), so positive charge is shared/delocalized rather than sitting on a single free carbocation, which prevents the 1,2-hydride/alkyl shifts that plague simple acid hydration."
+      },
+      {
+        "cat": "OXYMERCURATION-DEMERCURATION OF ALKENES",
+        "q": "What reagent is used for the demercuration (second) step of this two-step sequence?",
+        "options": [
+          "H2O2/NaOH",
+          "NaBH4",
+          "Zn/AcOH",
+          "O3 then Zn/H2O"
+        ],
+        "correct": 1,
+        "expl": "NaBH4 reduces the C-Hg(OAc) bond, replacing it with C-H and cleanly delivering the Markovnikov alcohol from the oxymercuration intermediate."
+      },
+      {
+        "cat": "OXYMERCURATION-DEMERCURATION OF ALKENES",
+        "q": "What is the reagent combination used in the first (oxymercuration) step?",
+        "options": [
+          "BH3/THF",
+          "Hg(OAc)2, H2O",
+          "KMnO4, cold and dilute",
+          "O3, then Zn/H2O"
+        ],
+        "correct": 1,
+        "expl": "Mercuric acetate, Hg(OAc)2, together with water, forms the bridged mercurinium ion across the alkene, which water then opens at the more substituted carbon."
+      },
+      {
+        "cat": "OXYMERCURATION-DEMERCURATION OF ALKENES",
+        "q": "Why is oxymercuration-demercuration often preferred over simple acid-catalysed hydration for making a Markovnikov alcohol?",
+        "options": [
+          "It is cheaper in every case",
+          "It gives the clean, unrearranged Markovnikov product without competing rearrangement",
+          "It always gives the anti-Markovnikov alcohol instead",
+          "It works only on alkynes"
+        ],
+        "correct": 1,
+        "expl": "Because no free carbocation forms, the reaction reliably gives the Markovnikov alcohol without the rearranged side-products that simple H3O+/H2SO4 hydration can produce, making it the more reliable synthetic method."
+      },
+      {
+        "cat": "OXIDATION OF ALKENES: BAEYER'S TEST, EPOXIDATION & OZONOLYSIS",
+        "q": "What does cold, dilute, alkaline KMnO4 (Baeyer's reagent) do to an alkene?",
+        "options": [
+          "Cleaves the double bond into two carbonyl fragments",
+          "Adds two -OH groups syn across the double bond to give a vicinal diol",
+          "Converts it into an epoxide",
+          "Reduces it to an alkane"
+        ],
+        "correct": 1,
+        "expl": "Under cold, dilute, mildly alkaline conditions KMnO4 adds both oxygens to the same face of the double bond (syn addition), producing a vicinal (1,2-)diol/glycol without cleaving the C-C bond."
+      },
+      {
+        "cat": "OXIDATION OF ALKENES: BAEYER'S TEST, EPOXIDATION & OZONOLYSIS",
+        "q": "What visual change signals a positive Baeyer's test for unsaturation?",
+        "options": [
+          "A white precipitate forms",
+          "The purple colour of KMnO4 is decolorized (often with a brown MnO2 precipitate)",
+          "The solution turns blue",
+          "Bubbles of oxygen gas are released"
+        ],
+        "correct": 1,
+        "expl": "As KMnO4 is reduced while oxidizing the alkene to the diol, its characteristic purple colour disappears (often leaving a brown MnO2 precipitate), which is taken as a positive test for unsaturation."
+      },
+      {
+        "cat": "OXIDATION OF ALKENES: BAEYER'S TEST, EPOXIDATION & OZONOLYSIS",
+        "q": "Hot, concentrated/acidified KMnO4 acting on a terminal =CH2 carbon of an alkene ultimately gives which product from that carbon?",
+        "options": [
+          "A ketone",
+          "An aldehyde only",
+          "CO2 (with water)",
+          "No reaction at that carbon"
+        ],
+        "correct": 2,
+        "expl": "Under vigorous oxidative cleavage conditions, a terminal =CH2 carbon (bearing two H's) is oxidized all the way past the aldehyde stage to CO2 and water, whereas a disubstituted alkene carbon instead stops at a ketone."
+      },
+      {
+        "cat": "OXIDATION OF ALKENES: BAEYER'S TEST, EPOXIDATION & OZONOLYSIS",
+        "q": "Which reagent converts an alkene directly into an epoxide without cleaving the C=C bond?",
+        "options": [
+          "Hot acidic KMnO4",
+          "A peroxyacid such as m-CPBA or peracetic acid",
+          "O3 followed by Zn/H2O",
+          "Br2/CCl4"
+        ],
+        "correct": 1,
+        "expl": "A peroxyacid transfers a single oxygen atom to the alkene in one concerted syn step, giving the three-membered cyclic ether (epoxide/oxirane) directly, leaving the carbon skeleton intact."
+      },
+      {
+        "cat": "OXIDATION OF ALKENES: BAEYER'S TEST, EPOXIDATION & OZONOLYSIS",
+        "q": "In ozonolysis, which reductive work-up is used on the ozonide to give carbonyl products without over-oxidation to acids?",
+        "options": [
+          "H2O2",
+          "Zn/H2O (or Zn/AcOH, or Me2S)",
+          "NaBH4/NaOH",
+          "Hot concentrated KMnO4"
+        ],
+        "correct": 1,
+        "expl": "Zn dust in water/acetic acid (or dimethyl sulfide) reductively cleaves the unstable ozonide to aldehydes/ketones and quenches any peroxide intermediates, preventing them from being further oxidized to carboxylic acids."
+      },
+      {
+        "cat": "OXIDATION OF ALKENES: BAEYER'S TEST, EPOXIDATION & OZONOLYSIS",
+        "q": "What are the products of ozonolysis (reductive work-up) of 2-methylbut-2-ene?",
+        "options": [
+          "Formaldehyde and butanone",
+          "Acetone and acetaldehyde",
+          "Two molecules of acetaldehyde",
+          "Acetic acid and acetone"
+        ],
+        "correct": 1,
+        "expl": "2-Methylbut-2-ene, (CH3)2C=CHCH3, is cleaved at the double bond into acetone [(CH3)2C=O] from the trisubstituted carbon and acetaldehyde (CH3CHO) from the disubstituted carbon."
+      },
+      {
+        "cat": "POLYMERIZATION OF ALKENES",
+        "q": "What type of polymerization do simple alkenes typically undergo?",
+        "options": [
+          "Condensation polymerization",
+          "Addition (chain-growth) polymerization",
+          "Ring-opening polymerization only",
+          "Cross-metathesis exclusively"
+        ],
+        "correct": 1,
+        "expl": "Alkenes polymerize by repeatedly opening the pi bond in a chain-growth (addition) process — via free-radical, cationic, or anionic mechanisms — without losing any small molecule as a by-product."
+      },
+      {
+        "cat": "POLYMERIZATION OF ALKENES",
+        "q": "Polymerization of chloroethene (vinyl chloride) gives which important polymer?",
+        "options": [
+          "Polyethylene",
+          "Polystyrene",
+          "PVC (polyvinyl chloride)",
+          "Teflon"
+        ],
+        "correct": 2,
+        "expl": "Vinyl chloride (CH2=CHCl) undergoes addition polymerization to give PVC, one of the most widely used thermoplastics."
+      },
+      {
+        "cat": "POLYMERIZATION OF ALKENES",
+        "q": "Natural rubber is the polymer of which diene, and in which geometric form?",
+        "options": [
+          "trans-1,3-butadiene",
+          "cis-isoprene (2-methylbuta-1,3-diene)",
+          "trans-isoprene",
+          "cis-1,3-pentadiene"
+        ],
+        "correct": 1,
+        "expl": "Natural rubber is essentially the cis (Z) polymer of isoprene; the related trans polymer of the same monomer is gutta-percha, which is harder and less elastic."
+      },
+      {
+        "cat": "POLYMERIZATION OF ALKENES",
+        "q": "What process cross-links rubber polymer chains with sulfur to improve strength and elasticity?",
+        "options": [
+          "Ozonolysis",
+          "Vulcanization",
+          "Hydroboration",
+          "Halogenation"
+        ],
+        "correct": 1,
+        "expl": "Vulcanization heats natural rubber with sulfur, forming disulfide cross-links between polymer chains that make the rubber stronger, more elastic, and less temperature-sensitive."
+      },
+      {
+        "cat": "POLYMERIZATION OF ALKENES",
+        "q": "Tetrafluoroethene (CF2=CF2) polymerizes to give which well-known non-stick polymer?",
+        "options": [
+          "Polypropylene",
+          "PTFE (Teflon)",
+          "Polystyrene",
+          "Polyethylene"
+        ],
+        "correct": 1,
+        "expl": "Addition polymerization of tetrafluoroethene gives PTFE, marketed as Teflon, prized for its chemical inertness and non-stick surface properties."
+      },
+      {
+        "cat": "ALKYNE ADDITION: HYDROGENATION, HYDROHALOGENATION & HALOGENATION",
+        "q": "Hydrogenation of an internal alkyne over Lindlar's catalyst gives which product?",
+        "options": [
+          "The fully saturated alkane",
+          "The cis (Z) alkene",
+          "The trans (E) alkene",
+          "A geminal dihalide"
+        ],
+        "correct": 1,
+        "expl": "Lindlar's catalyst (Pd on CaCO3/BaSO4, poisoned with a trace of quinoline or Pb(OAc)2) delivers H2 syn to the triple bond and is deliberately deactivated so it stops at the alkene stage, giving the cis-alkene selectively."
+      },
+      {
+        "cat": "ALKYNE ADDITION: HYDROGENATION, HYDROHALOGENATION & HALOGENATION",
+        "q": "Reduction of an internal alkyne with Na (or Li) in liquid NH3 gives which stereochemical outcome?",
+        "options": [
+          "cis-alkene",
+          "trans-alkene",
+          "Racemic alkane",
+          "No reaction"
+        ],
+        "correct": 1,
+        "expl": "This dissolving-metal reduction proceeds via a radical-anion mechanism that delivers the two hydrogens to opposite faces of the developing double bond, selectively giving the trans (E) alkene."
+      },
+      {
+        "cat": "ALKYNE ADDITION: HYDROGENATION, HYDROHALOGENATION & HALOGENATION",
+        "q": "What is Lindlar's catalyst composed of?",
+        "options": [
+          "Raney nickel alone",
+          "Pd deposited on CaCO3 or BaSO4, poisoned with quinoline/Pb(OAc)2",
+          "Pt black with no poison",
+          "Zn dust in acetic acid"
+        ],
+        "correct": 1,
+        "expl": "Lindlar's catalyst is palladium supported on calcium carbonate or barium sulfate and partially deactivated (poisoned) with a trace of quinoline or lead acetate, so it hydrogenates the alkyne only as far as the cis-alkene and no further."
+      },
+      {
+        "cat": "ALKYNE ADDITION: HYDROGENATION, HYDROHALOGENATION & HALOGENATION",
+        "q": "Addition of 2 equivalents of HX (following Markovnikov's rule both times) to a terminal alkyne gives which product?",
+        "options": [
+          "A vicinal (1,2-)dihalide",
+          "A geminal (1,1-)dihalide",
+          "A trihalide",
+          "No further addition after the first equivalent"
+        ],
+        "correct": 1,
+        "expl": "The first HX addition (Markovnikov) gives a haloalkene with the halogen on the more substituted carbon; the second HX addition places the second halogen on the very same carbon (again Markovnikov), giving a geminal dihalide."
+      },
+      {
+        "cat": "ALKYNE ADDITION: HYDROGENATION, HYDROHALOGENATION & HALOGENATION",
+        "q": "Addition of 2 equivalents of X2 (e.g. Br2) to an alkyne gives which product?",
+        "options": [
+          "A geminal dihalide",
+          "A vicinal tetrahalide (1,1,2,2-tetrahalide)",
+          "An epoxide",
+          "A single vinyl halide only"
+        ],
+        "correct": 1,
+        "expl": "Each equivalent of X2 adds across the multiple bond; the first gives a 1,2-dihaloalkene and the second adds across that remaining double bond to give the fully saturated 1,1,2,2-tetrahalide."
+      },
+      {
+        "cat": "ALKYNE HYDRATION, TAUTOMERISM & HYDROBORATION-OXIDATION",
+        "q": "What catalyst system is used for acid-catalysed (Markovnikov) hydration of an alkyne?",
+        "options": [
+          "BH3/THF then H2O2, NaOH",
+          "Hg2+ (e.g. HgSO4) / H2SO4, H2O",
+          "Lindlar's catalyst",
+          "Na/liquid NH3"
+        ],
+        "correct": 1,
+        "expl": "Mercuric ion catalyses Markovnikov addition of water across the triple bond via a mercurinium-type intermediate, giving an enol that tautomerizes to the carbonyl compound."
+      },
+      {
+        "cat": "ALKYNE HYDRATION, TAUTOMERISM & HYDROBORATION-OXIDATION",
+        "q": "What is the product when ethyne (acetylene) itself undergoes Hg2+/H2SO4-catalysed hydration?",
+        "options": [
+          "Acetone",
+          "Acetaldehyde",
+          "Formic acid",
+          "Ethanol"
+        ],
+        "correct": 1,
+        "expl": "Since both carbons of acetylene are equivalent, Markovnikov addition of water followed by keto-enol tautomerization gives acetaldehyde (CH3CHO) — the one special case among alkyne hydrations."
+      },
+      {
+        "cat": "ALKYNE HYDRATION, TAUTOMERISM & HYDROBORATION-OXIDATION",
+        "q": "Markovnikov (acid-catalysed) hydration of propyne gives which product?",
+        "options": [
+          "Propanal",
+          "Acetone (propan-2-one)",
+          "Propan-1-ol",
+          "Propanoic acid"
+        ],
+        "correct": 1,
+        "expl": "Water adds with -OH going to the more substituted (internal) carbon per Markovnikov's rule, and the resulting enol tautomerizes to the methyl ketone acetone — any terminal alkyne other than acetylene gives a methyl ketone this way."
+      },
+      {
+        "cat": "ALKYNE HYDRATION, TAUTOMERISM & HYDROBORATION-OXIDATION",
+        "q": "Hydroboration-oxidation of a terminal alkyne gives which carbonyl product, in contrast to acid-catalysed hydration?",
+        "options": [
+          "The same methyl ketone",
+          "An aldehyde (anti-Markovnikov regiochemistry)",
+          "A carboxylic acid",
+          "No carbonyl forms"
+        ],
+        "correct": 1,
+        "expl": "Boron adds to the less substituted (terminal) carbon; oxidative work-up converts this to an enol that tautomerizes to an aldehyde, the anti-Markovnikov counterpart to the methyl ketone from acid-catalysed hydration."
+      },
+      {
+        "cat": "ALKYNE HYDRATION, TAUTOMERISM & HYDROBORATION-OXIDATION",
+        "q": "What intermediate forms immediately after water adds across the triple bond, before the final carbonyl product is obtained?",
+        "options": [
+          "A geminal diol",
+          "An enol, which tautomerizes to the carbonyl compound",
+          "An epoxide",
+          "A vicinal diol"
+        ],
+        "correct": 1,
+        "expl": "Addition of water to the triple bond first gives a vinyl alcohol (enol); enols are unstable relative to their keto tautomer, so they rapidly tautomerize (keto-enol tautomerism) to the aldehyde or ketone."
+      },
+      {
+        "cat": "OXIDATIVE CLEAVAGE & POLYMERIZATION OF ALKYNES",
+        "q": "Oxidative cleavage (ozonolysis or hot KMnO4) of an internal (disubstituted) alkyne gives which products?",
+        "options": [
+          "Two aldehydes",
+          "Two ketones",
+          "Two carboxylic acids",
+          "One carboxylic acid and CO2"
+        ],
+        "correct": 2,
+        "expl": "The triple bond is cleaved via an intermediate diketone-like species that is further oxidized under these vigorous conditions, giving two separate carboxylic acid fragments, one from each original alkyne carbon."
+      },
+      {
+        "cat": "OXIDATIVE CLEAVAGE & POLYMERIZATION OF ALKYNES",
+        "q": "Oxidative cleavage of a terminal alkyne's ≡CH carbon gives which product from that carbon?",
+        "options": [
+          "A ketone",
+          "CO2",
+          "An aldehyde that survives intact",
+          "No reaction at that carbon"
+        ],
+        "correct": 1,
+        "expl": "The terminal ≡C-H carbon, bearing no alkyl substituent to stop at a stable carbonyl, is oxidized all the way through to CO2, while the rest of the chain gives a carboxylic acid."
+      },
+      {
+        "cat": "OXIDATIVE CLEAVAGE & POLYMERIZATION OF ALKYNES",
+        "q": "Passing acetylene through a red-hot iron tube at about 873 K brings about which transformation?",
+        "options": [
+          "Reduction to ethane",
+          "Cyclic trimerization to benzene",
+          "Hydration to acetaldehyde",
+          "Polymerization to PVC"
+        ],
+        "correct": 1,
+        "expl": "Three molecules of ethyne cyclically trimerize under these conditions (red-hot iron tube, ~873 K) to give benzene — a classic aromatization/cyclic-polymerization reaction of acetylene."
+      },
+      {
+        "cat": "OXIDATIVE CLEAVAGE & POLYMERIZATION OF ALKYNES",
+        "q": "What catalyst brings about the linear dimerization of acetylene to vinylacetylene?",
+        "options": [
+          "Lindlar's catalyst",
+          "CuCl/NH4Cl",
+          "Hg2+/H2SO4",
+          "Zn dust"
+        ],
+        "correct": 1,
+        "expl": "Cuprous chloride with ammonium chloride catalyses the head-to-tail linear coupling of two acetylene molecules to give vinylacetylene (but-1-en-3-yne)."
+      },
+      {
+        "cat": "OXIDATIVE CLEAVAGE & POLYMERIZATION OF ALKYNES",
+        "q": "Vinylacetylene reacting with HCl produces the monomer of which synthetic rubber?",
+        "options": [
+          "Natural rubber (isoprene)",
+          "Neoprene (chloroprene monomer)",
+          "Buna-S rubber",
+          "Butyl rubber"
+        ],
+        "correct": 1,
+        "expl": "Addition of HCl to vinylacetylene gives chloroprene (2-chlorobuta-1,3-diene), the monomer that polymerizes to neoprene, a synthetic rubber valued for its oil and weather resistance."
+      },
+      {
+        "cat": "ALKYNE PREPARATION",
+        "q": "Electrolysis of the potassium/sodium salt of an acetylenic (propiolic-type) carboxylic acid (Kolbe's electrolysis) gives a higher alkyne by which overall process?",
+        "options": [
+          "Reduction of the salt to an alkane",
+          "Anodic loss of CO2 to form a radical, which dimerizes with another such radical to form the higher alkyne",
+          "Direct hydrolysis to an alcohol",
+          "Simple protonation of the carboxylate"
+        ],
+        "correct": 1,
+        "expl": "At the anode each carboxylate loses an electron and then CO2 (decarboxylation) to give a radical; two such radicals combine (dimerize) to form a new C-C bond, joining two alkynyl fragments into a single, longer alkyne."
       }
     ],
     "catColors": {
@@ -3723,7 +4347,17 @@
       "DEHALOGENATION OF VICINAL DIHALIDES": "#fb7185",
       "WITTIG REACTION & YLIDES": "#c084fc",
       "ALKYNE PREPARATION": "#22d3ee",
-      "ALKYNE ACIDITY, ISOMERIZATION & METAL ACETYLIDES": "#a3e635"
+      "ALKYNE ACIDITY, ISOMERIZATION & METAL ACETYLIDES": "#a3e635",
+      "ALKENE STABILITY, GEOMETRICAL ISOMERISM & PHYSICAL PROPERTIES": "#f472b6",
+      "ELECTROPHILIC ADDITION: HYDROGENATION & HALOGENATION OF ALKENES": "#38bdf8",
+      "MARKOVNIKOV ADDITION: HYDROHALOGENATION & ACID-CATALYSED HYDRATION": "#fb923c",
+      "ANTI-MARKOVNIKOV ADDITION: PEROXIDE EFFECT & HYDROBORATION-OXIDATION": "#a78bfa",
+      "OXYMERCURATION-DEMERCURATION OF ALKENES": "#4ade80",
+      "OXIDATION OF ALKENES: BAEYER'S TEST, EPOXIDATION & OZONOLYSIS": "#facc15",
+      "POLYMERIZATION OF ALKENES": "#2dd4bf",
+      "ALKYNE ADDITION: HYDROGENATION, HYDROHALOGENATION & HALOGENATION": "#f87171",
+      "ALKYNE HYDRATION, TAUTOMERISM & HYDROBORATION-OXIDATION": "#818cf8",
+      "OXIDATIVE CLEAVAGE & POLYMERIZATION OF ALKYNES": "#d8b4fe"
     }
   }
 }
