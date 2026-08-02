@@ -591,7 +591,7 @@ mark.study-hit{ background:rgba(52,211,153,0.28); color:var(--text); border-radi
 .reagent-q-text{ font-size:14.5px; line-height:1.5; margin:0 0 8px; }
 .reagent-q-answer{ font-size:13.5px; color:var(--mint); margin:0 0 6px; }
 .reagent-q-expl{ font-size:13px; color:var(--muted); line-height:1.55; }
-mark.reagent-hit{ background:rgba(240,163,78,0.35); color:inherit; border-radius:3px; padding:0 2px; }
+mark.reagent-hit{ background:var(--flame); color:#1a1006; font-weight:700; border-radius:3px; padding:0 3px; }
 </style>
 </head>
 <body>
@@ -1133,13 +1133,13 @@ const REAGENT_SUGGESTIONS = [
 ];
 
 function escapeRegExp(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+function escapeHtml(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-function highlightHTML(html, query){
-  if(!query) return html;
+function highlightPlain(text, query){
+  const escaped = escapeHtml(text);
+  if(!query) return escaped;
   const re = new RegExp('(' + escapeRegExp(query) + ')', 'ig');
-  return html.split(/(<[^>]+>)/g).map(seg =>
-    seg.startsWith('<') ? seg : seg.replace(re, '<mark class="reagent-hit">$1</mark>')
-  ).join('');
+  return escaped.replace(re, '<mark class="reagent-hit">$1</mark>');
 }
 
 function buildReagentIndex(data){
@@ -1193,7 +1193,7 @@ function renderReagentResults(query){
   });
 
   if(matches.length === 0){
-    resultsEl.innerHTML = '<div class="reagent-empty">No questions mention "' + q.replace(/</g,'&lt;') + '" yet. Try a shorter or differently-spelled term.</div>';
+    resultsEl.innerHTML = '<div class="reagent-empty">No questions mention "' + escapeHtml(q) + '" yet. Try a shorter or differently-spelled term.</div>';
     countEl.classList.add('hide');
     return;
   }
@@ -1220,9 +1220,9 @@ function renderReagentResults(query){
         const answer = item.options[item.correct];
         html += `<div class="reagent-q-card">
           <span class="reagent-q-cat" style="background:${item.color}22; color:${item.color};">${item.cat}</span>
-          <div class="reagent-q-text">${highlightHTML(item.q, q)}</div>
-          <div class="reagent-q-answer">✓ ${highlightHTML(answer, q)}</div>
-          <div class="reagent-q-expl">${highlightHTML(item.expl, q)}</div>
+          <div class="reagent-q-text">${highlightPlain(stripTags(item.q), q)}</div>
+          <div class="reagent-q-answer">✓ ${highlightPlain(stripTags(answer), q)}</div>
+          <div class="reagent-q-expl">${highlightPlain(stripTags(item.expl), q)}</div>
         </div>`;
       });
       html += `</div>`;
