@@ -364,6 +364,75 @@ body{ padding:28px 16px 60px; }
 
 .reviewEmpty{ text-align:center; color:var(--muted); padding:50px 20px; font-size:14px; }
 
+/* ---------- MISTAKE NOTEBOOK ---------- */
+.notebook{ display:none; }
+.notebook.show{ display:block; }
+.notebookTop{ margin-bottom:18px; }
+.notebookBadge{
+  display:inline-block; min-width:18px; padding:1px 6px; margin-left:2px;
+  border-radius:20px; font-size:10.5px; font-weight:700; text-align:center;
+  background:transparent; color:var(--muted); vertical-align:middle;
+}
+.notebookBadge.hasCount{ background:var(--wrong-dim); color:var(--wrong); border:1px solid var(--wrong); }
+
+.notebookToolbar{
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  flex-wrap:wrap; margin:18px 0 6px;
+}
+.notebookFilters{ display:flex; flex-wrap:wrap; gap:8px; flex:1; }
+.notebookChip{
+  font-family:'JetBrains Mono', monospace; font-size:12px;
+  background:transparent; border:1px solid var(--chipcolor, var(--panel-border));
+  color:var(--chipcolor, var(--muted)); padding:6px 13px; border-radius:20px; cursor:pointer;
+  opacity:.55; transition:opacity .12s ease;
+}
+.notebookChip:hover{ opacity:.85; }
+.notebookChip.active{ opacity:1; background:color-mix(in srgb, var(--chipcolor) 16%, transparent); }
+
+.notebookSort{ display:flex; align-items:center; gap:12px; font-size:12.5px; color:var(--muted); flex:0 0 auto; }
+.notebookSort select{
+  font-family:'JetBrains Mono', monospace; font-size:12.5px; background:var(--panel);
+  color:var(--text); border:1px solid var(--panel-border); border-radius:8px; padding:6px 10px;
+}
+.notebookSort label{ display:flex; align-items:center; gap:6px; cursor:pointer; white-space:nowrap; }
+
+.notebookActionsRow{ display:flex; gap:10px; margin:18px 0 6px; flex-wrap:wrap; }
+.copyListBtn{
+  font-family:'JetBrains Mono', monospace; font-size:12.5px; font-weight:600;
+  background:var(--panel); color:#d7e3dc; border:1px solid var(--panel-border);
+  padding:9px 16px; border-radius:20px; cursor:pointer;
+}
+.copyListBtn:hover{ border-color:var(--mint); color:var(--mint); }
+.copyListBtn:disabled{ opacity:.35; cursor:default; }
+
+.notebookList{ display:flex; flex-direction:column; gap:16px; margin-top:14px; }
+
+.mistakeCard{ position:relative; }
+.mistakeCard.masteredCard{ opacity:.68; }
+.reviewBadge.masteredBadge{ background:rgba(52,211,153,0.14); color:var(--mint); border-color:var(--mint); }
+.lastMissed{ font-size:11.5px; color:var(--muted); }
+.streakHint{ font-size:11.5px; color:var(--mint); font-style:italic; }
+
+.noteBox{ margin-top:12px; }
+.noteInput{
+  width:100%; min-height:44px; resize:vertical; box-sizing:border-box;
+  font-family:'JetBrains Mono', monospace; font-size:12.5px; color:#cfe0d8;
+  background:rgba(255,255,255,0.03); border:1px solid var(--panel-border); border-radius:10px;
+  padding:10px 12px; line-height:1.5;
+}
+.noteInput:focus{ outline:none; border-color:var(--mint-dim); }
+.noteInput::placeholder{ color:#5b6f65; }
+
+.mistakeActions{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+.mistakeActionBtn{
+  font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:600;
+  padding:8px 14px; border-radius:20px; cursor:pointer; background:transparent;
+}
+.mistakeActionBtn.masterBtn{ border:1px solid var(--mint); color:var(--mint); }
+.mistakeActionBtn.masterBtn:hover{ background:rgba(52,211,153,0.12); }
+.mistakeActionBtn.removeBtn{ border:1px solid var(--wrong); color:var(--wrong); }
+.mistakeActionBtn.removeBtn:hover{ background:rgba(251,113,133,0.12); }
+
 /* ---------- SMOOTH VIEW TRANSITIONS ---------- */
 .wrap{ overflow:hidden; }
 @keyframes viewEnter{
@@ -964,6 +1033,64 @@ function fmtDate(ts){
   const d = new Date(ts);
   return d.toLocaleDateString(undefined,{month:'short',day:'numeric'}) + ' · ' +
          d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
+}
+
+// ============================================================
+//  MISTAKE NOTEBOOK STORAGE
+//  Every wrong or skipped answer, in any quiz run, in any
+//  section, is logged persistently here — keyed by sectionKey
+//  then by the question's original index in that section's
+//  bank. An entry tracks how many times it's been missed, when
+//  it was last missed, a consecutive-correct streak (auto-masters
+//  after 2 correct in a row), a manual mastered flag, and an
+//  optional personal note.
+// ============================================================
+const MISTAKE_KEY = 'saltdash-mistakes-v1';
+
+function loadMistakes(){
+  if(!storageAvailable()) return {};
+  try{ return JSON.parse(localStorage.getItem(MISTAKE_KEY)) || {}; }catch(e){ return {}; }
+}
+function saveMistakes(all){
+  if(!storageAvailable()) return;
+  try{ localStorage.setItem(MISTAKE_KEY, JSON.stringify(all)); }catch(e){}
+}
+function getSectionMistakes(sectionKey){
+  return loadMistakes()[sectionKey] || {};
+}
+function updateMistakeEntry(sectionKey, idx, patchFn){
+  const all = loadMistakes();
+  if(!all[sectionKey]) all[sectionKey] = {};
+  const cur = all[sectionKey][idx] || { missCount:0, lastMissed:null, correctStreak:0, mastered:false, note:'' };
+  all[sectionKey][idx] = patchFn(cur) || cur;
+  saveMistakes(all);
+}
+function recordMistake(sectionKey, idx){
+  updateMistakeEntry(sectionKey, idx, (cur)=>({
+    ...cur, missCount: cur.missCount + 1, lastMissed: Date.now(), correctStreak: 0, mastered: false
+  }));
+}
+// Only touches the entry if this question is already being tracked (i.e.
+// it's been missed before) — getting a never-missed question right doesn't
+// need to create a notebook entry. Two correct answers in a row auto-masters it.
+function recordCorrectForNotebook(sectionKey, idx){
+  const all = loadMistakes();
+  const sec = all[sectionKey];
+  if(!sec || !sec[idx]) return;
+  const cur = sec[idx];
+  const streak = (cur.correctStreak||0) + 1;
+  sec[idx] = { ...cur, correctStreak: streak, mastered: streak>=2 ? true : cur.mastered };
+  saveMistakes(all);
+}
+function setMistakeMastered(sectionKey, idx, mastered){
+  updateMistakeEntry(sectionKey, idx, (cur)=>({...cur, mastered, correctStreak: mastered ? Math.max(cur.correctStreak,2) : 0}));
+}
+function removeMistakeEntry(sectionKey, idx){
+  const all = loadMistakes();
+  if(all[sectionKey]){ delete all[sectionKey][idx]; saveMistakes(all); }
+}
+function setMistakeNote(sectionKey, idx, note){
+  updateMistakeEntry(sectionKey, idx, (cur)=>({...cur, note}));
 }
 
 function sparklineSVG(values){
@@ -2558,6 +2685,7 @@ function quizTemplate(title){
     <div class="back-row">
       <button class="back-btn" data-role="backBtn">&larr; Back</button>
       <button class="back-btn" data-role="historyBtn">📈 View report</button>
+      <button class="back-btn" data-role="notebookBtn">🗒️ Mistake Notebook<span class="notebookBadge" data-role="notebookBadge"></span></button>
     </div>
     <h2 class="app-title">${title}</h2>
 
@@ -2658,6 +2786,35 @@ function quizTemplate(title){
       <p class="reviewSub" data-role="reviewSub"></p>
       <div class="reviewList" data-role="reviewList"></div>
     </div>
+
+    <div class="notebook" data-role="notebook">
+      <div class="notebookTop">
+        <button class="back-btn" data-role="notebookBackBtn">&larr; Back to quiz</button>
+      </div>
+      <h1 class="reviewTitle">Mistake Notebook</h1>
+      <p class="reviewSub" data-role="notebookSub"></p>
+
+      <div data-role="notebookStats"></div>
+
+      <div class="notebookActionsRow">
+        <button class="submitBtn" data-role="practiceBtn">▶ Practice these mistakes</button>
+        <button class="copyListBtn" data-role="copyListBtn">📋 Copy list as text</button>
+      </div>
+
+      <div class="notebookToolbar">
+        <div class="notebookFilters" data-role="notebookFilters"></div>
+        <div class="notebookSort">
+          <select data-role="notebookSortSelect">
+            <option value="recent">Sort: most recently missed</option>
+            <option value="missed">Sort: most missed</option>
+            <option value="category">Sort: category</option>
+          </select>
+          <label><input type="checkbox" data-role="notebookShowMastered"> Show mastered</label>
+        </div>
+      </div>
+
+      <div class="notebookList" data-role="notebookList"></div>
+    </div>
   `;
 }
 
@@ -2688,6 +2845,16 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
   const qNavGrid = $('qNavGrid');
   const reviewBtn = $('reviewBtn'), reviewCount = $('reviewCount'), reviewBackBtn = $('reviewBackBtn');
   const reviewTitle = $('reviewTitle'), reviewSub = $('reviewSub'), reviewList = $('reviewList');
+
+  const notebookBtn = $('notebookBtn'), notebookBadge = $('notebookBadge');
+  const notebook = $('notebook'), notebookBackBtn = $('notebookBackBtn'), notebookSub = $('notebookSub');
+  const notebookStats = $('notebookStats'), notebookFilters = $('notebookFilters'), notebookList = $('notebookList');
+  const notebookSortSelect = $('notebookSortSelect'), notebookShowMasteredChk = $('notebookShowMastered');
+  const practiceBtn = $('practiceBtn'), copyListBtn = $('copyListBtn');
+
+  let practiceMode = false;
+  let savedOrder = null, savedPos = null, savedAnswers = null;
+  let notebookCategoryFilter = null, notebookSort = 'recent', notebookShowMasteredFlag = false;
 
   function reshuffleOrder(){
     for(let i=order.length-1;i>0;i--){
@@ -2730,6 +2897,13 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     });
   }
 
+  function updateNotebookBadge(){
+    const mistakes = getSectionMistakes(sectionKey);
+    const openCount = Object.values(mistakes).filter(m=>!m.mastered).length;
+    notebookBadge.textContent = openCount>0 ? openCount : '';
+    notebookBadge.classList.toggle('hasCount', openCount>0);
+  }
+
   function render(){
     const idx = currentIdx();
     const item = currentQ();
@@ -2738,8 +2912,8 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     pill.style.setProperty('--pillcolor', color);
     pill.style.color = color;
     questionText.innerHTML = item.q;
-    posnum.textContent = (pos+1) + " / " + TOTAL;
-    fill.style.width = (((pos+1)/TOTAL)*100).toFixed(1) + "%";
+    posnum.textContent = (pos+1) + " / " + order.length;
+    fill.style.width = (((pos+1)/order.length)*100).toFixed(1) + "%";
 
     optionsWrap.innerHTML = "";
     const existing = answers[idx];
@@ -2784,11 +2958,14 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     prevBtn.disabled = pos===0;
     updateStats();
     renderQNav();
+    updateNotebookBadge();
   }
 
   function selectOption(idx, choiceIdx){
     const item = QUESTIONS[idx];
-    answers[idx] = { selected: choiceIdx, skipped:false, correct: choiceIdx===item.correct };
+    const correct = choiceIdx===item.correct;
+    answers[idx] = { selected: choiceIdx, skipped:false, correct };
+    if(correct){ recordCorrectForNotebook(sectionKey, idx); } else { recordMistake(sectionKey, idx); }
     render();
   }
 
@@ -2796,12 +2973,13 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     const idx = currentIdx();
     if(answers[idx]) return;
     answers[idx] = { selected:null, skipped:true, correct:false };
+    recordMistake(sectionKey, idx);
     render();
   });
 
   prevBtn.addEventListener('click', ()=>{ if(pos>0){ pos--; render(); } });
   nextBtn.addEventListener('click', ()=>{
-    if(pos < TOTAL-1){ pos++; render(); }
+    if(pos < order.length-1){ pos++; render(); }
     else { pos = 0; render(); }
   });
   shuffleBtn.addEventListener('click', ()=>{
@@ -2814,7 +2992,7 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
   });
 
   container.addEventListener('keydown', (e)=>{
-    if(!report.classList.contains('show')){
+    if(!report.classList.contains('show') && !review.classList.contains('show') && !notebook.classList.contains('show')){
       if(e.code==='ArrowRight'){ nextBtn.click(); }
       else if(e.code==='ArrowLeft'){ prevBtn.click(); }
       else if(['1','2','3','4'].includes(e.key)){
@@ -2998,6 +3176,111 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     });
   }
 
+  function renderNotebook(){
+    const mistakes = getSectionMistakes(sectionKey);
+    const entries = Object.entries(mistakes)
+      .map(([idxStr, m]) => ({ idx: parseInt(idxStr,10), ...m }))
+      .filter(e => QUESTIONS[e.idx]); // guard against stale indices if the bank ever shrinks
+
+    const openEntries = entries.filter(e=>!e.mastered);
+    const masteredEntries = entries.filter(e=>e.mastered);
+    const totalMissesEver = entries.reduce((s,e)=>s+e.missCount,0);
+
+    const catCounts = {};
+    openEntries.forEach(e=>{ const cat = QUESTIONS[e.idx].cat; catCounts[cat] = (catCounts[cat]||0) + 1; });
+    const topCat = Object.entries(catCounts).sort((a,b)=>b[1]-a[1])[0];
+
+    notebookBadge.textContent = openEntries.length>0 ? openEntries.length : '';
+    notebookBadge.classList.toggle('hasCount', openEntries.length>0);
+
+    notebookSub.textContent = entries.length===0
+      ? "Nothing logged yet — any wrong or skipped answer, in any run, will show up here automatically."
+      : (openEntries.length===0
+          ? "No open mistakes left — everything you've missed before is mastered. Nice work."
+          : openEntries.length + " question" + (openEntries.length===1?'':'s') + " still tripping you up"
+            + (masteredEntries.length ? ", " + masteredEntries.length + " mastered" : "") + ".");
+
+    notebookStats.innerHTML = `
+      <div class="progStats">
+        <div class="progStat"><div class="progNum">${openEntries.length}</div><div class="progLbl">open mistakes</div></div>
+        <div class="progStat"><div class="progNum up">${masteredEntries.length}</div><div class="progLbl">mastered</div></div>
+        <div class="progStat"><div class="progNum">${totalMissesEver}</div><div class="progLbl">total misses logged</div></div>
+        <div class="progStat"><div class="progNum" style="font-size:13px; line-height:1.3;">${topCat ? topCat[0] : '—'}</div><div class="progLbl">weakest category</div></div>
+      </div>
+    `;
+
+    const allCats = [...new Set(entries.map(e=>QUESTIONS[e.idx].cat))];
+    notebookFilters.innerHTML = ['All', ...allCats].map(cat=>{
+      const isAll = cat==='All';
+      const active = isAll ? !notebookCategoryFilter : cat===notebookCategoryFilter;
+      const color = isAll ? '#34d399' : (CAT_COLORS[cat] || '#34d399');
+      return `<button class="notebookChip ${active?'active':''}" data-cat="${isAll?'':cat}" style="--chipcolor:${color}">${cat}</button>`;
+    }).join('');
+    notebookFilters.querySelectorAll('.notebookChip').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        notebookCategoryFilter = btn.getAttribute('data-cat') || null;
+        renderNotebook();
+      });
+    });
+
+    let list = notebookShowMasteredFlag ? entries.slice() : openEntries.slice();
+    if(notebookCategoryFilter) list = list.filter(e=>QUESTIONS[e.idx].cat === notebookCategoryFilter);
+
+    if(notebookSort === 'missed') list.sort((a,b)=> b.missCount - a.missCount);
+    else if(notebookSort === 'category') list.sort((a,b)=> QUESTIONS[a.idx].cat.localeCompare(QUESTIONS[b.idx].cat));
+    else list.sort((a,b)=> (b.lastMissed||0) - (a.lastMissed||0)); // 'recent' default
+
+    practiceBtn.disabled = openEntries.length === 0;
+    practiceBtn.textContent = "▶ Practice these mistakes (" + openEntries.length + ")";
+    copyListBtn.disabled = openEntries.length === 0;
+
+    const letters = ["A","B","C","D"];
+    notebookList.innerHTML = "";
+    if(list.length === 0){
+      notebookList.innerHTML = `<div class="reviewEmpty">${entries.length===0
+        ? "Wrong or skipped answers from any quiz run in this section will show up here automatically."
+        : "No mistakes match this filter."}</div>`;
+      return;
+    }
+
+    list.forEach(e=>{
+      const item = QUESTIONS[e.idx];
+      const color = CAT_COLORS[item.cat] || "#34d399";
+      const card = document.createElement('div');
+      card.className = "reviewCard mistakeCard" + (e.mastered ? " masteredCard" : "");
+      const streakNote = (!e.mastered && e.correctStreak===1)
+        ? '<span class="streakHint">1 correct in a row — one more masters it</span>' : '';
+      card.innerHTML = `
+        <div class="reviewMeta">
+          <span class="pill" style="border-color:${color}; color:${color};">${item.cat}</span>
+          <span class="reviewBadge ${e.mastered ? 'masteredBadge' : 'wrongBadge'}">${e.mastered ? 'Mastered' : 'Missed ' + e.missCount + '\u00d7'}</span>
+          ${e.lastMissed ? `<span class="lastMissed">last missed ${fmtDate(e.lastMissed)}</span>` : ''}
+          ${streakNote}
+        </div>
+        <div class="reviewQ">${item.q}</div>
+        <div class="reviewAnsRow correctAns"><span class="tag">\u2713 ${letters[item.correct]}</span><span class="val">${item.options[item.correct]}</span></div>
+        <div class="reviewExpl"><b>Why:</b> ${item.expl || "No explanation available for this question yet."}</div>
+        <div class="noteBox"><textarea class="noteInput" placeholder="Jot a personal note on why you keep missing this…">${e.note ? e.note.replace(/</g,'&lt;') : ''}</textarea></div>
+        <div class="mistakeActions">
+          <button class="mistakeActionBtn masterBtn" data-action="master">${e.mastered ? '\u21ba Unmark mastered' : '\u2713 Mark as mastered'}</button>
+          <button class="mistakeActionBtn removeBtn" data-action="remove">\u2715 Remove from notebook</button>
+        </div>
+      `;
+      card.querySelector('.noteInput').addEventListener('blur', (ev)=>{
+        setMistakeNote(sectionKey, e.idx, ev.target.value);
+      });
+      card.querySelector('[data-action="master"]').addEventListener('click', ()=>{
+        setMistakeMastered(sectionKey, e.idx, !e.mastered);
+        renderNotebook();
+      });
+      card.querySelector('[data-action="remove"]').addEventListener('click', ()=>{
+        removeMistakeEntry(sectionKey, e.idx);
+        renderNotebook();
+      });
+      notebookList.appendChild(card);
+    });
+  }
+
   function renderProgressDashboard(){
     const dash = $('progressDash');
     const records = (loadHistory()[sectionKey]) || [];
@@ -3096,7 +3379,27 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     reshuffleOrder();
   }
 
-  submitTop.addEventListener('click', showReport);
+  function finishPractice(){
+    const attempted = Object.keys(answers).length;
+    const correctCount = Object.values(answers).filter(a=>a.correct).length;
+
+    order = savedOrder; pos = savedPos; answers = savedAnswers;
+    practiceMode = false;
+    savedOrder = null; savedPos = null; savedAnswers = null;
+
+    animatedSwitch(()=>{
+      quizview.classList.add('hide');
+      notebook.classList.add('show');
+    }, notebook);
+    renderNotebook();
+    if(attempted>0){
+      notebookSub.textContent = `Practice round done — ${correctCount}/${attempted} correct this round. ` + notebookSub.textContent;
+    }
+  }
+
+  submitTop.addEventListener('click', ()=>{
+    if(practiceMode){ finishPractice(); } else { showReport(); }
+  });
 
   reviewBtn.addEventListener('click', ()=>{
     if(lastMistakeIdx.length === 0) return;
@@ -3129,10 +3432,16 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     // Leaving mid-test — whether unanswered, partially answered, or
     // already submitted — resets the run so coming back to this section
     // always starts a fresh, reshuffled test automatically.
+    if(practiceMode){
+      order = savedOrder || QUESTIONS.map((_,i)=>i);
+      practiceMode = false;
+      savedOrder = null; savedPos = null; savedAnswers = null;
+    }
     answers = {};
     reshuffleOrder();
     report.classList.remove('show');
     review.classList.remove('show');
+    notebook.classList.remove('show');
     quizview.classList.remove('hide');
     render();
     openSubmenu(sectionKey);
@@ -3140,13 +3449,97 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
 
   historyBtn.addEventListener('click', ()=>{
     // Same as Back — jumping off to the Test Report also counts as leaving the test.
+    if(practiceMode){
+      order = savedOrder || QUESTIONS.map((_,i)=>i);
+      practiceMode = false;
+      savedOrder = null; savedPos = null; savedAnswers = null;
+    }
     answers = {};
     reshuffleOrder();
     report.classList.remove('show');
     review.classList.remove('show');
+    notebook.classList.remove('show');
     quizview.classList.remove('hide');
     render();
     openHistory(SECTION_CHAPTER[sectionKey]);
+  });
+
+  notebookBtn.addEventListener('click', ()=>{
+    renderNotebook();
+    animatedSwitch(()=>{
+      quizview.classList.add('hide');
+      report.classList.remove('show');
+      review.classList.remove('show');
+      notebook.classList.add('show');
+    }, notebook);
+  });
+
+  notebookBackBtn.addEventListener('click', ()=>{
+    animatedSwitch(()=>{
+      notebook.classList.remove('show');
+      quizview.classList.remove('hide');
+    }, quizview);
+  });
+
+  practiceBtn.addEventListener('click', ()=>{
+    const mistakes = getSectionMistakes(sectionKey);
+    const openIdx = Object.entries(mistakes)
+      .filter(([,m])=>!m.mastered)
+      .map(([i])=>parseInt(i,10))
+      .filter(i=>QUESTIONS[i]);
+    if(openIdx.length === 0) return;
+
+    for(let i=openIdx.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [openIdx[i],openIdx[j]] = [openIdx[j],openIdx[i]];
+    }
+
+    savedOrder = order; savedPos = pos; savedAnswers = answers;
+    order = openIdx;
+    pos = 0;
+    answers = {};
+    practiceMode = true;
+
+    animatedSwitch(()=>{
+      notebook.classList.remove('show');
+      quizview.classList.remove('hide');
+      render();
+    }, quizview);
+  });
+
+  copyListBtn.addEventListener('click', ()=>{
+    const mistakes = getSectionMistakes(sectionKey);
+    const openEntries = Object.entries(mistakes)
+      .filter(([,m])=>!m.mastered)
+      .map(([idxStr,m])=>({idx:parseInt(idxStr,10), ...m}))
+      .filter(e=>QUESTIONS[e.idx]);
+    if(openEntries.length === 0) return;
+
+    const letters = ["A","B","C","D"];
+    const lines = openEntries.map(e=>{
+      const item = QUESTIONS[e.idx];
+      let block = `[${item.cat}] ${stripTags(item.q)}\nAnswer: ${letters[item.correct]}. ${stripTags(item.options[item.correct])}\nMissed ${e.missCount}\u00d7`;
+      if(e.note) block += `\nNote: ${e.note}`;
+      return block;
+    });
+    const text = `Mistake Notebook — ${title}\n${openEntries.length} open mistake(s)\n\n` + lines.join('\n\n');
+
+    const originalLabel = copyListBtn.textContent;
+    const done = () => { copyListBtn.textContent = "✓ Copied"; setTimeout(()=>{ copyListBtn.textContent = originalLabel; }, 1600); };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(done);
+    } else {
+      done();
+    }
+  });
+
+  notebookSortSelect.addEventListener('change', (e)=>{
+    notebookSort = e.target.value;
+    renderNotebook();
+  });
+  notebookShowMasteredChk.addEventListener('change', (e)=>{
+    notebookShowMasteredFlag = e.target.checked;
+    renderNotebook();
   });
 
   render();
