@@ -7,6 +7,9 @@ analysis. Built as a static site — no backend required.
 
 ```
 Chemistry
+ ├─ Reagent Lookup       (cross-chapter search — type any reagent to see
+ │                         every question that uses it, across every
+ │                         chapter, side by side)
  ├─ Salt Analysis
  │   ├─ Anion Analysis
  │   │   ├─ Study               (full, nothing-skipped overview)
@@ -23,10 +26,24 @@ Chemistry
      │   ├─ Study                (full overview)
      │   ├─ 30-Min Quick Revision
      │   └─ Flashcards / Quick Quiz (35-question MCQ run)
+     ├─ Alkene & Alkyne
+     │   ├─ Study
+     │   ├─ 30-Min Quick Revision
+     │   └─ Flashcards / Quick Quiz
      └─ Test Report              (past attempts & accuracy trend
-                                   for this chapter's sections)
+                                   for this chapter's sections —
+                                   always the LAST card in the grid)
 ```
 
+- **Reagent Lookup** lives at the Chemistry-hub level (not inside a single
+  chapter) since reagents cut across chapters — e.g. AgNO₃ shows up both
+  in alkyne acidity tests and in anion halide tests. Typing a reagent name
+  live-filters every question bank (`ALL_QUESTIONS_FLAT`, built once at
+  load from all of `questions.json`) by plain-text match across the
+  question, options, and explanation, then groups hits by chapter →
+  section so you can compare how the same reagent behaves on different
+  substrates. No separate content file — it searches the same
+  `questions.json` everything else already uses.
 - **Study** renders the full transcribed class notes for that category
   (group reagents, every confirmatory test, every color reaction and
   equation) first, followed by a collapsible list of every question in
@@ -43,7 +60,10 @@ Chemistry
   Hydrocarbons each have their own Test Report card, and each shows
   every past quiz attempt for that chapter's sections only (e.g. the
   Hydrocarbons report shows Alkane attempts, not Anion/Prelim ones),
-  without needing to submit a new run to check.
+  without needing to submit a new run to check. It is always the
+  **last** card in that chapter's section-grid — `add_topic.py` inserts
+  new topic cards immediately before it (see `CHAPTER_HISTORY_ANCHOR`),
+  never after, so this stays true as new sections get added.
 
 Study and Revision content is generated at runtime directly from the
 question bank in `questions.json` (see "Editing questions" below) —

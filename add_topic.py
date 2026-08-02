@@ -38,7 +38,16 @@ JSON_PATH = SITE_DIR / "questions.json"
 
 CHAPTER_MORE_NOTE = {
     "salt": "More sections (e.g. cation analysis, systematic scheme) can be added here as separate cards.",
-    "hydro": "More sections (e.g. alkenes, alkynes, aromatic hydrocarbons) can be added here as separate cards.",
+    "hydro": "More sections (e.g. aromatic hydrocarbons) can be added here as separate cards.",
+}
+
+# The chapter's Test Report card must always be the LAST card in the
+# section-grid. New topic cards are inserted immediately before this
+# anchor (not before more-note, which sits outside/after the grid) so
+# Test Report never ends up above a newly-added section.
+CHAPTER_HISTORY_ANCHOR = {
+    "salt": '<div class="section-card wide" id="cardHistory">',
+    "hydro": '<div class="section-card wide" id="cardHistoryHydro">',
 }
 
 
@@ -97,11 +106,13 @@ def main():
         f'        <div class="meta">\u2192 <span id="{key}Count">0</span> questions</div>\n'
         f'      </div>\n'
     )
-    more_note = CHAPTER_MORE_NOTE[chapter]
-    more_note_tag = f'<div class="more-note">{more_note}</div>'
-    if more_note_tag not in html:
-        sys.exit("Could not find the chapter's nav-card anchor (more-note div) — site layout may have changed.")
-    html = html.replace(more_note_tag, card_html + "    " + more_note_tag, 1)
+    if chapter not in CHAPTER_HISTORY_ANCHOR:
+        sys.exit(f"Unknown chapter '{chapter}'. Known: {list(CHAPTER_HISTORY_ANCHOR)}. "
+                  f"New chapters need a manual dashboard block first — ask Claude to add one.")
+    history_anchor = CHAPTER_HISTORY_ANCHOR[chapter]
+    if history_anchor not in html:
+        sys.exit("Could not find the chapter's Test Report card anchor — site layout may have changed.")
+    html = html.replace(history_anchor, card_html + "      " + history_anchor, 1)
 
     # ---------- 3. app-shell container ----------
     shell_anchor = "  <!-- ======= HISTORY VIEW ======= -->"

@@ -562,6 +562,36 @@ mark.study-hit{ background:rgba(52,211,153,0.28); color:var(--text); border-radi
   border:1px solid rgba(240,163,78,0.3); border-radius:10px; padding:10px 14px;
   margin:-6px 0 24px;
 }
+
+/* ---- Reagent Lookup ---- */
+.reagent-chips{ display:flex; flex-wrap:wrap; gap:8px; margin:0 0 18px; }
+.reagent-chip{
+  font-size:12.5px; color:var(--muted); background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1); border-radius:999px; padding:6px 13px;
+  cursor:pointer; transition:border-color .15s, color .15s;
+}
+.reagent-chip:hover{ color:var(--mint); border-color:var(--mint); }
+.reagent-empty{ color:var(--muted); font-size:13.5px; padding:20px 0; }
+.reagent-count{ font-size:12.5px; color:var(--muted); margin:-8px 0 20px; }
+.reagent-chapter-group{ margin:0 0 30px; }
+.reagent-chapter-group > h2{
+  font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--flame);
+  margin:0 0 14px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.reagent-section-group{ margin:0 0 20px; }
+.reagent-section-group > h3{ font-size:14.5px; color:var(--muted); margin:0 0 10px; }
+.reagent-q-card{
+  background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px; padding:14px 16px; margin:0 0 10px;
+}
+.reagent-q-cat{
+  display:inline-block; font-size:11px; font-weight:600; letter-spacing:.03em;
+  padding:2px 9px; border-radius:999px; margin:0 0 8px;
+}
+.reagent-q-text{ font-size:14.5px; line-height:1.5; margin:0 0 8px; }
+.reagent-q-answer{ font-size:13.5px; color:var(--mint); margin:0 0 6px; }
+.reagent-q-expl{ font-size:13px; color:var(--muted); line-height:1.55; }
+mark.reagent-hit{ background:rgba(240,163,78,0.35); color:inherit; border-radius:3px; padding:0 2px; }
 </style>
 </head>
 <body>
@@ -589,6 +619,12 @@ mark.study-hit{ background:rgba(52,211,153,0.28); color:var(--text); border-radi
         <h3>Hydrocarbons</h3>
         <p>Alkanes — nomenclature, isomerism, Wurtz/Corey-House/Kolbe preparation methods, catalytic & partial hydrogenation, named reductions, carbide chemistry, physical properties, halogenation, combustion/cracking, and ethane conformations.</p>
         <div class="meta">→ open chapter</div>
+      </div>
+      <div class="section-card wide" id="cardReagentSearch">
+        <div class="icon" style="background:rgba(240,163,78,0.12); color:var(--flame);">🔎</div>
+        <h3>Reagent Lookup</h3>
+        <p>Type any reagent (e.g. NaNH₂, Lindlar's catalyst, KMnO₄) to instantly see every question across every chapter that uses it — side by side, so you can compare how the same reagent behaves on different substrates.</p>
+        <div class="meta">→ search across chapters</div>
       </div>
     </div>
     <div class="more-note">More chapters (e.g. mole concept, chemical bonding) can be added here as separate cards.</div>
@@ -648,6 +684,12 @@ mark.study-hit{ background:rgba(52,211,153,0.28); color:var(--text); border-radi
         <p>Nomenclature &amp; isomerism, Wurtz-family couplings, Corey-House synthesis, decarboxylation &amp; Kolbe electrolysis, catalytic &amp; partial hydrogenation, named carbonyl reductions, carbide chemistry, physical properties, halogenation, combustion/cracking, and ethane conformations.</p>
         <div class="meta">→ <span id="alkaneCount">0</span> questions</div>
       </div>
+      <div class="section-card" id="cardAlkene_alkyne">
+        <div class="icon" style="background:#a3e6351f; color:#a3e635;">⚡</div>
+        <h3>Alkene & Alkyne</h3>
+        <p>Elimination mechanisms (E1/E2/E1cB), Zaitsev vs Hofmann products, alcohol dehydration, dehalogenation of vicinal dihalides, the Wittig reaction, and alkyne preparation, acidity & isomerization.</p>
+        <div class="meta">→ <span id="alkene_alkyneCount">0</span> questions</div>
+      </div>
       <div class="section-card wide" id="cardHistoryHydro">
         <div class="icon" style="background:rgba(240,163,78,0.12); color:var(--flame);">📈</div>
         <h3>Test Report</h3>
@@ -655,13 +697,7 @@ mark.study-hit{ background:rgba(52,211,153,0.28); color:var(--text); border-radi
         <div class="meta">→ view past results</div>
       </div>
     </div>
-          <div class="section-card" id="cardAlkene_alkyne">
-        <div class="icon" style="background:#a3e6351f; color:#a3e635;">⚡</div>
-        <h3>Alkene & Alkyne</h3>
-        <p>Elimination mechanisms (E1/E2/E1cB), Zaitsev vs Hofmann products, alcohol dehydration, dehalogenation of vicinal dihalides, the Wittig reaction, and alkyne preparation, acidity & isomerization.</p>
-        <div class="meta">→ <span id="alkene_alkyneCount">0</span> questions</div>
-      </div>
-    <div class="more-note">More sections (e.g. alkenes, alkynes, aromatic hydrocarbons) can be added here as separate cards.</div>
+    <div class="more-note">More sections (e.g. aromatic hydrocarbons) can be added here as separate cards.</div>
   </div>
 
   <!-- ======= SUBCHAPTER MENU (shared by Anion + Prelim + Alkane) ======= -->
@@ -716,6 +752,20 @@ mark.study-hit{ background:rgba(52,211,153,0.28); color:var(--text); border-radi
     <h2 class="app-title" id="revisionTitle">30-Min Quick Revision</h2>
     <div class="rev-timer-note" id="revisionNote">Scan top to bottom — budget roughly 1–2 minutes per category to get through this in about 30 minutes.</div>
     <div class="rev-grid" id="revisionBody"></div>
+  </div>
+
+  <!-- ======= REAGENT LOOKUP (cross-chapter search) ======= -->
+  <div class="app-shell" id="app-reagent-search">
+    <div class="crumb" data-role="crumb"></div>
+    <div class="back-row"><button class="back-btn" data-role="reagentBack">&larr; Back to Chemistry</button></div>
+    <h2 class="app-title">Reagent Lookup</h2>
+    <div class="study-search-row">
+      <input type="text" id="reagentSearchInput" class="study-search-input" placeholder="Type a reagent — e.g. NaNH2, Lindlar's catalyst, KMnO4, LiAlH4…">
+      <button id="reagentSearchClear" class="study-search-clear hide" title="Clear search">✕</button>
+    </div>
+    <div class="reagent-chips" id="reagentChips"></div>
+    <div class="reagent-count hide" id="reagentCount"></div>
+    <div id="reagentResults"><div class="reagent-empty">Start typing a reagent name above, or tap one of the suggestions.</div></div>
   </div>
 
   <!-- ======= ANION APP ======= -->
@@ -1071,6 +1121,145 @@ function openHydrocarbons(){
   }, document.getElementById('dashboard-hydro'));
   setActiveBack('\u2190 Back to Chemistry', showChemHub);
 }
+
+// ============================================================
+//  REAGENT LOOKUP (cross-chapter search over every question bank)
+// ============================================================
+let ALL_QUESTIONS_FLAT = []; // filled once questions.json loads (see BOOTSTRAP)
+
+const REAGENT_SUGGESTIONS = [
+  'AgNO3', "Lindlar's catalyst", 'NaNH2', 'KMnO4',
+  'Zn dust', 'Grignard', 'alcoholic KOH', 'Clemmensen', 'borax bead'
+];
+
+function escapeRegExp(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+function highlightHTML(html, query){
+  if(!query) return html;
+  const re = new RegExp('(' + escapeRegExp(query) + ')', 'ig');
+  return html.split(/(<[^>]+>)/g).map(seg =>
+    seg.startsWith('<') ? seg : seg.replace(re, '<mark class="reagent-hit">$1</mark>')
+  ).join('');
+}
+
+function buildReagentIndex(data){
+  ALL_QUESTIONS_FLAT = [];
+  Object.keys(data).forEach(sectionKey => {
+    const bank = data[sectionKey];
+    if(!bank || !bank.questions) return;
+    bank.questions.forEach(item => {
+      ALL_QUESTIONS_FLAT.push({
+        sectionKey,
+        chapterKey: SECTION_CHAPTER[sectionKey] || 'other',
+        cat: item.cat,
+        color: (bank.catColors && bank.catColors[item.cat]) || '#94a3b8',
+        q: item.q,
+        options: item.options,
+        correct: item.correct,
+        expl: item.expl
+      });
+    });
+  });
+}
+
+function renderReagentChips(){
+  const chipsEl = document.getElementById('reagentChips');
+  chipsEl.innerHTML = REAGENT_SUGGESTIONS.map(r =>
+    `<span class="reagent-chip" data-term="${r.replace(/"/g,'&quot;')}">${r}</span>`
+  ).join('');
+  chipsEl.querySelectorAll('.reagent-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const input = document.getElementById('reagentSearchInput');
+      input.value = chip.dataset.term;
+      renderReagentResults(chip.dataset.term);
+      document.getElementById('reagentSearchClear').classList.remove('hide');
+    });
+  });
+}
+
+function renderReagentResults(query){
+  const resultsEl = document.getElementById('reagentResults');
+  const countEl = document.getElementById('reagentCount');
+  const q = query.trim();
+  if(!q){
+    resultsEl.innerHTML = '<div class="reagent-empty">Start typing a reagent name above, or tap one of the suggestions.</div>';
+    countEl.classList.add('hide');
+    return;
+  }
+  const lower = q.toLowerCase();
+  const matches = ALL_QUESTIONS_FLAT.filter(item => {
+    const plain = (stripTags(item.q) + ' ' + item.options.map(stripTags).join(' ') + ' ' + stripTags(item.expl)).toLowerCase();
+    return plain.includes(lower);
+  });
+
+  if(matches.length === 0){
+    resultsEl.innerHTML = '<div class="reagent-empty">No questions mention "' + q.replace(/</g,'&lt;') + '" yet. Try a shorter or differently-spelled term.</div>';
+    countEl.classList.add('hide');
+    return;
+  }
+
+  countEl.textContent = matches.length + ' matching question' + (matches.length===1?'':'s');
+  countEl.classList.remove('hide');
+
+  // group by chapter, then by section
+  const byChapter = {};
+  matches.forEach(m => {
+    (byChapter[m.chapterKey] = byChapter[m.chapterKey] || {})[m.sectionKey] =
+      (byChapter[m.chapterKey][m.sectionKey] || []).concat(m);
+  });
+
+  let html = '';
+  Object.keys(byChapter).forEach(chapterKey => {
+    const chapTitle = (CHAPTER_META[chapterKey] && CHAPTER_META[chapterKey].title) || chapterKey;
+    html += `<div class="reagent-chapter-group"><h2>${chapTitle}</h2>`;
+    const bySection = byChapter[chapterKey];
+    Object.keys(bySection).forEach(sectionKey => {
+      const secTitle = (SECTION_META[sectionKey] && SECTION_META[sectionKey].title) || sectionKey;
+      html += `<div class="reagent-section-group"><h3>${secTitle}</h3>`;
+      bySection[sectionKey].forEach(item => {
+        const answer = item.options[item.correct];
+        html += `<div class="reagent-q-card">
+          <span class="reagent-q-cat" style="background:${item.color}22; color:${item.color};">${item.cat}</span>
+          <div class="reagent-q-text">${highlightHTML(item.q, q)}</div>
+          <div class="reagent-q-answer">✓ ${highlightHTML(answer, q)}</div>
+          <div class="reagent-q-expl">${highlightHTML(item.expl, q)}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    });
+    html += `</div>`;
+  });
+  resultsEl.innerHTML = html;
+}
+
+function openReagentSearch(){
+  animatedSwitch(()=>{
+    document.querySelector('.wrap').classList.remove('wide');
+    hideAllShells();
+    document.getElementById('app-reagent-search').classList.add('show');
+  }, document.getElementById('app-reagent-search'));
+  renderCrumb('app-reagent-search', [
+    {label:'Chemistry', onClick: showChemHub},
+    {label:'Reagent Lookup'}
+  ]);
+  setActiveBack('\u2190 Back to Chemistry', showChemHub);
+  document.getElementById('reagentSearchInput').focus();
+}
+
+document.getElementById('cardReagentSearch').addEventListener('click', openReagentSearch);
+document.querySelector('#app-reagent-search [data-role="reagentBack"]').addEventListener('click', showChemHub);
+renderReagentChips();
+document.getElementById('reagentSearchInput').addEventListener('input', e => {
+  document.getElementById('reagentSearchClear').classList.toggle('hide', e.target.value.trim()==='');
+  renderReagentResults(e.target.value);
+});
+document.getElementById('reagentSearchClear').addEventListener('click', () => {
+  const input = document.getElementById('reagentSearchInput');
+  input.value = '';
+  input.focus();
+  document.getElementById('reagentSearchClear').classList.add('hide');
+  renderReagentResults('');
+});
 
 document.getElementById('cardSaltAnalysis').addEventListener('click', openSaltAnalysis);
 document.getElementById('crumbChemistry').addEventListener('click', showChemHub);
@@ -2795,6 +2984,7 @@ fetch('./questions.json')
   .then(res => res.json())
   .then(data => {
     SECTION_DATA = data;
+    buildReagentIndex(data);
     anionApp = initQuizApp('app-anion', data.anion.questions, data.anion.catColors, 'Anion Analysis', 'anion');
     prelimApp = initQuizApp('app-prelim', data.prelim.questions, data.prelim.catColors, 'Preliminary Tests & Cation Groups', 'prelim');
     const alkaneApp = initQuizApp('app-alkane', data.alkane.questions, data.alkane.catColors, 'Alkane', 'alkane');
