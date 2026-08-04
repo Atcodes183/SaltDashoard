@@ -913,21 +913,49 @@ const SoundFX = (function(){
     return ctx;
   }
 
-  // Plays a single soft tone: sine wave, quick attack, gentle exponential decay.
-  function tone(freq, startTime, duration, peakGain, type){
+  // A tonal "pop": pitch drops quickly from freqStart to freqEnd while gain
+  // snaps up then decays away — the classic UI bubble-pop shape.
+  function pop(startTime, freqStart, freqEnd, duration, peakGain){
     const ac = getCtx();
     if(!ac) return;
     const osc = ac.createOscillator();
     const gain = ac.createGain();
-    osc.type = type || 'sine';
-    osc.frequency.setValueAtTime(freq, startTime);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freqStart, startTime);
+    osc.frequency.exponentialRampToValueAtTime(freqEnd, startTime + duration);
     gain.gain.setValueAtTime(0.0001, startTime);
-    gain.gain.exponentialRampToValueAtTime(peakGain, startTime + 0.012);
+    gain.gain.exponentialRampToValueAtTime(peakGain, startTime + 0.004);
     gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
     osc.connect(gain);
     gain.connect(ac.destination);
     osc.start(startTime);
     osc.stop(startTime + duration + 0.02);
+  }
+
+  // A short burst of filtered noise layered on top of the pop for the
+  // crisp "click" transient — like a mouse/button click.
+  function click(startTime, duration, peakGain, filterFreq){
+    const ac = getCtx();
+    if(!ac) return;
+    const len = Math.max(1, Math.floor(ac.sampleRate * duration));
+    const buffer = ac.createBuffer(1, len, ac.sampleRate);
+    const data = buffer.getChannelData(0);
+    for(let i=0;i<len;i++){
+      data[i] = (Math.random()*2-1) * Math.pow(1 - i/len, 3);
+    }
+    const src = ac.createBufferSource();
+    src.buffer = buffer;
+    const filter = ac.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.value = filterFreq;
+    filter.Q.value = 0.9;
+    const gain = ac.createGain();
+    gain.gain.setValueAtTime(peakGain, startTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+    src.connect(filter);
+    filter.connect(gain);
+    gain.connect(ac.destination);
+    src.start(startTime);
   }
 
   let enabled = true;
@@ -942,24 +970,24 @@ const SoundFX = (function(){
   }
   function isEnabled(){ return enabled; }
 
-  // Correct: soft two-note ascending chime (like a light "ding-ding")
+  // Correct: bright, crisp pop — high click transient + quick upward-pitched pop
   function playCorrect(){
     if(!enabled) return;
     const ac = getCtx();
     if(!ac) return;
     const t = ac.currentTime;
-    tone(880, t, 0.16, 0.09, 'sine');
-    tone(1318.5, t + 0.07, 0.20, 0.08, 'sine');
+    click(t, 0.03, 0.11, 3200);
+    pop(t, 1500, 950, 0.09, 0.11);
   }
 
-  // Wrong: single soft, low, short-decay tone — clear but not harsh
+  // Wrong: duller, lower click/pop — same crisp mechanic, muted pitch
   function playWrong(){
     if(!enabled) return;
     const ac = getCtx();
     if(!ac) return;
     const t = ac.currentTime;
-    tone(220, t, 0.18, 0.07, 'sine');
-    tone(196, t + 0.05, 0.22, 0.05, 'sine');
+    click(t, 0.035, 0.09, 650);
+    pop(t, 420, 260, 0.11, 0.09);
   }
 
   return { playCorrect, playWrong, setEnabled, isEnabled };
