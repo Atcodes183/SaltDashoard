@@ -825,11 +825,17 @@ mark.reagent-hit, mark.study-hit{ background:var(--flame); color:#1a1006; font-w
         <p>A condensed, scan-friendly cheat sheet of every group reagent, test, and color reaction — built to get through right before your test.</p>
         <div class="meta">→ quick scan format</div>
       </div>
-      <div class="section-card wide" id="cardFlashcards">
+      <div class="section-card" id="cardFlashcards">
         <div class="icon" style="background:rgba(52,211,153,0.12); color:var(--mint);">🗂</div>
         <h3>Flashcards / Quick Quiz</h3>
         <p>The full multiple-choice run with instant feedback, question navigator, and end-of-run report.</p>
         <div class="meta">→ <span id="submenuQuizCount">0</span> questions</div>
+      </div>
+      <div class="section-card" id="cardNotebook">
+        <div class="icon" style="background:rgba(251,113,133,0.12); color:var(--wrong);">🗒️</div>
+        <h3>Mistake Notebook</h3>
+        <p>Every question you've missed, filterable by category and sorted by how often you've gotten it wrong — open it any time, no test required.</p>
+        <div class="meta">→ <span id="submenuNotebookCount">0</span> open mistakes</div>
       </div>
     </div>
   </div>
@@ -2542,6 +2548,9 @@ function openSubmenu(sectionKey){
   document.getElementById('submenuDesc').textContent = meta.desc;
   document.getElementById('submenuStudyCount').textContent = data ? data.questions.length : 0;
   document.getElementById('submenuQuizCount').textContent = data ? data.questions.length : 0;
+  const mistakes = getSectionMistakes(sectionKey);
+  const openCount = Object.values(mistakes).filter(m=>!m.mastered).length;
+  document.getElementById('submenuNotebookCount').textContent = openCount;
   animatedSwitch(()=>{
     document.querySelector('.wrap').classList.remove('wide');
     hideAllShells();
@@ -2559,6 +2568,9 @@ document.getElementById('cardStudy').addEventListener('click', ()=> openStudy(cu
 document.getElementById('cardRevision').addEventListener('click', ()=> openRevision(currentSection));
 document.getElementById('cardFlashcards').addEventListener('click', ()=>{
   if(SECTION_APPS[currentSection]) SECTION_APPS[currentSection].open();
+});
+document.getElementById('cardNotebook').addEventListener('click', ()=>{
+  if(SECTION_APPS[currentSection]) SECTION_APPS[currentSection].openNotebook();
 });
 
 document.getElementById('historyBackBtn').addEventListener('click', ()=> CHAPTER_META[currentHistoryChapter].open());
@@ -3681,6 +3693,27 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
         {label: CHAPTER_META[SECTION_CHAPTER[sectionKey]].title, onClick: CHAPTER_META[SECTION_CHAPTER[sectionKey]].open},
         {label: title, onClick: ()=> openSubmenu(sectionKey)},
         {label:'Flashcards / Quick Quiz'}
+      ]);
+      setActiveBack('\u2190 Back to ' + title, ()=> openSubmenu(sectionKey));
+      container.focus({preventScroll:true});
+    },
+    openNotebook(){
+      currentSection = sectionKey;
+      renderNotebook();
+      animatedSwitch(()=>{
+        document.querySelector('.wrap').classList.add('wide');
+        hideAllShells();
+        container.classList.add('show');
+        quizview.classList.add('hide');
+        report.classList.remove('show');
+        review.classList.remove('show');
+        notebook.classList.add('show');
+      }, container);
+      renderCrumb(containerId, [
+        {label:'Chemistry', onClick: showChemHub},
+        {label: CHAPTER_META[SECTION_CHAPTER[sectionKey]].title, onClick: CHAPTER_META[SECTION_CHAPTER[sectionKey]].open},
+        {label: title, onClick: ()=> openSubmenu(sectionKey)},
+        {label:'Mistake Notebook'}
       ]);
       setActiveBack('\u2190 Back to ' + title, ()=> openSubmenu(sectionKey));
       container.focus({preventScroll:true});
