@@ -209,6 +209,62 @@ body{ padding:28px 16px 60px; }
 .opt.locked{ cursor:default; }
 .opt.dim{ opacity:.55; }
 
+/* ---- Mock Test mode ---- */
+.opt.selectedChoice{ border-color:#60a5fa; background:rgba(96,165,250,0.08); }
+.opt.selectedChoice .badge{ border-color:#60a5fa; color:#60a5fa; }
+.pyqBadge{
+  display:inline-block; font-size:11px; font-weight:600; letter-spacing:.04em;
+  color:#60a5fa; background:rgba(96,165,250,0.1); border:1px solid rgba(96,165,250,0.35);
+  border-radius:6px; padding:3px 9px; margin-bottom:10px; text-transform:uppercase;
+}
+.markingNote{
+  font-size:12.5px; color:var(--muted); background:var(--panel2, rgba(255,255,255,0.02));
+  border:1px solid var(--panel-border); border-radius:8px; padding:8px 14px; margin-bottom:18px;
+  display:flex; gap:14px; flex-wrap:wrap;
+}
+.markingNote b{ color:#dfe9e3; }
+.mockTopbar{ display:flex; align-items:center; gap:16px; margin-bottom:18px; flex-wrap:wrap; }
+.mockAttempted{ font-size:13px; color:var(--muted); white-space:nowrap; }
+.mockSubmitBtn{
+  background:var(--mint); color:#06251a; border:none; border-radius:8px;
+  padding:10px 18px; font-weight:700; font-size:14px; cursor:pointer; white-space:nowrap;
+  transition:opacity .12s ease;
+}
+.mockSubmitBtn:hover{ opacity:.88; }
+.qNavGrid .qNavBox.answered{ background:rgba(96,165,250,0.22); border-color:#60a5fa; color:#60a5fa; }
+.mockScoreCard{
+  text-align:center; padding:32px 20px; border:1px solid var(--panel-border); border-radius:14px;
+  background:var(--panel2, rgba(255,255,255,0.02)); margin-bottom:24px;
+}
+.mockScoreNum{ font-size:52px; font-weight:800; color:var(--mint); line-height:1; }
+.mockScoreOf{ font-size:16px; color:var(--muted); margin-top:4px; }
+.mockStatGrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:22px 0 28px; }
+@media (max-width:680px){ .mockStatGrid{ grid-template-columns:1fr; } }
+.mockStat{ text-align:center; border:1px solid var(--panel-border); border-radius:10px; padding:14px; }
+.mockStat .num{ font-size:24px; font-weight:700; }
+.mockStat .lbl{ font-size:12px; color:var(--muted); margin-top:2px; text-transform:uppercase; letter-spacing:.03em; }
+.mockStat.ok .num{ color:var(--mint); }
+.mockStat.wrong .num{ color:var(--wrong); }
+.mockStat.skip .num{ color:var(--gray, #8ca0b3); }
+.mockReviewItem{
+  border:1px solid var(--panel-border); border-radius:10px; padding:16px 18px; margin-bottom:14px;
+}
+.mockReviewItem .rtag{
+  display:inline-block; font-size:11px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  border-radius:6px; padding:2px 8px; margin-bottom:8px;
+}
+.mockReviewItem.wrong .rtag{ background:rgba(251,113,133,0.12); color:var(--wrong); }
+.mockReviewItem.skip .rtag{ background:rgba(140,160,179,0.12); color:#8ca0b3; }
+.mockReviewItem .rq{ font-size:15px; margin-bottom:10px; }
+.mockReviewItem .ra{ font-size:13.5px; color:var(--muted); line-height:1.5; }
+.mockReviewItem .ra b{ color:#dfe9e3; }
+.mockRetakeBtn{
+  background:transparent; color:#dfe9e3; border:1.5px solid var(--panel-border); border-radius:8px;
+  padding:10px 20px; font-size:14px; font-weight:600; cursor:pointer; margin-top:8px;
+}
+.mockRetakeBtn:hover{ border-color:var(--mint); color:var(--mint); }
+
+
 .feedback{ min-height:20px; font-size:14px; margin-bottom:8px; }
 .feedback.ok{ color:var(--mint); }
 .feedback.bad{ color:var(--flame); }
@@ -837,6 +893,12 @@ mark.reagent-hit, mark.study-hit{ background:var(--flame); color:#1a1006; font-w
         <p>Every question you've missed, filterable by category and sorted by how often you've gotten it wrong — open it any time, no test required.</p>
         <div class="meta">→ <span id="submenuNotebookCount">0</span> open mistakes</div>
       </div>
+      <div class="section-card" id="cardMockTest" style="display:none;">
+        <div class="icon" style="background:rgba(96,165,250,0.12); color:#60a5fa;">🎯</div>
+        <h3>Mock Test <span style="font-size:11px; font-weight:600; color:#60a5fa; border:1px solid rgba(96,165,250,0.4); border-radius:5px; padding:1px 6px; margin-left:6px; vertical-align:middle;">JEE Main pattern</span></h3>
+        <p>Real JEE Main level questions, no instant feedback, marked +4 / 0 / −1 exactly like the real exam. Previous-year questions are labelled with their year.</p>
+        <div class="meta">→ <span id="submenuMockCount">0</span> questions</div>
+      </div>
     </div>
   </div>
 
@@ -875,6 +937,13 @@ mark.reagent-hit, mark.study-hit{ background:var(--flame); color:#1a1006; font-w
     <div class="reagent-chips" id="reagentChips"></div>
     <div class="reagent-count hide" id="reagentCount"></div>
     <div id="reagentResults"><div class="reagent-empty">Start typing a reagent name above, or tap one of the suggestions.</div></div>
+  </div>
+
+  <!-- ======= MOCK TEST (shared, per-section content built dynamically) ======= -->
+  <div class="app-shell" id="app-mocktest">
+    <div class="crumb" data-role="crumb"></div>
+    <div class="back-row"><button class="back-btn" id="mockBackBtn">&larr; Back</button></div>
+    <div id="mockTestRoot"></div>
   </div>
 
   <!-- ======= ANION APP ======= -->
@@ -2551,6 +2620,14 @@ function openSubmenu(sectionKey){
   const mistakes = getSectionMistakes(sectionKey);
   const openCount = Object.values(mistakes).filter(m=>!m.mastered).length;
   document.getElementById('submenuNotebookCount').textContent = openCount;
+  const mockCard = document.getElementById('cardMockTest');
+  const mockData = data && data.mockTest;
+  if(mockData && mockData.questions && mockData.questions.length){
+    mockCard.style.display = '';
+    document.getElementById('submenuMockCount').textContent = mockData.questions.length;
+  } else {
+    mockCard.style.display = 'none';
+  }
   animatedSwitch(()=>{
     document.querySelector('.wrap').classList.remove('wide');
     hideAllShells();
@@ -2572,6 +2649,7 @@ document.getElementById('cardFlashcards').addEventListener('click', ()=>{
 document.getElementById('cardNotebook').addEventListener('click', ()=>{
   if(SECTION_APPS[currentSection]) SECTION_APPS[currentSection].openNotebook();
 });
+document.getElementById('cardMockTest').addEventListener('click', ()=> openMockTest(currentSection));
 
 document.getElementById('historyBackBtn').addEventListener('click', ()=> CHAPTER_META[currentHistoryChapter].open());
 document.querySelector('#subchapter-menu [data-role="submenuBack"]').addEventListener('click', ()=> CHAPTER_META[SECTION_CHAPTER[currentSection]].open());
@@ -2794,6 +2872,220 @@ function openRevision(sectionKey){
   setActiveBack('\u2190 Back to ' + meta.title, ()=> openSubmenu(sectionKey));
 }
 document.querySelector('#app-revision [data-role="revisionBack"]').addEventListener('click', ()=> openSubmenu(currentSection));
+
+// ============================================================
+//  MOCK TEST MODE (JEE Main pattern: +4 / 0 / -1, no instant feedback)
+//  Shared container, content rebuilt per section on open.
+// ============================================================
+let mtSectionKey = null, mtQuestions = [], mtAnswers = {}, mtPos = 0, mtSubmitted = false, mtMeta = null;
+
+function mtLetters(){ return ["A","B","C","D"]; }
+
+function openMockTest(sectionKey){
+  currentSection = sectionKey;
+  mtSectionKey = sectionKey;
+  const data = SECTION_DATA[sectionKey];
+  mtMeta = data.mockTest;
+  mtQuestions = mtMeta.questions;
+  mtAnswers = {};
+  mtPos = 0;
+  mtSubmitted = false;
+
+  renderMockTest();
+
+  animatedSwitch(()=>{
+    document.querySelector('.wrap').classList.add('wide');
+    hideAllShells();
+    document.getElementById('app-mocktest').classList.add('show');
+  }, document.getElementById('app-mocktest'));
+  renderCrumb('app-mocktest', [
+    {label:'Chemistry', onClick: showChemHub},
+    {label: CHAPTER_META[SECTION_CHAPTER[sectionKey]].title, onClick: CHAPTER_META[SECTION_CHAPTER[sectionKey]].open},
+    {label: SECTION_META[sectionKey].title, onClick: ()=> openSubmenu(sectionKey)},
+    {label:'Mock Test'}
+  ]);
+  setActiveBack('\u2190 Back to ' + SECTION_META[sectionKey].title, ()=> openSubmenu(sectionKey));
+}
+document.getElementById('mockBackBtn').addEventListener('click', ()=> openSubmenu(mtSectionKey || currentSection));
+
+function mtScore(){
+  let correct=0, wrong=0, unattempted=0;
+  mtQuestions.forEach((q,i)=>{
+    const a = mtAnswers[i];
+    if(a === undefined || a === null) unattempted++;
+    else if(a === q.correct) correct++;
+    else wrong++;
+  });
+  const marks = correct*4 + wrong*(-1) + unattempted*0;
+  const max = mtQuestions.length*4;
+  return { correct, wrong, unattempted, marks, max };
+}
+
+function renderMockTest(){
+  const root = document.getElementById('mockTestRoot');
+  if(mtSubmitted){
+    root.innerHTML = mtResultHtml();
+    wireMtResult();
+  } else {
+    root.innerHTML = mtTestHtml();
+    wireMtTest();
+  }
+}
+
+function mtTestHtml(){
+  const total = mtQuestions.length;
+  const attempted = Object.keys(mtAnswers).length;
+  return `
+    <h2 class="app-title">${mtMeta.title || 'Mock Test'}</h2>
+    <div class="markingNote"><span><b>+4</b> correct</span><span><b>0</b> unattempted</span><span><b>&minus;1</b> wrong</span><span style="margin-left:auto; color:var(--muted);">No instant feedback — results shown after you submit, just like the real exam.</span></div>
+
+    <div class="mockTopbar">
+      <div class="posnum" data-role="posnum">1 / ${total}</div>
+      <div class="track" style="flex:1;"><div class="fill" data-role="fill" style="width:${100/total}%"></div></div>
+      <div class="mockAttempted" data-role="attemptedLbl">${attempted} / ${total} attempted</div>
+      <button class="mockSubmitBtn" data-role="mtSubmitBtn">Submit test</button>
+    </div>
+
+    <div class="quizLayout">
+      <div class="quizMain">
+        <div class="card">
+          <div class="rowtop">
+            <span class="pill" data-role="pill">CATEGORY</span>
+            <span class="hint">no answer revealed until submit</span>
+          </div>
+          <div data-role="pyqBadgeSlot"></div>
+          <div class="question" data-role="questionText">Loading…</div>
+          <div class="options" data-role="optionsWrap"></div>
+        </div>
+        <div class="navrow">
+          <button class="navbtn" data-role="mtPrevBtn">&larr; Prev</button>
+          <button class="navbtn" data-role="mtClearBtn">Clear response</button>
+          <button class="navbtn" data-role="mtNextBtn">Next &rarr;</button>
+        </div>
+      </div>
+      <div class="qNavPanel">
+        <div class="qNavTitle">Jump to question</div>
+        <div class="qNavLegend">
+          <span><i style="background:rgba(96,165,250,0.35); border:1px solid #60a5fa;"></i>Answered</span>
+          <span><i style="background:transparent; border:1px solid var(--panel-border);"></i>Not answered</span>
+        </div>
+        <div class="qNavGrid" data-role="qNavGrid"></div>
+      </div>
+    </div>
+  `;
+}
+
+function wireMtTest(){
+  const root = document.getElementById('mockTestRoot');
+  const $ = (role) => root.querySelector(`[data-role="${role}"]`);
+  const posnum = $('posnum'), fill = $('fill'), attemptedLbl = $('attemptedLbl');
+  const pill = $('pill'), pyqSlot = $('pyqBadgeSlot'), questionText = $('questionText'), optionsWrap = $('optionsWrap');
+  const qNavGrid = $('qNavGrid');
+  const total = mtQuestions.length;
+
+  function renderQNav(){
+    qNavGrid.innerHTML = mtQuestions.map((_,i)=>{
+      const answered = mtAnswers[i] !== undefined && mtAnswers[i] !== null;
+      let cls = 'qNavBox';
+      if(i===mtPos) cls += ' current';
+      if(answered) cls += ' answered';
+      return `<div class="${cls}" data-i="${i}">${i+1}</div>`;
+    }).join('');
+    qNavGrid.querySelectorAll('.qNavBox').forEach(el=>{
+      el.addEventListener('click', ()=>{ mtPos = parseInt(el.getAttribute('data-i'),10); renderQuestion(); });
+    });
+  }
+
+  function renderQuestion(){
+    const item = mtQuestions[mtPos];
+    posnum.textContent = `${mtPos+1} / ${total}`;
+    fill.style.width = `${((mtPos+1)/total)*100}%`;
+    const attempted = Object.keys(mtAnswers).length;
+    attemptedLbl.textContent = `${attempted} / ${total} attempted`;
+    pill.textContent = item.cat;
+    pill.style.borderColor = (mtMeta.catColors && mtMeta.catColors[item.cat]) || '#8ca0b3';
+    pill.style.color = (mtMeta.catColors && mtMeta.catColors[item.cat]) || '#8ca0b3';
+    pyqSlot.innerHTML = item.source ? `<div class="pyqBadge">${item.source}</div>` : '';
+    questionText.innerHTML = item.q;
+    const letters = mtLetters();
+    optionsWrap.innerHTML = item.options.map((opt,i)=>{
+      const selected = mtAnswers[mtPos] === i ? 'selectedChoice' : '';
+      return `<div class="opt ${selected}" data-i="${i}"><span class="badge">${letters[i]}</span><span>${opt}</span></div>`;
+    }).join('');
+    optionsWrap.querySelectorAll('.opt').forEach(el=>{
+      el.addEventListener('click', ()=>{
+        mtAnswers[mtPos] = parseInt(el.getAttribute('data-i'),10);
+        renderQuestion();
+        renderQNav();
+      });
+    });
+    renderQNav();
+  }
+
+  $('mtPrevBtn').addEventListener('click', ()=>{ if(mtPos>0){ mtPos--; renderQuestion(); } });
+  $('mtNextBtn').addEventListener('click', ()=>{ if(mtPos<total-1){ mtPos++; renderQuestion(); } });
+  $('mtClearBtn').addEventListener('click', ()=>{ delete mtAnswers[mtPos]; renderQuestion(); renderQNav(); });
+  $('mtSubmitBtn').addEventListener('click', ()=>{
+    const unattempted = total - Object.keys(mtAnswers).length;
+    if(unattempted > 0){
+      const ok = window.confirm(`${unattempted} question(s) unattempted. Submit anyway?`);
+      if(!ok) return;
+    }
+    mtSubmitted = true;
+    renderMockTest();
+  });
+
+  renderQuestion();
+}
+
+function mtResultHtml(){
+  const s = mtScore();
+  const letters = mtLetters();
+  const reviewItems = mtQuestions.map((item,i)=>{
+    const a = mtAnswers[i];
+    const isSkip = a === undefined || a === null;
+    const isWrong = !isSkip && a !== item.correct;
+    if(!isSkip && !isWrong) return ''; // correct answers omitted from review list
+    const tag = isSkip ? 'skip' : 'wrong';
+    const tagLabel = isSkip ? 'Not attempted' : 'Wrong';
+    const yourAns = isSkip ? '—' : `${letters[a]}. ${item.options[a]}`;
+    const source = item.source ? `<div class="pyqBadge" style="margin-bottom:8px;">${item.source}</div>` : '';
+    return `<div class="mockReviewItem ${tag}">
+      <span class="rtag">${tagLabel}</span>
+      ${source}
+      <div class="rq">${item.q}</div>
+      <div class="ra">
+        ${isSkip ? '' : `Your answer: <b>${yourAns}</b><br>`}
+        Correct answer: <b>${letters[item.correct]}. ${item.options[item.correct]}</b><br>
+        ${item.expl}
+      </div>
+    </div>`;
+  }).join('');
+
+  return `
+    <h2 class="app-title">${mtMeta.title || 'Mock Test'} — Result</h2>
+    <div class="mockScoreCard">
+      <div class="mockScoreNum">${s.marks}</div>
+      <div class="mockScoreOf">out of ${s.max} (+4 / 0 / &minus;1 marking)</div>
+    </div>
+    <div class="mockStatGrid">
+      <div class="mockStat ok"><div class="num">${s.correct}</div><div class="lbl">Correct</div></div>
+      <div class="mockStat wrong"><div class="num">${s.wrong}</div><div class="lbl">Wrong</div></div>
+      <div class="mockStat skip"><div class="num">${s.unattempted}</div><div class="lbl">Unattempted</div></div>
+    </div>
+    <div class="sectionLbl">Review — wrong &amp; unattempted</div>
+    ${reviewItems || '<div class="reviewEmpty">Everything attempted was correct — nothing to review.</div>'}
+    <button class="mockRetakeBtn" data-role="mtRetakeBtn">&#8635; Retake test</button>
+  `;
+}
+
+function wireMtResult(){
+  const root = document.getElementById('mockTestRoot');
+  root.querySelector('[data-role="mtRetakeBtn"]').addEventListener('click', ()=>{
+    mtAnswers = {}; mtPos = 0; mtSubmitted = false;
+    renderMockTest();
+  });
+}
 
 // ============================================================
 //  QUIZ APP TEMPLATE (scoped per container, no global id clashes)
