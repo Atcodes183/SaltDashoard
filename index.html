@@ -172,16 +172,6 @@ body{ padding:28px 16px 60px; }
 }
 .hint{ font-size:13px; color:var(--muted); }
 
-.soundToggle{
-  display:inline-flex; align-items:center; justify-content:center;
-  width:30px; height:30px; margin-left:10px; padding:0;
-  background:transparent; border:1px solid var(--panel-border); border-radius:8px;
-  color:var(--muted); cursor:pointer; font-size:14px; line-height:1;
-  transition:border-color .12s ease, color .12s ease;
-}
-.soundToggle:hover{ border-color:var(--mint); color:var(--mint); }
-.soundToggle.isMuted{ color:#5c6f66; }
-
 .question{
   font-family:'Source Serif 4', Georgia, serif;
   font-weight:700; font-size:27px; line-height:1.4; color:#fbfdfc; margin-bottom:30px;
@@ -208,62 +198,6 @@ body{ padding:28px 16px 60px; }
 .opt.wrongChoice .badge{ border-color:var(--wrong); color:var(--wrong); }
 .opt.locked{ cursor:default; }
 .opt.dim{ opacity:.55; }
-
-/* ---- Mock Test mode ---- */
-.opt.selectedChoice{ border-color:#60a5fa; background:rgba(96,165,250,0.08); }
-.opt.selectedChoice .badge{ border-color:#60a5fa; color:#60a5fa; }
-.pyqBadge{
-  display:inline-block; font-size:11px; font-weight:600; letter-spacing:.04em;
-  color:#60a5fa; background:rgba(96,165,250,0.1); border:1px solid rgba(96,165,250,0.35);
-  border-radius:6px; padding:3px 9px; margin-bottom:10px; text-transform:uppercase;
-}
-.markingNote{
-  font-size:12.5px; color:var(--muted); background:var(--panel2, rgba(255,255,255,0.02));
-  border:1px solid var(--panel-border); border-radius:8px; padding:8px 14px; margin-bottom:18px;
-  display:flex; gap:14px; flex-wrap:wrap;
-}
-.markingNote b{ color:#dfe9e3; }
-.mockTopbar{ display:flex; align-items:center; gap:16px; margin-bottom:18px; flex-wrap:wrap; }
-.mockAttempted{ font-size:13px; color:var(--muted); white-space:nowrap; }
-.mockSubmitBtn{
-  background:var(--mint); color:#06251a; border:none; border-radius:8px;
-  padding:10px 18px; font-weight:700; font-size:14px; cursor:pointer; white-space:nowrap;
-  transition:opacity .12s ease;
-}
-.mockSubmitBtn:hover{ opacity:.88; }
-.qNavGrid .qNavBox.answered{ background:rgba(96,165,250,0.22); border-color:#60a5fa; color:#60a5fa; }
-.mockScoreCard{
-  text-align:center; padding:32px 20px; border:1px solid var(--panel-border); border-radius:14px;
-  background:var(--panel2, rgba(255,255,255,0.02)); margin-bottom:24px;
-}
-.mockScoreNum{ font-size:52px; font-weight:800; color:var(--mint); line-height:1; }
-.mockScoreOf{ font-size:16px; color:var(--muted); margin-top:4px; }
-.mockStatGrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:22px 0 28px; }
-@media (max-width:680px){ .mockStatGrid{ grid-template-columns:1fr; } }
-.mockStat{ text-align:center; border:1px solid var(--panel-border); border-radius:10px; padding:14px; }
-.mockStat .num{ font-size:24px; font-weight:700; }
-.mockStat .lbl{ font-size:12px; color:var(--muted); margin-top:2px; text-transform:uppercase; letter-spacing:.03em; }
-.mockStat.ok .num{ color:var(--mint); }
-.mockStat.wrong .num{ color:var(--wrong); }
-.mockStat.skip .num{ color:var(--gray, #8ca0b3); }
-.mockReviewItem{
-  border:1px solid var(--panel-border); border-radius:10px; padding:16px 18px; margin-bottom:14px;
-}
-.mockReviewItem .rtag{
-  display:inline-block; font-size:11px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
-  border-radius:6px; padding:2px 8px; margin-bottom:8px;
-}
-.mockReviewItem.wrong .rtag{ background:rgba(251,113,133,0.12); color:var(--wrong); }
-.mockReviewItem.skip .rtag{ background:rgba(140,160,179,0.12); color:#8ca0b3; }
-.mockReviewItem .rq{ font-size:15px; margin-bottom:10px; }
-.mockReviewItem .ra{ font-size:13.5px; color:var(--muted); line-height:1.5; }
-.mockReviewItem .ra b{ color:#dfe9e3; }
-.mockRetakeBtn{
-  background:transparent; color:#dfe9e3; border:1.5px solid var(--panel-border); border-radius:8px;
-  padding:10px 20px; font-size:14px; font-weight:600; cursor:pointer; margin-top:8px;
-}
-.mockRetakeBtn:hover{ border-color:var(--mint); color:var(--mint); }
-
 
 .feedback{ min-height:20px; font-size:14px; margin-bottom:8px; }
 .feedback.ok{ color:var(--mint); }
@@ -429,75 +363,6 @@ body{ padding:28px 16px 60px; }
 .reviewExpl b{ color:var(--mint); }
 
 .reviewEmpty{ text-align:center; color:var(--muted); padding:50px 20px; font-size:14px; }
-
-/* ---------- MISTAKE NOTEBOOK ---------- */
-.notebook{ display:none; }
-.notebook.show{ display:block; }
-.notebookTop{ margin-bottom:18px; }
-.notebookBadge{
-  display:inline-block; min-width:18px; padding:1px 6px; margin-left:2px;
-  border-radius:20px; font-size:10.5px; font-weight:700; text-align:center;
-  background:transparent; color:var(--muted); vertical-align:middle;
-}
-.notebookBadge.hasCount{ background:var(--wrong-dim); color:var(--wrong); border:1px solid var(--wrong); }
-
-.notebookToolbar{
-  display:flex; align-items:center; justify-content:space-between; gap:14px;
-  flex-wrap:wrap; margin:18px 0 6px;
-}
-.notebookFilters{ display:flex; flex-wrap:wrap; gap:8px; flex:1; }
-.notebookChip{
-  font-family:'JetBrains Mono', monospace; font-size:12px;
-  background:transparent; border:1px solid var(--chipcolor, var(--panel-border));
-  color:var(--chipcolor, var(--muted)); padding:6px 13px; border-radius:20px; cursor:pointer;
-  opacity:.55; transition:opacity .12s ease;
-}
-.notebookChip:hover{ opacity:.85; }
-.notebookChip.active{ opacity:1; background:color-mix(in srgb, var(--chipcolor) 16%, transparent); }
-
-.notebookSort{ display:flex; align-items:center; gap:12px; font-size:12.5px; color:var(--muted); flex:0 0 auto; }
-.notebookSort select{
-  font-family:'JetBrains Mono', monospace; font-size:12.5px; background:var(--panel);
-  color:var(--text); border:1px solid var(--panel-border); border-radius:8px; padding:6px 10px;
-}
-.notebookSort label{ display:flex; align-items:center; gap:6px; cursor:pointer; white-space:nowrap; }
-
-.notebookActionsRow{ display:flex; gap:10px; margin:18px 0 6px; flex-wrap:wrap; }
-.copyListBtn{
-  font-family:'JetBrains Mono', monospace; font-size:12.5px; font-weight:600;
-  background:var(--panel); color:#d7e3dc; border:1px solid var(--panel-border);
-  padding:9px 16px; border-radius:20px; cursor:pointer;
-}
-.copyListBtn:hover{ border-color:var(--mint); color:var(--mint); }
-.copyListBtn:disabled{ opacity:.35; cursor:default; }
-
-.notebookList{ display:flex; flex-direction:column; gap:16px; margin-top:14px; }
-
-.mistakeCard{ position:relative; }
-.mistakeCard.masteredCard{ opacity:.68; }
-.reviewBadge.masteredBadge{ background:rgba(52,211,153,0.14); color:var(--mint); border-color:var(--mint); }
-.lastMissed{ font-size:11.5px; color:var(--muted); }
-.streakHint{ font-size:11.5px; color:var(--mint); font-style:italic; }
-
-.noteBox{ margin-top:12px; }
-.noteInput{
-  width:100%; min-height:44px; resize:vertical; box-sizing:border-box;
-  font-family:'JetBrains Mono', monospace; font-size:12.5px; color:#cfe0d8;
-  background:rgba(255,255,255,0.03); border:1px solid var(--panel-border); border-radius:10px;
-  padding:10px 12px; line-height:1.5;
-}
-.noteInput:focus{ outline:none; border-color:var(--mint-dim); }
-.noteInput::placeholder{ color:#5b6f65; }
-
-.mistakeActions{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
-.mistakeActionBtn{
-  font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:600;
-  padding:8px 14px; border-radius:20px; cursor:pointer; background:transparent;
-}
-.mistakeActionBtn.masterBtn{ border:1px solid var(--mint); color:var(--mint); }
-.mistakeActionBtn.masterBtn:hover{ background:rgba(52,211,153,0.12); }
-.mistakeActionBtn.removeBtn{ border:1px solid var(--wrong); color:var(--wrong); }
-.mistakeActionBtn.removeBtn:hover{ background:rgba(251,113,133,0.12); }
 
 /* ---------- SMOOTH VIEW TRANSITIONS ---------- */
 .wrap{ overflow:hidden; }
@@ -881,23 +746,11 @@ mark.reagent-hit, mark.study-hit{ background:var(--flame); color:#1a1006; font-w
         <p>A condensed, scan-friendly cheat sheet of every group reagent, test, and color reaction — built to get through right before your test.</p>
         <div class="meta">→ quick scan format</div>
       </div>
-      <div class="section-card" id="cardFlashcards">
+      <div class="section-card wide" id="cardFlashcards">
         <div class="icon" style="background:rgba(52,211,153,0.12); color:var(--mint);">🗂</div>
         <h3>Flashcards / Quick Quiz</h3>
         <p>The full multiple-choice run with instant feedback, question navigator, and end-of-run report.</p>
         <div class="meta">→ <span id="submenuQuizCount">0</span> questions</div>
-      </div>
-      <div class="section-card" id="cardNotebook">
-        <div class="icon" style="background:rgba(251,113,133,0.12); color:var(--wrong);">🗒️</div>
-        <h3>Mistake Notebook</h3>
-        <p>Every question you've missed, filterable by category and sorted by how often you've gotten it wrong — open it any time, no test required.</p>
-        <div class="meta">→ <span id="submenuNotebookCount">0</span> open mistakes</div>
-      </div>
-      <div class="section-card" id="cardMockTest" style="display:none;">
-        <div class="icon" style="background:rgba(96,165,250,0.12); color:#60a5fa;">🎯</div>
-        <h3>Mock Test <span style="font-size:11px; font-weight:600; color:#60a5fa; border:1px solid rgba(96,165,250,0.4); border-radius:5px; padding:1px 6px; margin-left:6px; vertical-align:middle;">JEE Main pattern</span></h3>
-        <p>Real JEE Main level questions, no instant feedback, marked +4 / 0 / −1 exactly like the real exam. Previous-year questions are labelled with their year.</p>
-        <div class="meta">→ <span id="submenuMockCount">0</span> questions</div>
       </div>
     </div>
   </div>
@@ -939,13 +792,6 @@ mark.reagent-hit, mark.study-hit{ background:var(--flame); color:#1a1006; font-w
     <div id="reagentResults"><div class="reagent-empty">Start typing a reagent name above, or tap one of the suggestions.</div></div>
   </div>
 
-  <!-- ======= MOCK TEST (shared, per-section content built dynamically) ======= -->
-  <div class="app-shell" id="app-mocktest">
-    <div class="crumb" data-role="crumb"></div>
-    <div class="back-row"><button class="back-btn" id="mockBackBtn">&larr; Back</button></div>
-    <div id="mockTestRoot"></div>
-  </div>
-
   <!-- ======= ANION APP ======= -->
   <div class="app-shell" id="app-anion" data-title="Anion Analysis"></div>
 
@@ -971,103 +817,6 @@ mark.reagent-hit, mark.study-hit{ background:var(--flame); color:#1a1006; font-w
 <button id="floatingBackBtn" class="floating-back-btn">&larr; Back to Salt Analysis</button>
 
 <script>
-// ============================================================
-//  ANSWER SOUND EFFECTS
-//  Tiny synthesized tones (Web Audio API — no asset files needed)
-//  played on right/wrong answers. Kept short, soft, and minimal.
-// ============================================================
-const SoundFX = (function(){
-  let ctx = null;
-  function getCtx(){
-    if(!ctx){
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if(!AC) return null;
-      ctx = new AC();
-    }
-    if(ctx.state === 'suspended') ctx.resume();
-    return ctx;
-  }
-
-  // A tonal "pop": pitch drops quickly from freqStart to freqEnd while gain
-  // snaps up then decays away — the classic UI bubble-pop shape.
-  function pop(startTime, freqStart, freqEnd, duration, peakGain){
-    const ac = getCtx();
-    if(!ac) return;
-    const osc = ac.createOscillator();
-    const gain = ac.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freqStart, startTime);
-    osc.frequency.exponentialRampToValueAtTime(freqEnd, startTime + duration);
-    gain.gain.setValueAtTime(0.0001, startTime);
-    gain.gain.exponentialRampToValueAtTime(peakGain, startTime + 0.004);
-    gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
-    osc.connect(gain);
-    gain.connect(ac.destination);
-    osc.start(startTime);
-    osc.stop(startTime + duration + 0.02);
-  }
-
-  // A short burst of filtered noise layered on top of the pop for the
-  // crisp "click" transient — like a mouse/button click.
-  function click(startTime, duration, peakGain, filterFreq){
-    const ac = getCtx();
-    if(!ac) return;
-    const len = Math.max(1, Math.floor(ac.sampleRate * duration));
-    const buffer = ac.createBuffer(1, len, ac.sampleRate);
-    const data = buffer.getChannelData(0);
-    for(let i=0;i<len;i++){
-      data[i] = (Math.random()*2-1) * Math.pow(1 - i/len, 3);
-    }
-    const src = ac.createBufferSource();
-    src.buffer = buffer;
-    const filter = ac.createBiquadFilter();
-    filter.type = 'bandpass';
-    filter.frequency.value = filterFreq;
-    filter.Q.value = 0.9;
-    const gain = ac.createGain();
-    gain.gain.setValueAtTime(peakGain, startTime);
-    gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
-    src.connect(filter);
-    filter.connect(gain);
-    gain.connect(ac.destination);
-    src.start(startTime);
-  }
-
-  let enabled = true;
-  try{
-    const saved = localStorage.getItem('chemdash_sound_enabled');
-    if(saved !== null) enabled = saved === '1';
-  } catch(e){}
-
-  function setEnabled(v){
-    enabled = v;
-    try{ localStorage.setItem('chemdash_sound_enabled', v ? '1' : '0'); } catch(e){}
-  }
-  function isEnabled(){ return enabled; }
-
-  // Correct: bright, crisp pop — high click transient + quick upward-pitched pop
-  function playCorrect(){
-    if(!enabled) return;
-    const ac = getCtx();
-    if(!ac) return;
-    const t = ac.currentTime;
-    click(t, 0.03, 0.11, 3200);
-    pop(t, 1500, 950, 0.09, 0.11);
-  }
-
-  // Wrong: duller, lower click/pop — same crisp mechanic, muted pitch
-  function playWrong(){
-    if(!enabled) return;
-    const ac = getCtx();
-    if(!ac) return;
-    const t = ac.currentTime;
-    click(t, 0.035, 0.09, 650);
-    pop(t, 420, 260, 0.11, 0.09);
-  }
-
-  return { playCorrect, playWrong, setEnabled, isEnabled };
-})();
-
 // ============================================================
 //  SMOOTH VIEW-SWITCH ANIMATION
 //  Animates the shared .wrap element's height between two states
@@ -1215,64 +964,6 @@ function fmtDate(ts){
   const d = new Date(ts);
   return d.toLocaleDateString(undefined,{month:'short',day:'numeric'}) + ' · ' +
          d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
-}
-
-// ============================================================
-//  MISTAKE NOTEBOOK STORAGE
-//  Every wrong or skipped answer, in any quiz run, in any
-//  section, is logged persistently here — keyed by sectionKey
-//  then by the question's original index in that section's
-//  bank. An entry tracks how many times it's been missed, when
-//  it was last missed, a consecutive-correct streak (auto-masters
-//  after 2 correct in a row), a manual mastered flag, and an
-//  optional personal note.
-// ============================================================
-const MISTAKE_KEY = 'saltdash-mistakes-v1';
-
-function loadMistakes(){
-  if(!storageAvailable()) return {};
-  try{ return JSON.parse(localStorage.getItem(MISTAKE_KEY)) || {}; }catch(e){ return {}; }
-}
-function saveMistakes(all){
-  if(!storageAvailable()) return;
-  try{ localStorage.setItem(MISTAKE_KEY, JSON.stringify(all)); }catch(e){}
-}
-function getSectionMistakes(sectionKey){
-  return loadMistakes()[sectionKey] || {};
-}
-function updateMistakeEntry(sectionKey, idx, patchFn){
-  const all = loadMistakes();
-  if(!all[sectionKey]) all[sectionKey] = {};
-  const cur = all[sectionKey][idx] || { missCount:0, lastMissed:null, correctStreak:0, mastered:false, note:'' };
-  all[sectionKey][idx] = patchFn(cur) || cur;
-  saveMistakes(all);
-}
-function recordMistake(sectionKey, idx){
-  updateMistakeEntry(sectionKey, idx, (cur)=>({
-    ...cur, missCount: cur.missCount + 1, lastMissed: Date.now(), correctStreak: 0, mastered: false
-  }));
-}
-// Only touches the entry if this question is already being tracked (i.e.
-// it's been missed before) — getting a never-missed question right doesn't
-// need to create a notebook entry. Two correct answers in a row auto-masters it.
-function recordCorrectForNotebook(sectionKey, idx){
-  const all = loadMistakes();
-  const sec = all[sectionKey];
-  if(!sec || !sec[idx]) return;
-  const cur = sec[idx];
-  const streak = (cur.correctStreak||0) + 1;
-  sec[idx] = { ...cur, correctStreak: streak, mastered: streak>=2 ? true : cur.mastered };
-  saveMistakes(all);
-}
-function setMistakeMastered(sectionKey, idx, mastered){
-  updateMistakeEntry(sectionKey, idx, (cur)=>({...cur, mastered, correctStreak: mastered ? Math.max(cur.correctStreak,2) : 0}));
-}
-function removeMistakeEntry(sectionKey, idx){
-  const all = loadMistakes();
-  if(all[sectionKey]){ delete all[sectionKey][idx]; saveMistakes(all); }
-}
-function setMistakeNote(sectionKey, idx, note){
-  updateMistakeEntry(sectionKey, idx, (cur)=>({...cur, note}));
 }
 
 function sparklineSVG(values){
@@ -2226,10 +1917,6 @@ alkane: {
 <tr><td>Free-radical (default/most accepted)</td><td>R–X + Na <span class="rxn-arrow">→</span> R• + NaX (single electron transfer), then R• + R• <span class="rxn-arrow">→</span> R–R</td></tr>
 <tr><td>Ionic / Sɴ2 (alternative, suggested by default for some substrates)</td><td>R–X + 2Na <span class="rxn-arrow">→</span> R⁻Na⁺ + NaX (carbanion forms first), then R⁻ attacks a second R–X in an Sɴ2 step to displace X⁻</td></tr>
 </table>
-<p><b>Experimental evidence for each mechanism:</b> the free-radical pathway is supported by the appearance of <b>disproportionation by-products</b> when a 3° alkyl halide is used — the intermediate radical/carbanion can lose or gain H to give a small amount of alkene alongside the reduced alkane, instead of only the coupled product:</p>
-<div class="study-eqn">CH₃–C(CH₃)₂–Br —(Na, ether)<span class="rxn-arrow">→</span> CH₃–C(CH₃)=CH₂ + CH₃–CH(CH₃)–CH₃ + NaBr<br>(disproportionation: alkene + alkane by-products, alongside the expected coupled product)</div>
-<p>The ionic/carbanion pathway is supported by <b>carbonation-trapping</b> experiments: quenching the reaction with CO₂ before the second substitution step traps the carbanion as a carboxylate, isolable as the carboxylic acid on acid workup:</p>
-<div class="study-eqn">R–Na <span class="rxn-arrow">→</span> R⁻Na⁺ —(CO₂)<span class="rxn-arrow">→</span> R–COONa —(H⁺)<span class="rxn-arrow">→</span> R–COOH</div>
 <p><b>Reactivity of alkyl halides in Wurtz coupling</b> (for a given alkyl group): <b>R–I > R–Br > R–Cl > R–F</b> — a weaker C–X bond reacts faster, and R–F essentially doesn't react. When a milder metal is used (weaker reducing agent than Na, e.g. Zn or Sn), the medium usually needs to be made acidic (e.g. Zn/CH₃COOH or Sn/HCl) to drive the reaction.</p>
 <p>Since Wurtz forms a new C–C bond by joining two existing alkyl groups, the smallest alkane it can make is <b>ethane</b> (from CH₃–X + CH₃–X); it is fundamentally appropriate only for building <b>symmetrical</b> alkanes.</p>
 <p><b>Intramolecular Wurtz coupling</b> (cyclization) is faster than the corresponding intermolecular coupling. A dihalide can cyclize onto itself if this forms a 3- to 6-membered ring; if the resulting ring would need more than 6 carbons, intermolecular coupling dominates instead and the compound polymerizes.</p>
@@ -2280,8 +1967,6 @@ alkane: {
 </table>
 <p>(A related, complementary way the same idea is phrased: a cis-alkene undergoing syn addition gives the <i>erythro</i> diastereomer, while a trans-alkene undergoing syn addition gives the <i>threo</i> diastereomer, when the two new substituents are similar-but-not-identical.)</p>
 <p><b>Ease/rate of catalytic hydrogenation:</b> rate ∝ 1 / (steric crowding around the multiple bond) — a terminal, unhindered double/triple bond hydrogenates fastest; more substituted or internal alkenes/alkynes react slower because they adsorb less easily onto the flat catalyst surface. Raney nickel gives a faster rate than plain Ni/H₂ for the same substrate.</p>
-<p><b>Rate vs. heat of hydrogenation:</b> rate of hydrogenation ∝ heat of hydrogenation ∝ 1 / (stability of the alkene) — a <i>less</i> substituted, less stable alkene sits at higher energy, so it both releases <i>more</i> heat on hydrogenation and reacts <i>faster</i>, since there's less steric crowding blocking it from adsorbing onto the catalyst surface in the first place.</p>
-<p><b>Alkyne vs. alkene reactivity — two opposite trends:</b> in <b>catalytic hydrogenation</b>, alkynes are <i>more</i> reactive than alkenes (a C≡C adsorbs onto the catalyst surface more strongly than a C=C), but in <b>electrophilic addition</b> reactions, the trend flips — alkenes are <i>more</i> reactive than alkynes (the sp-hybridized, more electronegative alkyne carbons hold their π electrons more tightly, making the alkyne a weaker nucleophile toward an electrophile).</p>
 <p><b>Order of reactivity of different functional groups towards H₂/Pd</b> (lower temperature needed = reacts first/more easily): acid halide (–COX) > C≡C > C=C (all react around 25–30°C) > C=O > C≡N > –NO₂ (30–50°C) > R–X (50–100°C) > benzene ring (100–150°C) > ester, R–CO–O–R' (250–300°C, hardest to reduce).</p>
 <p><b>Homogeneous vs heterogeneous catalysts:</b></p>
 <table class="study-table">
@@ -2303,7 +1988,6 @@ alkane: {
 <p><b>Birch reduction of aromatic rings</b> (Na/Li in liquid NH₃/ROH) reduces benzene to a 1,4-cyclohexadiene, and the regiochemistry depends on the ring substituent: an electron-donating group (EDG) ends up on an <i>unreduced</i> (still sp², still part of a C=C) carbon of the diene product, while an electron-withdrawing group (EWG) ends up on a carbon that <i>is</i> reduced (becomes sp³) in the product.</p>
 <p><b>Diimide (HN=NH) reduction — a metal-free alternative:</b> diimide is generated in situ (e.g. N₂H₄ + H₂O₂, or N₂H₄ + O₂/hν, both mild oxidants) and is short-lived — if it doesn't react immediately with a substrate, it self-destructs by disproportionation back to N₂ + N₂H₄. This short lifetime is exactly why it is <b>selective</b>: it reacts fast with symmetrical/nonpolar multiple bonds (C=C, C≡C, N=N) but essentially never gets the chance to react with the slower, polar C=O or C=N bonds.</p>
 <p><b>Mechanism:</b> diimide approaches the alkene/alkyne through a concerted, six-membered <b>pericyclic transition state</b>; both H atoms are delivered to the same face of the multiple bond (<b>syn addition</b>) as N₂ is expelled — this is formally a type of transfer hydrogenation, since H₂ is never generated as a free, separate molecule.</p>
-<div class="study-eqn worked-example"><span class="worked-label">Worked example</span>diphenylethyne + H₂N–NH₂ / oxidant <span class="rxn-arrow">→</span> <i>cis</i>-1,2-diphenylethene (<i>cis</i>-stilbene)<span class="worked-note">diimide generated in situ from hydrazine + oxidant delivers syn addition to the internal alkyne, stopping cleanly at the cis-alkene stage</span></div>
 `,
 
 'CARBONYL-TO-ALKANE REDUCTIONS': `
@@ -2319,10 +2003,7 @@ alkane: {
 <p><b>Exceptional case — ring contraction:</b> Clemmensen-reducing a 1,3-diketone such as 5,5-dimethylcyclohexane-1,3-dione does <i>not</i> give the expected 1,1-dimethylcyclohexane. Instead, after one carbonyl is protonated/dehydrated, the resulting cationic intermediate undergoes a <b>1,2-alkyl shift</b> (ring contraction) rather than simply completing reduction, and the major product is the ring-contracted methyl ketone <b>2,4,4-trimethylcyclopentanone</b>.</p>
 <p><b>Wolff–Kishner reduction:</b> R–CHO / R–CO–R' + NH₂–NH₂ —(ethylene glycol, KOH, Δ)<span class="rxn-arrow">→</span> R–CH₃ / R–CH₂–R' + N₂. Mechanism (basic medium): the carbonyl first condenses with hydrazine to form a hydrazone (R₂C=N–NH₂); base then deprotonates it, and a series of proton transfers convert it to a diazo species (R₂C=N=N) which loses N₂ to leave a carbanion, immediately protonated by solvent to give the final CH₂/CH₃ group.</p>
 <p><b>Mozingo reduction:</b> the carbonyl is first converted to a cyclic 1,3-dithiolane using ethane-1,2-dithiol/dry HCl, then this thioacetal is desulfurized with Raney nickel (which carries adsorbed H₂ on its surface), reductively replacing both C–S bonds with C–H bonds. Since neither step needs strongly acidic or strongly basic conditions, this is the fallback method when the substrate can't survive either Clemmensen or Wolff–Kishner.</p>
-<p><b>Reduction by HI/red phosphorus:</b> red phosphorus continually regenerates HI from the I₂ byproduct, keeping a large excess of HI available. R–OH + HI (excess, red P, Δ) <span class="rxn-arrow">→</span> R–I <span class="rxn-arrow">→</span> (further reduced) <span class="rxn-arrow">→</span> R–H; R–Cl/Br/I similarly end up as R–H by halide reduction. Under forcing excess conditions this reagent combination can even carry a ketone/aldehyde all the way to R–CH₂–R'/R–CH₃ (via the alcohol, then the iodide, then reduction of that C–I bond) — an unusually exhaustive reduction compared to the other three methods above. It is powerful enough to strip a <b>carboxylic acid</b> all the way down to a methyl group too:</p>
-<div class="study-eqn">R–Cl/Br/I + HI —(red P, Δ)<span class="rxn-arrow">→</span> R–H + IX<br>R–OH + HI —(red P, Δ)<span class="rxn-arrow">→</span> R–H + H₂O + I₂<br>R–CHO / R–CO–R' + HI (excess) —(red P, Δ)<span class="rxn-arrow">→</span> R–CH₃ / R–CH₂–R' + H₂O + I₂<br>R–COOH + HI (excess) —(red P, Δ)<span class="rxn-arrow">→</span> R–CH₃ + H₂O + I₂</div>
-<p><b>Regeneration cycle:</b> red phosphorus mops up the I₂ by-product and converts it straight back into HI, which is why only a catalytic amount of I₂/red P is needed despite HI being consumed at every step above:</p>
-<div class="study-eqn">2P + 3I₂ <span class="rxn-arrow">→</span> 2PI₃<br>PI₃ + 3H₂O <span class="rxn-arrow">→</span> H₃PO₃ + 3HI</div>
+<p><b>Reduction by HI/red phosphorus:</b> red phosphorus continually regenerates HI from the I₂ byproduct, keeping a large excess of HI available. R–OH + HI (excess, red P, Δ) <span class="rxn-arrow">→</span> R–I <span class="rxn-arrow">→</span> (further reduced) <span class="rxn-arrow">→</span> R–H; R–Cl/Br/I similarly end up as R–H by halide reduction. Under forcing excess conditions this reagent combination can even carry a ketone/aldehyde all the way to R–CH₂–R'/R–CH₃ (via the alcohol, then the iodide, then reduction of that C–I bond) — an unusually exhaustive reduction compared to the other three methods above.</p>
 `,
 
 'PREPARATION FROM CARBIDES & GRIGNARD': `
@@ -2487,7 +2168,6 @@ alkene_alkyne: {
 <p><b>From vicinal tetrahalides/trihalides (dehalogenation):</b> heating with Zn dust removes halogens from adjacent carbons to directly form the triple bond, e.g. a 1,1,2,2-tetrahalide + Zn dust/&Delta; &rarr; alkyne + 2 ZnX<sub>2</sub>. A geminal trihalide (R-CX<sub>3</sub>) with Zn dust similarly gives a terminal alkyne (R-C&equiv;C-H) + ZnX<sub>2</sub>.</p>
 <p><b>Hydrolysis of carbides:</b> CaC<sub>2</sub> (calcium carbide, containing the acetylide C<sub>2</sub><sup>2-</sup> unit) + water &rarr; ethyne (HC&equiv;CH) + Ca(OH)<sub>2</sub> + heat. Mg<sub>2</sub>C<sub>3</sub> (containing a C<sub>3</sub><sup>4-</sup> unit) + water &rarr; propyne (allylene) + Mg(OH)<sub>2</sub> + heat. Methanide-type carbides give methane instead of an alkyne: Al<sub>4</sub>C<sub>3</sub> + water &rarr; 3 CH<sub>4</sub> + 4 Al(OH)<sub>3</sub> + heat; Be<sub>2</sub>C + water &rarr; CH<sub>4</sub> + 2 Be(OH)<sub>2</sub> + heat. The product depends entirely on the carbide's internal structure (acetylide C&equiv;C unit vs isolated carbon), so it's worth telling these apart carefully.</p>
 <p><b>Berthelot's synthesis:</b> carbon and hydrogen combine directly across an electric arc at about 1200&deg;C to give ethyne (2C + H<sub>2</sub> &rarr; HC&equiv;CH).</p>
-<p><b>Kolbe's electrolysis (from acetylenic carboxylate salts):</b> electrolysis of the potassium/sodium salt of an acetylenic carboxylic acid drives decarboxylation at the anode &mdash; each carboxylate loses an electron and then CO<sub>2</sub> to generate an alkynyl radical, and two such radicals dimerize (couple) to build a new C-C bond, joining two alkynyl fragments into one longer, symmetrical alkyne: 2 R-C&equiv;C-COO<sup>-</sup>K<sup>+</sup> &rarr; R-C&equiv;C-C&equiv;C-R + 2CO<sub>2</sub> + 2e<sup>-</sup> (at the cathode, 2H<sup>+</sup> + 2e<sup>-</sup> &rarr; H<sub>2</sub>).</p>
 
 `,
 
@@ -2496,103 +2176,6 @@ alkene_alkyne: {
 <p><b>Terminal alkyne acidity / metal acetylides:</b> a terminal alkyne's C-H is acidic enough to be displaced by certain metal ions, giving a precipitate: with ammoniacal AgNO<sub>3</sub> ([Ag(NH<sub>3</sub>)<sub>2</sub>]<sup>+</sup>, Tollen's reagent) it gives a white precipitate of the silver acetylide (R-C&equiv;C-Ag); with ammoniacal Cu<sub>2</sub>Cl<sub>2</sub>/CuCl ([Cu(NH<sub>3</sub>)<sub>2</sub>]<sup>+</sup>) it gives a red precipitate of the copper acetylide (R-C&equiv;C-Cu). Internal alkynes give no such precipitate (no terminal C-H to displace), which makes this test diagnostic for terminal alkynes specifically.</p>
 <p><b>Base-catalyzed isomerization:</b> a 1-alkyne treated with alcoholic KOH/&Delta; (a weak/moderate base) isomerizes into the more thermodynamically stable internal 2-alkyne. Conversely, a 2-alkyne (or any internal alkyne) treated with a strong base like NaNH<sub>2</sub> in liquid NH<sub>3</sub> isomerizes into the terminal 1-alkyne &mdash; the strong base deprotonates the terminal-most acidic position to form the acetylide anion, and since the terminal alkyne is continuously removed from equilibrium as its stable acetylide salt, the equilibrium keeps shifting toward the terminal isomer (Le Chatelier's principle) until conversion is essentially complete.</p>
 <p><b>Alkylation of acetylides (building higher alkynes):</b> a terminal alkyne is first converted to its sodium acetylide with Na in liquid NH<sub>3</sub> (2 R-C&equiv;C-H + 2Na &rarr; 2 R-C&equiv;C-Na<sup>+</sup> + H<sub>2</sub>). This acetylide then reacts with a primary alkyl halide via SN2 (R-C&equiv;C-Na<sup>+</sup> + X-R' &rarr; R-C&equiv;C-R' + NaX) to build a higher, unsymmetrical alkyne.</p>
-
-`,
-
-'ALKENE STABILITY, GEOMETRICAL ISOMERISM & PHYSICAL PROPERTIES': `
-
-<p><b>Structure:</b> alkenes (C<sub>n</sub>H<sub>2n</sub>) contain sp<sup>2</sup>-hybridized double-bond carbons with a trigonal planar geometry (bond angle &asymp;120&deg;) and one degree of unsaturation. The C=C bond is one &sigma; bond plus one weaker &pi; bond (&pi; bond energy &asymp;65 kcal/mol vs the &sigma; C-C bond's &asymp;83 kcal/mol), and rotation about the double bond is restricted since it would require breaking the &pi;-overlap.</p>
-<p><b>Stability order:</b> more substituted alkenes are more stable &mdash; tetrasubstituted &gt; trisubstituted &gt; disubstituted &gt; monosubstituted &mdash; due to greater hyperconjugative donation from alkyl C-H bonds into the &pi;-system and relief of steric strain. Among disubstituted alkenes, the trans isomer is usually more stable than the cis isomer because the bulky groups sit further apart, minimizing steric clash.</p>
-<p><b>Heat of hydrogenation as a stability probe:</b> since hydrogenation converts different alkenes to the same (or comparable) alkane, a lower heat of hydrogenation directly signals a more stable starting alkene &mdash; this inverse relationship is the standard experimental way stability orders are established.</p>
-<p><b>Geometrical (cis-trans / E-Z) isomerism:</b> arises purely from restricted rotation about C=C, and requires each doubly-bonded carbon to carry two <i>different</i> substituents (if either carbon bears two identical groups, no geometrical isomerism is possible). Under CIP-based nomenclature: <b>Z</b> (zusammen, "together") means the two higher-priority groups lie on the same side; <b>E</b> (entgegen, "opposite") means they lie on opposite sides. Cis/trans is used more loosely when comparing two identical reference groups directly.</p>
-<p><b>Physical properties:</b> alkenes are essentially non-polar and water-insoluble (marginally more soluble than the corresponding alkane due to the &pi;-electrons), and follow the same general trend as alkanes for boiling point &mdash; increasing with molecular mass, and decreasing with branching.</p>
-
-`,
-
-'ELECTROPHILIC ADDITION: HYDROGENATION & HALOGENATION OF ALKENES': `
-
-<p><b>Catalytic hydrogenation:</b> alkene + H<sub>2</sub> over Pt, Pd, or Ni delivers both H atoms from the same face of the adsorbed alkene (<b>syn addition</b>), converting it to the alkane; this reaction is exothermic, and its magnitude (heat of hydrogenation) is used to compare the relative stability of different alkenes.</p>
-<p><b>Halogenation (X<sub>2</sub> addition) &mdash; mechanism:</b> the alkene's &pi;-electrons attack Br<sub>2</sub> (or Cl<sub>2</sub>), displacing Br<sup>-</sup> and forming a cyclic, positively-charged, bridged <b>bromonium ion</b> rather than a free, open carbocation. The halide ion then attacks this bromonium ion from the face directly opposite the bridging bromine (backside, SN2-like opening), so the two halogens end up on opposite faces of the original double bond &mdash; an overall <b>anti (trans) addition</b>, giving a vicinal dihalide.</p>
-<p><b>Test for unsaturation:</b> alkenes (and alkynes) rapidly decolorize bromine water or Br<sub>2</sub>/CCl<sub>4</sub> without needing light or a catalyst (unlike alkanes, which require free-radical conditions) &mdash; this decolorization is a standard qualitative test for a C=C or C&equiv;C bond.</p>
-<p><b>Halohydrin formation:</b> when X<sub>2</sub> addition is carried out in the presence of water (an external nucleophile), water opens the bridged halonium ion at the <i>more substituted</i> carbon (which carries more positive/carbocation-like character), giving a halohydrin with the -OH on the more substituted carbon and -X on the less substituted one &mdash; Markovnikov-type regiochemistry, while the anti-addition stereochemistry is still followed.</p>
-
-`,
-
-'MARKOVNIKOV ADDITION: HYDROHALOGENATION & ACID-CATALYSED HYDRATION': `
-
-<p><b>Markovnikov's rule:</b> when HX adds to an unsymmetrical alkene, H bonds to the carbon that already bears more hydrogens, and X bonds to the more substituted carbon &mdash; e.g. propene + HBr &rarr; 2-bromopropane (not 1-bromopropane).</p>
-<p><b>Mechanism:</b> the alkene is first protonated by H<sup>+</sup> to give the <i>more stable</i> (more substituted) carbocation, which the halide ion then captures. Regiochemistry is dictated entirely by which carbocation is more stable, not by any inherent preference of the halide.</p>
-<p><b>Rearrangement:</b> since a genuine carbocation intermediate forms, a 1,2-hydride or alkyl shift to an even more stable carbocation is always a possibility before the halide traps it &mdash; e.g. 3,3-dimethylbut-1-ene + HCl gives 2-chloro-2,3-dimethylbutane (via a methyl shift to a tertiary cation) rather than the "expected" unrearranged secondary-carbon product.</p>
-<p><b>Acid-catalysed hydration:</b> alkene + H<sub>3</sub>O<sup>+</sup>/H<sub>2</sub>SO<sub>4</sub>, H<sub>2</sub>O follows the identical mechanistic logic &mdash; protonation to the more stable carbocation, attack by water, then loss of a proton &mdash; placing -OH on the more substituted carbon (Markovnikov) and remaining just as susceptible to rearrangement as HX addition.</p>
-
-`,
-
-'ANTI-MARKOVNIKOV ADDITION: PEROXIDE EFFECT & HYDROBORATION-OXIDATION': `
-
-<p><b>Peroxide (Kharasch) effect:</b> HBr specifically, in the presence of peroxides, adds to an alkene via a <b>free-radical chain mechanism</b> instead of the usual ionic pathway, which <i>reverses</i> the regiochemistry &mdash; Br ends up on the <i>less</i> substituted carbon (anti-Markovnikov), because the chain propagates through the more stable carbon <i>radical</i> rather than a carbocation. This peroxide effect is observed <b>only with HBr</b>: for HCl the radical-chain initiation step is too endothermic, and for HI the radical-chain propagation step is too endothermic, so both instead react by the normal ionic Markovnikov pathway even with peroxides present.</p>
-<p><b>Hydroboration-oxidation:</b> BH<sub>3</sub> (or B<sub>2</sub>H<sub>6</sub>) adds across the double bond in a single concerted step (a four-centered transition state), with boron bonding to the less hindered/less substituted carbon due to steric and electronic factors. Because the mechanism is concerted, <b>no carbocation forms and no rearrangement is possible</b>. The B-H addition itself is a <b>syn addition</b> (both add to the same face). Oxidative work-up with H<sub>2</sub>O<sub>2</sub>/NaOH then replaces the C-B bond with C-OH <i>with retention of configuration</i>, delivering the clean, unrearranged <b>anti-Markovnikov alcohol</b>.</p>
-
-`,
-
-'OXYMERCURATION-DEMERCURATION OF ALKENES': `
-
-<p><b>Step 1 (oxymercuration):</b> Hg(OAc)<sub>2</sub> and H<sub>2</sub>O form a bridged <b>mercurinium ion</b> across the alkene (analogous to a bromonium ion); water opens this ion at the more substituted carbon (which carries more positive character), giving a Markovnikov-type regiochemistry.</p>
-<p><b>Why no rearrangement:</b> because the positive charge is bridged/shared across both carbons in the mercurinium ion rather than sitting on one free, open carbocation, the 1,2-hydride/alkyl shifts that plague ordinary acid-catalysed hydration simply cannot occur here &mdash; this is the key practical advantage of the method.</p>
-<p><b>Step 2 (demercuration):</b> NaBH<sub>4</sub> reduces the C-Hg(OAc) bond, replacing it with C-H, and cleanly delivers the <b>Markovnikov alcohol</b> without any rearranged by-products.</p>
-<p><b>Summary:</b> oxymercuration-demercuration and hydroboration-oxidation are often taught as a complementary pair &mdash; both avoid carbocation rearrangement, but the former gives the Markovnikov alcohol while the latter gives the anti-Markovnikov alcohol.</p>
-
-`,
-
-"OXIDATION OF ALKENES: BAEYER'S TEST, EPOXIDATION & OZONOLYSIS": `
-
-<p><b>Baeyer's test (cold, dilute, alkaline KMnO<sub>4</sub>):</b> adds two -OH groups to the <i>same face</i> of the double bond (<b>syn addition</b>), producing a vicinal diol (glycol) without cleaving the C-C bond. The purple colour of KMnO<sub>4</sub> is decolorized (often leaving a brown MnO<sub>2</sub> precipitate) &mdash; a classic positive test for unsaturation.</p>
-<p><b>Hot, concentrated/acidified KMnO<sub>4</sub> (oxidative cleavage):</b> under vigorous conditions the double bond is cleaved entirely. Each original alkene carbon becomes: a <b>ketone</b>, if it was disubstituted (R<sub>2</sub>C=); a <b>carboxylic acid</b>, if it bore one H (RHC=); or <b>CO<sub>2</sub> + H<sub>2</sub>O</b>, if it was a terminal =CH<sub>2</sub> group &mdash; this pattern is what makes oxidative cleavage useful for deducing an unknown alkene's structure from its products.</p>
-<p><b>Epoxidation:</b> a peroxyacid (e.g. m-CPBA, peracetic acid) transfers a single oxygen atom to the alkene in one concerted syn step, giving the three-membered cyclic ether (epoxide/oxirane) directly &mdash; the C-C bond is left completely intact, unlike ozonolysis or KMnO<sub>4</sub> cleavage.</p>
-<p><b>Ozonolysis:</b> O<sub>3</sub> adds across the double bond to form an unstable cyclic ozonide. <b>Reductive work-up</b> with Zn/H<sub>2</sub>O (or Zn/AcOH, or Me<sub>2</sub>S) cleaves this ozonide to give two carbonyl fragments (aldehydes and/or ketones, depending on substitution) while quenching any peroxide intermediate &mdash; used to pinpoint the exact position of a double bond in an unknown alkene. <b>Oxidative work-up</b> (H<sub>2</sub>O<sub>2</sub>) instead lets any aldehyde fragment oxidize further to a carboxylic acid.</p>
-<p><i>Worked example:</i> reductive ozonolysis of 2-methylbut-2-ene, (CH<sub>3</sub>)<sub>2</sub>C=CHCH<sub>3</sub>, gives acetone from the trisubstituted carbon and acetaldehyde from the disubstituted carbon.</p>
-
-`,
-
-'POLYMERIZATION OF ALKENES': `
-
-<p><b>Addition (chain-growth) polymerization:</b> alkenes repeatedly open their &pi; bond to link into long polymer chains, via free-radical, cationic, or anionic mechanisms, without losing any small molecule as by-product.</p>
-<table class="study-table">
-<tr><th>Monomer</th><th>Polymer</th></tr>
-<tr><td>Ethene (ethylene)</td><td>Polyethylene (PE)</td></tr>
-<tr><td>Propene</td><td>Polypropylene (PP)</td></tr>
-<tr><td>Chloroethene (vinyl chloride)</td><td>PVC (polyvinyl chloride)</td></tr>
-<tr><td>Tetrafluoroethene</td><td>PTFE (Teflon)</td></tr>
-<tr><td>Styrene (phenylethene)</td><td>Polystyrene</td></tr>
-</table>
-<p><b>Natural rubber:</b> the <i>cis</i> (Z) polymer of isoprene (2-methylbuta-1,3-diene); the corresponding <i>trans</i> polymer of the same monomer is gutta-percha, which is harder and far less elastic. <b>Vulcanization</b> (heating rubber with sulfur) introduces disulfide cross-links between chains, greatly improving strength, elasticity, and resistance to temperature changes.</p>
-
-`,
-
-'ALKYNE ADDITION: HYDROGENATION, HYDROHALOGENATION & HALOGENATION': `
-
-<p><b>Complete hydrogenation:</b> alkyne + excess H<sub>2</sub> over Pt/Pd/Ni proceeds through the alkene intermediate all the way to the alkane.</p>
-<p><b>Selective reduction to the cis-alkene (Lindlar's catalyst):</b> Pd deposited on CaCO<sub>3</sub> or BaSO<sub>4</sub>, poisoned with a trace of quinoline (or Pb(OAc)<sub>2</sub>), delivers H<sub>2</sub> syn across the triple bond and is deliberately deactivated so the reaction <i>stops</i> at the alkene stage &mdash; giving the <b>cis (Z) alkene</b> stereoselectively.</p>
-<p><b>Selective reduction to the trans-alkene (Na or Li / liquid NH<sub>3</sub>):</b> this dissolving-metal reduction proceeds through a radical-anion mechanism that delivers the two H atoms to opposite faces of the developing double bond, giving the <b>trans (E) alkene</b> stereoselectively.</p>
-<p><b>Hydrohalogenation (2 &times; HX, Markovnikov both times):</b> the first HX addition gives a haloalkene with X on the more substituted carbon; the second HX addition (also Markovnikov) places the second halogen on that <i>same</i> carbon, giving a <b>geminal dihalide</b> (both halogens on one carbon).</p>
-<p><b>Halogenation (2 &times; X<sub>2</sub>):</b> the first equivalent of X<sub>2</sub> gives a 1,2-dihaloalkene; the second equivalent adds across that remaining double bond to give the fully saturated <b>1,1,2,2-vicinal tetrahalide</b>.</p>
-
-`,
-
-'ALKYNE HYDRATION, TAUTOMERISM & HYDROBORATION-OXIDATION': `
-
-<p><b>Acid-catalysed (Markovnikov) hydration:</b> Hg<sup>2+</sup> (e.g. HgSO<sub>4</sub>)/H<sub>2</sub>SO<sub>4</sub> catalyses addition of water across the triple bond via a mercurinium-type intermediate, placing -OH on the more substituted carbon (Markovnikov) &mdash; but the immediate product is an unstable <b>enol</b>, which rapidly undergoes <b>keto-enol tautomerism</b> to the more stable carbonyl compound.</p>
-<p><b>Special case &mdash; ethyne:</b> since both carbons of acetylene are equivalent, this hydration gives <b>acetaldehyde (CH<sub>3</sub>CHO)</b> &mdash; the one exception among alkyne hydrations.</p>
-<p><b>All other terminal alkynes:</b> give a <b>methyl ketone</b> (e.g. propyne &rarr; acetone), since -OH (and hence the eventual C=O) lands on the more substituted internal carbon per Markovnikov's rule.</p>
-<p><b>Hydroboration-oxidation (anti-Markovnikov):</b> BH<sub>3</sub> adds with boron on the <i>less</i> substituted (terminal) carbon; oxidative work-up gives an enol that tautomerizes to an <b>aldehyde</b> instead of a ketone &mdash; the complementary regiochemical outcome to acid-catalysed hydration, exactly mirroring the alkene case.</p>
-
-`,
-
-'OXIDATIVE CLEAVAGE & POLYMERIZATION OF ALKYNES': `
-
-<p><b>Oxidative cleavage (ozonolysis or hot KMnO<sub>4</sub>) of an internal alkyne:</b> the triple bond is cleaved via an intermediate diketone-like species that is further oxidized under these vigorous conditions, giving <b>two carboxylic acid</b> fragments, one from each original alkyne carbon.</p>
-<p><b>Terminal alkyne:</b> the terminal &equiv;C-H carbon, having no alkyl group to stabilize a carbonyl stopping point, is oxidized all the way through to <b>CO<sub>2</sub></b>, while the remaining chain gives a carboxylic acid.</p>
-<p><b>Cyclic polymerization:</b> passing acetylene through a red-hot iron tube at &asymp;873 K trimerizes three molecules of ethyne cyclically into <b>benzene</b> (3 HC&equiv;CH &rarr; C<sub>6</sub>H<sub>6</sub>); related conditions/catalysts can instead give cyclooctatetraene (COT) via tetramerization.</p>
-<p><b>Linear polymerization:</b> CuCl/NH<sub>4</sub>Cl catalyses head-to-tail coupling of two acetylene molecules into <b>vinylacetylene</b> (but-1-en-3-yne); vinylacetylene then reacts with HCl to give <b>chloroprene</b> (2-chlorobuta-1,3-diene), the monomer of the synthetic rubber <b>neoprene</b>.</p>
 
 `
 
@@ -2603,7 +2186,7 @@ const SECTION_META = {
   anion:  { title:'Anion Analysis', desc:'Group reagents, confirmatory tests, and color reactions for carbonate, sulphite, thiosulphate, sulphide, nitrite, nitrate, and the halides through sulphate.' },
   prelim: { title:'Preliminary Tests & Cation Groups', desc:'Physical tests, flame test colors, borax bead & microcosmic salt colors, charcoal cavity, cobalt nitrate, dry heat, and the cation group division table.' },
   alkane: { title:'Alkane', desc:'Nomenclature & isomerism, Wurtz/Corey-House/decarboxylation & Kolbe preparation methods, catalytic & partial hydrogenation, Clemmensen/Wolff-Kishner/Mozingo reductions, carbide chemistry, physical properties, free-radical halogenation, combustion/cracking, ethane conformations, and benzene structure & electrophilic substitution (halogenation, nitration, sulphonation, Friedel-Crafts, directive effects).' },
-  alkene_alkyne: { title:'Alkene & Alkyne', desc:'Elimination mechanisms, Zaitsev/Hofmann products, alcohol dehydration, alkene stability & addition reactions (Markovnikov, peroxide effect, hydroboration, oxymercuration), oxidation/ozonolysis, polymerization, plus alkyne preparation, addition, hydration, acidity, isomerization & cleavage.' }
+  alkene_alkyne: { title:'Alkene & Alkyne', desc:'Elimination mechanisms (E1/E2/E1cB), Zaitsev vs Hofmann products, alcohol dehydration, dehalogenation of vicinal dihalides, the Wittig reaction, and alkyne preparation, acidity & isomerization.' }
 };
 let currentSection = null;
 const SECTION_APPS = {}; // sectionKey -> quiz app instance, filled in BOOTSTRAP
@@ -2617,17 +2200,6 @@ function openSubmenu(sectionKey){
   document.getElementById('submenuDesc').textContent = meta.desc;
   document.getElementById('submenuStudyCount').textContent = data ? data.questions.length : 0;
   document.getElementById('submenuQuizCount').textContent = data ? data.questions.length : 0;
-  const mistakes = getSectionMistakes(sectionKey);
-  const openCount = Object.values(mistakes).filter(m=>!m.mastered).length;
-  document.getElementById('submenuNotebookCount').textContent = openCount;
-  const mockCard = document.getElementById('cardMockTest');
-  const mockData = data && data.mockTest;
-  if(mockData && mockData.questions && mockData.questions.length){
-    mockCard.style.display = '';
-    document.getElementById('submenuMockCount').textContent = mockData.questions.length;
-  } else {
-    mockCard.style.display = 'none';
-  }
   animatedSwitch(()=>{
     document.querySelector('.wrap').classList.remove('wide');
     hideAllShells();
@@ -2646,10 +2218,6 @@ document.getElementById('cardRevision').addEventListener('click', ()=> openRevis
 document.getElementById('cardFlashcards').addEventListener('click', ()=>{
   if(SECTION_APPS[currentSection]) SECTION_APPS[currentSection].open();
 });
-document.getElementById('cardNotebook').addEventListener('click', ()=>{
-  if(SECTION_APPS[currentSection]) SECTION_APPS[currentSection].openNotebook();
-});
-document.getElementById('cardMockTest').addEventListener('click', ()=> openMockTest(currentSection));
 
 document.getElementById('historyBackBtn').addEventListener('click', ()=> CHAPTER_META[currentHistoryChapter].open());
 document.querySelector('#subchapter-menu [data-role="submenuBack"]').addEventListener('click', ()=> CHAPTER_META[SECTION_CHAPTER[currentSection]].open());
@@ -2874,220 +2442,6 @@ function openRevision(sectionKey){
 document.querySelector('#app-revision [data-role="revisionBack"]').addEventListener('click', ()=> openSubmenu(currentSection));
 
 // ============================================================
-//  MOCK TEST MODE (JEE Main pattern: +4 / 0 / -1, no instant feedback)
-//  Shared container, content rebuilt per section on open.
-// ============================================================
-let mtSectionKey = null, mtQuestions = [], mtAnswers = {}, mtPos = 0, mtSubmitted = false, mtMeta = null;
-
-function mtLetters(){ return ["A","B","C","D"]; }
-
-function openMockTest(sectionKey){
-  currentSection = sectionKey;
-  mtSectionKey = sectionKey;
-  const data = SECTION_DATA[sectionKey];
-  mtMeta = data.mockTest;
-  mtQuestions = mtMeta.questions;
-  mtAnswers = {};
-  mtPos = 0;
-  mtSubmitted = false;
-
-  renderMockTest();
-
-  animatedSwitch(()=>{
-    document.querySelector('.wrap').classList.add('wide');
-    hideAllShells();
-    document.getElementById('app-mocktest').classList.add('show');
-  }, document.getElementById('app-mocktest'));
-  renderCrumb('app-mocktest', [
-    {label:'Chemistry', onClick: showChemHub},
-    {label: CHAPTER_META[SECTION_CHAPTER[sectionKey]].title, onClick: CHAPTER_META[SECTION_CHAPTER[sectionKey]].open},
-    {label: SECTION_META[sectionKey].title, onClick: ()=> openSubmenu(sectionKey)},
-    {label:'Mock Test'}
-  ]);
-  setActiveBack('\u2190 Back to ' + SECTION_META[sectionKey].title, ()=> openSubmenu(sectionKey));
-}
-document.getElementById('mockBackBtn').addEventListener('click', ()=> openSubmenu(mtSectionKey || currentSection));
-
-function mtScore(){
-  let correct=0, wrong=0, unattempted=0;
-  mtQuestions.forEach((q,i)=>{
-    const a = mtAnswers[i];
-    if(a === undefined || a === null) unattempted++;
-    else if(a === q.correct) correct++;
-    else wrong++;
-  });
-  const marks = correct*4 + wrong*(-1) + unattempted*0;
-  const max = mtQuestions.length*4;
-  return { correct, wrong, unattempted, marks, max };
-}
-
-function renderMockTest(){
-  const root = document.getElementById('mockTestRoot');
-  if(mtSubmitted){
-    root.innerHTML = mtResultHtml();
-    wireMtResult();
-  } else {
-    root.innerHTML = mtTestHtml();
-    wireMtTest();
-  }
-}
-
-function mtTestHtml(){
-  const total = mtQuestions.length;
-  const attempted = Object.keys(mtAnswers).length;
-  return `
-    <h2 class="app-title">${mtMeta.title || 'Mock Test'}</h2>
-    <div class="markingNote"><span><b>+4</b> correct</span><span><b>0</b> unattempted</span><span><b>&minus;1</b> wrong</span><span style="margin-left:auto; color:var(--muted);">No instant feedback — results shown after you submit, just like the real exam.</span></div>
-
-    <div class="mockTopbar">
-      <div class="posnum" data-role="posnum">1 / ${total}</div>
-      <div class="track" style="flex:1;"><div class="fill" data-role="fill" style="width:${100/total}%"></div></div>
-      <div class="mockAttempted" data-role="attemptedLbl">${attempted} / ${total} attempted</div>
-      <button class="mockSubmitBtn" data-role="mtSubmitBtn">Submit test</button>
-    </div>
-
-    <div class="quizLayout">
-      <div class="quizMain">
-        <div class="card">
-          <div class="rowtop">
-            <span class="pill" data-role="pill">CATEGORY</span>
-            <span class="hint">no answer revealed until submit</span>
-          </div>
-          <div data-role="pyqBadgeSlot"></div>
-          <div class="question" data-role="questionText">Loading…</div>
-          <div class="options" data-role="optionsWrap"></div>
-        </div>
-        <div class="navrow">
-          <button class="navbtn" data-role="mtPrevBtn">&larr; Prev</button>
-          <button class="navbtn" data-role="mtClearBtn">Clear response</button>
-          <button class="navbtn" data-role="mtNextBtn">Next &rarr;</button>
-        </div>
-      </div>
-      <div class="qNavPanel">
-        <div class="qNavTitle">Jump to question</div>
-        <div class="qNavLegend">
-          <span><i style="background:rgba(96,165,250,0.35); border:1px solid #60a5fa;"></i>Answered</span>
-          <span><i style="background:transparent; border:1px solid var(--panel-border);"></i>Not answered</span>
-        </div>
-        <div class="qNavGrid" data-role="qNavGrid"></div>
-      </div>
-    </div>
-  `;
-}
-
-function wireMtTest(){
-  const root = document.getElementById('mockTestRoot');
-  const $ = (role) => root.querySelector(`[data-role="${role}"]`);
-  const posnum = $('posnum'), fill = $('fill'), attemptedLbl = $('attemptedLbl');
-  const pill = $('pill'), pyqSlot = $('pyqBadgeSlot'), questionText = $('questionText'), optionsWrap = $('optionsWrap');
-  const qNavGrid = $('qNavGrid');
-  const total = mtQuestions.length;
-
-  function renderQNav(){
-    qNavGrid.innerHTML = mtQuestions.map((_,i)=>{
-      const answered = mtAnswers[i] !== undefined && mtAnswers[i] !== null;
-      let cls = 'qNavBox';
-      if(i===mtPos) cls += ' current';
-      if(answered) cls += ' answered';
-      return `<div class="${cls}" data-i="${i}">${i+1}</div>`;
-    }).join('');
-    qNavGrid.querySelectorAll('.qNavBox').forEach(el=>{
-      el.addEventListener('click', ()=>{ mtPos = parseInt(el.getAttribute('data-i'),10); renderQuestion(); });
-    });
-  }
-
-  function renderQuestion(){
-    const item = mtQuestions[mtPos];
-    posnum.textContent = `${mtPos+1} / ${total}`;
-    fill.style.width = `${((mtPos+1)/total)*100}%`;
-    const attempted = Object.keys(mtAnswers).length;
-    attemptedLbl.textContent = `${attempted} / ${total} attempted`;
-    pill.textContent = item.cat;
-    pill.style.borderColor = (mtMeta.catColors && mtMeta.catColors[item.cat]) || '#8ca0b3';
-    pill.style.color = (mtMeta.catColors && mtMeta.catColors[item.cat]) || '#8ca0b3';
-    pyqSlot.innerHTML = item.source ? `<div class="pyqBadge">${item.source}</div>` : '';
-    questionText.innerHTML = item.q;
-    const letters = mtLetters();
-    optionsWrap.innerHTML = item.options.map((opt,i)=>{
-      const selected = mtAnswers[mtPos] === i ? 'selectedChoice' : '';
-      return `<div class="opt ${selected}" data-i="${i}"><span class="badge">${letters[i]}</span><span>${opt}</span></div>`;
-    }).join('');
-    optionsWrap.querySelectorAll('.opt').forEach(el=>{
-      el.addEventListener('click', ()=>{
-        mtAnswers[mtPos] = parseInt(el.getAttribute('data-i'),10);
-        renderQuestion();
-        renderQNav();
-      });
-    });
-    renderQNav();
-  }
-
-  $('mtPrevBtn').addEventListener('click', ()=>{ if(mtPos>0){ mtPos--; renderQuestion(); } });
-  $('mtNextBtn').addEventListener('click', ()=>{ if(mtPos<total-1){ mtPos++; renderQuestion(); } });
-  $('mtClearBtn').addEventListener('click', ()=>{ delete mtAnswers[mtPos]; renderQuestion(); renderQNav(); });
-  $('mtSubmitBtn').addEventListener('click', ()=>{
-    const unattempted = total - Object.keys(mtAnswers).length;
-    if(unattempted > 0){
-      const ok = window.confirm(`${unattempted} question(s) unattempted. Submit anyway?`);
-      if(!ok) return;
-    }
-    mtSubmitted = true;
-    renderMockTest();
-  });
-
-  renderQuestion();
-}
-
-function mtResultHtml(){
-  const s = mtScore();
-  const letters = mtLetters();
-  const reviewItems = mtQuestions.map((item,i)=>{
-    const a = mtAnswers[i];
-    const isSkip = a === undefined || a === null;
-    const isWrong = !isSkip && a !== item.correct;
-    if(!isSkip && !isWrong) return ''; // correct answers omitted from review list
-    const tag = isSkip ? 'skip' : 'wrong';
-    const tagLabel = isSkip ? 'Not attempted' : 'Wrong';
-    const yourAns = isSkip ? '—' : `${letters[a]}. ${item.options[a]}`;
-    const source = item.source ? `<div class="pyqBadge" style="margin-bottom:8px;">${item.source}</div>` : '';
-    return `<div class="mockReviewItem ${tag}">
-      <span class="rtag">${tagLabel}</span>
-      ${source}
-      <div class="rq">${item.q}</div>
-      <div class="ra">
-        ${isSkip ? '' : `Your answer: <b>${yourAns}</b><br>`}
-        Correct answer: <b>${letters[item.correct]}. ${item.options[item.correct]}</b><br>
-        ${item.expl}
-      </div>
-    </div>`;
-  }).join('');
-
-  return `
-    <h2 class="app-title">${mtMeta.title || 'Mock Test'} — Result</h2>
-    <div class="mockScoreCard">
-      <div class="mockScoreNum">${s.marks}</div>
-      <div class="mockScoreOf">out of ${s.max} (+4 / 0 / &minus;1 marking)</div>
-    </div>
-    <div class="mockStatGrid">
-      <div class="mockStat ok"><div class="num">${s.correct}</div><div class="lbl">Correct</div></div>
-      <div class="mockStat wrong"><div class="num">${s.wrong}</div><div class="lbl">Wrong</div></div>
-      <div class="mockStat skip"><div class="num">${s.unattempted}</div><div class="lbl">Unattempted</div></div>
-    </div>
-    <div class="sectionLbl">Review — wrong &amp; unattempted</div>
-    ${reviewItems || '<div class="reviewEmpty">Everything attempted was correct — nothing to review.</div>'}
-    <button class="mockRetakeBtn" data-role="mtRetakeBtn">&#8635; Retake test</button>
-  `;
-}
-
-function wireMtResult(){
-  const root = document.getElementById('mockTestRoot');
-  root.querySelector('[data-role="mtRetakeBtn"]').addEventListener('click', ()=>{
-    mtAnswers = {}; mtPos = 0; mtSubmitted = false;
-    renderMockTest();
-  });
-}
-
-// ============================================================
 //  QUIZ APP TEMPLATE (scoped per container, no global id clashes)
 // ============================================================
 function quizTemplate(title){
@@ -3096,7 +2450,6 @@ function quizTemplate(title){
     <div class="back-row">
       <button class="back-btn" data-role="backBtn">&larr; Back</button>
       <button class="back-btn" data-role="historyBtn">📈 View report</button>
-      <button class="back-btn" data-role="notebookBtn">🗒️ Mistake Notebook<span class="notebookBadge" data-role="notebookBadge"></span></button>
     </div>
     <h2 class="app-title">${title}</h2>
 
@@ -3117,10 +2470,7 @@ function quizTemplate(title){
           <div class="card">
             <div class="rowtop">
               <span class="pill" data-role="pill">CATEGORY</span>
-              <span style="display:flex; align-items:center;">
-                <span class="hint" data-role="hintText">choose an answer</span>
-                <button type="button" class="soundToggle" data-role="soundToggle" title="Toggle answer sounds">&#128266;</button>
-              </span>
+              <span class="hint" data-role="hintText">choose an answer</span>
             </div>
             <div class="question" data-role="questionText">Loading…</div>
             <div class="options" data-role="optionsWrap"></div>
@@ -3200,35 +2550,6 @@ function quizTemplate(title){
       <p class="reviewSub" data-role="reviewSub"></p>
       <div class="reviewList" data-role="reviewList"></div>
     </div>
-
-    <div class="notebook" data-role="notebook">
-      <div class="notebookTop">
-        <button class="back-btn" data-role="notebookBackBtn">&larr; Back to quiz</button>
-      </div>
-      <h1 class="reviewTitle">Mistake Notebook</h1>
-      <p class="reviewSub" data-role="notebookSub"></p>
-
-      <div data-role="notebookStats"></div>
-
-      <div class="notebookActionsRow">
-        <button class="submitBtn" data-role="practiceBtn">▶ Practice these mistakes</button>
-        <button class="copyListBtn" data-role="copyListBtn">📋 Copy list as text</button>
-      </div>
-
-      <div class="notebookToolbar">
-        <div class="notebookFilters" data-role="notebookFilters"></div>
-        <div class="notebookSort">
-          <select data-role="notebookSortSelect">
-            <option value="recent">Sort: most recently missed</option>
-            <option value="missed">Sort: most missed</option>
-            <option value="category">Sort: category</option>
-          </select>
-          <label><input type="checkbox" data-role="notebookShowMastered"> Show mastered</label>
-        </div>
-      </div>
-
-      <div class="notebookList" data-role="notebookList"></div>
-    </div>
   `;
 }
 
@@ -3259,29 +2580,6 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
   const qNavGrid = $('qNavGrid');
   const reviewBtn = $('reviewBtn'), reviewCount = $('reviewCount'), reviewBackBtn = $('reviewBackBtn');
   const reviewTitle = $('reviewTitle'), reviewSub = $('reviewSub'), reviewList = $('reviewList');
-  const soundToggle = $('soundToggle');
-
-  function refreshSoundToggle(){
-    const on = SoundFX.isEnabled();
-    soundToggle.classList.toggle('isMuted', !on);
-    soundToggle.innerHTML = on ? '&#128266;' : '&#128264;';
-    soundToggle.title = on ? 'Sound on — click to mute' : 'Sound off — click to unmute';
-  }
-  refreshSoundToggle();
-  soundToggle.addEventListener('click', ()=>{
-    SoundFX.setEnabled(!SoundFX.isEnabled());
-    refreshSoundToggle();
-  });
-
-  const notebookBtn = $('notebookBtn'), notebookBadge = $('notebookBadge');
-  const notebook = $('notebook'), notebookBackBtn = $('notebookBackBtn'), notebookSub = $('notebookSub');
-  const notebookStats = $('notebookStats'), notebookFilters = $('notebookFilters'), notebookList = $('notebookList');
-  const notebookSortSelect = $('notebookSortSelect'), notebookShowMasteredChk = $('notebookShowMastered');
-  const practiceBtn = $('practiceBtn'), copyListBtn = $('copyListBtn');
-
-  let practiceMode = false;
-  let savedOrder = null, savedPos = null, savedAnswers = null;
-  let notebookCategoryFilter = null, notebookSort = 'recent', notebookShowMasteredFlag = false;
 
   function reshuffleOrder(){
     for(let i=order.length-1;i>0;i--){
@@ -3324,13 +2622,6 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     });
   }
 
-  function updateNotebookBadge(){
-    const mistakes = getSectionMistakes(sectionKey);
-    const openCount = Object.values(mistakes).filter(m=>!m.mastered).length;
-    notebookBadge.textContent = openCount>0 ? openCount : '';
-    notebookBadge.classList.toggle('hasCount', openCount>0);
-  }
-
   function render(){
     const idx = currentIdx();
     const item = currentQ();
@@ -3339,8 +2630,8 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     pill.style.setProperty('--pillcolor', color);
     pill.style.color = color;
     questionText.innerHTML = item.q;
-    posnum.textContent = (pos+1) + " / " + order.length;
-    fill.style.width = (((pos+1)/order.length)*100).toFixed(1) + "%";
+    posnum.textContent = (pos+1) + " / " + TOTAL;
+    fill.style.width = (((pos+1)/TOTAL)*100).toFixed(1) + "%";
 
     optionsWrap.innerHTML = "";
     const existing = answers[idx];
@@ -3385,14 +2676,11 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     prevBtn.disabled = pos===0;
     updateStats();
     renderQNav();
-    updateNotebookBadge();
   }
 
   function selectOption(idx, choiceIdx){
     const item = QUESTIONS[idx];
-    const correct = choiceIdx===item.correct;
-    answers[idx] = { selected: choiceIdx, skipped:false, correct };
-    if(correct){ recordCorrectForNotebook(sectionKey, idx); SoundFX.playCorrect(); } else { recordMistake(sectionKey, idx); SoundFX.playWrong(); }
+    answers[idx] = { selected: choiceIdx, skipped:false, correct: choiceIdx===item.correct };
     render();
   }
 
@@ -3400,14 +2688,12 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     const idx = currentIdx();
     if(answers[idx]) return;
     answers[idx] = { selected:null, skipped:true, correct:false };
-    recordMistake(sectionKey, idx);
-    SoundFX.playWrong();
     render();
   });
 
   prevBtn.addEventListener('click', ()=>{ if(pos>0){ pos--; render(); } });
   nextBtn.addEventListener('click', ()=>{
-    if(pos < order.length-1){ pos++; render(); }
+    if(pos < TOTAL-1){ pos++; render(); }
     else { pos = 0; render(); }
   });
   shuffleBtn.addEventListener('click', ()=>{
@@ -3420,7 +2706,7 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
   });
 
   container.addEventListener('keydown', (e)=>{
-    if(!report.classList.contains('show') && !review.classList.contains('show') && !notebook.classList.contains('show')){
+    if(!report.classList.contains('show')){
       if(e.code==='ArrowRight'){ nextBtn.click(); }
       else if(e.code==='ArrowLeft'){ prevBtn.click(); }
       else if(['1','2','3','4'].includes(e.key)){
@@ -3604,111 +2890,6 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     });
   }
 
-  function renderNotebook(){
-    const mistakes = getSectionMistakes(sectionKey);
-    const entries = Object.entries(mistakes)
-      .map(([idxStr, m]) => ({ idx: parseInt(idxStr,10), ...m }))
-      .filter(e => QUESTIONS[e.idx]); // guard against stale indices if the bank ever shrinks
-
-    const openEntries = entries.filter(e=>!e.mastered);
-    const masteredEntries = entries.filter(e=>e.mastered);
-    const totalMissesEver = entries.reduce((s,e)=>s+e.missCount,0);
-
-    const catCounts = {};
-    openEntries.forEach(e=>{ const cat = QUESTIONS[e.idx].cat; catCounts[cat] = (catCounts[cat]||0) + 1; });
-    const topCat = Object.entries(catCounts).sort((a,b)=>b[1]-a[1])[0];
-
-    notebookBadge.textContent = openEntries.length>0 ? openEntries.length : '';
-    notebookBadge.classList.toggle('hasCount', openEntries.length>0);
-
-    notebookSub.textContent = entries.length===0
-      ? "Nothing logged yet — any wrong or skipped answer, in any run, will show up here automatically."
-      : (openEntries.length===0
-          ? "No open mistakes left — everything you've missed before is mastered. Nice work."
-          : openEntries.length + " question" + (openEntries.length===1?'':'s') + " still tripping you up"
-            + (masteredEntries.length ? ", " + masteredEntries.length + " mastered" : "") + ".");
-
-    notebookStats.innerHTML = `
-      <div class="progStats">
-        <div class="progStat"><div class="progNum">${openEntries.length}</div><div class="progLbl">open mistakes</div></div>
-        <div class="progStat"><div class="progNum up">${masteredEntries.length}</div><div class="progLbl">mastered</div></div>
-        <div class="progStat"><div class="progNum">${totalMissesEver}</div><div class="progLbl">total misses logged</div></div>
-        <div class="progStat"><div class="progNum" style="font-size:13px; line-height:1.3;">${topCat ? topCat[0] : '—'}</div><div class="progLbl">weakest category</div></div>
-      </div>
-    `;
-
-    const allCats = [...new Set(entries.map(e=>QUESTIONS[e.idx].cat))];
-    notebookFilters.innerHTML = ['All', ...allCats].map(cat=>{
-      const isAll = cat==='All';
-      const active = isAll ? !notebookCategoryFilter : cat===notebookCategoryFilter;
-      const color = isAll ? '#34d399' : (CAT_COLORS[cat] || '#34d399');
-      return `<button class="notebookChip ${active?'active':''}" data-cat="${isAll?'':cat}" style="--chipcolor:${color}">${cat}</button>`;
-    }).join('');
-    notebookFilters.querySelectorAll('.notebookChip').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        notebookCategoryFilter = btn.getAttribute('data-cat') || null;
-        renderNotebook();
-      });
-    });
-
-    let list = notebookShowMasteredFlag ? entries.slice() : openEntries.slice();
-    if(notebookCategoryFilter) list = list.filter(e=>QUESTIONS[e.idx].cat === notebookCategoryFilter);
-
-    if(notebookSort === 'missed') list.sort((a,b)=> b.missCount - a.missCount);
-    else if(notebookSort === 'category') list.sort((a,b)=> QUESTIONS[a.idx].cat.localeCompare(QUESTIONS[b.idx].cat));
-    else list.sort((a,b)=> (b.lastMissed||0) - (a.lastMissed||0)); // 'recent' default
-
-    practiceBtn.disabled = openEntries.length === 0;
-    practiceBtn.textContent = "▶ Practice these mistakes (" + openEntries.length + ")";
-    copyListBtn.disabled = openEntries.length === 0;
-
-    const letters = ["A","B","C","D"];
-    notebookList.innerHTML = "";
-    if(list.length === 0){
-      notebookList.innerHTML = `<div class="reviewEmpty">${entries.length===0
-        ? "Wrong or skipped answers from any quiz run in this section will show up here automatically."
-        : "No mistakes match this filter."}</div>`;
-      return;
-    }
-
-    list.forEach(e=>{
-      const item = QUESTIONS[e.idx];
-      const color = CAT_COLORS[item.cat] || "#34d399";
-      const card = document.createElement('div');
-      card.className = "reviewCard mistakeCard" + (e.mastered ? " masteredCard" : "");
-      const streakNote = (!e.mastered && e.correctStreak===1)
-        ? '<span class="streakHint">1 correct in a row — one more masters it</span>' : '';
-      card.innerHTML = `
-        <div class="reviewMeta">
-          <span class="pill" style="border-color:${color}; color:${color};">${item.cat}</span>
-          <span class="reviewBadge ${e.mastered ? 'masteredBadge' : 'wrongBadge'}">${e.mastered ? 'Mastered' : 'Missed ' + e.missCount + '\u00d7'}</span>
-          ${e.lastMissed ? `<span class="lastMissed">last missed ${fmtDate(e.lastMissed)}</span>` : ''}
-          ${streakNote}
-        </div>
-        <div class="reviewQ">${item.q}</div>
-        <div class="reviewAnsRow correctAns"><span class="tag">\u2713 ${letters[item.correct]}</span><span class="val">${item.options[item.correct]}</span></div>
-        <div class="reviewExpl"><b>Why:</b> ${item.expl || "No explanation available for this question yet."}</div>
-        <div class="noteBox"><textarea class="noteInput" placeholder="Jot a personal note on why you keep missing this…">${e.note ? e.note.replace(/</g,'&lt;') : ''}</textarea></div>
-        <div class="mistakeActions">
-          <button class="mistakeActionBtn masterBtn" data-action="master">${e.mastered ? '\u21ba Unmark mastered' : '\u2713 Mark as mastered'}</button>
-          <button class="mistakeActionBtn removeBtn" data-action="remove">\u2715 Remove from notebook</button>
-        </div>
-      `;
-      card.querySelector('.noteInput').addEventListener('blur', (ev)=>{
-        setMistakeNote(sectionKey, e.idx, ev.target.value);
-      });
-      card.querySelector('[data-action="master"]').addEventListener('click', ()=>{
-        setMistakeMastered(sectionKey, e.idx, !e.mastered);
-        renderNotebook();
-      });
-      card.querySelector('[data-action="remove"]').addEventListener('click', ()=>{
-        removeMistakeEntry(sectionKey, e.idx);
-        renderNotebook();
-      });
-      notebookList.appendChild(card);
-    });
-  }
-
   function renderProgressDashboard(){
     const dash = $('progressDash');
     const records = (loadHistory()[sectionKey]) || [];
@@ -3807,27 +2988,7 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     reshuffleOrder();
   }
 
-  function finishPractice(){
-    const attempted = Object.keys(answers).length;
-    const correctCount = Object.values(answers).filter(a=>a.correct).length;
-
-    order = savedOrder; pos = savedPos; answers = savedAnswers;
-    practiceMode = false;
-    savedOrder = null; savedPos = null; savedAnswers = null;
-
-    animatedSwitch(()=>{
-      quizview.classList.add('hide');
-      notebook.classList.add('show');
-    }, notebook);
-    renderNotebook();
-    if(attempted>0){
-      notebookSub.textContent = `Practice round done — ${correctCount}/${attempted} correct this round. ` + notebookSub.textContent;
-    }
-  }
-
-  submitTop.addEventListener('click', ()=>{
-    if(practiceMode){ finishPractice(); } else { showReport(); }
-  });
+  submitTop.addEventListener('click', showReport);
 
   reviewBtn.addEventListener('click', ()=>{
     if(lastMistakeIdx.length === 0) return;
@@ -3860,16 +3021,10 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     // Leaving mid-test — whether unanswered, partially answered, or
     // already submitted — resets the run so coming back to this section
     // always starts a fresh, reshuffled test automatically.
-    if(practiceMode){
-      order = savedOrder || QUESTIONS.map((_,i)=>i);
-      practiceMode = false;
-      savedOrder = null; savedPos = null; savedAnswers = null;
-    }
     answers = {};
     reshuffleOrder();
     report.classList.remove('show');
     review.classList.remove('show');
-    notebook.classList.remove('show');
     quizview.classList.remove('hide');
     render();
     openSubmenu(sectionKey);
@@ -3877,97 +3032,13 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
 
   historyBtn.addEventListener('click', ()=>{
     // Same as Back — jumping off to the Test Report also counts as leaving the test.
-    if(practiceMode){
-      order = savedOrder || QUESTIONS.map((_,i)=>i);
-      practiceMode = false;
-      savedOrder = null; savedPos = null; savedAnswers = null;
-    }
     answers = {};
     reshuffleOrder();
     report.classList.remove('show');
     review.classList.remove('show');
-    notebook.classList.remove('show');
     quizview.classList.remove('hide');
     render();
     openHistory(SECTION_CHAPTER[sectionKey]);
-  });
-
-  notebookBtn.addEventListener('click', ()=>{
-    renderNotebook();
-    animatedSwitch(()=>{
-      quizview.classList.add('hide');
-      report.classList.remove('show');
-      review.classList.remove('show');
-      notebook.classList.add('show');
-    }, notebook);
-  });
-
-  notebookBackBtn.addEventListener('click', ()=>{
-    animatedSwitch(()=>{
-      notebook.classList.remove('show');
-      quizview.classList.remove('hide');
-    }, quizview);
-  });
-
-  practiceBtn.addEventListener('click', ()=>{
-    const mistakes = getSectionMistakes(sectionKey);
-    const openIdx = Object.entries(mistakes)
-      .filter(([,m])=>!m.mastered)
-      .map(([i])=>parseInt(i,10))
-      .filter(i=>QUESTIONS[i]);
-    if(openIdx.length === 0) return;
-
-    for(let i=openIdx.length-1;i>0;i--){
-      const j = Math.floor(Math.random()*(i+1));
-      [openIdx[i],openIdx[j]] = [openIdx[j],openIdx[i]];
-    }
-
-    savedOrder = order; savedPos = pos; savedAnswers = answers;
-    order = openIdx;
-    pos = 0;
-    answers = {};
-    practiceMode = true;
-
-    animatedSwitch(()=>{
-      notebook.classList.remove('show');
-      quizview.classList.remove('hide');
-      render();
-    }, quizview);
-  });
-
-  copyListBtn.addEventListener('click', ()=>{
-    const mistakes = getSectionMistakes(sectionKey);
-    const openEntries = Object.entries(mistakes)
-      .filter(([,m])=>!m.mastered)
-      .map(([idxStr,m])=>({idx:parseInt(idxStr,10), ...m}))
-      .filter(e=>QUESTIONS[e.idx]);
-    if(openEntries.length === 0) return;
-
-    const letters = ["A","B","C","D"];
-    const lines = openEntries.map(e=>{
-      const item = QUESTIONS[e.idx];
-      let block = `[${item.cat}] ${stripTags(item.q)}\nAnswer: ${letters[item.correct]}. ${stripTags(item.options[item.correct])}\nMissed ${e.missCount}\u00d7`;
-      if(e.note) block += `\nNote: ${e.note}`;
-      return block;
-    });
-    const text = `Mistake Notebook — ${title}\n${openEntries.length} open mistake(s)\n\n` + lines.join('\n\n');
-
-    const originalLabel = copyListBtn.textContent;
-    const done = () => { copyListBtn.textContent = "✓ Copied"; setTimeout(()=>{ copyListBtn.textContent = originalLabel; }, 1600); };
-    if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(done).catch(done);
-    } else {
-      done();
-    }
-  });
-
-  notebookSortSelect.addEventListener('change', (e)=>{
-    notebookSort = e.target.value;
-    renderNotebook();
-  });
-  notebookShowMasteredChk.addEventListener('change', (e)=>{
-    notebookShowMasteredFlag = e.target.checked;
-    renderNotebook();
   });
 
   render();
@@ -3985,27 +3056,6 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
         {label: CHAPTER_META[SECTION_CHAPTER[sectionKey]].title, onClick: CHAPTER_META[SECTION_CHAPTER[sectionKey]].open},
         {label: title, onClick: ()=> openSubmenu(sectionKey)},
         {label:'Flashcards / Quick Quiz'}
-      ]);
-      setActiveBack('\u2190 Back to ' + title, ()=> openSubmenu(sectionKey));
-      container.focus({preventScroll:true});
-    },
-    openNotebook(){
-      currentSection = sectionKey;
-      renderNotebook();
-      animatedSwitch(()=>{
-        document.querySelector('.wrap').classList.add('wide');
-        hideAllShells();
-        container.classList.add('show');
-        quizview.classList.add('hide');
-        report.classList.remove('show');
-        review.classList.remove('show');
-        notebook.classList.add('show');
-      }, container);
-      renderCrumb(containerId, [
-        {label:'Chemistry', onClick: showChemHub},
-        {label: CHAPTER_META[SECTION_CHAPTER[sectionKey]].title, onClick: CHAPTER_META[SECTION_CHAPTER[sectionKey]].open},
-        {label: title, onClick: ()=> openSubmenu(sectionKey)},
-        {label:'Mistake Notebook'}
       ]);
       setActiveBack('\u2190 Back to ' + title, ()=> openSubmenu(sectionKey));
       container.focus({preventScroll:true});
