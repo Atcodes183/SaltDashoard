@@ -1274,6 +1274,214 @@
       "BROMIDE": "#fb7185",
       "IODIDE": "#c084fc",
       "SULPHATE": "#fbbf24"
+    },
+    "mockTest": {
+      "title": "Anion Analysis — Mock Test (JEE Main Pattern)",
+      "marking": {
+        "correct": 4,
+        "wrong": -1,
+        "unattempted": 0
+      },
+      "catColors": {
+        "CARBONATE/BICARBONATE": "#34d399",
+        "SULPHITE/BISULPHITE": "#eab308",
+        "THIOSULPHATE": "#f97316",
+        "SULPHIDE/BISULPHIDE": "#a78bfa",
+        "NITRITE": "#60a5fa",
+        "NITRATE": "#22d3ee",
+        "CHLORIDE": "#4ade80",
+        "BROMIDE": "#fb7185",
+        "IODIDE": "#c084fc",
+        "SULPHATE": "#fbbf24",
+        "CLASSIFICATION": "#8ca0b3"
+      },
+      "questions": [
+        {
+          "cat": "CARBONATE/BICARBONATE",
+          "q": "A white solid, on treatment with dilute HCl, produces brisk effervescence of a colourless, odourless gas. This gas turns lime water milky, and the milkiness disappears on passing excess gas. Which anion is most likely present?",
+          "options": [
+            "CO<sub>3</sub><sup>2-</sup> / HCO<sub>3</sub><sup>-</sup>",
+            "SO<sub>3</sub><sup>2-</sup>",
+            "S<sub>2</sub>O<sub>3</sub><sup>2-</sup>",
+            "NO<sub>2</sub><sup>-</sup>"
+          ],
+          "correct": 0,
+          "expl": "A colourless, odourless gas that turns lime water milky (and clears again in excess, forming soluble Ca(HCO3)2) is the classic identification of CO2, confirming carbonate or bicarbonate. SO3(2-) and S2O3(2-) release pungent, odorous SO2; NO2- gives brown fumes, not a colourless gas."
+        },
+        {
+          "cat": "SULPHITE/BISULPHITE",
+          "source": "JEE Main 2022 (Online), 29th June Evening Shift",
+          "q": "A white precipitate was formed when BaCl<sub>2</sub> was added to the water extract of an inorganic salt. When this precipitate was dissolved in dilute HCl, a gas X with a characteristic pungent odour was released. The anion present in the salt is:",
+          "options": [
+            "SO<sub>4</sub><sup>2-</sup>",
+            "SO<sub>3</sub><sup>2-</sup>",
+            "CO<sub>3</sub><sup>2-</sup>",
+            "PO<sub>4</sub><sup>3-</sup>"
+          ],
+          "correct": 1,
+          "expl": "BaSO4 stays insoluble even in dilute HCl, so sulphate is ruled out. BaCO3 would dissolve releasing odourless CO2. BaSO3, however, dissolves in dilute HCl releasing pungent SO2 gas — matching gas X exactly. This confirms SO3(2-)."
+        },
+        {
+          "cat": "NITRITE",
+          "source": "Based on JEE Main 2022 (Online), 27th June Evening Shift",
+          "q": "When treated with dilute H<sub>2</sub>SO<sub>4</sub>, which one of the following anions releases brown fumes that turn a starch-iodide paper blue?",
+          "options": [
+            "CO<sub>3</sub><sup>2-</sup>",
+            "S<sup>2-</sup>",
+            "SO<sub>3</sub><sup>2-</sup>",
+            "NO<sub>2</sub><sup>-</sup>"
+          ],
+          "correct": 3,
+          "expl": "NO2- with dilute acid releases brown nitrous fumes, which oxidise I- (from KI in the starch-iodide paper) to I2, turning the paper blue. CO3(2-) gives odourless CO2, S2- gives H2S (blackens lead acetate paper), and SO3(2-) gives SO2 (turns acidified dichromate green) — none of these are brown."
+        },
+        {
+          "cat": "SULPHIDE/BISULPHIDE",
+          "source": "JEE Main 2025 (Online), 2nd April Evening Shift",
+          "q": "Addition of sodium nitroprusside to the sodium carbonate extract of a salt produces a purple-coloured complex, Na<sub>4</sub>[Fe(CN)<sub>5</sub>NOS]. This confirms the presence of:",
+          "options": [
+            "S<sup>2-</sup>",
+            "SO<sub>3</sub><sup>2-</sup>",
+            "S<sub>2</sub>O<sub>3</sub><sup>2-</sup>",
+            "CN<sup>-</sup>"
+          ],
+          "correct": 0,
+          "expl": "Sodium nitroprusside reacts specifically with sulphide ion to form the violet/purple thionitrosyl complex Na4[Fe(CN)5NOS]. It does not give this reaction with sulphite or thiosulphate, making it a clean confirmatory test for S2-."
+        },
+        {
+          "cat": "BROMIDE",
+          "source": "JEE Main 2024 (Online), 6th April Evening Shift",
+          "q": "The sodium carbonate extract of a salt is acidified with dilute HNO<sub>3</sub> and treated with AgNO<sub>3</sub> solution. A pale yellow precipitate is obtained that dissolves only with difficulty in NH<sub>4</sub>OH. This indicates the anion present is:",
+          "options": [
+            "Cl<sup>-</sup>",
+            "Br<sup>-</sup>",
+            "I<sup>-</sup>",
+            "SO<sub>4</sub><sup>2-</sup>"
+          ],
+          "correct": 1,
+          "expl": "AgCl is white and dissolves readily in dilute NH4OH; AgI is yellow and stays insoluble even in concentrated NH4OH. AgBr is pale yellow and dissolves only with difficulty — the intermediate behaviour that specifically identifies Br-."
+        },
+        {
+          "cat": "CHLORIDE",
+          "source": "JEE Main 2024 (Online), 29th January Morning Shift",
+          "q": "In the chromyl chloride test for Cl<sup>-</sup>, the yellow sodium chromate solution obtained is acidified and treated with amyl alcohol and 10% H<sub>2</sub>O<sub>2</sub>; the organic layer turns blue due to formation of chromium pentoxide, CrO<sub>5</sub>. The oxidation state of chromium in CrO<sub>5</sub> is:",
+          "options": [
+            "+3",
+            "+5",
+            "+6",
+            "+10"
+          ],
+          "correct": 2,
+          "expl": "CrO5 (structure CrO(O2)2) has one oxide (O2-) and two peroxide (O2^2-) linkages. Balancing: Cr + (-2) + 2×(-2) = 0, so Cr = +6. Despite the peroxide groups, chromium itself stays at +6 — a classic JEE trap that catches students who assume the peroxide changes Cr's oxidation state."
+        },
+        {
+          "cat": "NITRATE",
+          "q": "In the brown ring test for NO<sub>3</sub><sup>-</sup>, a brown nitrosyl complex forms at the junction of the two layers. What is the correct formula of this complex, and what is the formal oxidation state of iron in it (treating NO as the NO<sup>+</sup> ligand)?",
+          "options": [
+            "[Fe(H<sub>2</sub>O)<sub>5</sub>NO]<sup>2+</sup>, Fe is +2",
+            "[Fe(H<sub>2</sub>O)<sub>5</sub>NO]<sup>2+</sup>, Fe is +1",
+            "[Fe(H<sub>2</sub>O)<sub>6</sub>]<sup>3+</sup>, Fe is +3",
+            "[Fe(NO)<sub>2</sub>(SO<sub>4</sub>)<sub>2</sub>]<sup>-</sup>, Fe is +3"
+          ],
+          "correct": 1,
+          "expl": "The brown ring complex is [Fe(H2O)5NO]2+. NO3- first oxidises Fe2+ to Fe3+ while itself being reduced to NO, which then binds to leftover Fe2+ as the NO+ (nitrosonium) ligand. With water neutral and NO counted as NO+ (+1), an overall +2 charge means Fe is formally +1 — an easy-to-miss detail since the complex is loosely called 'ferrous nitroso'."
+        },
+        {
+          "cat": "SULPHATE",
+          "q": "Water extract of a salt gives a white precipitate with BaCl<sub>2</sub> solution. This precipitate is insoluble in both dilute HCl and dilute HNO<sub>3</sub>. The anion present is:",
+          "options": [
+            "CO<sub>3</sub><sup>2-</sup>",
+            "SO<sub>3</sub><sup>2-</sup>",
+            "SO<sub>4</sub><sup>2-</sup>",
+            "PO<sub>4</sub><sup>3-</sup>"
+          ],
+          "correct": 2,
+          "expl": "BaSO4 is unique among the common Ba-precipitates in being insoluble in both dilute HCl and dilute HNO3, unlike BaCO3 and BaSO3, which dissolve with gas evolution. This insolubility is the standard confirmatory test for SO4(2-)."
+        },
+        {
+          "cat": "THIOSULPHATE",
+          "q": "A salt solution, when treated with dilute HCl, gives a yellow turbidity along with the smell of burning sulphur, and on warming, a pale yellow precipitate settles out along with a colourless gas that turns acidified potassium dichromate paper green. Which anion is indicated?",
+          "options": [
+            "S<sup>2-</sup>",
+            "SO<sub>3</sub><sup>2-</sup>",
+            "S<sub>2</sub>O<sub>3</sub><sup>2-</sup>",
+            "SO<sub>4</sub><sup>2-</sup>"
+          ],
+          "correct": 2,
+          "expl": "Thiosulphate decomposes with dilute acid to give both SO2 gas (turning dichromate paper green) and a precipitate of colloidal sulphur (the yellow turbidity). This dual decomposition — gas plus precipitate from the same reaction — is unique to S2O3(2-) among the common anions."
+        },
+        {
+          "cat": "CARBONATE/BICARBONATE",
+          "q": "Two white solids, X and Y, both give brisk effervescence of CO<sub>2</sub> with dilute HCl. X gives a white precipitate with MgSO<sub>4</sub> solution in the cold, while Y gives a white precipitate with MgSO<sub>4</sub> only on boiling. X and Y are respectively:",
+          "options": [
+            "CO<sub>3</sub><sup>2-</sup>, HCO<sub>3</sub><sup>-</sup>",
+            "HCO<sub>3</sub><sup>-</sup>, CO<sub>3</sub><sup>2-</sup>",
+            "SO<sub>3</sub><sup>2-</sup>, CO<sub>3</sub><sup>2-</sup>",
+            "CO<sub>3</sub><sup>2-</sup>, SO<sub>3</sub><sup>2-</sup>"
+          ],
+          "correct": 0,
+          "expl": "Normal carbonate (CO3(2-)) precipitates MgCO3 with MgSO4 in the cold. Bicarbonate (HCO3-) only precipitates MgCO3 on boiling, since boiling drives off CO2 and converts HCO3- into CO3(2-) first. This is the standard test distinguishing the two."
+        },
+        {
+          "cat": "IODIDE",
+          "q": "The sodium carbonate extract of a salt is acidified with dilute HNO<sub>3</sub> and treated with AgNO<sub>3</sub>. A yellow precipitate forms that is insoluble even in concentrated NH<sub>4</sub>OH. The anion present is:",
+          "options": [
+            "Cl<sup>-</sup>",
+            "Br<sup>-</sup>",
+            "I<sup>-</sup>",
+            "S<sup>2-</sup>"
+          ],
+          "correct": 2,
+          "expl": "AgI is yellow and essentially insoluble in both dilute and concentrated NH4OH, which distinguishes it from AgCl (white, dissolves readily) and AgBr (pale yellow, dissolves only with difficulty)."
+        },
+        {
+          "cat": "CLASSIFICATION",
+          "q": "Among CO<sub>3</sub><sup>2-</sup>, SO<sub>3</sub><sup>2-</sup>, NO<sub>3</sub><sup>-</sup>, Cl<sup>-</sup>, Br<sup>-</sup> and S<sub>2</sub>O<sub>3</sub><sup>2-</sup>, how many anions belong to the dilute-acid (Group I) class — i.e., react with dilute HCl/H<sub>2</sub>SO<sub>4</sub> in the cold to release a gas?",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correct": 1,
+          "expl": "CO3(2-), SO3(2-) and S2O3(2-) all react with dilute acid in the cold to release a gas, so 3 of the 6 belong to Group I. NO3-, Cl- and Br- do not react with dilute acid at all — they need the concentrated H2SO4 group reagent instead."
+        },
+        {
+          "cat": "SULPHITE/BISULPHITE",
+          "q": "Dilute HCl is added to solid Na<sub>2</sub>SO<sub>3</sub>, and the gas evolved is passed into acidified potassium dichromate solution. The orange dichromate solution turns:",
+          "options": [
+            "Deep blue",
+            "Green",
+            "Colourless",
+            "No change"
+          ],
+          "correct": 1,
+          "expl": "SO2 gas reduces orange Cr2O7(2-) (Cr in +6) to green Cr3+. This colour change from orange to green is a classic confirmatory test for sulphite / SO2 gas."
+        },
+        {
+          "cat": "NITRATE",
+          "q": "Which pair of anions can both give a positive brown ring test with FeSO<sub>4</sub> and dilute acid, meaning a positive result alone cannot distinguish between them without a further confirmatory test?",
+          "options": [
+            "CO<sub>3</sub><sup>2-</sup> &amp; HCO<sub>3</sub><sup>-</sup>",
+            "NO<sub>3</sub><sup>-</sup> &amp; NO<sub>2</sub><sup>-</sup>",
+            "Cl<sup>-</sup> &amp; Br<sup>-</sup>",
+            "SO<sub>4</sub><sup>2-</sup> &amp; SO<sub>3</sub><sup>2-</sup>"
+          ],
+          "correct": 1,
+          "expl": "Both nitrate and nitrite are reduced to NO under the acidic FeSO4 conditions, so both can give the brown ring. A positive brown ring alone does not distinguish NO3- from NO2-; additional tests (e.g. behaviour with dilute acid alone, or with KMnO4) are needed to tell them apart."
+        },
+        {
+          "cat": "CLASSIFICATION",
+          "q": "Which one of the following anions gives no observable reaction (no gas, no colour change) when its salt is treated with dilute H<sub>2</sub>SO<sub>4</sub> in the cold, and therefore needs the concentrated H<sub>2</sub>SO<sub>4</sub> group reagent for its identification?",
+          "options": [
+            "CO<sub>3</sub><sup>2-</sup>",
+            "SO<sub>3</sub><sup>2-</sup>",
+            "Cl<sup>-</sup>",
+            "S<sub>2</sub>O<sub>3</sub><sup>2-</sup>"
+          ],
+          "correct": 2,
+          "expl": "Chloride does not react with dilute acid at all; it needs the concentrated H2SO4 group reagent (releasing HCl gas, or via the chromyl chloride test) for identification — unlike CO3(2-), SO3(2-) and S2O3(2-), which are all dilute-acid-group anions."
+        }
+      ]
     }
   },
   "prelim": {

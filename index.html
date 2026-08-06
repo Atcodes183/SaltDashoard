@@ -199,6 +199,62 @@ body{ padding:28px 16px 60px; }
 .opt.locked{ cursor:default; }
 .opt.dim{ opacity:.55; }
 
+/* ---- Mock Test mode ---- */
+.opt.selectedChoice{ border-color:#60a5fa; background:rgba(96,165,250,0.08); }
+.opt.selectedChoice .badge{ border-color:#60a5fa; color:#60a5fa; }
+.pyqBadge{
+  display:inline-block; font-size:11px; font-weight:600; letter-spacing:.04em;
+  color:#60a5fa; background:rgba(96,165,250,0.1); border:1px solid rgba(96,165,250,0.35);
+  border-radius:6px; padding:3px 9px; margin-bottom:10px; text-transform:uppercase;
+}
+.markingNote{
+  font-size:12.5px; color:var(--muted); background:var(--panel2, rgba(255,255,255,0.02));
+  border:1px solid var(--panel-border); border-radius:8px; padding:8px 14px; margin-bottom:18px;
+  display:flex; gap:14px; flex-wrap:wrap;
+}
+.markingNote b{ color:#dfe9e3; }
+.mockTopbar{ display:flex; align-items:center; gap:16px; margin-bottom:18px; flex-wrap:wrap; }
+.mockAttempted{ font-size:13px; color:var(--muted); white-space:nowrap; }
+.mockSubmitBtn{
+  background:var(--mint); color:#06251a; border:none; border-radius:8px;
+  padding:10px 18px; font-weight:700; font-size:14px; cursor:pointer; white-space:nowrap;
+  transition:opacity .12s ease;
+}
+.mockSubmitBtn:hover{ opacity:.88; }
+.qNavGrid .qNavBox.answered{ background:rgba(96,165,250,0.22); border-color:#60a5fa; color:#60a5fa; }
+.mockScoreCard{
+  text-align:center; padding:32px 20px; border:1px solid var(--panel-border); border-radius:14px;
+  background:var(--panel2, rgba(255,255,255,0.02)); margin-bottom:24px;
+}
+.mockScoreNum{ font-size:52px; font-weight:800; color:var(--mint); line-height:1; }
+.mockScoreOf{ font-size:16px; color:var(--muted); margin-top:4px; }
+.mockStatGrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:22px 0 28px; }
+@media (max-width:680px){ .mockStatGrid{ grid-template-columns:1fr; } }
+.mockStat{ text-align:center; border:1px solid var(--panel-border); border-radius:10px; padding:14px; }
+.mockStat .num{ font-size:24px; font-weight:700; }
+.mockStat .lbl{ font-size:12px; color:var(--muted); margin-top:2px; text-transform:uppercase; letter-spacing:.03em; }
+.mockStat.ok .num{ color:var(--mint); }
+.mockStat.wrong .num{ color:var(--wrong); }
+.mockStat.skip .num{ color:var(--gray, #8ca0b3); }
+.mockReviewItem{
+  border:1px solid var(--panel-border); border-radius:10px; padding:16px 18px; margin-bottom:14px;
+}
+.mockReviewItem .rtag{
+  display:inline-block; font-size:11px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+  border-radius:6px; padding:2px 8px; margin-bottom:8px;
+}
+.mockReviewItem.wrong .rtag{ background:rgba(251,113,133,0.12); color:var(--wrong); }
+.mockReviewItem.skip .rtag{ background:rgba(140,160,179,0.12); color:#8ca0b3; }
+.mockReviewItem .rq{ font-size:15px; margin-bottom:10px; }
+.mockReviewItem .ra{ font-size:13.5px; color:var(--muted); line-height:1.5; }
+.mockReviewItem .ra b{ color:#dfe9e3; }
+.mockRetakeBtn{
+  background:transparent; color:#dfe9e3; border:1.5px solid var(--panel-border); border-radius:8px;
+  padding:10px 20px; font-size:14px; font-weight:600; cursor:pointer; margin-top:8px;
+}
+.mockRetakeBtn:hover{ border-color:var(--mint); color:var(--mint); }
+
+
 .feedback{ min-height:20px; font-size:14px; margin-bottom:8px; }
 .feedback.ok{ color:var(--mint); }
 .feedback.bad{ color:var(--flame); }
@@ -363,6 +419,76 @@ body{ padding:28px 16px 60px; }
 .reviewExpl b{ color:var(--mint); }
 
 .reviewEmpty{ text-align:center; color:var(--muted); padding:50px 20px; font-size:14px; }
+
+/* ---------- MISTAKE NOTEBOOK ---------- */
+.notebook{ display:none; }
+.notebook.show{ display:block; }
+.notebookTop{ margin-bottom:18px; }
+.notebookBadge{
+  display:inline-block; min-width:18px; padding:1px 6px; margin-left:2px;
+  border-radius:20px; font-size:10.5px; font-weight:700; text-align:center;
+  background:transparent; color:var(--muted); vertical-align:middle;
+}
+.notebookBadge.hasCount{ background:var(--wrong-dim); color:var(--wrong); border:1px solid var(--wrong); }
+
+.notebookToolbar{
+  display:flex; align-items:center; justify-content:space-between; gap:14px;
+  flex-wrap:wrap; margin:18px 0 6px;
+}
+.notebookFilters{ display:flex; flex-wrap:wrap; gap:8px; flex:1; }
+.notebookChip{
+  font-family:'JetBrains Mono', monospace; font-size:12px;
+  background:transparent; border:1px solid var(--chipcolor, var(--panel-border));
+  color:var(--chipcolor, var(--muted)); padding:6px 13px; border-radius:20px; cursor:pointer;
+  opacity:.55; transition:opacity .12s ease;
+}
+.notebookChip:hover{ opacity:.85; }
+.notebookChip.active{ opacity:1; background:color-mix(in srgb, var(--chipcolor) 16%, transparent); }
+
+.notebookSort{ display:flex; align-items:center; gap:12px; font-size:12.5px; color:var(--muted); flex:0 0 auto; }
+.notebookSort select{
+  font-family:'JetBrains Mono', monospace; font-size:12.5px; background:var(--panel);
+  color:var(--text); border:1px solid var(--panel-border); border-radius:8px; padding:6px 10px;
+}
+.notebookSort label{ display:flex; align-items:center; gap:6px; cursor:pointer; white-space:nowrap; }
+
+.notebookActionsRow{ display:flex; gap:10px; margin:18px 0 6px; flex-wrap:wrap; }
+.copyListBtn{
+  font-family:'JetBrains Mono', monospace; font-size:12.5px; font-weight:600;
+  background:var(--panel); color:#d7e3dc; border:1px solid var(--panel-border);
+  padding:9px 16px; border-radius:20px; cursor:pointer;
+}
+.copyListBtn:hover{ border-color:var(--mint); color:var(--mint); }
+.copyListBtn:disabled{ opacity:.35; cursor:default; }
+
+.notebookList{ display:flex; flex-direction:column; gap:16px; margin-top:14px; }
+
+.mistakeCard{ position:relative; }
+.mistakeCard.masteredCard{ opacity:.68; }
+.reviewBadge.masteredBadge{ background:rgba(52,211,153,0.14); color:var(--mint); border-color:var(--mint); }
+.lastMissed{ font-size:11.5px; color:var(--muted); }
+.streakHint{ font-size:11.5px; color:var(--mint); font-style:italic; }
+
+.noteBox{ margin-top:12px; }
+.noteInput{
+  width:100%; min-height:44px; resize:vertical; box-sizing:border-box;
+  font-family:'JetBrains Mono', monospace; font-size:12.5px; color:#cfe0d8;
+  background:rgba(255,255,255,0.03); border:1px solid var(--panel-border); border-radius:10px;
+  padding:10px 12px; line-height:1.5;
+}
+.noteInput:focus{ outline:none; border-color:var(--mint-dim); }
+.noteInput::placeholder{ color:#5b6f65; }
+
+.mistakeActions{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+.mistakeActionBtn{
+  font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:600;
+  padding:8px 14px; border-radius:20px; cursor:pointer; background:transparent;
+}
+.mistakeActionBtn.masterBtn{ border:1px solid var(--mint); color:var(--mint); }
+.mistakeActionBtn.masterBtn:hover{ background:rgba(52,211,153,0.12); }
+.mistakeActionBtn.removeBtn{ border:1px solid var(--wrong); color:var(--wrong); }
+.mistakeActionBtn.removeBtn:hover{ background:rgba(251,113,133,0.12); }
+
 
 /* ---------- SMOOTH VIEW TRANSITIONS ---------- */
 .wrap{ overflow:hidden; }
@@ -746,13 +872,32 @@ mark.reagent-hit, mark.study-hit{ background:var(--flame); color:#1a1006; font-w
         <p>A condensed, scan-friendly cheat sheet of every group reagent, test, and color reaction — built to get through right before your test.</p>
         <div class="meta">→ quick scan format</div>
       </div>
-      <div class="section-card wide" id="cardFlashcards">
+      <div class="section-card" id="cardFlashcards">
         <div class="icon" style="background:rgba(52,211,153,0.12); color:var(--mint);">🗂</div>
         <h3>Flashcards / Quick Quiz</h3>
         <p>The full multiple-choice run with instant feedback, question navigator, and end-of-run report.</p>
         <div class="meta">→ <span id="submenuQuizCount">0</span> questions</div>
       </div>
+      <div class="section-card" id="cardNotebook">
+        <div class="icon" style="background:rgba(251,113,133,0.12); color:var(--wrong);">🗒️</div>
+        <h3>Mistake Notebook</h3>
+        <p>Every question you've missed, filterable by category and sorted by how often you've gotten it wrong — open it any time, no test required.</p>
+        <div class="meta">→ <span id="submenuNotebookCount">0</span> open mistakes</div>
+      </div>
+      <div class="section-card" id="cardMockTest" style="display:none;">
+        <div class="icon" style="background:rgba(96,165,250,0.12); color:#60a5fa;">🎯</div>
+        <h3>Mock Test <span style="font-size:11px; font-weight:600; color:#60a5fa; border:1px solid rgba(96,165,250,0.4); border-radius:5px; padding:1px 6px; margin-left:6px; vertical-align:middle;">JEE Main pattern</span></h3>
+        <p>Real JEE Main level questions, no instant feedback, marked +4 / 0 / −1 exactly like the real exam. Previous-year questions are labelled with their year.</p>
+        <div class="meta">→ <span id="submenuMockCount">0</span> questions</div>
+      </div>
     </div>
+  </div>
+
+  <!-- ======= MOCK TEST (shared, per-section content built dynamically) ======= -->
+  <div class="app-shell" id="app-mocktest">
+    <div class="crumb" data-role="crumb"></div>
+    <div class="back-row"><button class="back-btn" id="mockBackBtn">&larr; Back</button></div>
+    <div id="mockTestRoot"></div>
   </div>
 
   <!-- ======= STUDY VIEW (shared by Anion + Prelim) ======= -->
@@ -951,6 +1096,64 @@ function saveHistoryRecord(sectionKey, record){
   // keep the most recent 50 attempts per section
   if(all[sectionKey].length > 50) all[sectionKey] = all[sectionKey].slice(-50);
   try{ localStorage.setItem(HISTORY_KEY, JSON.stringify(all)); }catch(e){}
+}
+
+// ============================================================
+//  MISTAKE NOTEBOOK STORAGE
+//  Every wrong or skipped answer, in any quiz run, in any
+//  section, is logged persistently here — keyed by sectionKey
+//  then by the question's original index in that section's
+//  bank. An entry tracks how many times it's been missed, when
+//  it was last missed, a consecutive-correct streak (auto-masters
+//  after 2 correct in a row), a manual mastered flag, and an
+//  optional personal note.
+// ============================================================
+const MISTAKE_KEY = 'saltdash-mistakes-v1';
+
+function loadMistakes(){
+  if(!storageAvailable()) return {};
+  try{ return JSON.parse(localStorage.getItem(MISTAKE_KEY)) || {}; }catch(e){ return {}; }
+}
+function saveMistakes(all){
+  if(!storageAvailable()) return;
+  try{ localStorage.setItem(MISTAKE_KEY, JSON.stringify(all)); }catch(e){}
+}
+function getSectionMistakes(sectionKey){
+  return loadMistakes()[sectionKey] || {};
+}
+function updateMistakeEntry(sectionKey, idx, patchFn){
+  const all = loadMistakes();
+  if(!all[sectionKey]) all[sectionKey] = {};
+  const cur = all[sectionKey][idx] || { missCount:0, lastMissed:null, correctStreak:0, mastered:false, note:'' };
+  all[sectionKey][idx] = patchFn(cur) || cur;
+  saveMistakes(all);
+}
+function recordMistake(sectionKey, idx){
+  updateMistakeEntry(sectionKey, idx, (cur)=>({
+    ...cur, missCount: cur.missCount + 1, lastMissed: Date.now(), correctStreak: 0, mastered: false
+  }));
+}
+// Only touches the entry if this question is already being tracked (i.e.
+// it's been missed before) — getting a never-missed question right doesn't
+// need to create a notebook entry. Two correct answers in a row auto-masters it.
+function recordCorrectForNotebook(sectionKey, idx){
+  const all = loadMistakes();
+  const sec = all[sectionKey];
+  if(!sec || !sec[idx]) return;
+  const cur = sec[idx];
+  const streak = (cur.correctStreak||0) + 1;
+  sec[idx] = { ...cur, correctStreak: streak, mastered: streak>=2 ? true : cur.mastered };
+  saveMistakes(all);
+}
+function setMistakeMastered(sectionKey, idx, mastered){
+  updateMistakeEntry(sectionKey, idx, (cur)=>({...cur, mastered, correctStreak: mastered ? Math.max(cur.correctStreak,2) : 0}));
+}
+function removeMistakeEntry(sectionKey, idx){
+  const all = loadMistakes();
+  if(all[sectionKey]){ delete all[sectionKey][idx]; saveMistakes(all); }
+}
+function setMistakeNote(sectionKey, idx, note){
+  updateMistakeEntry(sectionKey, idx, (cur)=>({...cur, note}));
 }
 
 function clearHistorySection(sectionKey){
@@ -2200,6 +2403,17 @@ function openSubmenu(sectionKey){
   document.getElementById('submenuDesc').textContent = meta.desc;
   document.getElementById('submenuStudyCount').textContent = data ? data.questions.length : 0;
   document.getElementById('submenuQuizCount').textContent = data ? data.questions.length : 0;
+  const mistakes = getSectionMistakes(sectionKey);
+  const openCount = Object.values(mistakes).filter(m=>!m.mastered).length;
+  document.getElementById('submenuNotebookCount').textContent = openCount;
+  const mockCard = document.getElementById('cardMockTest');
+  const mockData = data && data.mockTest;
+  if(mockData && mockData.questions && mockData.questions.length){
+    mockCard.style.display = '';
+    document.getElementById('submenuMockCount').textContent = mockData.questions.length;
+  } else {
+    mockCard.style.display = 'none';
+  }
   animatedSwitch(()=>{
     document.querySelector('.wrap').classList.remove('wide');
     hideAllShells();
@@ -2218,6 +2432,10 @@ document.getElementById('cardRevision').addEventListener('click', ()=> openRevis
 document.getElementById('cardFlashcards').addEventListener('click', ()=>{
   if(SECTION_APPS[currentSection]) SECTION_APPS[currentSection].open();
 });
+document.getElementById('cardNotebook').addEventListener('click', ()=>{
+  if(SECTION_APPS[currentSection]) SECTION_APPS[currentSection].openNotebook();
+});
+document.getElementById('cardMockTest').addEventListener('click', ()=> openMockTest(currentSection));
 
 document.getElementById('historyBackBtn').addEventListener('click', ()=> CHAPTER_META[currentHistoryChapter].open());
 document.querySelector('#subchapter-menu [data-role="submenuBack"]').addEventListener('click', ()=> CHAPTER_META[SECTION_CHAPTER[currentSection]].open());
@@ -2450,6 +2668,7 @@ function quizTemplate(title){
     <div class="back-row">
       <button class="back-btn" data-role="backBtn">&larr; Back</button>
       <button class="back-btn" data-role="historyBtn">📈 View report</button>
+      <button class="back-btn" data-role="notebookBtn">🗒️ Mistake Notebook<span class="notebookBadge" data-role="notebookBadge"></span></button>
     </div>
     <h2 class="app-title">${title}</h2>
 
@@ -2550,8 +2769,253 @@ function quizTemplate(title){
       <p class="reviewSub" data-role="reviewSub"></p>
       <div class="reviewList" data-role="reviewList"></div>
     </div>
+
+    <div class="notebook" data-role="notebook">
+      <div class="notebookTop">
+        <button class="back-btn" data-role="notebookBackBtn">&larr; Back to quiz</button>
+      </div>
+      <h1 class="reviewTitle">Mistake Notebook</h1>
+      <p class="reviewSub" data-role="notebookSub"></p>
+
+      <div data-role="notebookStats"></div>
+
+      <div class="notebookActionsRow">
+        <button class="submitBtn" data-role="practiceBtn">▶ Practice these mistakes</button>
+        <button class="copyListBtn" data-role="copyListBtn">📋 Copy list as text</button>
+      </div>
+
+      <div class="notebookToolbar">
+        <div class="notebookFilters" data-role="notebookFilters"></div>
+        <div class="notebookSort">
+          <select data-role="notebookSortSelect">
+            <option value="recent">Sort: most recently missed</option>
+            <option value="missed">Sort: most missed</option>
+            <option value="category">Sort: category</option>
+          </select>
+          <label><input type="checkbox" data-role="notebookShowMastered"> Show mastered</label>
+        </div>
+      </div>
+
+      <div class="notebookList" data-role="notebookList"></div>
+    </div>
   `;
 }
+
+// ============================================================
+//  MOCK TEST MODE (JEE Main pattern: +4 / 0 / -1, no instant feedback)
+//  Shared container, content rebuilt per section on open.
+// ============================================================
+let mtSectionKey = null, mtQuestions = [], mtAnswers = {}, mtPos = 0, mtSubmitted = false, mtMeta = null;
+
+function mtLetters(){ return ["A","B","C","D"]; }
+
+function openMockTest(sectionKey){
+  currentSection = sectionKey;
+  mtSectionKey = sectionKey;
+  const data = SECTION_DATA[sectionKey];
+  mtMeta = data.mockTest;
+  mtQuestions = mtMeta.questions;
+  mtAnswers = {};
+  mtPos = 0;
+  mtSubmitted = false;
+
+  renderMockTest();
+
+  animatedSwitch(()=>{
+    document.querySelector('.wrap').classList.add('wide');
+    hideAllShells();
+    document.getElementById('app-mocktest').classList.add('show');
+  }, document.getElementById('app-mocktest'));
+  renderCrumb('app-mocktest', [
+    {label:'Chemistry', onClick: showChemHub},
+    {label: CHAPTER_META[SECTION_CHAPTER[sectionKey]].title, onClick: CHAPTER_META[SECTION_CHAPTER[sectionKey]].open},
+    {label: SECTION_META[sectionKey].title, onClick: ()=> openSubmenu(sectionKey)},
+    {label:'Mock Test'}
+  ]);
+  setActiveBack('\u2190 Back to ' + SECTION_META[sectionKey].title, ()=> openSubmenu(sectionKey));
+}
+document.getElementById('mockBackBtn').addEventListener('click', ()=> openSubmenu(mtSectionKey || currentSection));
+
+function mtScore(){
+  let correct=0, wrong=0, unattempted=0;
+  mtQuestions.forEach((q,i)=>{
+    const a = mtAnswers[i];
+    if(a === undefined || a === null) unattempted++;
+    else if(a === q.correct) correct++;
+    else wrong++;
+  });
+  const marks = correct*4 + wrong*(-1) + unattempted*0;
+  const max = mtQuestions.length*4;
+  return { correct, wrong, unattempted, marks, max };
+}
+
+function renderMockTest(){
+  const root = document.getElementById('mockTestRoot');
+  if(mtSubmitted){
+    root.innerHTML = mtResultHtml();
+    wireMtResult();
+  } else {
+    root.innerHTML = mtTestHtml();
+    wireMtTest();
+  }
+}
+
+function mtTestHtml(){
+  const total = mtQuestions.length;
+  const attempted = Object.keys(mtAnswers).length;
+  return `
+    <h2 class="app-title">${mtMeta.title || 'Mock Test'}</h2>
+    <div class="markingNote"><span><b>+4</b> correct</span><span><b>0</b> unattempted</span><span><b>&minus;1</b> wrong</span><span style="margin-left:auto; color:var(--muted);">No instant feedback — results shown after you submit, just like the real exam.</span></div>
+
+    <div class="mockTopbar">
+      <div class="posnum" data-role="posnum">1 / ${total}</div>
+      <div class="track" style="flex:1;"><div class="fill" data-role="fill" style="width:${100/total}%"></div></div>
+      <div class="mockAttempted" data-role="attemptedLbl">${attempted} / ${total} attempted</div>
+      <button class="mockSubmitBtn" data-role="mtSubmitBtn">Submit test</button>
+    </div>
+
+    <div class="quizLayout">
+      <div class="quizMain">
+        <div class="card">
+          <div class="rowtop">
+            <span class="pill" data-role="pill">CATEGORY</span>
+            <span class="hint">no answer revealed until submit</span>
+          </div>
+          <div data-role="pyqBadgeSlot"></div>
+          <div class="question" data-role="questionText">Loading…</div>
+          <div class="options" data-role="optionsWrap"></div>
+        </div>
+        <div class="navrow">
+          <button class="navbtn" data-role="mtPrevBtn">&larr; Prev</button>
+          <button class="navbtn" data-role="mtClearBtn">Clear response</button>
+          <button class="navbtn" data-role="mtNextBtn">Next &rarr;</button>
+        </div>
+      </div>
+      <div class="qNavPanel">
+        <div class="qNavTitle">Jump to question</div>
+        <div class="qNavLegend">
+          <span><i style="background:rgba(96,165,250,0.35); border:1px solid #60a5fa;"></i>Answered</span>
+          <span><i style="background:transparent; border:1px solid var(--panel-border);"></i>Not answered</span>
+        </div>
+        <div class="qNavGrid" data-role="qNavGrid"></div>
+      </div>
+    </div>
+  `;
+}
+
+function wireMtTest(){
+  const root = document.getElementById('mockTestRoot');
+  const $ = (role) => root.querySelector(`[data-role="${role}"]`);
+  const posnum = $('posnum'), fill = $('fill'), attemptedLbl = $('attemptedLbl');
+  const pill = $('pill'), pyqSlot = $('pyqBadgeSlot'), questionText = $('questionText'), optionsWrap = $('optionsWrap');
+  const qNavGrid = $('qNavGrid');
+  const total = mtQuestions.length;
+
+  function renderQNav(){
+    qNavGrid.innerHTML = mtQuestions.map((_,i)=>{
+      const answered = mtAnswers[i] !== undefined && mtAnswers[i] !== null;
+      let cls = 'qNavBox';
+      if(i===mtPos) cls += ' current';
+      if(answered) cls += ' answered';
+      return `<div class="${cls}" data-i="${i}">${i+1}</div>`;
+    }).join('');
+    qNavGrid.querySelectorAll('.qNavBox').forEach(el=>{
+      el.addEventListener('click', ()=>{ mtPos = parseInt(el.getAttribute('data-i'),10); renderQuestion(); });
+    });
+  }
+
+  function renderQuestion(){
+    const item = mtQuestions[mtPos];
+    posnum.textContent = `${mtPos+1} / ${total}`;
+    fill.style.width = `${((mtPos+1)/total)*100}%`;
+    const attempted = Object.keys(mtAnswers).length;
+    attemptedLbl.textContent = `${attempted} / ${total} attempted`;
+    pill.textContent = item.cat;
+    pill.style.borderColor = (mtMeta.catColors && mtMeta.catColors[item.cat]) || '#8ca0b3';
+    pill.style.color = (mtMeta.catColors && mtMeta.catColors[item.cat]) || '#8ca0b3';
+    pyqSlot.innerHTML = item.source ? `<div class="pyqBadge">${item.source}</div>` : '';
+    questionText.innerHTML = item.q;
+    const letters = mtLetters();
+    optionsWrap.innerHTML = item.options.map((opt,i)=>{
+      const selected = mtAnswers[mtPos] === i ? 'selectedChoice' : '';
+      return `<div class="opt ${selected}" data-i="${i}"><span class="badge">${letters[i]}</span><span>${opt}</span></div>`;
+    }).join('');
+    optionsWrap.querySelectorAll('.opt').forEach(el=>{
+      el.addEventListener('click', ()=>{
+        mtAnswers[mtPos] = parseInt(el.getAttribute('data-i'),10);
+        renderQuestion();
+        renderQNav();
+      });
+    });
+    renderQNav();
+  }
+
+  $('mtPrevBtn').addEventListener('click', ()=>{ if(mtPos>0){ mtPos--; renderQuestion(); } });
+  $('mtNextBtn').addEventListener('click', ()=>{ if(mtPos<total-1){ mtPos++; renderQuestion(); } });
+  $('mtClearBtn').addEventListener('click', ()=>{ delete mtAnswers[mtPos]; renderQuestion(); renderQNav(); });
+  $('mtSubmitBtn').addEventListener('click', ()=>{
+    const unattempted = total - Object.keys(mtAnswers).length;
+    if(unattempted > 0){
+      const ok = window.confirm(`${unattempted} question(s) unattempted. Submit anyway?`);
+      if(!ok) return;
+    }
+    mtSubmitted = true;
+    renderMockTest();
+  });
+
+  renderQuestion();
+}
+
+function mtResultHtml(){
+  const s = mtScore();
+  const letters = mtLetters();
+  const reviewItems = mtQuestions.map((item,i)=>{
+    const a = mtAnswers[i];
+    const isSkip = a === undefined || a === null;
+    const isWrong = !isSkip && a !== item.correct;
+    if(!isSkip && !isWrong) return ''; // correct answers omitted from review list
+    const tag = isSkip ? 'skip' : 'wrong';
+    const tagLabel = isSkip ? 'Not attempted' : 'Wrong';
+    const yourAns = isSkip ? '—' : `${letters[a]}. ${item.options[a]}`;
+    const source = item.source ? `<div class="pyqBadge" style="margin-bottom:8px;">${item.source}</div>` : '';
+    return `<div class="mockReviewItem ${tag}">
+      <span class="rtag">${tagLabel}</span>
+      ${source}
+      <div class="rq">${item.q}</div>
+      <div class="ra">
+        ${isSkip ? '' : `Your answer: <b>${yourAns}</b><br>`}
+        Correct answer: <b>${letters[item.correct]}. ${item.options[item.correct]}</b><br>
+        ${item.expl}
+      </div>
+    </div>`;
+  }).join('');
+
+  return `
+    <h2 class="app-title">${mtMeta.title || 'Mock Test'} — Result</h2>
+    <div class="mockScoreCard">
+      <div class="mockScoreNum">${s.marks}</div>
+      <div class="mockScoreOf">out of ${s.max} (+4 / 0 / &minus;1 marking)</div>
+    </div>
+    <div class="mockStatGrid">
+      <div class="mockStat ok"><div class="num">${s.correct}</div><div class="lbl">Correct</div></div>
+      <div class="mockStat wrong"><div class="num">${s.wrong}</div><div class="lbl">Wrong</div></div>
+      <div class="mockStat skip"><div class="num">${s.unattempted}</div><div class="lbl">Unattempted</div></div>
+    </div>
+    <div class="sectionLbl">Review — wrong &amp; unattempted</div>
+    ${reviewItems || '<div class="reviewEmpty">Everything attempted was correct — nothing to review.</div>'}
+    <button class="mockRetakeBtn" data-role="mtRetakeBtn">&#8635; Retake test</button>
+  `;
+}
+
+function wireMtResult(){
+  const root = document.getElementById('mockTestRoot');
+  root.querySelector('[data-role="mtRetakeBtn"]').addEventListener('click', ()=>{
+    mtAnswers = {}; mtPos = 0; mtSubmitted = false;
+    renderMockTest();
+  });
+}
+
+// ============================================================
 
 function stripTags(html){
   const d = document.createElement('div');
@@ -2581,6 +3045,16 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
   const reviewBtn = $('reviewBtn'), reviewCount = $('reviewCount'), reviewBackBtn = $('reviewBackBtn');
   const reviewTitle = $('reviewTitle'), reviewSub = $('reviewSub'), reviewList = $('reviewList');
 
+  const notebookBtn = $('notebookBtn'), notebookBadge = $('notebookBadge');
+  const notebook = $('notebook'), notebookBackBtn = $('notebookBackBtn'), notebookSub = $('notebookSub');
+  const notebookStats = $('notebookStats'), notebookFilters = $('notebookFilters'), notebookList = $('notebookList');
+  const notebookSortSelect = $('notebookSortSelect'), notebookShowMasteredChk = $('notebookShowMastered');
+  const practiceBtn = $('practiceBtn'), copyListBtn = $('copyListBtn');
+
+  let practiceMode = false;
+  let savedOrder = null, savedPos = null, savedAnswers = null;
+  let notebookCategoryFilter = null, notebookSort = 'recent', notebookShowMasteredFlag = false;
+
   function reshuffleOrder(){
     for(let i=order.length-1;i>0;i--){
       const j = Math.floor(Math.random()*(i+1));
@@ -2600,6 +3074,13 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     });
     okCount.textContent = ok + " correct";
     badCount.textContent = bad + " missed";
+  }
+
+  function updateNotebookBadge(){
+    const mistakes = getSectionMistakes(sectionKey);
+    const openCount = Object.values(mistakes).filter(m=>!m.mastered).length;
+    notebookBadge.textContent = openCount>0 ? openCount : '';
+    notebookBadge.classList.toggle('hasCount', openCount>0);
   }
 
   function renderQNav(){
@@ -2676,11 +3157,14 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     prevBtn.disabled = pos===0;
     updateStats();
     renderQNav();
+    updateNotebookBadge();
   }
 
   function selectOption(idx, choiceIdx){
     const item = QUESTIONS[idx];
-    answers[idx] = { selected: choiceIdx, skipped:false, correct: choiceIdx===item.correct };
+    const correct = choiceIdx===item.correct;
+    answers[idx] = { selected: choiceIdx, skipped:false, correct };
+    if(correct){ recordCorrectForNotebook(sectionKey, idx); } else { recordMistake(sectionKey, idx); }
     render();
   }
 
@@ -2688,6 +3172,7 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     const idx = currentIdx();
     if(answers[idx]) return;
     answers[idx] = { selected:null, skipped:true, correct:false };
+    recordMistake(sectionKey, idx);
     render();
   });
 
@@ -2706,7 +3191,7 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
   });
 
   container.addEventListener('keydown', (e)=>{
-    if(!report.classList.contains('show')){
+    if(!report.classList.contains('show') && !review.classList.contains('show') && !notebook.classList.contains('show')){
       if(e.code==='ArrowRight'){ nextBtn.click(); }
       else if(e.code==='ArrowLeft'){ prevBtn.click(); }
       else if(['1','2','3','4'].includes(e.key)){
@@ -2890,6 +3375,111 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     });
   }
 
+  function renderNotebook(){
+    const mistakes = getSectionMistakes(sectionKey);
+    const entries = Object.entries(mistakes)
+      .map(([idxStr, m]) => ({ idx: parseInt(idxStr,10), ...m }))
+      .filter(e => QUESTIONS[e.idx]); // guard against stale indices if the bank ever shrinks
+
+    const openEntries = entries.filter(e=>!e.mastered);
+    const masteredEntries = entries.filter(e=>e.mastered);
+    const totalMissesEver = entries.reduce((s,e)=>s+e.missCount,0);
+
+    const catCounts = {};
+    openEntries.forEach(e=>{ const cat = QUESTIONS[e.idx].cat; catCounts[cat] = (catCounts[cat]||0) + 1; });
+    const topCat = Object.entries(catCounts).sort((a,b)=>b[1]-a[1])[0];
+
+    notebookBadge.textContent = openEntries.length>0 ? openEntries.length : '';
+    notebookBadge.classList.toggle('hasCount', openEntries.length>0);
+
+    notebookSub.textContent = entries.length===0
+      ? "Nothing logged yet — any wrong or skipped answer, in any run, will show up here automatically."
+      : (openEntries.length===0
+          ? "No open mistakes left — everything you've missed before is mastered. Nice work."
+          : openEntries.length + " question" + (openEntries.length===1?'':'s') + " still tripping you up"
+            + (masteredEntries.length ? ", " + masteredEntries.length + " mastered" : "") + ".");
+
+    notebookStats.innerHTML = `
+      <div class="progStats">
+        <div class="progStat"><div class="progNum">${openEntries.length}</div><div class="progLbl">open mistakes</div></div>
+        <div class="progStat"><div class="progNum up">${masteredEntries.length}</div><div class="progLbl">mastered</div></div>
+        <div class="progStat"><div class="progNum">${totalMissesEver}</div><div class="progLbl">total misses logged</div></div>
+        <div class="progStat"><div class="progNum" style="font-size:13px; line-height:1.3;">${topCat ? topCat[0] : '—'}</div><div class="progLbl">weakest category</div></div>
+      </div>
+    `;
+
+    const allCats = [...new Set(entries.map(e=>QUESTIONS[e.idx].cat))];
+    notebookFilters.innerHTML = ['All', ...allCats].map(cat=>{
+      const isAll = cat==='All';
+      const active = isAll ? !notebookCategoryFilter : cat===notebookCategoryFilter;
+      const color = isAll ? '#34d399' : (CAT_COLORS[cat] || '#34d399');
+      return `<button class="notebookChip ${active?'active':''}" data-cat="${isAll?'':cat}" style="--chipcolor:${color}">${cat}</button>`;
+    }).join('');
+    notebookFilters.querySelectorAll('.notebookChip').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        notebookCategoryFilter = btn.getAttribute('data-cat') || null;
+        renderNotebook();
+      });
+    });
+
+    let list = notebookShowMasteredFlag ? entries.slice() : openEntries.slice();
+    if(notebookCategoryFilter) list = list.filter(e=>QUESTIONS[e.idx].cat === notebookCategoryFilter);
+
+    if(notebookSort === 'missed') list.sort((a,b)=> b.missCount - a.missCount);
+    else if(notebookSort === 'category') list.sort((a,b)=> QUESTIONS[a.idx].cat.localeCompare(QUESTIONS[b.idx].cat));
+    else list.sort((a,b)=> (b.lastMissed||0) - (a.lastMissed||0)); // 'recent' default
+
+    practiceBtn.disabled = openEntries.length === 0;
+    practiceBtn.textContent = "▶ Practice these mistakes (" + openEntries.length + ")";
+    copyListBtn.disabled = openEntries.length === 0;
+
+    const letters = ["A","B","C","D"];
+    notebookList.innerHTML = "";
+    if(list.length === 0){
+      notebookList.innerHTML = `<div class="reviewEmpty">${entries.length===0
+        ? "Wrong or skipped answers from any quiz run in this section will show up here automatically."
+        : "No mistakes match this filter."}</div>`;
+      return;
+    }
+
+    list.forEach(e=>{
+      const item = QUESTIONS[e.idx];
+      const color = CAT_COLORS[item.cat] || "#34d399";
+      const card = document.createElement('div');
+      card.className = "reviewCard mistakeCard" + (e.mastered ? " masteredCard" : "");
+      const streakNote = (!e.mastered && e.correctStreak===1)
+        ? '<span class="streakHint">1 correct in a row — one more masters it</span>' : '';
+      card.innerHTML = `
+        <div class="reviewMeta">
+          <span class="pill" style="border-color:${color}; color:${color};">${item.cat}</span>
+          <span class="reviewBadge ${e.mastered ? 'masteredBadge' : 'wrongBadge'}">${e.mastered ? 'Mastered' : 'Missed ' + e.missCount + '\u00d7'}</span>
+          ${e.lastMissed ? `<span class="lastMissed">last missed ${fmtDate(e.lastMissed)}</span>` : ''}
+          ${streakNote}
+        </div>
+        <div class="reviewQ">${item.q}</div>
+        <div class="reviewAnsRow correctAns"><span class="tag">\u2713 ${letters[item.correct]}</span><span class="val">${item.options[item.correct]}</span></div>
+        <div class="reviewExpl"><b>Why:</b> ${item.expl || "No explanation available for this question yet."}</div>
+        <div class="noteBox"><textarea class="noteInput" placeholder="Jot a personal note on why you keep missing this…">${e.note ? e.note.replace(/</g,'&lt;') : ''}</textarea></div>
+        <div class="mistakeActions">
+          <button class="mistakeActionBtn masterBtn" data-action="master">${e.mastered ? '\u21ba Unmark mastered' : '\u2713 Mark as mastered'}</button>
+          <button class="mistakeActionBtn removeBtn" data-action="remove">\u2715 Remove from notebook</button>
+        </div>
+      `;
+      card.querySelector('.noteInput').addEventListener('blur', (ev)=>{
+        setMistakeNote(sectionKey, e.idx, ev.target.value);
+      });
+      card.querySelector('[data-action="master"]').addEventListener('click', ()=>{
+        setMistakeMastered(sectionKey, e.idx, !e.mastered);
+        renderNotebook();
+      });
+      card.querySelector('[data-action="remove"]').addEventListener('click', ()=>{
+        removeMistakeEntry(sectionKey, e.idx);
+        renderNotebook();
+      });
+      notebookList.appendChild(card);
+    });
+  }
+
   function renderProgressDashboard(){
     const dash = $('progressDash');
     const records = (loadHistory()[sectionKey]) || [];
@@ -2988,7 +3578,27 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     reshuffleOrder();
   }
 
-  submitTop.addEventListener('click', showReport);
+  function finishPractice(){
+    const attempted = Object.keys(answers).length;
+    const correctCount = Object.values(answers).filter(a=>a.correct).length;
+
+    order = savedOrder; pos = savedPos; answers = savedAnswers;
+    practiceMode = false;
+    savedOrder = null; savedPos = null; savedAnswers = null;
+
+    animatedSwitch(()=>{
+      quizview.classList.add('hide');
+      notebook.classList.add('show');
+    }, notebook);
+    renderNotebook();
+    if(attempted>0){
+      notebookSub.textContent = `Practice round done — ${correctCount}/${attempted} correct this round. ` + notebookSub.textContent;
+    }
+  }
+
+  submitTop.addEventListener('click', ()=>{
+    if(practiceMode){ finishPractice(); } else { showReport(); }
+  });
 
   reviewBtn.addEventListener('click', ()=>{
     if(lastMistakeIdx.length === 0) return;
@@ -3021,10 +3631,16 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
     // Leaving mid-test — whether unanswered, partially answered, or
     // already submitted — resets the run so coming back to this section
     // always starts a fresh, reshuffled test automatically.
+    if(practiceMode){
+      order = savedOrder || QUESTIONS.map((_,i)=>i);
+      practiceMode = false;
+      savedOrder = null; savedPos = null; savedAnswers = null;
+    }
     answers = {};
     reshuffleOrder();
     report.classList.remove('show');
     review.classList.remove('show');
+    notebook.classList.remove('show');
     quizview.classList.remove('hide');
     render();
     openSubmenu(sectionKey);
@@ -3032,13 +3648,97 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
 
   historyBtn.addEventListener('click', ()=>{
     // Same as Back — jumping off to the Test Report also counts as leaving the test.
+    if(practiceMode){
+      order = savedOrder || QUESTIONS.map((_,i)=>i);
+      practiceMode = false;
+      savedOrder = null; savedPos = null; savedAnswers = null;
+    }
     answers = {};
     reshuffleOrder();
     report.classList.remove('show');
     review.classList.remove('show');
+    notebook.classList.remove('show');
     quizview.classList.remove('hide');
     render();
     openHistory(SECTION_CHAPTER[sectionKey]);
+  });
+
+  notebookBtn.addEventListener('click', ()=>{
+    renderNotebook();
+    animatedSwitch(()=>{
+      quizview.classList.add('hide');
+      report.classList.remove('show');
+      review.classList.remove('show');
+      notebook.classList.add('show');
+    }, notebook);
+  });
+
+  notebookBackBtn.addEventListener('click', ()=>{
+    animatedSwitch(()=>{
+      notebook.classList.remove('show');
+      quizview.classList.remove('hide');
+    }, quizview);
+  });
+
+  practiceBtn.addEventListener('click', ()=>{
+    const mistakes = getSectionMistakes(sectionKey);
+    const openIdx = Object.entries(mistakes)
+      .filter(([,m])=>!m.mastered)
+      .map(([i])=>parseInt(i,10))
+      .filter(i=>QUESTIONS[i]);
+    if(openIdx.length === 0) return;
+
+    for(let i=openIdx.length-1;i>0;i--){
+      const j = Math.floor(Math.random()*(i+1));
+      [openIdx[i],openIdx[j]] = [openIdx[j],openIdx[i]];
+    }
+
+    savedOrder = order; savedPos = pos; savedAnswers = answers;
+    order = openIdx;
+    pos = 0;
+    answers = {};
+    practiceMode = true;
+
+    animatedSwitch(()=>{
+      notebook.classList.remove('show');
+      quizview.classList.remove('hide');
+      render();
+    }, quizview);
+  });
+
+  copyListBtn.addEventListener('click', ()=>{
+    const mistakes = getSectionMistakes(sectionKey);
+    const openEntries = Object.entries(mistakes)
+      .filter(([,m])=>!m.mastered)
+      .map(([idxStr,m])=>({idx:parseInt(idxStr,10), ...m}))
+      .filter(e=>QUESTIONS[e.idx]);
+    if(openEntries.length === 0) return;
+
+    const letters = ["A","B","C","D"];
+    const lines = openEntries.map(e=>{
+      const item = QUESTIONS[e.idx];
+      let block = `[${item.cat}] ${stripTags(item.q)}\nAnswer: ${letters[item.correct]}. ${stripTags(item.options[item.correct])}\nMissed ${e.missCount}\u00d7`;
+      if(e.note) block += `\nNote: ${e.note}`;
+      return block;
+    });
+    const text = `Mistake Notebook — ${title}\n${openEntries.length} open mistake(s)\n\n` + lines.join('\n\n');
+
+    const originalLabel = copyListBtn.textContent;
+    const done = () => { copyListBtn.textContent = "✓ Copied"; setTimeout(()=>{ copyListBtn.textContent = originalLabel; }, 1600); };
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(done);
+    } else {
+      done();
+    }
+  });
+
+  notebookSortSelect.addEventListener('change', (e)=>{
+    notebookSort = e.target.value;
+    renderNotebook();
+  });
+  notebookShowMasteredChk.addEventListener('change', (e)=>{
+    notebookShowMasteredFlag = e.target.checked;
+    renderNotebook();
   });
 
   render();
@@ -3056,6 +3756,27 @@ function initQuizApp(containerId, QUESTIONS, CAT_COLORS, title, sectionKey){
         {label: CHAPTER_META[SECTION_CHAPTER[sectionKey]].title, onClick: CHAPTER_META[SECTION_CHAPTER[sectionKey]].open},
         {label: title, onClick: ()=> openSubmenu(sectionKey)},
         {label:'Flashcards / Quick Quiz'}
+      ]);
+      setActiveBack('\u2190 Back to ' + title, ()=> openSubmenu(sectionKey));
+      container.focus({preventScroll:true});
+    },
+    openNotebook(){
+      currentSection = sectionKey;
+      renderNotebook();
+      animatedSwitch(()=>{
+        document.querySelector('.wrap').classList.add('wide');
+        hideAllShells();
+        container.classList.add('show');
+        quizview.classList.add('hide');
+        report.classList.remove('show');
+        review.classList.remove('show');
+        notebook.classList.add('show');
+      }, container);
+      renderCrumb(containerId, [
+        {label:'Chemistry', onClick: showChemHub},
+        {label: CHAPTER_META[SECTION_CHAPTER[sectionKey]].title, onClick: CHAPTER_META[SECTION_CHAPTER[sectionKey]].open},
+        {label: title, onClick: ()=> openSubmenu(sectionKey)},
+        {label:'Mistake Notebook'}
       ]);
       setActiveBack('\u2190 Back to ' + title, ()=> openSubmenu(sectionKey));
       container.focus({preventScroll:true});
